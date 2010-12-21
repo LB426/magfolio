@@ -5,13 +5,19 @@
   <meta name="description" content="Найди магазин для своей следующей покупки. Выбери стиль, бюджет и место. Просмотри товары, услуги и предложения." />
   <meta http-equiv="X-UA-Compatible" content="IE=8" />
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
-<body>
-
-<%= yield %>
-
+<body class="home">
+  <div class="container">
+    <div id="header" class="header"></div>
+    <div class="content">
+      <div id="endless_listings">
+        <%= yield %>
+      </div>
+      <div class="footer"></div>
+    </div>
+  </div>
 </body>
 </html>
