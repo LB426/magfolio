@@ -1,4 +1,6 @@
 Magfolio::Application.routes.draw do
+  resources :companies
+
   get "home/index"
 
   # The priority is based upon order of creation:
