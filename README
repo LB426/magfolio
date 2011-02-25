@@ -1,0 +1,3 @@
+надо добавить для ошибок и уведомлений
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>

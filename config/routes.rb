@@ -1,4 +1,6 @@
 Magfolio::Application.routes.draw do
+  devise_for :users
+
   match 'about' => 'about#index', :as => :about
 
   resources :companies
