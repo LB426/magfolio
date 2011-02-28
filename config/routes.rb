@@ -1,5 +1,8 @@
 Magfolio::Application.routes.draw do
   
+  match 'signup' => 'signup#new', :as => :signup
+  resources :signup
+  
   match 'login' => 'user_sessions#new', :as => :login
   resources :user_sessions
   
