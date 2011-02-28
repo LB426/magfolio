@@ -1,4 +1,8 @@
 Magfolio::Application.routes.draw do
+  
+  match 'login' => 'user_sessions#new', :as => :login
+  resources :user_sessions
+  
   match 'about' => 'about#index', :as => :about
 
   resources :companies

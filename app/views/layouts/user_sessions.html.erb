@@ -10,7 +10,7 @@
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
-<body class="perma about">
+<body class="login">
   <a name="top"></a>
   <div class="container">
     <div id="header" class="header">
@@ -21,7 +21,7 @@
       </div>
       <div class="signup guest_user" id="signup">
         <a href="/signup"></a>
-        <div class="signup_description" id="slide_listed" style="height: 70px; ">
+        <div class="signup_description" id="slide_listed" style="display: none">
           <div class="signup_text">
             <a href="/signup">Create a listing. Add a portfolio. Start getting work.</a>
           </div>
@@ -40,23 +40,10 @@
           <img alt="Sortfolio" height="39" src="/images/logo_sortfolio-type.png" width="155">
         </a>
       </div>
-      <div class="filterbar">
-        <div class="filter">
-          ← <a href="/">Back to Listings</a>
-        </div>
-      </div>
+      <div class="filterbar"></div>
     </div>
     <div class="content">
       <%= yield %>
-      <div class="footer">
-        <a href="http://spknd.ru" target="_blank">
-          <img alt="37signals" src="/images/logo_37signals-gray.png" height="24" width="107" align="right">
-        </a>
-        Sortfolio™ is a trademark of <a href="http://www.spknd.ru">Spknd</a>, LLC. All rights reserved.<br>Images/logos belonging to web design firms listed on Sortfolio are owned by their respective trademark owners.<br>Sortfolio was known as Haystack from October 21, 2009 - January 3, 2010.
-        <p>Get in touch with us at 
-          <a href="mailto:contact@sortfolio.com?subject=Questions about Sortfolio">contact@sortfolio.com</a>.
-        </p>
-      </div>
     </div>
   </div>
 </body>

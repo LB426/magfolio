@@ -5,9 +5,9 @@ gem 'rails', '3.0.4'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# gem "haml"
 gem 'mysql2'
 gem 'devise'
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -31,5 +31,3 @@ gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 # group :development, :test do
 #   gem 'webrat'
 # end
-
-#gem "haml"
