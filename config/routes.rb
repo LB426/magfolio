@@ -1,6 +1,10 @@
 Magfolio::Application.routes.draw do
-  devise_for :users
-
+  match 'signup' => 'signup#new', :as => :signup
+  resources :signup
+  
+  match 'login' => 'user_sessions#new', :as => :login
+  resources :user_sessions
+  
   match 'about' => 'about#index', :as => :about
 
   resources :companies
