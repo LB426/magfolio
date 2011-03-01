@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/sferik/rails_admin.git
-  revision: 5c5228e2fd9639e84ad5c30770c5ef6f6ef35c63
-  specs:
-    rails_admin (0.0.1)
-      builder (~> 2.1.0)
-      rails (~> 3.0.3)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -37,11 +29,7 @@ GEM
       activesupport (= 3.0.5)
     activesupport (3.0.5)
     arel (2.0.8)
-    bcrypt-ruby (2.1.4)
     builder (2.1.2)
-    devise (1.1.7)
-      bcrypt-ruby (~> 2.1.2)
-      warden (~> 1.0.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     i18n (0.5.0)
@@ -52,7 +40,6 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mysql2 (0.2.6)
-    nifty-generators (0.4.5)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -77,19 +64,10 @@ GEM
     treetop (1.4.9)
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
-    warden (1.0.3)
-      rack (>= 1.0.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  devise
   mysql2
-<<<<<<< HEAD
-  nifty-generators
-  rails (= 3.0.4)
-  rails_admin!
-=======
   rails (= 3.0.5)
->>>>>>> adab9e8bda654edd67bcf6337e7e4614d8913da6
