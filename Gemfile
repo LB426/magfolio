@@ -30,7 +30,4 @@ gem 'mysql2'
 # group :development, :test do
 #   gem 'webrat'
 # end
-<<<<<<< HEAD
 
-=======
->>>>>>> adab9e8bda654edd67bcf6337e7e4614d8913da6
