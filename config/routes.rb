@@ -1,8 +1,14 @@
 Magfolio::Application.routes.draw do
+  match 'atlanta' => 'atlanta#index', :as => :atlanta
+  get "atlanta/index"
+
+  match 'success' => 'success#index', :as => :success
+
+  match 'cities' => 'cities#index', :as => :cities
+  
   match 'signup' => 'signup#new', :as => :signup
   match 'signup/upgrade' => 'signup#upgrade', :as => :upgrade
   match 'signup/:id/publish' => 'signup#publish', :as => :publish
-  resources :signup
   
   match 'login' => 'user_sessions#new', :as => :login
   resources :user_sessions
