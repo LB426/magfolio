@@ -214,7 +214,8 @@ div.container {
 }
 
 body.home div.header {
-  background-image: url(/images/bkgd-abstractcards.png);
+  /*background-image: url(/images/bkgd-abstractcards.png);*/
+	background-image: url(/images/bkgd-abstractcards-my.png);
   background-repeat: no-repeat;
 }
 
