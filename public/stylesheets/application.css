@@ -214,8 +214,7 @@ div.container {
 }
 
 body.home div.header {
-  /*background-image: url(/images/bkgd-abstractcards.png);*/
-	background-image: url(/images/bkgd-abstractcards-my.png);
+  background-image: url(/images/bkgd-abstractcards.png);
   background-repeat: no-repeat;
 }
 
@@ -638,14 +637,14 @@ div.cardtools img {
 }
 
 div.cardtools a.favorites {
-  background: url('/images/icon_star.gif') 0px 0px no-repeat;
+  background: url('/images/icon_clover.png') 0px 0px no-repeat;
   padding-left: 20px;
   border-bottom: none;
   padding-top: 1px;
 }
 
 div.cardtools a.favorites:hover {
-  background: url('/images/icon_star.gif') 0px -16px no-repeat;
+  background: url('/images/icon_clover.png') 0px -16px no-repeat;
 }
 
 div.slideshownav {
