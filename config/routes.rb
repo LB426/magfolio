@@ -1,4 +1,7 @@
 Magfolio::Application.routes.draw do
+  match 'favorites' => 'favorites#index', :as => :favorites
+  get "favorites/index"
+
   match 'atlanta' => 'atlanta#index', :as => :atlanta
   get "atlanta/index"
 

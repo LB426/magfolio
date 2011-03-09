@@ -14,32 +14,10 @@
   <a name="top"></a>
   <div class="container">
     <div id="header" class="header">
-      <div class="needle">
-        <a href="/" class="homepage">
-          <img alt="Sortfolio" height="100" src="/images/logo_card-interior.png" width="90">
-        </a>
-      </div>
-      <div class="signup guest_user" id="signup">
-        <a href="/signup"></a>
-        <div class="signup_description" id="slide_listed" style="display: none">
-          <div class="signup_text">
-            <a href="/signup">Create a listing. Add a portfolio. Start getting work.</a>
-          </div>
-        </div>
-      </div>
-      <div class="nav">
-        <a href="/cities">All cities</a> |
-        <a href="/about">About Sortfolio</a> |
-        <a href="/favorites">My favorites</a> <span class="favorites_count">(1)</span> |
-        <a href="/account" class="logged_in_user" style="display: none; ">My listing/account</a> <span class="logged_in_user" style="display: none; ">|</span>
-        <a href="/session" class="logged_in_user signup" onclick="var f = document.createElement('form'); f.style.display = 'none'; this.parentNode.appendChild(f); f.method = 'POST'; f.action = this.href;var m = document.createElement('input'); m.setAttribute('type', 'hidden'); m.setAttribute('name', '_method'); m.setAttribute('value', 'delete'); f.appendChild(m);var s = document.createElement('input'); s.setAttribute('type', 'hidden'); s.setAttribute('name', 'authenticity_token'); s.setAttribute('value', 'UGVUsgRPxDc0p+eDTq8UluW+bkjic5RUNHTmssPr9h8='); f.appendChild(s);f.submit();return false;" style="display: none; ">Logout</a>
-        <a href="/login" class="guest_user">Login to Sortfolio</a>
-      </div>
-      <div class="masthead">
-        <a href="/" class="homepage">
-          <img alt="Sortfolio" height="39" src="/images/logo_sortfolio-type.png" width="155">
-        </a>
-      </div>
+      <%= render 'layouts/logo1' %>
+      <%= render 'layouts/register' %>
+      <%= render 'layouts/maintopnav' %>
+      <%= render 'layouts/logo2' %>
       <div class="filterbar"></div>
     </div>
     <div class="content">
