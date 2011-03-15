@@ -1,14 +1,27 @@
 class SignupController < ApplicationController
   
   def new
+    @title = "Создание каталога Клевер"
+    @body_css_class = "create"
+    @header_layout = 'signup/header_new'
   end
   
   def upgrade
+    @title = "Изменение тарифного плана каталога Клевер"
+    @body_css_class = "upgrade"
+    @header_layout = 'signup/header_upgrade'
   end
   
   def publish
-    render 'signup/free-publish' if params[:id] == 'free'
-    render 'signup/pro-publish' if params[:id] == 'pro'
+    @header_layout = 'signup/header_upgrade_free'
+    if params[:id] == 'free'
+      @body_css_class = 'publish free'
+      render 'signup/free-publish'
+    end
+    if params[:id] == 'pro'
+      @body_css_class = 'publish pro'
+      render 'signup/pro-publish'
+    end
   end
   
 end
