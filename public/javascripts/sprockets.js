@@ -9005,7 +9005,7 @@ var ListingSignup = {
     if(name) {
       $('live_company_name').update(name.escapeHTML());
     } else {
-      $('live_company_name').update('Your company name');
+      $('live_company_name').update('Имя Вашей компании');
     }
   },
 
