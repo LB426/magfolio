@@ -9019,7 +9019,7 @@ var ListingSignup = {
   },
 
   show_preview_location: function() {
-    var default_location = 'Company location';
+    var default_location = 'Где находиться компания';
     var new_location;
 
     if($F('listing_location_id').blank())
@@ -9053,7 +9053,7 @@ var ListingSignup = {
     var value = $F('listing_portfolio_images_attributes_0_description');
 
     if(value.blank()) {
-      $('live_image_description').update('Your image description');
+      $('live_image_description').update('Краткое описание бизнеса');
     } else {
       $('live_image_description').update(value.escapeHTML());
     }
