@@ -9053,7 +9053,7 @@ var ListingSignup = {
     var value = $F('listing_portfolio_images_attributes_0_description');
 
     if(value.blank()) {
-      $('live_image_description').update('Краткое описание бизнеса');
+      $('live_image_description').update('Аннотация к изображению');
     } else {
       $('live_image_description').update(value.escapeHTML());
     }
