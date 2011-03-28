@@ -1,7 +1,9 @@
+/* GENERAL ----------------------------------------------------*/
+
 body {
   margin: 0;
   padding: 0;
-	background-color: #F5F6F7;
+	background-color: #F6F6F6;
 	font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, Arial, sans-serif;
   font-size: 12px;
   color: #333;
@@ -26,12 +28,10 @@ a:focus {
   outline: none; 
 }
 
-
 a img {
   border: 0;
 	padding: 0;
 }
-
 
 h1 {
   font-family: Georgia, Times, serif;
@@ -56,7 +56,7 @@ div.ruleline {
   border-top: 5px solid #e8e8e8;
 }
 
-/* структура */
+/* STRUCTURE --------------------------------------------------*/
 
 div.container {
   width: 100%;
@@ -156,7 +156,7 @@ body.listings div.header h1 {
   font-size: 31px;
 }
 
-/* навигация */
+/* NAV ---------------------------------------------------------*/
 
 div.nav a {
   color: #999;
@@ -263,114 +263,62 @@ body.listings a.homepage img {
   margin-top: -20px;
 }
 
-/* фильтр */
+/* FILTER ------------------------------------------------------*/
 
-div.nav a {
-  color: #999;
+div.filterbar {
+  border-top: 3px solid #e8e8e8;
+  padding: 15px 0 10px 0;
+  overflow: visible;
 }
 
-div.nav a.signup {
-  color: #333;
+div.filter {
   font-weight: bold;
+  margin-top: 3px;
+  margin-bottom: 10px;
 }
 
-div.nav a.selected {
-  color: #333;
-  font-weight: bold;
+div.search a {
+  font-size: 26px;
+  font-weight: normal;
+  color: #3399cc;
   text-decoration: none;
+  font-family: Georgia, Times, serif;
+  border-bottom: 3px solid #3399cc;
 }
 
-div.back_to_top {
-  position: fixed;
-  bottom: 0;
-  margin-left: 380px;
+div.search a:hover {
+  color: #111;
+  border-bottom: 3px solid #0099ff;
 }
 
-div.back_to_top a {
-  display: block;
-  width: 200px;
-  background-image: url(/images/bkgd-backtotop.png);
-  background-repeat: no-repeat;
-  color: #444;
+div.no_results {
+  text-align: center;
+  padding: 15px;
+  margin: 20px 15px;
+  border: 5px solid #ccc;
+  background-color: #efefef;
+  font-size: 14px;
   font-weight: bold;
-  font-size: 16px;
-  text-decoration: none;
-  padding: 15px 0 15px 20px;
 }
 
-div.signup {
-  float: right;
-  margin-top: 10px;
-  margin-right: 15px;
-  position: relative;
-}
-
-div.signup a {
-  display: block;
-  width: 135px;
-  height: 38px;
-  background: url('/images/btn_getlisted.png') 0px 0px no-repeat;
-}
-
-div.signup:hover a {
-  background: url('/images/btn_getlisted.png') 0px -38px no-repeat;
-}
-
-div.signup_description {
-  position: absolute;
-  top: 35px;
-  z-index: 50;
-  margin: 0;
-  overflow: hidden;
-}
-
-div.signup_description div.signup_text {
+div#related_locations {
+  margin-top: 20px;
   font-size: 12px;
-  text-align: left;
-  color: #fff;
 }
 
-div.signup_description div.signup_text {
-  padding: 0
-  width: 110px;
+div#related_locations ul {
+  margin: 0;
+  margin-left: -30px;
 }
 
-div.signup_description div.signup_text a {
-  background: url('/images/bkgd-signupdescription.png') no-repeat;
-  color: #fff;
-  line-height: 1.3em;
-  padding: 5px 10px 28px 15px;
-  width: 110px;
-  text-decoration: none;
+div#related_locations li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding-right: 10px;
 }
 
-div.last_menu {
-  border-top: 1px solid #dbdbdb;
-}
-
-div.success {
-  float: right;
-  margin-top: 10px;
-  margin-right: 15px;
-  position: relative;
-}
-
-div.success a {
-  display: block;
-  width: 135px;
-  height: 50px;
-  background: url('/images/btn_success.png') 0px 0px no-repeat;
-}
-
-div.success:hover a {
-  background: url('/images/btn_success.png') 0px -50px no-repeat;
-}
-
-body.listings a.homepage img {
-  margin-top: -20px;
-}
-
-/* карточки */
+/* CARDS -------------------------------------------------------*/
 
 div.card-upgrade {
   width: 470px;
