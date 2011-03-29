@@ -1,3 +1,4 @@
+<!-- ccc -->
 <div class="example_card"> 
   <h3>Бесплатный каталог будет выглядеть так...</h3> 
   <div class="card"> 
@@ -12,7 +13,9 @@
         <p><span id="live_budget">Типичные товары или услуги</span><br /> 
           <span id="live_company_location">Город</span></p> 
       </div> 
-      <a href="#" onclick="return false"><img alt="image" id="preview_card_image" src="/images/img_empty-small.png" /></a> 
+      <a href="#" onclick="return false">
+        <img alt="image" id="preview_card_image" src="/images/img_empty-small.png" />
+      </a> 
       <div class="caption">
         <span id="live_image_description">Краткое описание бизнеса</span>
       </div> 
@@ -21,13 +24,10 @@
       <img alt="Card-bottom" src="/images/card-bottom.png" />
     </div> 
   </div> 
-</div> 
+</div>
 
 <div class="create_form">
   <form action="/signup" class="listing_form" enctype="multipart/form-data" id="signup_listing_form" method="post">
-    <div style="margin:0;padding:0;display:inline">
-      <input name="authenticity_token" type="hidden" value="AHtnEay+m9HUYtyE/lFp38GEY6A5TqaasIi29NANjGY=" />
-    </div>
     <div class="image_upload"> 
       <h2>Сначала, лучшую фотографию Вашего бизнеса</h2> 
       <img align="right" alt="Img_uploadsample" src="/images/img_uploadsample.png" style="margin-left: 10px;" /> 
@@ -40,8 +40,12 @@
       <div id="upload_progress_bar" style="display:none"> 
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
       </div> 
-      <p><label for="listing_portfolio_images_attributes_0_description">Описание изображения которое Вы добавили</label><br /><small>Например: Центральный магазин торговой сети "Товары для дома"</small><br />
-      <textarea cols="40" id="listing_portfolio_images_attributes_0_description" name="listing[portfolio_images_attributes][0][description]" rows="20"></textarea></p> 
+      <p>
+        <label for="listing_portfolio_images_attributes_0_description">
+        Описание изображения которое Вы добавили</label><br />
+        <small>Например: Центральный магазин торговой сети "Товары для дома"</small><br />
+        <textarea cols="40" id="listing_portfolio_images_attributes_0_description" name="listing[portfolio_images_attributes][0][description]" rows="20"></textarea>
+      </p> 
     </div>
     <div class="about_company"> 
       <h2>Теперь расскажите нам о Вашем бизнесе</h2> 

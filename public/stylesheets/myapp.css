@@ -255,6 +255,38 @@ div.cardcontent-upgrade h2 {
   white-space: nowrap;
 }
 
+div.card {
+  width: 225px;
+  margin: 10px;
+  overflow: hidden;
+  float: left;
+  background-color: #fff;
+}
+
+div.cardcap {
+  width: 225px;
+  height: 10px;
+  margin: 0;
+  background-color: #f5f6f7;
+}
+
+div.cardcontent {
+  background-image: url('/images/card-bkgd.png');
+  padding: 5px 15px;
+  text-align: left;
+  font-size: 11px;
+  line-height: 1.3em;
+}
+
+div.cardcontent h2 {
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  color: #222;
+  margin: 5px 0;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
 div.cardcontent-upgrade h2 a, div.cardcontent h2 a {
   color: #222;
   font-weight: bold;
@@ -294,6 +326,12 @@ div.scroller div.section {
   width:450px;
   overflow:hidden;
   float:left;
+}
+
+div.caption {
+  background-color: #fff;
+  padding: 10px 5px 5px 5px;
+  color: #666;
 }
 
 div.pro-caption {
@@ -468,6 +506,79 @@ div.cardcontent-perma {
 
 /* CREATE ---------------------------------------------------*/
 
+body.create div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+div.steps {
+  width: 960px;
+  text-align: center;
+  font-size: 18px;
+  font-family: Georgia, serif;
+  color: #777;
+  margin:auto;
+}
+
+div.steps img {
+  margin-bottom: 5px;
+  margin-left: 50px;
+}
+
+div.steps img.first {
+  margin-left: 0;
+}
+
+div.steps a {
+  color: #777;
+}
+
+body.create div.content {
+  margin-top: 20px;
+  text-align: left;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+body.create h1, body.publish h1 {
+  margin: 15px 0;
+}
+
+body.create h3, body.publish h3, body.account h3 {
+  margin: 20px 0 10px 0;
+}
+
+body.create div.example_card {
+  width: 350px;
+  text-align: center;
+  float: left;
+	/* float: right; */
+  background-image: url(/images/bkgd-create.png);
+  background-repeat: no-repeat;
+  position: fixed;
+	/*  left: 840px; */
+}
+
+body.create div.card {
+  margin-left: 65px;
+}
+
+body.create div.create_form {
+  text-align: left;
+  margin-top: 0;
+  padding-top: 0;
+  width: 560px;
+	/* float: left; */
+  float: right;
+}
+
+body.create div.create_form {
+  padding: 0 30px 20px 30px;
+}
+
+body.create div.create_form label {
+  font-weight: bold;
+}
+
 input {
   height: 30px;
   color: #333;
@@ -489,6 +600,48 @@ input#user_session_email {
 
 input#user_session_password {
   width:300px;
+}
+
+input.submit_image {
+  height: 38px;
+}
+
+body.create div.image_upload {
+  background-color: #f6def8;
+  border: 1px solid #ccc;
+  padding: 30px;
+  padding-right: 15px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+body.create div.image_upload h2 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+body.create div.image_upload p {
+  margin: 15px 0;
+}
+
+body.create textarea {
+  width: 455px;
+  height: 40px;
+}
+
+body.create div.about_company, body.create div.contact, body.update div.about_company, body.update div.contact {
+  background-color: #f6def8;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  padding: 30px;
+  padding-right: 15px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+body.create div.about_company h2, body.create div.contact h2, body.update div.about_company h2, body.update div.contact h2 {
+  margin-top: 0;
+  font-size: 16px;
 }
 
 /* ABOUT ----------------------------------------------------*/
