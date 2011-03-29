@@ -6,11 +6,28 @@ jQuery.ajaxSetup({
 })
 
 $(document).ready(function() {
+  $('body').click(function() {
+    $("#search_location_menu").hide();
+    $("#search_budget_menu").hide();
+    $("#search_service_menu").hide();
+  });
   $("#slide_listed").hide();
   $('#signup').mouseenter(function() {
     $("#slide_listed").show("slide", { direction: "up" }, 700);
   });
   $('#signup').mouseleave(function() {
     $("#slide_listed").hide("slide", { direction: "up" }, 700);
+  });
+  $('#search_location_name').click(function() {
+    $("#search_location_menu").show();
+    event.stopPropagation();
+  });
+  $('#search_budget_name').click(function() {
+    $("#search_budget_menu").show();
+    event.stopPropagation();
+  });
+  $('#search_service_name').click(function() {
+    $("#search_service_menu").show();
+    event.stopPropagation();
   });
 })

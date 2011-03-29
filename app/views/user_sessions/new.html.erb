@@ -1,10 +1,15 @@
+<script type="text/javascript">
+  $(function() {
+    $("#user_session_email").focus();
+  });
+</script>
+
 <div class="card-upgrade">
-  <div class="cardcap-upgrade"><img alt="Card-top-large" src="/images/card-top-large.png" /></div>
+  <div class="cardcap-upgrade">
+    <img alt="Card-top-large" src="/images/card-top-large.png" />
+  </div>
   <div class="cardcontent-upgrade login">
     <form action="/session" class="new_user_session" id="user_session_70869520" method="post">
-      <div style="margin:0;padding:0;display:inline">
-        <input name="authenticity_token" type="hidden" value="WzkziciMhaYks5MdwDBxwcl5IcqqP1sR4cJ8AVllGcY=" />
-      </div>
       <h2>Вход в онлайн каталоги Клевер</h2> 
       <p><label for="user_session_email">Email:</label></p> 
       <input id="user_session_email" name="user_session[email]" size="30" type="text" />
@@ -25,5 +30,5 @@
   <div class="cardcap-upgrade">
     <img alt="Card-bottom-large" src="/images/card-bottom-large.png" />
   </div>
-  <div class="create">У Вас нет имени и пароля? <a href="/signup">Создайть веб каталог Клевер.</a></div>
+  <div class="create">У Вас нет имени и пароля? <a href="/signup">Создать веб каталог Клевер.</a></div>
 </div>

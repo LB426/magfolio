@@ -10,10 +10,6 @@ body {
   line-height: 1.4em;
 }
 
-body.print {
-  background-color: #ffffff;
-}
-
 a {
   color: #3399cc;
 	margin: 0;
@@ -44,11 +40,6 @@ h1 {
 
 div.clear {
   clear: both;
-}
-
-span.highlight {
-  background-color: #ffcc00;
-  padding: 3px;
 }
 
 /* STRUCTURE --------------------------------------------------*/
@@ -125,12 +116,6 @@ div.scroller_content {
   padding: auto;
 }
 
-div.spinner {
-  text-align: right;
-  padding: 30px 0 30px 15px;
-  clear: both;
-}
-
 div.footer {
   text-align: left;
   padding: 150px 0 50px 15px;
@@ -144,11 +129,6 @@ div.footer a {
 
 div.footer img {
   margin-right: 15px;
-}
-
-body.listings div.header h1 {
-  margin: 12px 0 15px 0;
-  font-size: 31px;
 }
 
 /* NAV ---------------------------------------------------------*/
@@ -218,24 +198,6 @@ div.last_menu {
   border-top: 1px solid #dbdbdb;
 }
 
-div.success {
-  float: right;
-  margin-top: 10px;
-  margin-right: 15px;
-  position: relative;
-}
-
-div.success a {
-  display: block;
-  width: 135px;
-  height: 50px;
-  background: url('/images/btn_success.png') 0px 0px no-repeat;
-}
-
-div.success:hover a {
-  background: url('/images/btn_success.png') 0px -50px no-repeat;
-}
-
 body.listings a.homepage img {
   margin-top: -20px;
 }
@@ -268,31 +230,202 @@ div.search a:hover {
   border-bottom: 3px solid #0099ff;
 }
 
-div.no_results {
-  text-align: center;
-  padding: 15px;
-  margin: 20px 15px;
-  border: 5px solid #ccc;
-  background-color: #efefef;
-  font-size: 14px;
+/* CARDS -------------------------------------------------------*/
+
+div.card-upgrade {
+  width: 470px;
+  margin: 10px;
+  overflow: hidden;
+  float: left;
+  background-color: #fff;
+}
+
+div.cardcontent-upgrade {
+  background-image: url('/images/card-bkgd-large.png');
+  padding: 5px 20px;
+  text-align: left;
+}
+
+div.cardcontent-upgrade h2 {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  color: #222;
+  margin: 5px 0;
   font-weight: bold;
+  white-space: nowrap;
 }
 
-div#related_locations {
-  margin-top: 20px;
-  font-size: 12px;
+div.cardcontent-upgrade h2 a, div.cardcontent h2 a {
+  color: #222;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #e8e8e8;
 }
 
-div#related_locations ul {
-  margin: 0;
-  margin-left: -30px;
+div.cardcontent-upgrade h2 a:hover, div.cardcontent h2 a:hover {
+  border-bottom: 2px solid #0099ff;
 }
 
-div#related_locations li {
-  display: inline;
+div.cardcontent-upgrade p, div.cardcontent p, div.cardcontent-perma p {
+  margin: 0 0 10px 0;
+}
+
+div.cardcontent-upgrade span, div.cardcontent span, div.cardcontent-perma span {
+  color: #999;
+}
+
+div.cardcompany {
+  overflow: hidden;
+  height: 63px;
+}
+
+div.card div.cardcompany p {
+  font-size: 10px;
+  line-height: normal;
+}
+
+div.scroller {
+  width: 430px;
+  overflow: hidden;
+/*  border:1px solid #cccccc;*/
+}
+
+div.scroller div.section {
+  width:450px;
+  overflow:hidden;
+  float:left;
+}
+
+div.pro-caption {
+  background-color: #fff;
+  padding: 10px 0 0 0;
+  margin-right: 20px;
+  color: #666;
+  height: 65px;
+  overflow: hidden;
+}
+
+/* Кардтулс --------------------------*/
+
+div.cardtools {
+  text-align: left;
+  margin: 10px 0;
+  padding-top: 10px;
+}
+
+div.card-upgrade div.cardtools {
+  margin: 5px 0 10px 0;
+}
+
+div.cardtools a {
+  color: #888;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+div.cardtools a:hover {
+ color: #222;
+ border-bottom: 2px solid #0099ff;
+}
+
+div.cardtools img {
+  margin-right: 5px;
+}
+
+div.cardtools a.favorites {
+  background: url('/images/icon_clover.png') 0px 0px no-repeat;
+  padding-left: 20px;
+  border-bottom: none;
+  padding-top: 1px;
+}
+
+div.cardtools a.favorites:hover {
+  background: url('/images/icon_clover.png') 0px -16px no-repeat;
+}
+
+/* Навигация слайдшоу --------------------------*/
+
+div.slideshownav {
+  text-align: center;
+  padding-top: 8px;
+  overflow: hidden;
+  border-top: 1px solid #ccc;
+  margin-top: 5px;
+  height: 22px;
+}
+
+div.slideshownav a.next {
+  background: url('/images/icon_rightarrow.gif') 0px 0px no-repeat;
+  width: 22px;
+  height: 22px;
+  float: right;
+}
+
+div.slideshownav a.next:hover {
+  background: url('/images/icon_rightarrow.gif') 0px -22px no-repeat;
+}
+
+div.slideshownav a.previous {
+  background: url('/images/icon_leftarrow.gif') 0px 0px no-repeat;
+  width: 22px;
+  height: 22px;
+  float: left;
+}
+
+div.slideshownav a.previous:hover {
+  background: url('/images/icon_leftarrow.gif') 0px -22px no-repeat;
+}
+
+div.slides {
+  text-align: center;
+  float: left;
+  margin: auto;
+  margin-top: -6px;
+}
+
+div.slides ul {
+  list-style-image: none;
+  list-style-position: outside;
   list-style-type: none;
+  text-align: center;
+}
+
+div.slides li {
+  display: inline;
   margin: 0;
-  padding-right: 10px;
+  padding: 0;
+}
+
+div.slides li a {
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+  outline-color: -moz-use-text-color;
+  outline-style: none;
+  outline-width: medium;
+  -moz-background-clip: border;
+  -moz-background-inline-policy:continuous;
+  -moz-background-origin:padding;
+  background:transparent url(/images/icon_slides.gif) no-repeat scroll center top;
+  display:block;
+  float:left;
+  height:6px;
+  margin:0 2px;
+  overflow:hidden;
+  padding:2px;
+  text-indent:-9999px;
+  width:10px;
+}
+
+div.slides li a.active {
+  background-position:center -10px;
+}
+
+div.pro-image {
+  width: 430px;
+  height: 300px;
+  overflow: hidden;
 }
 
 /* PERMA -------------------------------------------------------*/
@@ -333,166 +466,10 @@ div.cardcontent-perma {
   overflow: hidden;
 }
 
-body.print div.cardcontent-perma {
-  background-image: none;
-  padding: 5px 20px 0 20px;
-  text-align: left;
-  overflow: hidden;
-}
-
-div.cardcontent-perma h2 {
-  font-family: Helvetica, sans-serif;
-  font-size: 28px;
-  letter-spacing: -1px;
-  color: #222;
-  margin: 10px 0;
-  font-weight: bold;
-}
-
-body.perma div.cardcompany {
-  margin-top: 15px;
-  height: auto;
-}
-
-body.perma div.cardtools {
-  clear:both;
-  padding-bottom: 20px;
-  padding-top: 0;
-  border-top: 0;
-}
-
-body.perma div.description {
-  margin: 10px 0 15px 0;
-  width: 660px;
-  clear: both;
-}
-
-body.perma div.description p {
-  margin: 0 0 15px 0;
-}
-
-body.perma div.gallery {
-  background-color: #e8e8e8;
-  padding: 10px 0 5px 0;
-  text-align: center;
-  margin: 30px 0;
-  clear: both;
-}
-
-body.perma div.gallery p {
-  text-align: left;
-  margin: 15px;
-}
-
-body.perma div.action {
-	padding: 20px;
-	margin-bottom: 10px;
-	background-color: #222;
-	text-align: center;
-	color: #999;
-	font-size: 12px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-}
-
-body.perma div.action h2 {
-	color: #f7eaac;
-	font-size: 16px;
-	letter-spacing: normal;
-	margin: 0 0 10px 0;
-	padding: 0;
-}
-
-body.perma div.action h3 {
-	color: #999;
-	font-size: 18px;
-	letter-spacing: normal;
-	margin: 0 0 12px 0;
-	padding: 0;
-}
-
 /* CREATE ---------------------------------------------------*/
 
-body.create div.filterbar {
-  padding: 20px 0 0 0;
-}
-
-.liveValidationErrors {
-  color: red;
-}
-
-div.steps {
-  width: 960px;
-  text-align: center;
-  font-size: 18px;
-  font-family: Georgia, serif;
-  color: #777;
-  margin:auto;
-}
-
-div.steps img {
-  margin-bottom: 5px;
-  margin-left: 50px;
-}
-
-div.steps img.first {
-  margin-left: 0;
-}
-
-div.steps a {
-  color: #777;
-}
-
-body.create div.content {
-  margin-top: 20px;
-  text-align: left;
-  border-top: 1px solid #ccc;
-  padding-top: 20px;
-}
-
-body.create h1, body.publish h1 {
-  margin: 15px 0;
-}
-
-body.create h3, body.publish h3, body.account h3 {
-  margin: 20px 0 10px 0;
-}
-
-body.create div.example_card {
-  width: 350px;
-  text-align: center;
-  float: left;
-  background-image: url(/images/bkgd-create.png);
-  background-repeat: no-repeat;
-  position: fixed;
-}
-
-body.create div.card {
-  margin-left: 65px;
-}
-
-body.create div.create_form {
-  text-align: left;
-  margin-top: 0;
-  padding-top: 0;
-  width: 560px;
-  float: right;
-}
-
-body.create div.create_form {
-  padding: 0 30px 20px 30px;
-}
-
-body.create div.create_form p {
-  margin: 20px 0 3px 0;
-}
-
-body.create div.create_form label {
-  font-weight: bold;
-}
-
 input {
-  height: 21px;
+  height: 30px;
   color: #333;
   padding: 3px;
   font-size: 16px;
@@ -506,274 +483,152 @@ input[type=submit], input[type=file] {
   height: auto;
 }
 
-input#listing_company_name  {
+input#user_session_email {
   width:300px;
 }
 
-input#ZIP, input#card_zip_code {
-  width:75px;
-}
-
-input.submit_image {
-  height: 38px;
-}
-
-textarea {
-  color: #333;
-  padding: 5px;
-  font-family: 'Lucida Grande','Lucida Sans Unicode',Verdana,Helvetica,Arial,sans-serif;
-  font-size:12px;
-  line-height:1.4em;
-}
-
-textarea#listing_overview, textarea#description {
-  width:500px;
-  height: 200px;
-}
-
-input#listing_website_url, input#email, input#firstname, input#lastname, 
-input#acctemail, input#username, input#password, input#passwordverify, 
-input#subject, input#email_address, input#screen, input#user_session_email {
+input#user_session_password {
   width:300px;
 }
 
-input#user_login, input#user_password, input#user_password_confirmation, 
-input#user_email, input#user_session_login, input#user_session_password {
-  width:300px;
+/* ABOUT ----------------------------------------------------*/
+
+body.about div.filter, body.upgrade div.filter {
+  width: 960px;
+  text-align: left;
+  margin:auto;
 }
 
-input#login {
-  width:300px;
-}
-
-body.create div.image_upload {
-  background-color: #f6def8;
-  border: 1px solid #ccc;
-  padding: 30px;
-  padding-right: 15px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
-body.create div.image_upload h2 {
-  margin-top: 0;
-  font-size: 16px;
-}
-
-body.create div.image_upload p {
-  margin: 15px 0;
-}
-
-body.create textarea {
-  width: 455px;
-  height: 40px;
-}
-
-body.create div.about_company, body.create div.contact, body.update div.about_company, body.update div.contact {
-  background-color: #f6def8;
-  border: 1px solid #ccc;
-  margin-top: 20px;
-  padding: 30px;
-  padding-right: 15px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-}
-
-body.create div.about_company h2, body.create div.contact h2, body.update div.about_company h2, body.update div.contact h2 {
-  margin-top: 0;
-  font-size: 16px;
-}
-
-div.screenupload {
-  width: 465px;
-  margin: 15px 0;
-  padding: 10px 0;
-}
-
-div.delete {
-  padding: 5px 0;
-}
-
-div.delete a {
-  color: red;
-}
-
-span#live_budget {
-  color: #333;
-}
-
-div.budget_choices {
-  padding: 0;
-  clear: both;
-  overflow: hidden;
-}
-
-div.budget_choices label {
-  display: block;
-  float: left;
-  padding-right: 10px;
-  white-space: nowrap;
-}
-
-div.budget_choices input {
-  vertical-align: middle;
-}
-
-div.budget_choices span {
-  vertical-align: middle;
-  font-weight: normal;
-}
-
-div.us_select {
-  margin: 5px 0 0 0;
-  overflow: hidden;
-}
-
-div.us {
-  padding: 0;
-  clear: both;
-  overflow: hidden;
-}
-
-div.us label {
-  display: block;
-  float: left;
-  padding-right: 10px;
-  white-space: nowrap;
-}
-
-div.us input {
-  vertical-align: middle;
-}
-
-div.us span {
-  vertical-align: middle;
-  font-weight: normal;
-}
-
-div.autocomplete {
-  background: #fff;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-}
-
-div.autocomplete ul {
-  list-style: none;
-  margin-left: -40px;
-}
-
-div.autocomplete li {
-  margin: 0;
-  padding: 5px;
-  padding-left: 10px;
-}
-
-div.autocomplete li.selected {
-  margin: 0;
-  padding: 5px;
-  padding-left: 10px;
-  background-color: #efefef;
-}
-
-div.autocomplete li a {
-  display: block;
-  font-weight: bold;
-  text-decoration: none;
-  color: #222;
-}
-
-div.autocomplete li a:hover {
-  color: #0099ff;
-}
-
-/* UPGRADE & DOWNGRADE --------------------------------------------------*/
-
-body.upgrade div.filterbar, body.downgrade div.filterbar {
+body.about div.filterbar {
   padding: 20px 0 0 0;
 }
 
-
-body.upgrade div.card, body.upgrade div.card-upgrade {
-  margin: 0;
+body.about div.cardcontent-perma {
+  padding: 20px;
 }
 
-body.upgrade div.content {
-  padding: 20px 0;
-  margin-top: 0;
-  text-align: left;
+body.about h2 {
+  margin: 20px;
 }
 
-body.upgrade h3 {
-  margin-top: 25px;
-  margin-bottom: 15px;
+body.about h3 {
+  margin: 5px 0 5px 0;
   font-size: 16px;
 }
 
-body.upgrade div.bulletsleft ul, body.upgrade div.bulletsright ul, body.upgrade div.upgrade ul, body.downgrade div.downgrade ul {
-  margin: 0 0 10px 0;
-  list-style-image: url(/images/icon_check.png);
+body.about h4 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: normal;
+  color: #999;
+  line-height: 1.3em;
+  margin-top: 0;
+  margin-left: 20px;
 }
 
-body.upgrade div.bulletsleft ul li, body.upgrade div.bulletsright ul li, body.upgrade div.upgrade ul li, body.downgrade div.downgrade ul li {
-  padding: 0 0 5px 0;
-}
-
-body.upgrade div.free {
-  width: 317px;
-  padding: 0 20px;
-  float: left;
-  text-align: left;
+body.about div.about {
   overflow: hidden;
-  background-image: url(/images/bkgd-free.png);
-  background-repeat: no-repeat;
-  margin-right: 20px;
+  width: 400px;
+  line-height: 1.5em;
+  float: left;
+  margin: 0 20px 20px 20px;
 }
 
-body.upgrade div.freebutton {
-  margin: 20px 0 0 0;
-  width: 207px;
-  text-align: center;
+body.about div.cardcontent-perma p {
+  font-size: 14px;
+  color: #666;
 }
 
-body.upgrade div.pro {
-  width: 580px;
+body.about div.cardcontent-perma img {
+  margin-right: 10px;
   margin-bottom: 15px;
-  padding: 0 10px;
-  float: left;
-  text-align: center;
-  overflow: hidden;
-  background-image: url(/images/bkgd-pro.png);
-  background-repeat: no-repeat;
 }
 
-body.upgrade div.bulletsleft {
+body.about div.cardcontent-perma p a {
+  color: #0099ff;
+  border-bottom: 2px solid #0099ff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+body.about div.cardcontent-perma div.faq p a {
+  color: #0099ff;
+  border: none;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+body.about div.cardcontent-perma p a:hover {
+ color: #222;
+ border-bottom: 2px solid #0099ff;
+}
+
+body.about div.faq {
+  border-top: 1px solid #ccc;
+  margin-top: 30px;
+}
+
+body.about div.faq h2 {
+  margin-bottom: 30px;
+}
+
+body.about div.faq h3 {
+  margin-left: 20px;
+}
+
+body.about div.faq p {
+  margin-left: 20px;
+  margin-bottom: 20px;
+	width: 65%;
+	line-height: 1.3em;
+}
+
+body.about div.faq div.background {
+	float: right;
+	width: 220px;
+	padding: 10px;
+	border-left: 1px solid #ccc;
+	margin-top: 20px;
+}
+
+body.about div.faq div.background h3 {
+	font-size: 14px;
+}
+
+body.about div.faq div.background p {
+	font-size: 12px;
+	width: auto;
+}
+
+body.about div.faq div.background a {
+	border-bottom: none;
+}
+
+body.about div.cardcontent-perma div.tweet {
   float: left;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
   width: 200px;
-  overflow: hidden;
-  text-align: left;
-  margin-left: 65px;
 }
 
-body.upgrade div.bulletsright {
-  float: left;
-  width: 240px;
-  overflow: hidden;
-  text-align: left;
+body.about div.cardcontent-perma div.tweet div.tweet-content {
+  padding: 15px;
+  padding-bottom: 5px;
+  background-color: #b3fcce;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
-body.upgrade div.freecard {
-  margin-right: 20px;
-  overflow: hidden;
-  width: 357px;
-  float: left;
+body.about div.cardcontent-perma div.tweet div.tweet-content p {
+  color: #333;
 }
 
-body.upgrade div.procard {
-  float: left;
-  overflow: hidden;
+body.about div.cardcontent-perma div.tweet div.bubble {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  height: 16px;
 }
 
 /* FAVORITES ------------------------------------------------*/
@@ -868,7 +723,58 @@ body.favorites div.cardcontent-perma p a:hover {
  border-bottom: 2px solid #0099ff;
 }
 
-/* SEARCH BAR */
+/* LOGIN ----------------------------------------------------*/
+
+body.login div.card-upgrade {
+  margin-left: 275px;
+}
+
+body.login h2 {
+  color:#222222;
+  font-family:Helvetica,sans-serif;
+  font-size:21px;
+  font-weight:bold;
+  margin-top: 20px;
+}
+
+body.login div.login p {
+  margin: 20px 0 3px 0;
+}
+
+body.login div.login label {
+  font-weight: bold;
+}
+
+body.login div.create {
+  padding: 10px 0;
+  text-align: right;
+  font-size: 11px;
+  color: #666;
+  background-color: #f5f6f7;
+}
+
+body.login div.remember {
+  padding: 15px 0 30px 0;
+}
+
+body.login div.remember label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+body.login div.remember input {
+  vertical-align: middle;
+}
+
+body.login div.remember span {
+  color: #222;
+  vertical-align: middle;
+  font-weight: normal;
+}
+
+/* SEARCH BAR -----------------------------------------------*/
 
 ul.search_bar {
   list-style: none;
@@ -925,3 +831,81 @@ ul.search_bar li div.search_menu a {
 ul.search_bar li div.search_menu a:hover {
   text-decoration: underline;
 }
+
+/* CITIES ---------------------------------------------------*/
+
+body.cities div.content {
+}
+
+body.cities div.content ul {
+	list-style: none;
+	margin: 0 0 0 20px;
+	padding: 0;
+}
+
+body.cities div.content li {
+	font-size: 14px;
+	line-height: 1.3em;
+	padding-bottom: 3px;
+}
+
+body.cities div.content table td {
+	padding-right: 30px;
+}
+
+body.cities div.filter {
+  width: 960px;
+  text-align: left;
+  margin:auto;
+}
+
+body.cities div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.cities div.cardcontent-perma {
+  padding: 20px;
+}
+
+body.cities div.cardcontent-perma h2 {
+  margin: 20px;
+  font-size: 28px;
+}
+
+body.cities div.cardcontent-perma h3 {
+  text-transform: uppercase;
+  margin-left: 20px;
+  border-top: 1px dotted #ccc;
+  padding: 10px 0 0 0;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+body.cities div.cardcontent-perma h3 span {
+  font-size: 12px;
+  text-transform: none;
+  font-weight: normal;
+}
+
+body.cities div.cardcontent-perma h4 {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 10px 0 0 0;
+}
+
+body.cities div.cardcontent-perma h4 a {
+  color: #222;
+  border-bottom: 2px solid #3399CC;
+  text-decoration: none;
+}
+
+body.cities div.cardcontent-perma h4 a:hover {
+  color: #3399CC;
+}
+
+body.cities div.cardcontent-perma table.topcities li {
+  font-size: 21px;
+  padding-bottom: 5px;
+}
+
+
