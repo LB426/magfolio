@@ -4,6 +4,7 @@ class SignupController < ApplicationController
     @title = "Создание каталога Клевер"
     @body_css_class = "create"
     @header_layout = 'signup/header_new'
+    @signup = Signup.new
   end
   
   def upgrade
@@ -22,6 +23,11 @@ class SignupController < ApplicationController
       @body_css_class = 'publish pro'
       render 'signup/pro-publish'
     end
+  end
+  
+  def logoupload
+    @signup = Signup.create( params[:user] )
+    render :nothing => true
   end
   
 end

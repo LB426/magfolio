@@ -7,6 +7,7 @@ gem 'rails', '3.0.5'
 
 # gem "haml"
 gem 'mysql2'
+gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'
