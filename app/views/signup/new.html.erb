@@ -26,15 +26,16 @@
 </div>
 
 <div class="create_form">
-  <form action="/signup" class="listing_form" enctype="multipart/form-data" id="signup_listing_form" method="post">
     <div class="image_upload"> 
       <h2>Сначала, лучшую фотографию Вашего бизнеса</h2> 
       <img align="right" alt="Img_uploadsample" src="/images/img_uploadsample.png" style="margin-left: 10px;" /> 
       <p>Загрузите изображение которое лучше всего представило бы Вашу компанию, так сказать лицо Вашего бизнеса. Позже Вы всегда сможете изменить это изображение.</p> 
       <p><strong>Для лучшего результата загрузите картинку размером 900 x 630 JPG или PNG.</strong><br /> 
       <em>Нет в таком размере? Ничего, мы подгоним размер под нужный формат.</em></p>
-      <div id="upload_progress_file"> 
-        <input accept="image/*" id="listing_portfolio_images_attributes_0_image" name="listing[portfolio_images_attributes][0][image]" size="30" style="width: 300px; height: 21px;" type="file" /> 
+      <div id="upload_best_business_file">
+        <%= form_for @signup, :url => '/signup/logoupload', :html => {:multipart => true} do |f| %>
+          <%= f.file_field :logotype %>
+        <% end %>
       </div> 
       <div id="upload_progress_bar" style="display:none"> 
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
@@ -46,6 +47,7 @@
         <textarea cols="40" id="listing_portfolio_images_attributes_0_description" name="listing[portfolio_images_attributes][0][description]" rows="20"></textarea>
       </p> 
     </div>
+  <form action="/signup" class="listing_form" enctype="multipart/form-data" id="signup_listing_form" method="post">  
     <div class="about_company"> 
       <h2>Теперь расскажите нам о Вашем бизнесе</h2> 
       <p><label for="listing_company_name">Как называется Ваша компания?</label><br /> 
@@ -104,13 +106,11 @@
   </form>
 </div> 
 
-<iframe id="1logo_upload1" name="upload_iframe" style="width:0;height:0" src="" frameborder="0">
+<iframe id="upload_iframe" name="upload_iframe" style="width:0;height:0" src="" frameborder="0">
 </iframe> 
 
 <div class="clear"></div>
 
-<div id="logo_upload">
-</div>
 
         
 

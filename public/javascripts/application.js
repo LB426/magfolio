@@ -30,29 +30,21 @@ $(document).ready(function() {
     $("#search_service_menu").show();
     event.stopPropagation();
   });
-  $('input[type=file]#listing_logo').change(function(event){
+  $('input[type=file]#best_business_image').change(function(event){
     var userFile = $(this).val();
-    alert(userFile);
+    //alert(userFile);
     var max = 5000000 ;
-    var iframe = $( '
-    <iframe name="logo_upload_iframe" id="logo_upload_iframe" class="hidden" src="about:none" /> 
-    <form id="logo_upload_form">
-    <input type="hidden" id="max" name="MAX_FILE_SIZE" value="5000000" >
-    <input id="userfile" name="userfile" size="50" type="file" value="asdfg">
-    <input id="formsubmit" type="submit" value="Send File" >
-    </form>
-    </iframe>' );
+    var iframe = $( '<iframe name="iframe" id="iframe" class="hidden" src="about:none" />' );
     $("#logo_upload").append( iframe );
-    $('#logo_upload_form').attr( "action", "/signup/logoupload" );
-    $('#logo_upload_form').attr( "method", "post" );
-    //$('#logo_upload_form').attr( "userfile", userFile );
-    //$('#userfile').val(userFile);
-    $('#logo_upload_form').attr( "MAX_FILE_SIZE", max );
-    $('#logo_upload_form').attr( "enctype", "multipart/form-data" );
-    $('#logo_upload_form').attr( "encoding", "multipart/form-data" );
-    $('#logo_upload_form').attr( "target", "logo_upload_iframe" );
-    $('#logo_upload_form').submit();
-    $("#logo_upload_iframe").load(
+    $('#business_img_upload_form').attr( "action", "/signup/logoupload" );
+    $('#business_img_upload_form').attr( "method", "post" );
+    $('#business_img_upload_form').attr( "userfile", userFile );
+    $('#business_img_upload_form').attr( "MAX_FILE_SIZE", max );
+    $('#business_img_upload_form').attr( "enctype", "multipart/form-data" );
+    $('#business_img_upload_form').attr( "encoding", "multipart/form-data" );
+    $('#business_img_upload_form').attr( "target", "iframe" );
+    $('#business_img_upload_form').submit();
+    $("#iframe").load(
       function(){
         //iframeContents = $("iframe#logo_upload_iframe").contentDocument.body.innerHTML;
         //$("div#logo_upload").html(iframeContents);
@@ -60,4 +52,14 @@ $(document).ready(function() {
     );
     return false;
   });
+	$('input[type=file]#signup_logotype').change(function(event){
+		var userFile = $(this).val();
+		$("#upload_progress_bar").show();
+		$('#new_signup').attr( "target", "upload_iframe" );
+		$('#new_signup').submit();
+		$("#upload_iframe").load(function(){
+			$("#upload_progress_bar").hide();	
+		});
+		return false;
+	});
 })

@@ -26,7 +26,7 @@ class SignupController < ApplicationController
   end
   
   def logoupload
-    @signup = Signup.create( params[:user] )
+    @signup = Signup.create( params[:signup] )
     render :nothing => true
   end
   
