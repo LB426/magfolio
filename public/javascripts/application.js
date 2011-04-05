@@ -2,8 +2,18 @@
 // This file is automatically included by javascript_include_tag :defaults
 
 jQuery.ajaxSetup({
-  'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
-})
+  'beforeSend': function(xhr) {
+    xhr.setRequestHeader("Accept", "text/javascript")
+  }
+});
+
+/*
+jQuery.ajaxSetup({
+  beforeSend: function(xhr) {
+    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+  }
+});
+*/
 
 $(document).ready(function() {
   $('body').click(function() {
@@ -52,13 +62,17 @@ $(document).ready(function() {
     );
     return false;
   });
-	$('input[type=file]#signup_logotype').change(function(event){
+	$('input[type=file]#signup_logo').change(function(event){
 		var userFile = $(this).val();
+		//alert(document.cookie);
+		//alert($.cookie("_session_id"));
 		$("#upload_progress_bar").show();
 		$('#new_signup').attr( "target", "upload_iframe" );
 		$('#new_signup').submit();
 		$("#upload_iframe").load(function(){
-			$("#upload_progress_bar").hide();	
+			$("#upload_progress_bar").hide();
+			signup_id = $('#upload_iframe').contents().find('#signup_id').html();
+			alert(signup_id);
 		});
 		return false;
 	});

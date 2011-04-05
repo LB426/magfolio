@@ -34,7 +34,8 @@
       <em>Нет в таком размере? Ничего, мы подгоним размер под нужный формат.</em></p>
       <div id="upload_best_business_file">
         <%= form_for @signup, :url => '/signup/logoupload', :html => {:multipart => true} do |f| %>
-          <%= f.file_field :logotype %>
+          <%= f.file_field :logo %>
+          
         <% end %>
       </div> 
       <div id="upload_progress_bar" style="display:none"> 
@@ -107,7 +108,12 @@
 </div> 
 
 <iframe id="upload_iframe" name="upload_iframe" style="width:0;height:0" src="" frameborder="0">
-</iframe> 
+</iframe>
+<script type="text/javascript">
+//<![CDATA[
+   var signup_id = 0 ;
+//]]>
+</script>
 
 <div class="clear"></div>
 
