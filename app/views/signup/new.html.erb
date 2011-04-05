@@ -33,10 +33,7 @@
       <p><strong>Для лучшего результата загрузите картинку размером 900 x 630 JPG или PNG.</strong><br /> 
       <em>Нет в таком размере? Ничего, мы подгоним размер под нужный формат.</em></p>
       <div id="upload_best_business_file">
-        <%= form_for @signup, :url => '/signup/logoupload', :html => {:multipart => true} do |f| %>
-          <%= f.file_field :logo %>
-          
-        <% end %>
+        <input accept="image/*" id="listing_logo" name="listing[logo]" size="30" style="width: 300px; height: 21px;" type="file" />
       </div> 
       <div id="upload_progress_bar" style="display:none"> 
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
@@ -47,8 +44,7 @@
         <small>Например: Центральный магазин торговой сети "Товары для дома"</small><br />
         <textarea cols="40" id="listing_portfolio_images_attributes_0_description" name="listing[portfolio_images_attributes][0][description]" rows="20"></textarea>
       </p> 
-    </div>
-  <form action="/signup" class="listing_form" enctype="multipart/form-data" id="signup_listing_form" method="post">  
+    </div>  
     <div class="about_company"> 
       <h2>Теперь расскажите нам о Вашем бизнесе</h2> 
       <p><label for="listing_company_name">Как называется Ваша компания?</label><br /> 
@@ -57,7 +53,12 @@
       <p><label for="listing_logo">Загрузите логотип Вашей компании</label> &ndash; не обязательно<br /> 
       <small>GIF, JPG, or PNG. Будут подогнаны под нужный размер.<br />
         Он будет размещён на странице Вашего каталога, чтобы клиенты могли его видеть.</small></p> 
-      <input accept="image/*" id="listing_logo" name="listing[logo]" size="30" style="width: 300px; height: 21px;" type="file" /> 
+      <%= form_for @signup, :url => '/signup/logoupload', :html => {:multipart => true } do |f| %>
+        <%= f.file_field :logo, :accept => "image/*" %>          
+      <% end %>
+      <div id="logo_upload_progress_bar" style="display:none"> 
+        <img alt="Spinner-small" src="/images/spinner-small.gif" />
+      </div>
       <p><label for="listing_budget_id">К какому виду деятельности относиться Ваша компания?</label></p> 
       <select id="listing_location_id" name="listing[location_id]">
         <option value="">Выберите вид деятельности...</option> 
@@ -104,7 +105,7 @@
     <div id='submit_button'> 
       <p><input alt="Сохранить и продолжить" class="submit_image" onclick="ListingSignup.show_spinner()" src="/images/btn_saveandcontinue.png" type="image" /></p> 
     </div> 
-  </form>
+  
 </div> 
 
 <iframe id="upload_iframe" name="upload_iframe" style="width:0;height:0" src="" frameborder="0">
