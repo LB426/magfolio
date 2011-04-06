@@ -10,9 +10,12 @@ Magfolio::Application.routes.draw do
   match 'cities' => 'cities#index', :as => :cities
   
   match 'signup' => 'signup#new', :as => :signup
-  match 'signup/upgrade' => 'signup#upgrade', :as => :upgrade
+  match 'signup/:id/stage1' => 'signup#new', :as => :signup_stage1
   match 'signup/:id/publish' => 'signup#publish', :as => :publish
-  match 'signup/logoupload' => 'signup#logoupload', :as => :logoupload
+  match 'signup/bestpictureupload' => 'signup#bestpictureupload', :as => :bestpictureupload
+  match 'signup/:id/bestpictureurl' => 'signup#bestpictureurl', :as => :bestpictureurl
+  match 'signup/:id/logoupload' => 'signup#logoupload', :as => :logoupload
+  match 'signup/:id/cost' => 'signup#cost', :as => :cost
   
   match 'login' => 'user_sessions#new', :as => :login
   resources :user_sessions

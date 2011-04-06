@@ -9,14 +9,19 @@
         <h2>
           <a href="#" id="live_company_name" onclick = "return false">Имя Вашей компании</a>
         </h2> 
-        <p><span id="live_budget">Типичные товары или услуги</span><br /> 
-          <span id="live_company_location">Город</span></p> 
+        <p>
+          <span id="live_business_type">Типичные товары или услуги</span><br /> 
+          <span id="live_company_location">Город</span>
+        </p> 
       </div> 
       <a href="#" onclick="return false">
-        <img alt="image" id="preview_card_image" src="/images/img_empty-small.png" />
+        <div id="live_preview_best_business_image">
+          <%= image_tag("/images/img_empty-small.png") if @signup.id.nil? %>
+          <%= image_tag(@signup.bestpicture.url(:signup_step_one)) unless @signup.id.nil? %>
+        </div>
       </a> 
       <div class="caption">
-        <span id="live_image_description">Краткое описание бизнеса</span>
+        <span id="live_image_description">Краткое описание картинки</span>
       </div> 
     </div> 
     <div class="cardcap">
@@ -32,50 +37,52 @@
       <p>Загрузите изображение которое лучше всего представило бы Вашу компанию, так сказать лицо Вашего бизнеса. Позже Вы всегда сможете изменить это изображение.</p> 
       <p><strong>Для лучшего результата загрузите картинку размером 900 x 630 JPG или PNG.</strong><br /> 
       <em>Нет в таком размере? Ничего, мы подгоним размер под нужный формат.</em></p>
-      <div id="upload_best_business_file">
-        <input accept="image/*" id="listing_logo" name="listing[logo]" size="30" style="width: 300px; height: 21px;" type="file" />
+      <div id="upload_best_picrute">
+        <%= form_for @signup, :url => '/signup/bestpictureupload', :html => {:multipart => true , :id => 'new_bestpicture_signup_form' } do |f| %>
+          <%= f.file_field :bestpicture, :accept => "image/*" %>         
+        <% end %>
       </div> 
-      <div id="upload_progress_bar" style="display:none"> 
+      <div id="best_picrute_upload_progress_bar" style="display:none"> 
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
-      </div> 
+      </div>
       <p>
-        <label for="listing_portfolio_images_attributes_0_description">
+        <label>
         Описание изображения которое Вы добавили</label><br />
         <small>Например: Центральный магазин торговой сети "Товары для дома"</small><br />
-        <textarea cols="40" id="listing_portfolio_images_attributes_0_description" name="listing[portfolio_images_attributes][0][description]" rows="20"></textarea>
+        <textarea cols="40" id="best_picrute_description" name="listing[portfolio_images_attributes][0][description]" rows="20"></textarea>
       </p> 
     </div>  
     <div class="about_company"> 
       <h2>Теперь расскажите нам о Вашем бизнесе</h2> 
-      <p><label for="listing_company_name">Как называется Ваша компания?</label><br /> 
+      <p><label>Как называется Ваша компания?</label><br /> 
       <small>Вы можете использовать Ваше собственное имя, если Вы частный предприниматель.</small></p> 
-      <input id="listing_company_name" name="listing[company_name]" size="30" type="text" /> 
-      <p><label for="listing_logo">Загрузите логотип Вашей компании</label> &ndash; не обязательно<br /> 
+      <input id="company_name" name="company_name" size="30" type="text" /> 
+      <p><label>Загрузите логотип Вашей компании</label> &ndash; не обязательно<br /> 
       <small>GIF, JPG, or PNG. Будут подогнаны под нужный размер.<br />
         Он будет размещён на странице Вашего каталога, чтобы клиенты могли его видеть.</small></p> 
-      <%= form_for @signup, :url => '/signup/logoupload', :html => {:multipart => true } do |f| %>
-        <%= f.file_field :logo, :accept => "image/*" %>          
+      <%= form_for @signup, :url => '/signup/0/logoupload', :html => {:multipart => true, :id => 'new_logo_signup_form' } do |f| %>
+        <%= f.file_field :logo, :accept => "image/*" %>        
       <% end %>
       <div id="logo_upload_progress_bar" style="display:none"> 
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
       </div>
-      <p><label for="listing_budget_id">К какому виду деятельности относиться Ваша компания?</label></p> 
-      <select id="listing_location_id" name="listing[location_id]">
+      <p><label>К какой вид бизнеса наиболее типичен для Вас?</label></p> 
+      <select id="business_type_id" name="business_type_id">
         <option value="">Выберите вид деятельности...</option> 
         <option value="1">Торговля</option> 
         <option value="2">Промышленное производство</option> 
-        <option value="3">Услуги</option> 
+        <option value="3">Сфера услуг</option> 
         <option value="4">Сельское хозяйство</option> 
         <option value="0">Моего бизнеса нет в списке</option>
       </select> 
       <p> 
-        <label for="listing_location_id">Какой населённый пункт является главным для Вашей компании?</label><br /> 
+        <label>Какой населённый пункт является приоритетным для Вашей компании?</label><br /> 
         <small>
           &bull; Если Ваша компания ведёт дело во многих городах, выберите главный.<br />
           &bull; Если Вашего города нет в списке выберите &ldquo;Моего города нет в списке&rdquo;.
         </small> 
       </p> 
-      <select id="listing_location_id" name="listing[location_id]">
+      <select id="location_id" name="location_id">
         <option value="">Выберите город...</option> 
         <option value="1">Тихорецк</option> 
         <option value="2">Фастовецкая</option> 
@@ -87,36 +94,65 @@
     <div class="contact"> 
       <h2>Как клиенты могут связаться с Вами?</h2>
       <p> 
-        <label for="listing_contact_email">Телефон</label> - обязательно<br /> 
-        <small>Введите номер телефона с кодом города (например: (86196) 41616 )</small> 
+        <label>Телефон</label> - обязательно<br /> 
+        <small>Введите номер телефона с кодом города (например: (86196) 41616 или +7 918 123-44-56)</small> 
       </p>
-      <input id="listing_contact_phone" name="listing[contact_email]" size="30" type="text" />
+      <input id="contact_phone" name="contact_phone" size="30" type="text" />
       <p> 
-        <label for="listing_contact_email">Электронная почта</label> - не обязательно<br /> 
+        <label>Электронная почта</label> - не обязательно<br /> 
         <small>Введите адрес электронной почты (например: sales@mydomain.ru)</small> 
       </p> 
-      <input id="listing_contact_email" name="listing[contact_email]" size="30" type="text" /> 
+      <input id="contact_email" name="contact_email" size="30" type="text" /> 
       <p> 
-        <label for="listing_website_url">Вебсайт URL</label> - не обязательно<br /> 
+        <label>Вебсайт URL</label> - не обязательно<br /> 
         <small>(например: www.mydomain.ru)</small> 
       </p> 
-      <input id="listing_website_url" name="listing[website_url]" size="30" type="text" /> 
-    </div> 
-    <div id='submit_button'> 
-      <p><input alt="Сохранить и продолжить" class="submit_image" onclick="ListingSignup.show_spinner()" src="/images/btn_saveandcontinue.png" type="image" /></p> 
-    </div> 
-  
-</div> 
+      <input id="website_url" name="website_url" size="30" type="text" /> 
+    </div>
+    <div style="display:none">
+      <%= form_for @signup, :url => '/signup/0/cost', :html => { :id => 'save_and_continue_form' } do |f| %>
+        <%= f.text_field :company_name %>
+        <%= f.text_field :business_type %>
+        <%= f.text_field :location %>
+        <%= f.text_field :phone %>
+        <%= f.text_field :email %>
+        <%= f.text_field :company_url %>
+    </div>
+        <div id='signup_submit'> 
+          <p>
+            <input id="save_and_contunue_btn" alt="Сохранить и продолжить" class="submit_image" src="/images/btn_saveandcontinue.png" type="image" />
+          </p> 
+        </div>
+      <% end %>
+      <div id='signup_submit2'> 
+        <p>
+          <input id="save_and_contunue_btn2" alt="Сохранить и продолжить" class="submit_image" src="/images/btn_saveandcontinue.png" type="image" />
+        </p> 
+      </div>
+</div>
 
-<iframe id="upload_iframe" name="upload_iframe" style="width:0;height:0" src="" frameborder="0">
+<div class="clear"></div>
+
+<iframe id="best_picrute_upload_iframe" name="best_picrute_upload_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
 </iframe>
+<iframe id="logo_upload_iframe" name="logo_upload_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
+</iframe>
+
 <script type="text/javascript">
 //<![CDATA[
-   var signup_id = 0 ;
+  <%= "var signup_id = 0 ;" if @signup.id.nil? %>
+  <%= "var signup_id = #{@signup.id} ;" unless @signup.id.nil? %>
+  var best_picrute_desc = "no" ;
+  var company_name = "noname" ;
+  var business_type_id = -1 ;
+  var location_id = -1 ;
+  var phone = "no" ;
+  var email = "no" ;
+  var url = "no" ;
 //]]>
 </script>
 
-<div class="clear"></div>
+
 
 
         

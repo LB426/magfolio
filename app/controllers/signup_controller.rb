@@ -4,16 +4,22 @@ class SignupController < ApplicationController
     @title = "Создание каталога Клевер"
     @body_css_class = "create"
     @header_layout = 'signup/header_new'
-    @signup = Signup.new
+    if params[:id].nil?
+      @signup = Signup.new
+    else
+      @signup = Signup.find(params[:id])
+    end
     logger.debug "session = #{session}"
     logger.debug "session_id = #{request.session_options[:id]}"
     logger.debug "@signup.id = #{@signup.id}"
   end
   
-  def upgrade
+  def cost
     @title = "Изменение тарифного плана каталога Клевер"
     @body_css_class = "upgrade"
-    @header_layout = 'signup/header_upgrade'
+    @header_layout = 'signup/header_cost'
+    @signup = Signup.find(params[:id])
+    @signup.update_attributes(params[:signup])
   end
   
   def publish
@@ -28,14 +34,22 @@ class SignupController < ApplicationController
     end
   end
   
-  def logoupload
-    logger.debug "logoupload, session_id = #{request.session_options[:id]}"
+  def bestpictureupload
     @signup = Signup.create( params[:signup] )
-    #render :nothing => true
-    #response.headers['Content-type'] = "text/plain; charset=utf-8"
-    #render :text => @signup.to_json(:only => [ :id ])
     response.headers['Content-type'] = "text/html; charset=utf-8"
     render :text => "<body><div id=\"signup_id\">#{@signup.id}</div></body>"
+  end
+  
+  def bestpictureurl
+    @signup = Signup.find(params[:id])
+    response.headers['Content-type'] = "text/html; charset=utf-8"
+    render :text => "<img alt=\"image\" src=\"#{@signup.bestpicture.url(:signup_step_one)}\" />"
+  end
+  
+  def logoupload
+    @signup = Signup.find(params[:id])
+    @signup.update_attributes(params[:signup])
+    render :nothing => true
   end
   
 private
