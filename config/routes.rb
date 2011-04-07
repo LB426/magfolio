@@ -1,4 +1,6 @@
 Magfolio::Application.routes.draw do
+  resources :business_types
+
   match 'favorites' => 'favorites#index', :as => :favorites
   get "favorites/index"
 

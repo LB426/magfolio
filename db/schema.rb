@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110405072733) do
+ActiveRecord::Schema.define(:version => 20110407123834) do
+
+  create_table "business_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "business_types", ["id"], :name => "index_business_types_on_id"
 
   create_table "companies", :force => true do |t|
     t.integer  "user_id"

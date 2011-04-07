@@ -78,8 +78,14 @@ $(document).ready(function() {
 	});
 	$('#business_type_id').change(function(){
 	  business_type_id = $(this).val();
-	  var text = $('#business_type_id option:selected').html();
-	  $('#live_business_type').text(text);
+	  if(business_type_id == 0){
+      $("a#inline").click();
+    }else{
+      if(business_type_id != -1){
+        var text = $('#business_type_id option:selected').html();
+	      $('#live_business_type').text(text);
+      }
+    }
 	});
 	$('#location_id').change(function(){
 	  location_id = $(this).val();
@@ -110,6 +116,8 @@ $(document).ready(function() {
 	});
 	$('#save_and_contunue_btn2').click(function(){
 	  alert(signup_id + ' ' + best_picrute_desc + ' ' + company_name + ' ' + business_type_id + ' ' + location_id + ' ' + phone + ' ' + email + ' ' + url);
-	  $('input[type=file]#signup_bestpicture').val('ddddd');
-	});  
+	});
+	$("a#inline").fancybox({
+  		'hideOnContentClick': true
+  });
 })

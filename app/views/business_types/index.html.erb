@@ -1,0 +1,23 @@
+<h1>Listing business_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @business_types.each do |business_type| %>
+  <tr>
+    <td><%= business_type.name %></td>
+    <td><%= link_to 'Show', business_type %></td>
+    <td><%= link_to 'Edit', edit_business_type_path(business_type) %></td>
+    <td><%= link_to 'Destroy', business_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Business type', new_business_type_path %>

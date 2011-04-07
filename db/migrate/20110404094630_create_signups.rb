@@ -10,6 +10,8 @@ class CreateSignups < ActiveRecord::Migration
       
       t.timestamps
     end
+    
+    add_index :signups, :id
   end
 
   def self.down

@@ -68,11 +68,10 @@
       </div>
       <p><label>К какой вид бизнеса наиболее типичен для Вас?</label></p> 
       <select id="business_type_id" name="business_type_id">
-        <option value="">Выберите вид деятельности...</option> 
-        <option value="1">Торговля</option> 
-        <option value="2">Промышленное производство</option> 
-        <option value="3">Сфера услуг</option> 
-        <option value="4">Сельское хозяйство</option> 
+        <option value="-1">Выберите вид деятельности...</option> 
+        <% @business_types.each do |business_type| %>
+          <option value="<%= business_type.id %>"><%= business_type.name %></option>
+        <% end %>
         <option value="0">Моего бизнеса нет в списке</option>
       </select> 
       <p> 
@@ -137,6 +136,14 @@
 </iframe>
 <iframe id="logo_upload_iframe" name="logo_upload_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
 </iframe>
+
+<a id="inline" href="#add_business_type" style="display:none">&nbsp;</a>
+<div style="display:none">
+  <div id="add_business_type">
+    <h2>Как называется Ваш вид бизнеса?</h2>
+    
+  </div>
+</div>
 
 <script type="text/javascript">
 //<![CDATA[
