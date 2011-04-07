@@ -46,8 +46,7 @@
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
       </div>
       <p>
-        <label>
-        Описание изображения которое Вы добавили</label><br />
+        <label>Описание изображения которое Вы добавили</label><br />
         <small>Например: Центральный магазин торговой сети "Товары для дома"</small><br />
         <textarea cols="40" id="best_picrute_description" name="listing[portfolio_images_attributes][0][description]" rows="20"></textarea>
       </p> 
@@ -136,12 +135,18 @@
 </iframe>
 <iframe id="logo_upload_iframe" name="logo_upload_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
 </iframe>
+<iframe id="business_type_add_iframe" name="business_type_add_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
+</iframe>
 
 <a id="inline" href="#add_business_type" style="display:none">&nbsp;</a>
 <div style="display:none">
   <div id="add_business_type">
     <h2>Как называется Ваш вид бизнеса?</h2>
-    
+    <%= form_for @business_type, :url => businesstype_ajaxcreate_path, :html => { :target => 'business_type_add_iframe' } do |f| %>
+      <p><small>введите тип бизнеса, не более 30 знаков</small></p>
+      <p><%= f.text_field :name, :size => 30 %></p>
+      <p><%= f.submit "Внести в список" %></p>
+    <% end %>
   </div>
 </div>
 

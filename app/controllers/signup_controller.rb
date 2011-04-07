@@ -10,6 +10,7 @@ class SignupController < ApplicationController
       @signup = Signup.find(params[:id])
     end
     @business_types = BusinessType.all
+    @business_type = BusinessType.new
     logger.debug "session = #{session}"
     logger.debug "session_id = #{request.session_options[:id]}"
     logger.debug "@signup.id = #{@signup.id}"

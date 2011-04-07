@@ -118,6 +118,17 @@ $(document).ready(function() {
 	  alert(signup_id + ' ' + best_picrute_desc + ' ' + company_name + ' ' + business_type_id + ' ' + location_id + ' ' + phone + ' ' + email + ' ' + url);
 	});
 	$("a#inline").fancybox({
-  		'hideOnContentClick': true
+  		'hideOnContentClick': false ,
+			'onClosed': function(){
+				$.getJSON('/businesstype/ajaxgetbusinesstype', function(data){
+					$.each(data, function(i,item){
+						alert(item);
+						//$j("#business_type_id").append(
+					});
+				});
+			}
   });
+	$("#business_type_add_iframe").load(function(){
+		$.fancybox.close();
+	});
 })

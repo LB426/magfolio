@@ -80,4 +80,17 @@ class BusinessTypesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  def ajaxcreate
+    @business_type = BusinessType.new(params[:business_type])
+    @business_type.save
+    render :nothing => true
+  end
+  
+  def ajaxgetbusinesstype
+    business_types = BusinessType.all
+    response.headers['Content-type'] = "text/plain; charset=utf-8"
+    render :text => business_types.to_json(:only => [ :id, :name ])  
+  end
+  
 end

@@ -52,10 +52,6 @@ ActiveRecord::Schema.define(:version => 20110407123834) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.string   "bestpicture_file_name"
-    t.string   "bestpicture_content_type"
-    t.integer  "bestpicture_file_size"
-    t.datetime "bestpicture_updated_at"
   end
 
 end
