@@ -1,6 +1,6 @@
 Magfolio::Application.routes.draw do
   
-  match 'businesstype/ajaxgetbusinesstype' => 'business_types#ajaxgetbusinesstype'
+  match 'businesstype/getbusinesstypes' => 'business_types#getbusinesstypes'
   match 'businesstype/ajaxcreate' => 'business_types#ajaxcreate'
   resources :business_types
 

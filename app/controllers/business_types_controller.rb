@@ -87,10 +87,10 @@ class BusinessTypesController < ApplicationController
     render :nothing => true
   end
   
-  def ajaxgetbusinesstype
+  def getbusinesstypes
     business_types = BusinessType.all
     response.headers['Content-type'] = "text/plain; charset=utf-8"
-    render :text => business_types.to_json(:only => [ :id, :name ])  
+    render :text => business_types.to_json( :only => [ :id, :name ] )  
   end
   
 end

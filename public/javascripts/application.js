@@ -119,12 +119,15 @@ $(document).ready(function() {
 	});
 	$("a#inline").fancybox({
   		'hideOnContentClick': false ,
+  		'onComplete': function(){ $("#business_type_name").focus(); },
 			'onClosed': function(){
-				$.getJSON('/businesstype/ajaxgetbusinesstype', function(data){
+			  $('#business_type_id').empty();
+			  $('#business_type_id').prepend('<option value="-1">Выберите вид деятельности...</option>');
+				$.getJSON('/businesstype/getbusinesstypes', function(data){
 					$.each(data, function(i,item){
-						alert(item);
-						//$j("#business_type_id").append(
-					});
+					  $('#business_type_id').append('<option value="'+ item.business_type.id + '">' + item.business_type.name + '</option>');
+				  });
+				  $('#business_type_id').append('<option value="0">Моего бизнеса нет в списке</option>');
 				});
 			}
   });

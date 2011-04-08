@@ -65,7 +65,7 @@
       <div id="logo_upload_progress_bar" style="display:none"> 
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
       </div>
-      <p><label>К какой вид бизнеса наиболее типичен для Вас?</label></p> 
+      <p><label>Какой вид бизнеса наиболее типичен для Вас?</label></p> 
       <select id="business_type_id" name="business_type_id">
         <option value="-1">Выберите вид деятельности...</option> 
         <% @business_types.each do |business_type| %>
@@ -144,7 +144,7 @@
     <h2>Как называется Ваш вид бизнеса?</h2>
     <%= form_for @business_type, :url => businesstype_ajaxcreate_path, :html => { :target => 'business_type_add_iframe' } do |f| %>
       <p><small>введите тип бизнеса, не более 30 знаков</small></p>
-      <p><%= f.text_field :name, :size => 30 %></p>
+      <p><%= f.text_field :name, :size => 40 %></p>
       <p><%= f.submit "Внести в список" %></p>
     <% end %>
   </div>

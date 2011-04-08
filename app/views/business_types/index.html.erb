@@ -13,7 +13,7 @@
     <td><%= business_type.name %></td>
     <td><%= link_to 'Show', business_type %></td>
     <td><%= link_to 'Edit', edit_business_type_path(business_type) %></td>
-    <td><%= link_to 'Destroy', business_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Delete', business_type_path(business_type), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
