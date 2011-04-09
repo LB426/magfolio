@@ -57,9 +57,6 @@ $(document).ready(function() {
   		$('#new_logo_signup_form').attr( "action", "/signup/"+ signup_id +"/logoupload" );
   		$('#new_logo_signup_form').attr( "target", "logo_upload_iframe" );
   		$('#new_logo_signup_form').submit();
-  		//$("#upload_iframe").empty();
-  		//$("#upload_iframe").contents().find("body").html("");
-  		//alert($('#upload_iframe').contents().find('html').html());
   		$("#logo_upload_iframe").load(function(){
   			$("#logo_upload_progress_bar").hide();
   		});
@@ -68,16 +65,14 @@ $(document).ready(function() {
 	  }
 		return false;
 	});
-	$('#best_picrute_description').keyup(function(){
-    best_picrute_desc = $(this).val();
-    $('#live_image_description').text(best_picrute_desc);
+	$('#bestpic_comment').keyup(function(){
+    $('#live_image_description').text($(this).val());
 	});
 	$('#company_name').keyup(function(){
-    company_name = $(this).val();
-    $('#live_company_name').text(company_name);
+    $('#live_company_name').text($(this).val());
 	});
 	$('#business_type_id').change(function(){
-	  business_type_id = $(this).val();
+	  var business_type_id = $(this).val();
 	  if(business_type_id == 0){
       $("a#inline").click();
     }else{
@@ -86,33 +81,31 @@ $(document).ready(function() {
 	      $('#live_business_type').text(text);
       }
     }
-	});
+	});	
 	$('#location_id').change(function(){
-	  location_id = $(this).val();
-	  var text = $('#location_id option:selected').html();
-	  $('#live_company_location').text(text);
-	});
-	$('#contact_phone').keyup(function(){
-	  phone = $(this).val();
-	});
-	$('#contact_email').keyup(function(){
-	  email = $(this).val();
-	});
-	$('#website_url').keyup(function(){
-	  url = $(this).val();
+	  var location_id = $(this).val();
+	  if(location_id == 0){
+      $("a#inline_add_location").click();
+    }else{
+      if(location_id != -1){
+        var text = $('#location_id option:selected').html();
+	      $('#live_company_location').text(text);
+      }
+    }
 	});
 	$('#save_and_contunue_btn').click(function(){
 	  if(signup_id == 0){ 
 	    alert("Вы не загрузили лучшую фотографию Вашего бизнеса!");
 	    return false;
 	  }	  
-	  $('#save_and_continue_form').attr( "action", "/signup/" + signup_id + "/cost" );
-	  $('#signup_company_name').val(company_name);
-	  $('#signup_business_type').val(business_type_id);
-	  $('#signup_location').val(location_id);
-	  $('#signup_phone').val(phone);
-	  $('#signup_email').val(email);
-	  $('#signup_company_url').val(url);
+	  //$('#save_and_continue_form').attr( "action", "/signup/" + signup_id + "/stage2" );
+	  $('#signup_bestpic_comment').val($('#bestpic_comment').val());
+	  $('#signup_company_name').val($('#company_name').val());
+	  $('#signup_businesstype_id').val($('#business_type_id').val());
+	  $('#signup_location_id').val($('#location_id').val());
+	  $('#signup_phone').val($('#contact_phone').val());
+	  $('#signup_email').val($('#contact_email').val());
+	  $('#signup_company_url').val($('#website_url').val());
 	});
 	$('#save_and_contunue_btn2').click(function(){
 	  alert(signup_id + ' ' + best_picrute_desc + ' ' + company_name + ' ' + business_type_id + ' ' + location_id + ' ' + phone + ' ' + email + ' ' + url);
@@ -132,6 +125,12 @@ $(document).ready(function() {
 			}
   });
 	$("#business_type_add_iframe").load(function(){
+		$.fancybox.close();
+	});
+	$("a#inline_add_location").fancybox({
+  		'hideOnContentClick': false
+  });
+	$("#location_add_iframe").load(function(){
 		$.fancybox.close();
 	});
 })

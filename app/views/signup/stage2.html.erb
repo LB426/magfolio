@@ -3,7 +3,7 @@
 <p>Любой получит маленькую карточку. Большая карточка и лучшее размещение, когда перейдёте на Pro каталог.</p> 
 <div class="freebutton"> 
   <p>Вы можете перейти на Pro позже.</p> 
-  <a href="/signup/free/publish">
+  <a href="/signup/stage3-free">
     <img alt="Continue with the Free plan" height="38" src="/images/btn_continuefree.png" width="250" />
   </a> 
 </div> 
@@ -25,7 +25,7 @@
 </div> 
 <div class="clear"> 
   <p>No obligation. Cancel anytime.</p> 
-  <a href="/signup/pro/publish"><img alt="Upgrade to the Sortfolio Pro plan" height="38" src="/images/btn_cre_pro_catalog.png" width="320" /></a> 
+  <a href="/signup/stage3-pay"><img alt="Upgrade to the Sortfolio Pro plan" height="38" src="/images/btn_cre_pro_catalog.png" width="320" /></a> 
 </div> 
 </div> 
 
@@ -39,11 +39,16 @@
     </div> 
     <div class="cardcontent"> 
       <div class="cardcompany listing_content"> 
-        <h2>Марлен</h2> 
-        <p>$3,000 and under<br /><span>Rabat</span></p> 
+        <h2><%= @signup.company_name %></h2> 
+        <p>
+          <%= BusinessType.find(@signup.businesstype_id).name %><br />
+          <span>
+            <%= Location.find(@signup.location_id).name %>
+          </span>
+        </p> 
       </div> 
       <div class="free-image">
-        <img alt="14573_1299005890" class="tipify_image" src="/images/14573_1299005890.small.jpg" /> 
+        <%= image_tag @signup.bestpicture.url(:small) %>
       </div> 
     </div> 
     <div class="cardcap"><img alt="Card-bottom" src="/images/card-bottom.png" /></div> 
@@ -59,7 +64,7 @@
     </div> 
     <div class="cardcontent-upgrade"> 
       <div class="cardcompany">
-        <h2>Марлен</h2> 
+        <h2><%= @signup.company_name %></h2> 
         <p>$3,000 and under &nbsp; <span>Rabat</span></p> 
       </div>
       <div class="listing slideshow" id="slider_listing_11058">
@@ -78,10 +83,10 @@
         <div class="scroller"> 
           <div class="scroller_content"> 
             <div class="portfolio_image section" id="listing_portfolio_image_14573">
-              <div class="pro-image">  
-                <img alt="14573_1299005890" class="slideshow_image" height="300" src="/images/14573_1299005890.medium.jpg" />
+              <div class="pro-image">
+                <%= image_tag @signup.bestpicture.url(:medium), :height => '300' %>
               </div> 
-              <div class="pro-caption">Моя Марлен</div> 
+              <div class="pro-caption"><%= @signup.bestpic_comment %></div> 
             </div> 
             <div class="portfolio_image section" id="preview1"> 
               <div class="pro-image"> 

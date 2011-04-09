@@ -14,9 +14,10 @@
 </div>
 <div class="filterbar">
   <div class="steps">
-    <a href="/signup"><img align="absmiddle" alt="Step 1" class="first" src="/images/step_1-gray.png" /></a>
-    <%= link_to "Создайте свой каталог", signup_stage1_path(@signup) %>
-    <img align="absmiddle" alt="Step 2" src="/images/step_2-blue.png" /> Выберите вид каталога
-    <img align="absmiddle" alt="Step 3" src="/images/step_3-gray.png" /> Опубликуйте каталог
+    <%= link_to image_tag("/images/step_1-gray.png", :align=>'absmiddle'), signup_stage1_path %>
+    <%= link_to "Создайте свой каталог", signup_stage1_path %>
+    <%= link_to image_tag("/images/step_2-gray.png", :align=>'absmiddle'), signup_stage2_path %>
+    <%= link_to "Выберите вид каталога", signup_stage2_path %>
+    <img align="absmiddle" alt="Step 3" src="/images/step_3-blue.png" /> Опубликуйте каталог
   </div>
 </div>

@@ -1,5 +1,7 @@
 Magfolio::Application.routes.draw do
   
+  resources :locations
+
   match 'businesstype/getbusinesstypes' => 'business_types#getbusinesstypes'
   match 'businesstype/ajaxcreate' => 'business_types#ajaxcreate'
   resources :business_types
@@ -14,13 +16,14 @@ Magfolio::Application.routes.draw do
 
   match 'cities' => 'cities#index', :as => :cities
   
-  match 'signup' => 'signup#new', :as => :signup
-  match 'signup/:id/stage1' => 'signup#new', :as => :signup_stage1
-  match 'signup/:id/publish' => 'signup#publish', :as => :publish
+  match 'signup' => 'signup#stage1', :as => :signup
+  match 'signup/stage1' => 'signup#stage1', :as => :signup_stage1
+  match 'signup/stage2' => 'signup#stage2', :as => :signup_stage2
+  match 'signup/stage3-free' => 'signup#stage3free', :as => :signup_stage3_free
+  match 'signup/stage3-pay' => 'signup#stage3pay', :as => :signup_stage3_pay
   match 'signup/bestpictureupload' => 'signup#bestpictureupload', :as => :bestpictureupload
   match 'signup/:id/bestpictureurl' => 'signup#bestpictureurl', :as => :bestpictureurl
   match 'signup/:id/logoupload' => 'signup#logoupload', :as => :logoupload
-  match 'signup/:id/cost' => 'signup#cost', :as => :cost
   
   match 'login' => 'user_sessions#new', :as => :login
   resources :user_sessions

@@ -1,62 +1,68 @@
 class SignupController < ApplicationController
   
-  def new
+  def stage1
     @title = "Создание каталога Клевер"
     @body_css_class = "create"
-    @header_layout = 'signup/header_new'
-    if params[:id].nil?
-      @signup = Signup.new
-    else
-      @signup = Signup.find(params[:id])
-    end
+    @header_layout = 'signup/header_stage1'
+    @signup = find_signup
     @business_types = BusinessType.all
     @business_type = BusinessType.new
+    @locations = Location.all
+    @location = Location.new
     logger.debug "session = #{session}"
     logger.debug "session_id = #{request.session_options[:id]}"
-    logger.debug "@signup.id = #{@signup.id}"
+    rescue ActiveRecord::RecordNotFound
+      redirect_to signup_path
   end
   
-  def cost
+  def stage2
     @title = "Изменение тарифного плана каталога Клевер"
     @body_css_class = "upgrade"
-    @header_layout = 'signup/header_cost'
-    @signup = Signup.find(params[:id])
+    @header_layout = 'signup/header_stage2'
+    @signup = find_signup
     @signup.update_attributes(params[:signup])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to signup_path
   end
   
-  def publish
-    @header_layout = 'signup/header_upgrade_free'
-    if params[:id] == 'free'
-      @body_css_class = 'publish free'
-      render 'signup/free-publish'
-    end
-    if params[:id] == 'pro'
-      @body_css_class = 'publish pro'
-      render 'signup/pro-publish'
-    end
+  def stage3free
+    @header_layout = 'signup/header_stage3'
+    @body_css_class = 'publish free'
+    render 'signup/free-publish'
+  end
+  
+  def stage3pay
+    @header_layout = 'signup/header_stage3'
+    @body_css_class = 'publish pro'
+    render 'signup/pro-publish'
   end
   
   def bestpictureupload
     @signup = Signup.create( params[:signup] )
+    @signup.session_id = request.session_options[:id]
+    @signup.save
     response.headers['Content-type'] = "text/html; charset=utf-8"
     render :text => "<body><div id=\"signup_id\">#{@signup.id}</div></body>"
   end
   
   def bestpictureurl
-    @signup = Signup.find(params[:id])
+    @signup = find_signup
     response.headers['Content-type'] = "text/html; charset=utf-8"
-    render :text => "<img alt=\"image\" src=\"#{@signup.bestpicture.url(:signup_step_one)}\" />"
+    render :text => "<img alt=\"image\" src=\"#{@signup.bestpicture.url(:small)}\" />"
   end
   
   def logoupload
-    @signup = Signup.find(params[:id])
+    @signup = find_signup
     @signup.update_attributes(params[:signup])
     render :nothing => true
   end
   
 private
   def find_signup
-    @signup = (session[:signup] ||= Signup.new)
+    #@signup = (session[:id] ||= Signup.new)
+    signup = Signup.find_by_session_id(request.session_options[:id])
+    signup = Signup.new if signup.nil?
+    signup
   end
   
 end
