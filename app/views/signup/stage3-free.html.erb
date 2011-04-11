@@ -21,22 +21,26 @@
 <div class="example_card"> 
 <h3>Это будет опубликовано в каталоге Клевер.</h3> 
   <div class="card listing_content">
-    <div class="cardcap"><img alt="Card-top-publish" height="10" src="/images/card-top-publish.png" width="225" /></div> 
+    <div class="cardcap">
+      <img alt="Card-top-publish" height="10" src="/images/card-top-publish.png" width="225" />
+    </div> 
     <div class="cardcontent"> 
       <div class="cardcompany listing_content"> 
-        <h2>Марлен</h2> 
-        <p>$3,000 and under<br /> 
-          <span>Rabat</span></p> 
+        <h2><%= @signup.company_name %></h2> 
+        <p>
+          <%= BusinessType.find(@signup.businesstype_id).name %><br /> 
+          <span><%= Location.find(@signup.location_id).name %></span>
+        </p> 
       </div> 
       <div class="free-image"> 
-        <img alt="14573_1299005890" class="tipify_image" src="/images/14573_1299005890.small.jpg" /> 
+        <%= image_tag @signup.bestpicture.url(:small) %>
       </div> 
     </div> 
     <div class="cardcap"><img alt="Card-bottom" src="/images/card-bottom.png" /></div> 
   </div> 
   <div style="clear: both;"> 
     Хотите большую карточку и большие фотографии чтобы отобразить Ваш бизнес в самом лучшем свете?
-    <a href="/signup/pro/publish">Переключите на Pro</a> 
+    <a href="/signup/stage3-pay">Переключите на Pro</a> 
   </div> 
 </div> 
 

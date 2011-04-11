@@ -28,13 +28,19 @@ class SignupController < ApplicationController
   def stage3free
     @header_layout = 'signup/header_stage3'
     @body_css_class = 'publish free'
-    render 'signup/free-publish'
+    @signup = find_signup
+    @signup.tariff = 'free'
+    @signup.save
+    render 'signup/stage3-free'
   end
   
   def stage3pay
     @header_layout = 'signup/header_stage3'
     @body_css_class = 'publish pro'
-    render 'signup/pro-publish'
+    @signup = find_signup
+    @signup.tariff = 'pay'
+    @signup.save
+    render 'signup/stage3-pay'
   end
   
   def bestpictureupload

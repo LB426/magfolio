@@ -1,18 +1,4 @@
 <form action="/" class="account account_form" id="queenbee_redirect_form" method="post">
-  <div style="margin:0;padding:0;display:inline">
-    <input name="authenticity_token" type="hidden" value="ztqGuN7neC5PnJtwmAOJZzIQhV/HvVvsmkjX4ovPKGY=" />
-  </div>
-  <input id="qb_plan" name="qb[plan]" type="hidden" value="free" />
-  <input id="qb_price" name="qb[price]" type="hidden" value="0" />
-  <input id="qb_failure" name="qb[failure]" type="hidden" value="https://sortfolio.com/signup/free/publish" />
-  <input id="qb_data_listing_id" name="qb[data][listing_id]" type="hidden" value="11058" />
-  <input id="qb_data_image_id" name="qb[data][image_id]" type="hidden" value="14939" />
-  <input id="qb_product_name" name="qb[product_name]" type="hidden" value="sortfolio" />
-  <input id="qb_success" name="qb[success]" type="hidden" value="https://sortfolio.com/signup/complete" />
-  <input id="qb_keys" name="qb[keys]" type="hidden" value="plan,price,failure,data:listing_id,data:image_id,product_name,success" />
-  <input id="qb_signature" name="qb[signature]" type="hidden" value="8f58fabaa635e1837ba4309fde9c0c83c99b443f" />
-  <input id="qb_data_name" name="qb[data][name]" type="hidden" value="Марлен" />
-  <input id="qb_data_owner_name" name="qb[data][owner_name]" type="hidden" value="Марлен" />
   <div class="create_form"> 
     <h1>Ваша учётная запись</h1> 
     <p>Перед тем как разместиться в каталоге Клевер Вам необходимо создать учётную запись. Однажды создав учётную запись Вы сможете обновлять информацию о своей компании и изменять фотографии столько сколько захотите.</p> 
@@ -92,8 +78,13 @@
     </div> 
     <div class="cardcontent-upgrade"> 
       <div class="cardcompany"> 
-        <h2>Марлен</h2> 
-        <p>$3,000 and under &nbsp; <span>Rabat</span></p> 
+        <h2><%= @signup.company_name %></h2> 
+        <p>
+          <%= BusinessType.find(@signup.businesstype_id).name %>
+          <span>
+            <%= Location.find(@signup.location_id).name %>
+          </span>
+        </p> 
       </div> 
       <div class="listing slideshow" id="slider_listing_11058">
         <div class="slideshownav"></div> 
@@ -101,9 +92,9 @@
           <div class="scroller_content"> 
             <div class="portfolio_image section" id="listing_portfolio_image_14573">
               <div class="pro-image"> 
-                <img alt="14573_1299005890" class="slideshow_image" height="300" src="/images/14573_1299005890.medium.jpg" /> 
+                <%= image_tag @signup.bestpicture.url(:medium) %> 
               </div> 
-              <div class="pro-caption">Моя Марлен</div> 
+              <div class="pro-caption"><%= @signup.bestpic_comment %></div> 
             </div> 
           </div> 
         </div> 
@@ -112,7 +103,7 @@
     <div class="cardcap-upgrade"><img alt="Card-bottom-large" src="/images/card-bottom-large.png" /></div> 
   </div> 
   <div style="clear: both;"> 
-    Нет спасибо. Я подключу себе <a href="/signup/free/publish">бесплатный каталог.</a> 
+    Нет спасибо. Я подключу себе <a href="/signup/stage3-free">бесплатный каталог.</a> 
   </div> 
 </div> 
 

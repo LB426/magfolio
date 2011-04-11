@@ -65,7 +65,12 @@
     <div class="cardcontent-upgrade"> 
       <div class="cardcompany">
         <h2><%= @signup.company_name %></h2> 
-        <p>$3,000 and under &nbsp; <span>Rabat</span></p> 
+        <p>
+          <%= BusinessType.find(@signup.businesstype_id).name %>
+          <span>
+            <%= Location.find(@signup.location_id).name %>
+          </span>
+        </p> 
       </div>
       <div class="listing slideshow" id="slider_listing_11058">
         <div class="slideshownav"> 
