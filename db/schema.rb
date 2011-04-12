@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110409125513) do
+ActiveRecord::Schema.define(:version => 20110412124115) do
 
   create_table "business_types", :force => true do |t|
     t.string   "name"
@@ -73,5 +73,13 @@ ActiveRecord::Schema.define(:version => 20110409125513) do
 
   add_index "signups", ["id"], :name => "index_signups_on_id"
   add_index "signups", ["session_id"], :name => "index_signups_on_session_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
