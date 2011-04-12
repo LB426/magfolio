@@ -1,6 +1,6 @@
 <script type="text/javascript">
   $(function() {
-    $("#user_session_email").focus();
+    $("#email").focus();
   });
 </script>
 
@@ -9,12 +9,12 @@
     <img alt="Card-top-large" src="/images/card-top-large.png" />
   </div>
   <div class="cardcontent-upgrade login">
-    <form action="/session" class="new_user_session" id="user_session_70869520" method="post">
+    <%= form_tag sessions_path do %>
       <h2>Вход в онлайн каталоги Клевер</h2> 
-      <p><label for="user_session_email">Email:</label></p> 
-      <input id="user_session_email" name="user_session[email]" size="30" type="text" />
-      <p><label for="user_session_password">Пароль:</label></p>
-      <input id="user_session_password" name="user_session[password]" size="30" type="password" />
+      <p><%= label_tag :email %></p> 
+      <%= text_field_tag :email, params[:email], :size => '40' %>
+      <p><%= label_tag :password %></p>
+      <%= password_field_tag :password, '', :size => '40' %>
       <br />
       <a href="/password/reset">Я забыл пароль</a>
       <div class="remember">
@@ -24,8 +24,8 @@
             <span>Запомнить меня на этом компьютере</span>
           </label>
       </div>
-      <p><input id="user_session_submit" name="commit" type="submit" value="Вход" /></p> 
-    </form>
+      <p><%= submit_tag "Вход" %></p> 
+    <% end %>
   </div>
   <div class="cardcap-upgrade">
     <img alt="Card-bottom-large" src="/images/card-bottom-large.png" />

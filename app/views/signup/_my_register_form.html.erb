@@ -1,0 +1,36 @@
+<%= form_for @user, :class => 'account account_form' do |f| %>
+  <div class="create_form">
+    <% if @user.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <h1>Ваша учётная запись</h1>
+    <p>
+      Перед тем как разместиться в каталоге Клевер Вам необходимо создать учётную запись. Однажды создав учётную запись Вы сможете обновлять информацию о своей компании и изменять фотографии столько сколько захотите.
+    </p>
+    <p><%= f.label :email, "Ваш email адрес" %></p>
+    <%= f.text_field :email %><br />
+    <small>Это секретный email (клиенты не должны видеть этот адрес).</small>
+    <div id="email_error" style='display: none;' class="liveValidationErrors"> 
+      <small>Email is already taken. Please choose another Username.</small> 
+    </div>
+    <p><%= f.label :password, "Пароль" %></p>
+    <%= f.password_field :password %><br />
+    <small>Должен быть более 6 символов.</small>
+    <p>
+      Кликнув на 
+      <strong>Создать каталог &amp; Зарегистрировать</strong>
+      Вы соглашаетесь с 
+      <a href="/terms" target="blank">Условиями использования</a>, 
+      <a href="/privacy" target="blank">Privacy</a> и 
+      <a href="http://www.spknd.ru/refund" target="_blank">Refund Policy</a>.
+    </p>
+    <input alt="Publish listing &amp; Create account" class="submit_image" src="/images/btn_publish.png" type="image" />
+  </div>
+<% end %>

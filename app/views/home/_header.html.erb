@@ -15,7 +15,11 @@
   <a href="/cities">Поиск</a> |
   <a href="/about">О каталогах</a> |
   <a href="/favorites">Избранное</a> |
-  <a href="/login" class="guest_user">Войти в каталог</a>
+  <% if current_user %>
+    <a href="/log_out" class="guest_user">Выйти из каталога</a>
+  <% else %>
+    <a href="/login" class="guest_user">Войти в каталог</a>
+  <% end %>
 </div>
 <div class="masthead">
   <a href="/" class="homepage"><img alt="Sortfolio" height="39" src="/images/logo_magfolio-type.png" width="155">

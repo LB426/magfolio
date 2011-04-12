@@ -31,6 +31,7 @@ class SignupController < ApplicationController
     @signup = find_signup
     @signup.tariff = 'free'
     @signup.save
+    @user = User.new
     render 'signup/stage3-free'
   end
   
