@@ -8,6 +8,7 @@ gem 'rails', '3.0.6'
 # gem "haml"
 gem 'mysql2'
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
+gem "bcrypt-ruby", :require => "bcrypt"
 
 # Use unicorn as the web server
 # gem 'unicorn'
