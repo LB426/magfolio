@@ -7,7 +7,7 @@ module ApplicationHelper
   
   def body_style
     return @body_css_class if defined?(@body_css_class)
-    "home"
+    "perma cities"
   end
   
   def render_header

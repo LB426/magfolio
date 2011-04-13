@@ -1,8 +1,11 @@
 Magfolio::Application.routes.draw do
   
-  get "log_out" => "sessions#destroy", :as => "log_out"
-  get "log_in" => "sessions#new", :as => "log_in"
-  get "sign_up" => "users#new", :as => "sign_up"
+  resources :pictures
+
+  resources :catalogs
+
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
   resources :users
   resources :sessions
 
@@ -30,9 +33,6 @@ Magfolio::Application.routes.draw do
   match 'signup/bestpictureupload' => 'signup#bestpictureupload', :as => :bestpictureupload
   match 'signup/:id/bestpictureurl' => 'signup#bestpictureurl', :as => :bestpictureurl
   match 'signup/:id/logoupload' => 'signup#logoupload', :as => :logoupload
-  
-  match 'login' => 'user_sessions#new', :as => :login
-  resources :user_sessions
   
   match 'about' => 'about#index', :as => :about
 

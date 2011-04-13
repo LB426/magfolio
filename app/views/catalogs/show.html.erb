@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @catalog.user_id %>
+</p>
+
+<p>
+  <b>Tariff:</b>
+  <%= @catalog.tariff %>
+</p>
+
+
+<%= link_to 'Edit', edit_catalog_path(@catalog) %> |
+<%= link_to 'Back', catalogs_path %>

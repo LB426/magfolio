@@ -7,6 +7,7 @@ class CreateLocations < ActiveRecord::Migration
     end
     
     add_index :locations, :id
+    Location.create :name => "Тихорецк"
   end
 
   def self.down

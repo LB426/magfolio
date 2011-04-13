@@ -23,6 +23,7 @@
     <div id="header" class="header">
       <%= render_header %>
     </div>
+    <p class="notice"><%= flash[:notice] %></p>
     <div class="content">
       <%= yield %>
       <%= render 'layouts/footer' %>
