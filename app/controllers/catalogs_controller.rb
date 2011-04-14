@@ -17,9 +17,11 @@ class CatalogsController < ApplicationController
   # GET /catalogs/1.xml
   def show
     @catalog = Catalog.find(params[:id])
-    @picture = current_user.pictures.new
-    @picture.user_id = current_user.id
-    @picture.catalog_id = @catalog.id
+    if current_user
+      @picture = current_user.pictures.new
+      @picture.user_id = current_user.id
+      @picture.catalog_id = @catalog.id
+    end
 
     respond_to do |format|
       format.html # show.html.erb
