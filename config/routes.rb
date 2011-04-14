@@ -36,7 +36,6 @@ Magfolio::Application.routes.draw do
   
   match 'about' => 'about#index', :as => :about
 
-  resources :companies
   get "home/index"
   
   # The priority is based upon order of creation:

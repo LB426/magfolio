@@ -21,16 +21,16 @@ ActiveRecord::Schema.define(:version => 20110413103345) do
   add_index "business_types", ["id"], :name => "index_business_types_on_id"
 
   create_table "catalogs", :force => true do |t|
-    t.integer  "user_id",                          :null => false
-    t.string   "company_name",                     :null => false
-    t.integer  "businesstype_id",                  :null => false
-    t.integer  "location_id",                      :null => false
-    t.string   "phone",                            :null => false
-    t.string   "email",                            :null => false
+    t.integer  "user_id",                            :null => false
+    t.string   "company_name",                       :null => false
+    t.integer  "businesstype_id",                    :null => false
+    t.integer  "location_id",                        :null => false
+    t.string   "phone",                              :null => false
+    t.string   "email",                              :null => false
     t.string   "company_url"
-    t.string   "tariff",                           :null => false
-    t.integer  "rating",            :default => 0, :null => false
-    t.text     "company_about"
+    t.string   "tariff",                             :null => false
+    t.integer  "rating",              :default => 0, :null => false
+    t.text     "company_description"
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
@@ -43,15 +43,6 @@ ActiveRecord::Schema.define(:version => 20110413103345) do
   add_index "catalogs", ["id"], :name => "index_catalogs_on_id"
   add_index "catalogs", ["location_id"], :name => "index_catalogs_on_location_id"
   add_index "catalogs", ["user_id"], :name => "index_catalogs_on_user_id"
-
-  create_table "companies", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.string   "contact_mail"
-    t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "locations", :force => true do |t|
     t.string   "name"

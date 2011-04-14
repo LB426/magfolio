@@ -1,15 +1,137 @@
-<p id="notice"><%= notice %></p>
+<div class="card-perma">
+  <div class="cardcap-perma">
+    <img alt="Card-top-perma" src="/images/card-top-perma.png">
+  </div>
+  <div class="cardcontent-perma">
+    <div class="cardtools">
+      <div class="printpage">
+        <a href="#" class="print" target="_blank">
+          Рейтинг
+          <%= @catalog.rating %>
+        </a>
+      </div>
+      <div class="listing">
+        <span class="favorite_links" data-listing-id="8805">
+          <a href="/favorites/8805/remove.js" class="favorites remove_from_favorites" onclick="return false" style="display: none; ">Удалить из избранного</a>
+          <a href="/favorites/8805/add.js" class="favorites add_to_favorites" onclick="return false" style="">Добавить в избранное</a>
+        </span>  
+      </div>
+    </div>
+    <div class="cardcompany <%= edit_block %>">
+      <% if current_user %>
+        <p><a href="#catalog_base_data" id="catalog_base_data_edit">
+          Редактировать блок</a></p>
+      <% end %>
+      <%= image_tag @catalog.logo.url(:thumb), :align => 'right' %>
+      <h2><%= @catalog.company_name %></h2>
+      <p>
+        Вид бизнеса: 
+        <strong><%= BusinessType.find(@catalog.businesstype_id).name %></strong><br>
+        Расположен в 
+        <strong>
+          <a href="/chicago"><%= Location.find(@catalog.location_id).name %></a>
+        </strong>
+      </p>
+    </div>
+    <div class="description <%= edit_block %>">
+      <% if current_user %>
+        <p><a href="#catalog_description" id="catalog_description_edit">Редактировать блок</a></p>
+      <% end %>
+      <%= render :inline => @catalog.company_description %>
+    </div>
+    <% if current_user %>
+      <div class="<%= edit_block %>">
+      <p>
+        <a href="#catalog_galery_img" id="catalog_galery_img_add">
+          Добавить изображение в галерею</a></p>
+      </div>
+    <% end %>
+    <% @catalog.pictures.each do |pic| %>
+      <div class="gallery <%= edit_block %>">
+        <% if current_user %>
+          <p>
+            <a href="#catalog_picture_<%= pic.id %>" id="catalog_picture_edit_<%= pic.id %>">
+              Редактировать блок</a>
+          </p>
+          <div style="display:none">
+            <div id="catalog_picture_<%= pic.id %>">
+              <h2>Заменить изображение</h2>
+              <%= form_for(pic, :html => {:multipart => true} ) do |f| %>
+                <p>
+                  <%= f.label :Изображение %>
+                  <%= f.file_field :picture, :accept => "image/*" %></p>
+                <p>
+                  <%= f.label :Комментарий_к_изображению %><br />
+                  <%= f.text_area :description, :cols => 50, :rows => 10 %></p>
+               <p><%= f.submit "Внести изменения" %></p> 
+              <% end %>
+              <%= button_to 'Удалить блок', picture_path(pic), :method => :delete %>
+            </div>
+          </div>
+          <script type="text/javascript">
+            $("a#catalog_picture_edit_<%= pic.id %>").fancybox({
+            		'hideOnContentClick': false
+            });
+          </script>
+        <% end %>
+        <%= image_tag pic.picture.url(:medium) %>
+        <p><%= render :inline => pic.description %></p>
+      </div>
+    <% end %>
+    <div class="action">
+      <h2>Вам понравилось? Свяжитесь с <%= @catalog.company_name %>.</h2>
+      <h3>
+          <a href="mailto:<%= @catalog.email %>"><%= @catalog.email %></a>
+          •
+          <a href="<%= @catalog.company_url %>"><%= @catalog.company_url %></a>
+      </h3>
+    </div>
+  </div>
+  <div class="cardcap-perma">
+    <img alt="Card-bottom-perma" src="/images/card-bottom-perma.png">
+  </div>
+</div>
 
-<p>
-  <b>User:</b>
-  <%= @catalog.user_id %>
-</p>
-
-<p>
-  <b>Tariff:</b>
-  <%= @catalog.tariff %>
-</p>
-
-
-<%= link_to 'Edit', edit_catalog_path(@catalog) %> |
-<%= link_to 'Back', catalogs_path %>
+<% if current_user %>
+<div style="display:none">
+  <div id="catalog_base_data">
+    <h2>Редактирование основных данных каталога</h2>
+    <%= form_for(@catalog, :html => {:multipart => true} ) do |f| %>
+      <p><%= f.label :Имя_компании %><br />
+      <%= f.text_field :company_name, :size => 40 %></p>
+      <p><%= f.label :Телефон %><br />
+      <%= f.text_field :phone, :size => 40 %></p>
+      <p><%= f.label :Контактный_email %><br />
+      <%= f.text_field :email, :size => 40 %></p>
+      <p><%= f.label :Вебсайт %><br />
+      <%= f.text_field :company_url, :size => 40 %></p>
+      <p><%= f.label :Тариф %><br />
+      <%= f.text_field :tariff, :size => 40 %></p>
+      <p><%= f.label :Логотип %><%= f.file_field :logo, :accept => "image/*" %></p>
+      <p><%= f.submit "Внести изменения" %></p>
+    <% end %>
+  </div>
+  <div id="catalog_description">
+    <h2>Несколько слов о компании</h2>
+    <%= form_for(@catalog) do |f| %>
+      <p><small>здесь можно вводить html код</small></p>
+      <%= f.text_area :company_description %></p>
+      <p><%= f.submit "Внести изменения" %></p>
+    <% end %>
+  </div>
+  <div id="catalog_galery_img">
+    <h2>Добавить изображение в галерею</h2>
+    <%= form_for(@picture, :html => {:multipart => true} ) do |f| %>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :catalog_id %>
+      <p>
+        <%= f.label :Изображение %>
+        <%= f.file_field :picture, :accept => "image/*" %></p>
+      <p>
+        <%= f.label :Комментарий_к_изображению %><br />
+        <%= f.text_area :description %></p>
+      <p><%= f.submit "Внести изменения" %></p>
+    <% end %>
+  </div>
+</div>
+<% end %>

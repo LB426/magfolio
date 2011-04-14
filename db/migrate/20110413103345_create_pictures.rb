@@ -3,7 +3,7 @@ class CreatePictures < ActiveRecord::Migration
     create_table :pictures do |t|
       t.integer   :user_id, :null => false
       t.integer   :catalog_id, :null => false
-      t.text      :comment
+      t.text      :description
       t.string    :picture_file_name
       t.string    :picture_content_type
       t.integer   :picture_file_size

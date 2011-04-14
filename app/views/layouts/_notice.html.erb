@@ -1,0 +1,7 @@
+<% [:notice, :error, :success, :alert].each do |key| %>
+  <% unless flash[key].blank? %>
+    <p class="<%= key %>">
+      <%= flash[key] %>
+    </p>
+  <% end%>
+<% end %>

@@ -10,7 +10,7 @@ class CreateCatalogs < ActiveRecord::Migration
       t.string    :company_url
       t.string    :tariff, :null => false
       t.integer   :rating, :null => false, :default => 0
-      t.text      :company_about
+      t.text      :company_description
       t.string    :logo_file_name
       t.string    :logo_content_type
       t.integer   :logo_file_size

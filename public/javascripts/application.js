@@ -133,4 +133,13 @@ $(document).ready(function() {
 	$("#location_add_iframe").load(function(){
 		$.fancybox.close();
 	});
+	$("a#catalog_base_data_edit").fancybox({
+  		'hideOnContentClick': false
+  });
+  $("a#catalog_description_edit").fancybox({
+  		'hideOnContentClick': false
+  });
+  $("a#catalog_galery_img_add").fancybox({
+  		'hideOnContentClick': false
+  });
 })

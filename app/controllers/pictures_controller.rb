@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+  before_filter :logged_in?
+  
   # GET /pictures
   # GET /pictures.xml
   def index
@@ -41,10 +43,11 @@ class PicturesController < ApplicationController
   # POST /pictures.xml
   def create
     @picture = Picture.new(params[:picture])
+    @catalog = Catalog.find(@picture.catalog_id)
 
     respond_to do |format|
       if @picture.save
-        format.html { redirect_to(@picture, :notice => 'Picture was successfully created.') }
+        format.html { redirect_to(@catalog, :notice => 'Picture was successfully created.') }
         format.xml  { render :xml => @picture, :status => :created, :location => @picture }
       else
         format.html { render :action => "new" }
@@ -57,10 +60,10 @@ class PicturesController < ApplicationController
   # PUT /pictures/1.xml
   def update
     @picture = Picture.find(params[:id])
-
+    @catalog = Catalog.find(@picture.catalog_id)
     respond_to do |format|
       if @picture.update_attributes(params[:picture])
-        format.html { redirect_to(@picture, :notice => 'Picture was successfully updated.') }
+        format.html { redirect_to(@catalog, :notice => 'Picture was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -73,10 +76,11 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1.xml
   def destroy
     @picture = Picture.find(params[:id])
+    @catalog = Catalog.find(@picture.catalog_id)
     @picture.destroy
 
     respond_to do |format|
-      format.html { redirect_to(pictures_url) }
+      format.html { redirect_to(@catalog, :notice => 'Picture was successfully destroyed.') }
       format.xml  { head :ok }
     end
   end

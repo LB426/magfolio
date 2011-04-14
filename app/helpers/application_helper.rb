@@ -17,5 +17,5 @@ module ApplicationHelper
       render 'layouts/header'
     end
   end
-  
+    
 end

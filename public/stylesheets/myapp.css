@@ -42,6 +42,36 @@ div.clear {
   clear: both;
 }
 
+p.alert {
+  font-size: 18px;
+  background-color: #ff0000;
+  border: 1px solid #ccc;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+p.notice {
+  font-size: 18px;
+  background-color: #abf6c5;
+  border: 1px solid #ccc;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 50px;
+  margin-right: 50px;
+  padding: 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+div.edithis {
+  border: 1px solid #21c425;
+}
+
 /* STRUCTURE --------------------------------------------------*/
 
 div.container {
@@ -482,6 +512,45 @@ body.perma div.cardtools {
   border-bottom: 1px dotted #ccc;
 }
 
+div.printpage {
+  float: right;
+  color: #e8e8e8;
+}
+
+div.printpage a.print {
+  background: url('/images/icon_print.gif') 0px 0px no-repeat;
+  padding-left: 20px;
+  border-bottom: none;
+  padding-top: 1px;
+}
+
+div.printpage a.print:hover {
+  background: url('/images/icon_print.gif') 0px -16px no-repeat;
+}
+
+body.perma div.description {
+  margin: 10px 0 15px 0;
+  width: 660px;
+  clear: both;
+}
+
+body.perma div.description p {
+  margin: 0 0 15px 0;
+}
+
+body.perma div.gallery {
+  background-color: #e8e8e8;
+  padding: 10px 0 5px 0;
+  text-align: center;
+  margin: 30px 0;
+  clear: both;
+}
+
+body.perma div.gallery p {
+  text-align: left;
+  margin: 15px;
+}
+
 div.card-perma {
   width: 960px;
   margin: 10px;
@@ -502,6 +571,38 @@ div.cardcontent-perma {
   padding: 5px 20px 0 20px;
   text-align: left;
   overflow: hidden;
+}
+
+body.perma div.cardcompany {
+  margin-top: 15px;
+  height: auto;
+}
+
+body.perma div.action {
+	padding: 20px;
+	margin-bottom: 10px;
+	background-color: #222;
+	text-align: center;
+	color: #999;
+	font-size: 12px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+body.perma div.action h2 {
+	color: #f7eaac;
+	font-size: 16px;
+	letter-spacing: normal;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+body.perma div.action h3 {
+	color: #999;
+	font-size: 18px;
+	letter-spacing: normal;
+	margin: 0 0 12px 0;
+	padding: 0;
 }
 
 /* CREATE ---------------------------------------------------*/

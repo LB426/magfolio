@@ -1,4 +1,6 @@
 class CatalogsController < ApplicationController
+  #before_filter :logged_in?
+  
   # GET /catalogs
   # GET /catalogs.xml
   def index
@@ -10,10 +12,14 @@ class CatalogsController < ApplicationController
     end
   end
 
+  
   # GET /catalogs/1
   # GET /catalogs/1.xml
   def show
     @catalog = Catalog.find(params[:id])
+    @picture = current_user.pictures.new
+    @picture.user_id = current_user.id
+    @picture.catalog_id = @catalog.id
 
     respond_to do |format|
       format.html # show.html.erb
