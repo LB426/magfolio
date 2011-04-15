@@ -1,6 +1,6 @@
 <div class="needle">
   <a href="/" class="homepage">
-    <img alt="Sortfolio" height="145" src="/images/logo_card.png" width="90">
+    <img alt="clover" height="145" src="/images/logo_card.png" width="90">
   </a>
 </div>
 <div class="signup guest_user" id="signup">
@@ -22,7 +22,8 @@
   <% end %>
 </div>
 <div class="masthead">
-  <a href="/" class="homepage"><img alt="Sortfolio" height="39" src="/images/logo_magfolio-type.png" width="155">
+  <a href="/" class="homepage">
+    <img alt="Clover" height="39" src="/images/logo_magfolio-type.png" width="155">
   </a>
   <h1>Персональные веб каталоги товаров и услуг.</h1>
 </div>
@@ -33,21 +34,9 @@
       <li class="menu">
         <a href="#" id="search_location_name">Городе</a>
         <div id="search_location_menu" style="display:none" class="search_menu">
-          <a href="/" class="homepage">Тихорецк</a>
-          <a href="/atlanta">Архангельская</a>
-          <a href="/boston">Кропоткин</a>
-          <a href="/chicago">Усть-Лабинск</a>
-          <a href="/dallas">Белая Глина</a>
-          <a href="/denver">Новопокровская</a>
-          <a href="/london">Выселки</a>
-          <a href="/los-angeles">Кущевская</a>
-          <a href="/minneapolis">Крыловская</a>
-          <a href="/nyc">Павловская</a>
-          <a href="/portland">Ленинградская</a>
-          <a href="/san-francisco">Кореновск</a>
-          <a href="/seattle">Тбилисская</a>
-          <a href="/toronto-canada">Кавказская</a>
-          <a href="/vancouver-canada">Мирская</a>
+          <% @locations.each do |location| %>
+            <%= link_to location.name, location %>
+          <% end %>
           <div class="last_menu">
             <a href="/cities">Весь список</a>
           </div>

@@ -66,7 +66,6 @@ class SignupController < ApplicationController
   
 private
   def find_signup
-    #@signup = (session[:id] ||= Signup.new)
     signup = Signup.find_by_session_id(request.session_options[:id])
     signup = Signup.new if signup.nil?
     signup

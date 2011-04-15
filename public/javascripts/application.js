@@ -142,4 +142,31 @@ $(document).ready(function() {
   $("a#catalog_galery_img_add").fancybox({
   		'hideOnContentClick': false
   });
+  $('a[id^="control_id"]').click(function(event) {
+    var catalog_id = parseInt(this.id.replace("control_id_", ""));
+    var catalog_ctrl_links = $("a[href^='#catalog_"+catalog_id+"_link_image']");
+    var img_id = parseInt($(this).attr('href').replace("#catalog_"+catalog_id+"_link_image_",""));
+    $.each(catalog_ctrl_links,function(i,item){
+      var class_attr = $(item).attr('class');
+      if(class_attr == 'active'){ $(item).attr('class', ''); };
+    });
+    $(this).attr('class','active');
+    $("div.activeimg[id^=image_catalog_"+catalog_id+"]").hide();
+    $("div.activeimg[id^=image_catalog_"+catalog_id+"]").attr('class','inactiveimg');
+    $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).show();
+    $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).attr('class','activeimg');
+  });
+  $('a.next').click(function(event) {
+    var catalog_id = parseInt(this.id.replace("catalog_", ""));
+    var id = $("div.activeimg[id^=image_catalog_"+catalog_id+"]").attr('id');
+    var activeimg_id = parseInt(id.replace("image_catalog_"+catalog_id+"_image_",""));
+    //alert(catalog_id + ' ' + activeimg_id);
+    //1) сформировать массив с ID картинок
+    //2) отсортировать его по возрастанию
+    //3) найти позицию activeimg_id
+    //4) взять следующий ID
+    //5) отобразить его
+    $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).hide();
+    $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).attr('class','inactiveimg');
+  });  
 })

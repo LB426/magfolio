@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20110413103345) do
   create_table "pictures", :force => true do |t|
     t.integer  "user_id",              :null => false
     t.integer  "catalog_id",           :null => false
-    t.text     "comment"
+    t.text     "description"
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"

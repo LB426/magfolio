@@ -25,7 +25,8 @@ private
               )
     @user.pictures.create(
       :catalog_id => catalog.id,
-      :picture => signup.bestpicture
+      :picture => signup.bestpicture,
+      :description => signup.bestpic_comment
     )
     signup.destroy
     catalog

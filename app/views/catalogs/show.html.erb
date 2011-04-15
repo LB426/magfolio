@@ -18,11 +18,17 @@
       </div>
     </div>
     <div class="cardcompany <%= edit_block %>">
-      <% if current_user %>
+      <% if current_user_self? %>
         <p><a href="#catalog_base_data" id="catalog_base_data_edit">
           Редактировать блок</a></p>
       <% end %>
+      <% if /missing/ =~ @catalog.logo.url(:thumb) %>
+        <% if current_user_self? %>
+          <%= image_tag "/images/your_logo.png", :align => 'right' %>
+        <% end %>
+      <% else %>
       <%= image_tag @catalog.logo.url(:thumb), :align => 'right' %>
+      <% end %>
       <h2><%= @catalog.company_name %></h2>
       <p>
         Вид бизнеса: 
@@ -34,12 +40,14 @@
       </p>
     </div>
     <div class="description <%= edit_block %>">
-      <% if current_user %>
+      <% if current_user_self? %>
         <p><a href="#catalog_description" id="catalog_description_edit">Редактировать блок</a></p>
       <% end %>
+      <% unless @catalog.company_description.blank? %>
       <%= render :inline => @catalog.company_description %>
+      <% end %>
     </div>
-    <% if current_user %>
+    <% if current_user_self? %>
       <div class="<%= edit_block %>">
       <p>
         <a href="#catalog_galery_img" id="catalog_galery_img_add">
@@ -48,7 +56,7 @@
     <% end %>
     <% @catalog.pictures.each do |pic| %>
       <div class="gallery <%= edit_block %>">
-        <% if current_user %>
+        <% if current_user_self? %>
           <p>
             <a href="#catalog_picture_<%= pic.id %>" id="catalog_picture_edit_<%= pic.id %>">
               Редактировать блок</a>
@@ -74,8 +82,12 @@
             });
           </script>
         <% end %>
-        <%= image_tag pic.picture.url(:medium) %>
-        <p><%= render :inline => pic.description %></p>
+        <%= image_tag pic.picture.url(:large) %>
+        <p>
+          <% unless pic.description.blank? %>
+          <%= render :inline => pic.description %>
+          <% end %>
+        </p>
       </div>
     <% end %>
     <div class="action">
@@ -92,7 +104,7 @@
   </div>
 </div>
 
-<% if current_user %>
+<% if current_user_self? %>
 <div style="display:none">
   <div id="catalog_base_data">
     <h2>Редактирование основных данных каталога</h2>

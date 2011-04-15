@@ -1,25 +1,76 @@
-<h1>Listing catalogs</h1>
-
-<table>
-  <tr>
-    <th>User</th>
-    <th>Tariff</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @catalogs.each do |catalog| %>
-  <tr>
-    <td><%= catalog.user_id %></td>
-    <td><%= catalog.tariff %></td>
-    <td><%= link_to 'Show', catalog %></td>
-    <td><%= link_to 'Edit', edit_catalog_path(catalog) %></td>
-    <td><%= link_to 'Destroy', catalog, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<div class="card-upgrade listing_content">
+  <div class="cardcap-upgrade">
+    <img alt="Card-top-large" height="10"src="/images/card-top-large.png" width="470">
+  </div>
+  <div class="cardcontent-upgrade">
+    <div class="cardcompany">
+      <% unless /missing/ =~ catalog.logo.url(:thumb) %> 
+      <%= link_to image_tag(catalog.logo.url(:thumb), :align => 'right'), catalog %>
+      <% end %>
+      <h2><%= link_to catalog.company_name, catalog %></h2>
+      <p>
+        <%= BusinessType.find(catalog.businesstype_id).name %> &nbsp; 
+        <span><%= Location.find(catalog.location_id).name %></span>
+      </p>
+    </div>
+    
+    <div class="listing slideshow" id="slider_listing_3192">
+      <div class="slideshownav">
+        <a href="#" class="next" id="catalog_<%= catalog.id -%>" onclick="return false"></a>
+        <a href="#" class="previous" id="catalog_<%= catalog.id -%>" onclick="return false"></a>
+        <div class="controls slides" style="margin-left: 100px; ">
+            <ul id="image_controls_for_catalog_<%= catalog.id -%>">
+              <% flag = true %>
+              <% catalog.pictures.each do |pic| %>
+                <% if flag %>
+                  <li><a href="#catalog_<%= catalog.id -%>_link_image_<%= pic.id -%>" class="active" id="control_id_<%= catalog.id -%>"></a></li>
+                  <% flag = false %>
+                <% else %>
+                  <li><a href="#catalog_<%= catalog.id -%>_link_image_<%= pic.id -%>" id="control_id_<%= catalog.id -%>"></a></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+      </div>
+      <div class="scroller">
+        <div class="scroller_content">
+          <% flag = true %>
+          <% catalog.pictures.all(:order => "id ASC").each do |pic| %>
+          <% if flag %>
+            <div class="activeimg" id="image_catalog_<%= catalog.id -%>_image_<%= pic.id -%>">
+            <% flag = false %>
+          <% else %>
+            <div class="inactiveimg" id="image_catalog_<%= catalog.id -%>_image_<%= pic.id -%>" style="display:none">
+          <% end %>
+            <div class="section">
+              <div class="pro-image">
+                <%= link_to image_tag(pic.picture.url(:medium), :height => '300'), catalog -%>
+              </div>
+              <div class="pro-caption">
+                <% unless pic.description.blank? %>
+                <%= render :inline => pic.description %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+          
+        </div>
+      </div>
+    </div>
+    
+    <div class="cardtools">
+      <div class="listing" id="favorites_listing_3192">
+        <span class="favorite_links" data-listing-id="3192">
+          <a href="/favorites/3192/remove.js" class="favorites remove_from_favorites" onclick="return false" style="display: none; ">Удалить из избранного</a>
+          <a href="/favorites/3192/add.js" class="favorites add_to_favorites" onclick="return false" style="">Добавить в избранное</a>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="cardcap-upgrade">
+    <img alt="Card-bottom-large" src="/images/card-bottom-large.png">
+  </div>
+</div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Catalog', new_catalog_path %>

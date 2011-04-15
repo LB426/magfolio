@@ -4,7 +4,10 @@ class CatalogsController < ApplicationController
   # GET /catalogs
   # GET /catalogs.xml
   def index
+    @header_layout = 'catalogs/header'
+    @body_css_class = "home"
     @catalogs = Catalog.all
+    @locations = Location.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +20,8 @@ class CatalogsController < ApplicationController
   # GET /catalogs/1.xml
   def show
     @catalog = Catalog.find(params[:id])
-    if current_user
+    if current_user.id == @catalog.user_id
+      #@catalog = current_user.catalogs.find(params[:id])
       @picture = current_user.pictures.new
       @picture.user_id = current_user.id
       @picture.catalog_id = @catalog.id
@@ -27,6 +31,8 @@ class CatalogsController < ApplicationController
       format.html # show.html.erb
       format.xml  { render :xml => @catalog }
     end
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path, :alert => "Каталог не найден!"
   end
 
   # GET /catalogs/new
