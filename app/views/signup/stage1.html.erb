@@ -54,7 +54,7 @@
       <em>Нет в таком размере? Ничего, мы подгоним размер под нужный формат.</em></p>
       <div id="upload_best_picrute">
         <%= form_for @signup, :url => '/signup/bestpictureupload', :html => {:multipart => true , :id => 'new_bestpicture_signup_form' } do |f| %>
-          <%= f.file_field :bestpicture, :accept => "image/*" %>         
+          <%= f.file_field :bestpicture, :accept => "image/*" %>       
         <% end %>
       </div> 
       <div id="best_picrute_upload_progress_bar" style="display:none"> 
@@ -63,18 +63,22 @@
       <p>
         <label>Описание изображения которое Вы добавили</label><br />
         <small>Например: Центральный магазин торговой сети "Товары для дома"</small><br />
+        <div id="bestpic_comment_err">
         <%= form_tag('/signup') do %>
         <%= text_area_tag 'bestpic_comment', @signup.bestpic_comment %>
         <% end %>
+        </div>
       </p> 
     </div>  
     <div class="about_company"> 
       <h2>Теперь расскажите нам о Вашем бизнесе</h2> 
       <p><label>Как называется Ваша компания?</label><br /> 
-      <small>Вы можете использовать Ваше собственное имя, если Вы частный предприниматель.</small></p> 
+      <small>Вы можете использовать Ваше собственное имя, если Вы частный предприниматель.</small></p>
+      <div id="company_name_err"> 
       <%= form_tag('/signup') do %>
       <%= text_field_tag 'company_name', @signup.company_name, :size => 30 %>
       <% end %>
+      </div>
       <p><label>Загрузите логотип Вашей компании</label> &ndash; не обязательно<br /> 
       <small>GIF, JPG, or PNG. Будут подогнаны под нужный размер.<br />
         Он будет размещён на странице Вашего каталога, чтобы клиенты могли его видеть.</small></p> 
@@ -84,7 +88,8 @@
       <div id="logo_upload_progress_bar" style="display:none"> 
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
       </div>
-      <p><label>Какой вид бизнеса наиболее типичен для Вас?</label></p> 
+      <p><label>Какой вид бизнеса наиболее типичен для Вас?</label></p>
+      <div id="business_type_err"> 
       <select id="business_type_id" name="business_type_id">
         <option value="-1">Выберите вид деятельности...</option> 
         <% @business_types.each do |business_type| %>
@@ -96,13 +101,15 @@
         <% end %>
         <option value="0">Моего бизнеса нет в списке</option>
       </select>
+      </div>
       <p> 
         <label>Какой населённый пункт является приоритетным для Вашей компании?</label><br /> 
         <small>
           &bull; Если Ваша компания ведёт дело во многих городах, выберите главный.<br />
           &bull; Если Вашего города нет в списке выберите &ldquo;Моего города нет в списке&rdquo;.
         </small> 
-      </p> 
+      </p>
+      <div id="location_err">
       <select id="location_id" name="location_id">
         <option value="-1">Выберите город...</option> 
         <% @locations.each do |location| %>
@@ -114,23 +121,28 @@
         <% end %> 
         <option value="0">Моего города нет в списке</option>
       </select> 
+      </div>
     </div> 
     <div class="contact"> 
       <h2>Как клиенты могут связаться с Вами?</h2>
       <p> 
         <label>Телефон</label> - обязательно<br /> 
-        <small>Введите номер телефона с кодом города (например: (86196) 41616 или +7 918 123-44-56)</small> 
+        <small>Введите номер телефона с кодом города ( например: (86196)41616 или +7(918)123-44-56 )</small> 
       </p>
+      <div id="contact_phone_err">
       <%= form_tag('/signup') do %>
       <%= text_field_tag 'contact_phone', @signup.phone, :size => 30 %>
       <% end %>
-      <p> 
-        <label>Электронная почта</label> - не обязательно<br /> 
+      </div>
+      <p>
+        <label>Электронная почта</label> - обязательно<br /> 
         <small>Введите адрес электронной почты (например: sales@mydomain.ru)</small> 
       </p>
+      <div id="contact_email_err">
       <%= form_tag('/signup') do %>
       <%= text_field_tag 'contact_email', @signup.email, :size => 30 %>
       <% end %>
+      </div>
       <p> 
         <label>Вебсайт URL</label> - не обязательно<br /> 
         <small>(например: www.mydomain.ru)</small> 

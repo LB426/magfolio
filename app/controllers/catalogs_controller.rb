@@ -20,7 +20,7 @@ class CatalogsController < ApplicationController
   # GET /catalogs/1.xml
   def show
     @catalog = Catalog.find(params[:id])
-    if current_user.id == @catalog.user_id
+    if !current_user.nil? && current_user.id == @catalog.user_id
       #@catalog = current_user.catalogs.find(params[:id])
       @picture = current_user.pictures.new
       @picture.user_id = current_user.id

@@ -35,8 +35,16 @@
       </div>
       <div class="scroller">
         <div class="scroller_content">
+          <script type="text/javascript">
+            var catalog = new Object();
+            catalog.id = <%= catalog.id -%>;
+            catalog.imgs = new Array();
+          </script>
           <% flag = true %>
           <% catalog.pictures.all(:order => "id ASC").each do |pic| %>
+          <script type="text/javascript">
+            catalog.imgs.push(<%= pic.id -%>) ;
+          </script>
           <% if flag %>
             <div class="activeimg" id="image_catalog_<%= catalog.id -%>_image_<%= pic.id -%>">
             <% flag = false %>
@@ -55,7 +63,9 @@
             </div>
           </div>
           <% end %>
-          
+          <script type="text/javascript">
+            catalog_images.push(catalog);
+          </script>
         </div>
       </div>
     </div>

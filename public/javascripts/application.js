@@ -15,6 +15,8 @@ jQuery.ajaxSetup({
 });
 */
 
+var catalog_images = new Array();
+
 $(document).ready(function() {
   $('body').click(function() {
     $("#search_location_menu").hide();
@@ -94,18 +96,73 @@ $(document).ready(function() {
     }
 	});
 	$('#save_and_contunue_btn').click(function(){
+	  var bpc = $('#bestpic_comment').val();
+	  var cn = $('#company_name').val();
+	  var btid = $('#business_type_id').val();
+	  var lid = $('#location_id').val();
+	  var cphn = $('#contact_phone').val();
+	  var ceml = $('#contact_email').val();
+	  var url = $('#website_url').val();
+	  var reEmail = new RegExp(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/);
 	  if(signup_id == 0){ 
 	    alert("Вы не загрузили лучшую фотографию Вашего бизнеса!");
+	    $('#upload_best_picrute').attr('class','thiserror');
 	    return false;
-	  }	  
-	  //$('#save_and_continue_form').attr( "action", "/signup/" + signup_id + "/stage2" );
-	  $('#signup_bestpic_comment').val($('#bestpic_comment').val());
-	  $('#signup_company_name').val($('#company_name').val());
-	  $('#signup_businesstype_id').val($('#business_type_id').val());
-	  $('#signup_location_id').val($('#location_id').val());
-	  $('#signup_phone').val($('#contact_phone').val());
-	  $('#signup_email').val($('#contact_email').val());
-	  $('#signup_company_url').val($('#website_url').val());
+	  }
+	  if(bpc == ''){
+	    alert("Вы не дали описание или комментарий к фотографии!");
+	    $('#bestpic_comment_err').attr('class','thiserror');
+	    return false;
+	  }
+	  if(cn == ''){
+	    alert("Вы не указали название своей компании");
+	    $('#company_name_err').attr('class','thiserror');
+	    return false;
+	  }
+	  if((btid == '-1')||(btid == '0')){
+	    alert("Вы не указали тип бизнеса");
+	    $('#business_type_err').attr('class','thiserror');
+	    return false;
+	  }
+	  if((lid == '-1')||(lid == '0')){
+	    alert("Вы не указали местонахождение компании!");
+	    $('#location_err').attr('class','thiserror');
+	    return false;
+	  }
+	  if(cphn != ''){
+  	  var rePhoneNumber1 = new RegExp(/^\([1-9]\d{4}\)\d{5}$/);
+  	  var rePhoneNumber2 = new RegExp(/^\+7\([1-9]\d{2}\)\d{3}\-\d{2}\-\d{2}$/);
+  	  if(!rePhoneNumber1.test(cphn)){
+  	    if(!rePhoneNumber2.test(cphn)){
+  	      alert('Номер должен соответствовать формату - (86196)41199\nили +7(918)123-44-56');
+  	      $('#contact_phone_err').attr('class','thiserror');
+  	      return false;
+  	    }
+      }
+	  }else{
+	    $('#contact_phone_err').attr('class','thiserror');
+	    alert('Обязательно укажите номер телефона!')
+	    return false;
+	  }
+	  if(!reEmail.test(ceml)){
+	    alert("Неправильно указан e-mail!");
+	    $('#contact_email_err').attr('class','thiserror');
+	    return false;
+	  }
+	  $('#signup_bestpic_comment').val(bpc);
+	  $('#signup_company_name').val(cn);
+	  $('#signup_businesstype_id').val(btid);
+	  $('#signup_location_id').val(lid);
+	  $('#signup_phone').val(cphn);
+	  $('#signup_email').val(ceml);
+	  $('#signup_company_url').val(url);
+	});
+	$('#business_type_submit').click(function(){
+	  var btn = $('#business_type_name').val();
+	  if(btn.length < 3){
+	    alert("Вы не указали тип бизнеса или длина слов менее 3-х символов!");
+	    return false;
+	  }
 	});
 	$('#save_and_contunue_btn2').click(function(){
 	  alert(signup_id + ' ' + best_picrute_desc + ' ' + company_name + ' ' + business_type_id + ' ' + location_id + ' ' + phone + ' ' + email + ' ' + url);
@@ -160,13 +217,53 @@ $(document).ready(function() {
     var catalog_id = parseInt(this.id.replace("catalog_", ""));
     var id = $("div.activeimg[id^=image_catalog_"+catalog_id+"]").attr('id');
     var activeimg_id = parseInt(id.replace("image_catalog_"+catalog_id+"_image_",""));
+
     //alert(catalog_id + ' ' + activeimg_id);
     //1) сформировать массив с ID картинок
     //2) отсортировать его по возрастанию
     //3) найти позицию activeimg_id
     //4) взять следующий ID
     //5) отобразить его
-    $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).hide();
-    $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).attr('class','inactiveimg');
+    for (var i = 0; i < catalog_images.length; i++) {
+      if(catalog_images[i].id == catalog_id){
+        for (var j = 0; j < catalog_images[i].imgs.length; j++) {
+          if(catalog_images[i].imgs[j] == activeimg_id){
+            if(j < catalog_images[i].imgs.length - 1){
+              var img_id = catalog_images[i].imgs[ j+1 ] ;
+              $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).hide();
+              $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).attr('class','inactiveimg');
+              $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).show();
+              $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).attr('class','activeimg');
+              $('a[href^="#catalog_'+catalog_id+'_link_image_'+activeimg_id+'"]').attr('class','');
+              $('a[href^="#catalog_'+catalog_id+'_link_image_'+img_id+'"]').attr('class','active');
+              break;
+            }
+          }
+        }
+      }
+    }
+  });
+  $('a.previous').click(function(event) {
+    var catalog_id = parseInt(this.id.replace("catalog_", ""));
+    var id = $("div.activeimg[id^=image_catalog_"+catalog_id+"]").attr('id');
+    var activeimg_id = parseInt(id.replace("image_catalog_"+catalog_id+"_image_",""));
+    for (var i = 0; i < catalog_images.length; i++) {
+      if(catalog_images[i].id == catalog_id){
+        for (var j = 0; j < catalog_images[i].imgs.length; j++) {
+          if(catalog_images[i].imgs[j] == activeimg_id){
+            if(j > 0){
+              var img_id = catalog_images[i].imgs[ j-1 ] ;
+              $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).hide();
+              $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).attr('class','inactiveimg');
+              $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).show();
+              $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).attr('class','activeimg');
+              $('a[href^="#catalog_'+catalog_id+'_link_image_'+activeimg_id+'"]').attr('class','');
+              $('a[href^="#catalog_'+catalog_id+'_link_image_'+img_id+'"]').attr('class','active');
+              break;
+            }
+          }
+        }
+      }
+    }
   });  
 })

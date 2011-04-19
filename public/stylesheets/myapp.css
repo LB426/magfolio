@@ -72,6 +72,10 @@ div.edithis {
   border: 1px solid #21c425;
 }
 
+div.thiserror {
+  border: 1px solid #ff0000;
+}
+
 /* STRUCTURE --------------------------------------------------*/
 
 div.container {
