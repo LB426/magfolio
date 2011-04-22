@@ -50,6 +50,7 @@ $(document).ready(function() {
 			signup_id = $('#best_picrute_upload_iframe').contents().find('#signup_id').html();
 			$("#live_preview_best_business_image").load('/signup/' + signup_id + '/bestpictureurl');
 			$('#best_picrute_upload_progress_bar').hide();
+			$('#best_picrute_upload_iframe').contentWindow.document.body.innerHTML = '';
 		});
     return false;
   });

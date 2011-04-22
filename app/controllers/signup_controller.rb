@@ -48,9 +48,12 @@ class SignupController < ApplicationController
   end
   
   def bestpictureupload
-    @signup = Signup.create( params[:signup] )
+    @signup = find_signup
     @signup.session_id = request.session_options[:id]
-    @signup.save
+    #@signup = Signup.create( params[:signup] )
+    @signup.update_attributes(params[:signup])
+    #@signup.session_id = request.session_options[:id]
+    #@signup.save
     response.headers['Content-type'] = "text/html; charset=utf-8"
     render :text => "<body><div id=\"signup_id\">#{@signup.id}</div></body>"
   end

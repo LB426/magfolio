@@ -20,11 +20,13 @@ class Signup < ActiveRecord::Base
   end
   
   before_create :randomize_file_name
+  before_update :randomize_file_name
   
 private
 
   def randomize_file_name
     extension = File.extname(bestpicture_file_name).downcase
+    logger.debug "2222222222=#{bestpicture_file_name}"
     self.bestpicture.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
   end  
 
