@@ -8,4 +8,24 @@ class Signup < ActiveRecord::Base
                     :styles => { :small => "195x136#", :medium => "430x300#", :large => "897x628#" },
                     :path => ":rails_root/public/assets/signups/pictures/:id/:style/:basename.:extension",
                     :url  => "/assets/signups/pictures/:id/:style/:basename.:extension"
+  
+  Paperclip.interpolates :normalized_file_name do |attachment, style|
+    attachment.instance.normalized_file_name
+  end
+  
+  def normalized_file_name
+    # "#{self.id}-#{self.video_file_name.gsub( /[^a-zA-Z0-9_\.]/, '_')}"
+    # "#{Base64.decode64(self.bestpicture_file_name)}" 
+    logger.debug ""
+  end
+  
+  before_create :randomize_file_name
+  
+private
+
+  def randomize_file_name
+    extension = File.extname(bestpicture_file_name).downcase
+    self.bestpicture.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
+  end  
+
 end

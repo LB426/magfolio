@@ -57,6 +57,7 @@ class SignupController < ApplicationController
   
   def bestpictureurl
     @signup = find_signup
+    logger.debug "1111111=#{@signup.bestpicture.url(:small)}"
     response.headers['Content-type'] = "text/html; charset=utf-8"
     render :text => "<img alt=\"image\" src=\"#{@signup.bestpicture.url(:small)}\" />"
   end
