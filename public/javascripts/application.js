@@ -265,5 +265,12 @@ $(document).ready(function() {
         }
       }
     }
-  });  
+  });
+  $('#catalog_delete_form_send').click(function(){
+	  if (confirm('Удалить каталог?')){
+	    $('#catalog_delete_form').submit();
+    }else{
+      return false;
+    }
+	});
 })

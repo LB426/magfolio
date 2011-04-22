@@ -6,3 +6,6 @@ tmp/**/*
 .DS_Store
 public/assets/**
 
+Capfile
+config/deploy.rb
+

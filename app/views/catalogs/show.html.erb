@@ -32,10 +32,14 @@
       <h2><%= @catalog.company_name %></h2>
       <p>
         Вид бизнеса: 
-        <strong><%= BusinessType.find(@catalog.businesstype_id).name %></strong><br>
+        <strong><%= BusinessType.find(@catalog.businesstype_id).name %></strong><br />
         Расположен в 
         <strong>
           <a href="/chicago"><%= Location.find(@catalog.location_id).name %></a>
+        </strong><br />
+        E-mail: 
+        <strong>
+          <a href="mailto:<%= @catalog.email -%>?subject=Вопросы о каталоге <%= @catalog.company_name -%>"><%= @catalog.email %></a>
         </strong>
       </p>
     </div>
@@ -146,4 +150,8 @@
     <% end %>
   </div>
 </div>
+<% end %>
+
+<% if current_user_self? %>
+<%= render :partial => 'user_menu' %>
 <% end %>

@@ -19,4 +19,16 @@ protected
     end
   end
   
+  def registration_upon_request
+    unless session[:user_id]
+      flash[:notice] = "Извините в настоящий момент регистрация новых пользователей доступна только по приглашению."
+      @title = "Получение приглашения"
+      @body_css_class = "perma about"
+      render 'signup/registration-upon-request'
+      return false
+    else
+      return true
+    end
+  end
+  
 end

@@ -42,6 +42,8 @@ div.clear {
   clear: both;
 }
 
+/* Ошибки, уведомления для флэша -------------------------------*/
+
 p.alert {
   font-size: 18px;
   background-color: #ff0000;
@@ -68,12 +70,41 @@ p.notice {
   -webkit-border-radius: 5px;
 }
 
+/* Редактируемый блок ----------------------------------------*/
+
 div.edithis {
   border: 1px solid #21c425;
 }
 
+/* Ошибка тут ----------------------------------------*/
+
 div.thiserror {
   border: 1px solid #ff0000;
+}
+
+/* Боковое меню ----------------------------------------*/
+
+.user_menu {
+  position: fixed; /* Абсолютное позиционирование */
+  top: 35%; /* Положение от верхнего края */
+  left: 0%; /* Положение от левого края */
+  width: 4%;
+}
+
+.user_menu img {
+  border: none;
+  height: 25px;
+  width: 25px;
+}
+
+.user_menu a {
+  text-decoration:none;
+}
+
+.user_menu a:hover {
+  color: #000000;
+  background: #FFFFFF;
+  text-decoration: underline;
 }
 
 /* STRUCTURE --------------------------------------------------*/

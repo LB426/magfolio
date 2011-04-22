@@ -86,12 +86,14 @@ class CatalogsController < ApplicationController
   # DELETE /catalogs/1
   # DELETE /catalogs/1.xml
   def destroy
-    @catalog = Catalog.find(params[:id])
+    @catalog = current_user.catalogs.find(params[:id])
     @catalog.destroy
 
     respond_to do |format|
       format.html { redirect_to(catalogs_url) }
       format.xml  { head :ok }
     end
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_path
   end
 end

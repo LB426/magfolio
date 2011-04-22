@@ -1,0 +1,15 @@
+<div class="user_menu">
+  <a href="/home" title="Главная страница">
+    <img src="/images/home.png">
+  </a>
+  <a href="/help" title="справка">
+    <img src="/images/icon_help_s.gif">
+  </a>
+  <form id="catalog_delete_form" method="post" action="<%= catalog_path(@catalog) %>">
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+    <input name="_method" type="hidden" value="delete" />
+    <a href="#" id="catalog_delete_form_send" title="удалить каталог">
+      <img src="/images/delete.png">
+    </a>
+  </form>
+</div>

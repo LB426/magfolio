@@ -1,4 +1,5 @@
 class SignupController < ApplicationController
+  before_filter :registration_upon_request
   
   def stage1
     @title = "Создание каталога Клевер"
@@ -32,7 +33,8 @@ class SignupController < ApplicationController
     @signup.tariff = 'free'
     @signup.save
     @user = User.new
-    render 'signup/stage3-free'
+    rescue ActiveRecord::RecordNotFound
+      redirect_to signup_path
   end
   
   def stage3pay
@@ -41,7 +43,8 @@ class SignupController < ApplicationController
     @signup = find_signup
     @signup.tariff = 'pay'
     @signup.save
-    render 'signup/stage3-pay'
+    rescue ActiveRecord::RecordNotFound
+      redirect_to signup_path
   end
   
   def bestpictureupload
