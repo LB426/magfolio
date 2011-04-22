@@ -1,0 +1,7 @@
+#!/bin/sh
+
+THIN_CONF_FILE="/home/magfolio/magfolio/shared/system/magfolio.yml"
+
+thin stop -C $THIN_CONF_FILE
+thin start -C $THIN_CONF_FILE
+
