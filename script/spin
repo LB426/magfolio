@@ -1,5 +1,10 @@
 #!/bin/sh
 
+THIN_CONF_FILE="/home/magfolio/magfolio/shared/system/magfolio.yml"
+
 echo "Executing script/spin"
 
 ln -s /home/magfolio/magfolio/shared/assets /home/magfolio/magfolio/current/public/assets
+
+thin stop -C $THIN_CONF_FILE
+thin start -C $THIN_CONF_FILE
