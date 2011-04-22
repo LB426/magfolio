@@ -9,3 +9,5 @@ public/assets/**
 Capfile
 config/deploy.rb
 
+config/database.yml
+
