@@ -1,3 +1,5 @@
 #!/bin/sh
 
 echo "Executing script/spin"
+
+ln -s /home/magfolio/magfolio/shared/assets /home/magfolio/magfolio/current/public/assets
