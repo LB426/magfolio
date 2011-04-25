@@ -2,6 +2,7 @@ Magfolio::Application.routes.draw do
   
   resources :pictures
 
+  match 'catalogs/indexload' => 'catalogs#indexload', :as => :index_load
   resources :catalogs
 
   get "logout" => "sessions#destroy", :as => "logout"

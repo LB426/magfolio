@@ -6,13 +6,25 @@ class CatalogsController < ApplicationController
   def index
     @header_layout = 'catalogs/header'
     @body_css_class = "home"
-    @catalogs = Catalog.all
+    @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
+    #@catalogs = Catalog.all(:limit => 6, :order => 'id ASC')
+    
+    # нужно для перчня нас.пунктов в фильтре
     @locations = Location.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @catalogs }
-    end
+    #respond_to do |format|
+    #  format.html # index.html.erb
+    #  format.xml  { render :xml => @catalogs }
+    #end
+  end
+  
+  def indexload
+    @header_layout = 'catalogs/header'
+    @body_css_class = "home"
+    @locations = Location.all
+    @catalogs = Catalog.all(:limit => 6, :order => 'id DESC')
+    
+    render 'index', :layout => false
   end
 
   

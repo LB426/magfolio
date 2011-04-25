@@ -182,6 +182,10 @@ div.scroller_content {
 }
 
 div.footer {
+  width: 980px;
+  overflow: hidden;
+  margin: 10px auto;
+
   text-align: left;
   padding: 150px 0 50px 15px;
   color: #999;

@@ -15,7 +15,8 @@ jQuery.ajaxSetup({
 });
 */
 
-var catalog_images = new Array();
+var catalogs = new Array();
+var catalog_ids = new Array();
 
 $(document).ready(function() {
   $('body').click(function() {
@@ -225,12 +226,12 @@ $(document).ready(function() {
     //3) найти позицию activeimg_id
     //4) взять следующий ID
     //5) отобразить его
-    for (var i = 0; i < catalog_images.length; i++) {
-      if(catalog_images[i].id == catalog_id){
-        for (var j = 0; j < catalog_images[i].imgs.length; j++) {
-          if(catalog_images[i].imgs[j] == activeimg_id){
-            if(j < catalog_images[i].imgs.length - 1){
-              var img_id = catalog_images[i].imgs[ j+1 ] ;
+    for (var i = 0; i < catalogs.length; i++) {
+      if(catalogs[i].id == catalog_id){
+        for (var j = 0; j < catalogs[i].imgs.length; j++) {
+          if(catalogs[i].imgs[j] == activeimg_id){
+            if(j < catalogs[i].imgs.length - 1){
+              var img_id = catalogs[i].imgs[ j+1 ] ;
               $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).hide();
               $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).attr('class','inactiveimg');
               $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).show();
@@ -248,12 +249,12 @@ $(document).ready(function() {
     var catalog_id = parseInt(this.id.replace("catalog_", ""));
     var id = $("div.activeimg[id^=image_catalog_"+catalog_id+"]").attr('id');
     var activeimg_id = parseInt(id.replace("image_catalog_"+catalog_id+"_image_",""));
-    for (var i = 0; i < catalog_images.length; i++) {
-      if(catalog_images[i].id == catalog_id){
-        for (var j = 0; j < catalog_images[i].imgs.length; j++) {
-          if(catalog_images[i].imgs[j] == activeimg_id){
+    for (var i = 0; i < catalogs.length; i++) {
+      if(catalogs[i].id == catalog_id){
+        for (var j = 0; j < catalogs[i].imgs.length; j++) {
+          if(catalogs[i].imgs[j] == activeimg_id){
             if(j > 0){
-              var img_id = catalog_images[i].imgs[ j-1 ] ;
+              var img_id = catalogs[i].imgs[ j-1 ] ;
               $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).hide();
               $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).attr('class','inactiveimg');
               $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).show();
@@ -274,4 +275,15 @@ $(document).ready(function() {
       return false;
     }
 	});
+	$('.footer').waypoint(function(event, direction) {
+	  $('.footer').waypoint('remove');
+	  if(direction === 'down'){
+	    $.get('/catalogs/indexload', { catalog_ids: catalog_ids }, function(data) {
+        $('div.content').append(data);
+        $('.footer').waypoint({ offset: '100%' });
+      });
+	  }else{
+	    //alert('You have scrolled to an content.');
+    }
+  },{ offset: '100%' });
 })

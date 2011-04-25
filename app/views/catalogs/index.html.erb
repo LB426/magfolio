@@ -1,4 +1,7 @@
 <% @catalogs.each do |catalog| %>
+<script type="text/javascript">
+  catalog_ids.push(<%= catalog.id -%>);
+</script>
 <div class="card-upgrade listing_content">
   <div class="cardcap-upgrade">
     <img alt="Card-top-large" height="10"src="/images/card-top-large.png" width="470">
@@ -64,7 +67,7 @@
           </div>
           <% end %>
           <script type="text/javascript">
-            catalog_images.push(catalog);
+            catalogs.push(catalog);
           </script>
         </div>
       </div>
