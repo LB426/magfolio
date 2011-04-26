@@ -21,10 +21,21 @@ class CatalogsController < ApplicationController
   def indexload
     @header_layout = 'catalogs/header'
     @body_css_class = "home"
-    @locations = Location.all
-    @catalogs = Catalog.all(:limit => 6, :order => 'id DESC')
-    
-    render 'index', :layout => false
+
+    sql = ""
+    params[:catalog_ids].each do |catalog_id|
+      sql = " id != #{catalog_id} AND" + sql
+    end
+    sql.gsub!(/^\ /, 'SELECT `catalogs`.* FROM `catalogs` WHERE ( ' )
+    sql.gsub!(/\ AND$/,') ORDER BY id DESC LIMIT 4')
+    #logger.debug "sql=#{sql}"  
+    #@catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
+    @catalogs = Catalog.find_by_sql(sql)
+    unless @catalogs.nil?
+      render 'index', :layout => false
+    else
+      render :nothing => true
+    end
   end
 
   

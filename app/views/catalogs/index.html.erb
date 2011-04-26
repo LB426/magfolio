@@ -1,3 +1,8 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'waypoints.js' %>
+  <%= javascript_include_tag 'catalogs_index.js' %>
+<% end %>
+
 <% @catalogs.each do |catalog| %>
 <script type="text/javascript">
   catalog_ids.push(<%= catalog.id -%>);
@@ -20,17 +25,20 @@
     
     <div class="listing slideshow" id="slider_listing_3192">
       <div class="slideshownav">
-        <a href="#" class="next" id="catalog_<%= catalog.id -%>" onclick="return false"></a>
-        <a href="#" class="previous" id="catalog_<%= catalog.id -%>" onclick="return false"></a>
+        <a href="#null" class="next" onclick="img_next(<%= catalog.id -%>);"></a>
+        <a href="#null" class="previous" id="catalog_<%= catalog.id -%>" onclick="img_prev(<%= catalog.id -%>);"></a>
         <div class="controls slides" style="margin-left: 100px; ">
             <ul id="image_controls_for_catalog_<%= catalog.id -%>">
               <% flag = true %>
+              
               <% catalog.pictures.each do |pic| %>
-                <% if flag %>
-                  <li><a href="#catalog_<%= catalog.id -%>_link_image_<%= pic.id -%>" class="active" id="control_id_<%= catalog.id -%>"></a></li>
+                <% if flag %>       
+                  <li><a href="#null" class="active" onclick="imgchg_link(<%= catalog.id -%>,<%= pic.id -%>)" id="link_img_<%= catalog.id -%>_<%= pic.id -%>"></a>
+                  </li>
                   <% flag = false %>
                 <% else %>
-                  <li><a href="#catalog_<%= catalog.id -%>_link_image_<%= pic.id -%>" id="control_id_<%= catalog.id -%>"></a></li>
+                  <li><a href="#null" class="inactive" onclick="imgchg_link(<%= catalog.id -%>,<%= pic.id -%>)" id="link_img_<%= catalog.id -%>_<%= pic.id -%>"></a>
+                  </li>
                 <% end %>
               <% end %>
             </ul>
@@ -49,10 +57,10 @@
             catalog.imgs.push(<%= pic.id -%>) ;
           </script>
           <% if flag %>
-            <div class="activeimg" id="image_catalog_<%= catalog.id -%>_image_<%= pic.id -%>">
+            <div class="activeimg" id="image_catalog_<%= catalog.id -%>_<%= pic.id -%>">
             <% flag = false %>
           <% else %>
-            <div class="inactiveimg" id="image_catalog_<%= catalog.id -%>_image_<%= pic.id -%>" style="display:none">
+            <div class="inactiveimg" id="image_catalog_<%= catalog.id -%>_<%= pic.id -%>" style="display:none">
           <% end %>
             <div class="section">
               <div class="pro-image">

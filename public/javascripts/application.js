@@ -15,9 +15,6 @@ jQuery.ajaxSetup({
 });
 */
 
-var catalogs = new Array();
-var catalog_ids = new Array();
-
 $(document).ready(function() {
   $('body').click(function() {
     $("#search_location_menu").hide();
@@ -201,73 +198,6 @@ $(document).ready(function() {
   $("a#catalog_galery_img_add").fancybox({
   		'hideOnContentClick': false
   });
-  $('a[id^="control_id"]').click(function(event) {
-    var catalog_id = parseInt(this.id.replace("control_id_", ""));
-    var catalog_ctrl_links = $("a[href^='#catalog_"+catalog_id+"_link_image']");
-    var img_id = parseInt($(this).attr('href').replace("#catalog_"+catalog_id+"_link_image_",""));
-    $.each(catalog_ctrl_links,function(i,item){
-      var class_attr = $(item).attr('class');
-      if(class_attr == 'active'){ $(item).attr('class', ''); };
-    });
-    $(this).attr('class','active');
-    $("div.activeimg[id^=image_catalog_"+catalog_id+"]").hide();
-    $("div.activeimg[id^=image_catalog_"+catalog_id+"]").attr('class','inactiveimg');
-    $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).show();
-    $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).attr('class','activeimg');
-  });
-  $('a.next').click(function(event) {
-    var catalog_id = parseInt(this.id.replace("catalog_", ""));
-    var id = $("div.activeimg[id^=image_catalog_"+catalog_id+"]").attr('id');
-    var activeimg_id = parseInt(id.replace("image_catalog_"+catalog_id+"_image_",""));
-
-    //alert(catalog_id + ' ' + activeimg_id);
-    //1) сформировать массив с ID картинок
-    //2) отсортировать его по возрастанию
-    //3) найти позицию activeimg_id
-    //4) взять следующий ID
-    //5) отобразить его
-    for (var i = 0; i < catalogs.length; i++) {
-      if(catalogs[i].id == catalog_id){
-        for (var j = 0; j < catalogs[i].imgs.length; j++) {
-          if(catalogs[i].imgs[j] == activeimg_id){
-            if(j < catalogs[i].imgs.length - 1){
-              var img_id = catalogs[i].imgs[ j+1 ] ;
-              $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).hide();
-              $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).attr('class','inactiveimg');
-              $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).show();
-              $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).attr('class','activeimg');
-              $('a[href^="#catalog_'+catalog_id+'_link_image_'+activeimg_id+'"]').attr('class','');
-              $('a[href^="#catalog_'+catalog_id+'_link_image_'+img_id+'"]').attr('class','active');
-              break;
-            }
-          }
-        }
-      }
-    }
-  });
-  $('a.previous').click(function(event) {
-    var catalog_id = parseInt(this.id.replace("catalog_", ""));
-    var id = $("div.activeimg[id^=image_catalog_"+catalog_id+"]").attr('id');
-    var activeimg_id = parseInt(id.replace("image_catalog_"+catalog_id+"_image_",""));
-    for (var i = 0; i < catalogs.length; i++) {
-      if(catalogs[i].id == catalog_id){
-        for (var j = 0; j < catalogs[i].imgs.length; j++) {
-          if(catalogs[i].imgs[j] == activeimg_id){
-            if(j > 0){
-              var img_id = catalogs[i].imgs[ j-1 ] ;
-              $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).hide();
-              $("#image_catalog_"+catalog_id+"_image_"+activeimg_id).attr('class','inactiveimg');
-              $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).show();
-              $("div.inactiveimg#image_catalog_"+catalog_id+"_image_"+img_id).attr('class','activeimg');
-              $('a[href^="#catalog_'+catalog_id+'_link_image_'+activeimg_id+'"]').attr('class','');
-              $('a[href^="#catalog_'+catalog_id+'_link_image_'+img_id+'"]').attr('class','active');
-              break;
-            }
-          }
-        }
-      }
-    }
-  });
   $('#catalog_delete_form_send').click(function(){
 	  if (confirm('Удалить каталог?')){
 	    $('#catalog_delete_form').submit();
@@ -275,15 +205,4 @@ $(document).ready(function() {
       return false;
     }
 	});
-	$('.footer').waypoint(function(event, direction) {
-	  $('.footer').waypoint('remove');
-	  if(direction === 'down'){
-	    $.get('/catalogs/indexload', { catalog_ids: catalog_ids }, function(data) {
-        $('div.content').append(data);
-        $('.footer').waypoint({ offset: '100%' });
-      });
-	  }else{
-	    //alert('You have scrolled to an content.');
-    }
-  },{ offset: '100%' });
 })
