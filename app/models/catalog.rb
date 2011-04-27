@@ -6,4 +6,16 @@ class Catalog < ActiveRecord::Base
                     :styles => { :medium => "300x300>", :thumb => "100x100>" },
                     :path => ":rails_root/public/assets/logos/:id/:style/:basename.:extension",
                     :url  => "/assets/logos/:id/:style/:basename.:extension"
+
+  before_create :randomize_file_name
+
+private
+
+  def randomize_file_name
+    unless logo_file_name.nil?
+      extension = File.extname(logo_file_name).downcase
+      self.logo.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
+    end
+  end
+
 end

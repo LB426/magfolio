@@ -16,6 +16,11 @@ jQuery.ajaxSetup({
 */
 
 $(document).ready(function() {
+  if ($.browser.msie){
+    if($.browser.version == '6.0') {alert('У Вас старый Internet Explorer 6-й версии.\nБезопасность под угрозой!\n срочно обновите браузер!');}
+    if($.browser.version == '7.0') {alert('У Вас старый Internet Explorer 7-й версии.\nБезопасность под угрозой!\n срочно обновите браузер!');}
+    if($.browser.version == '8.0') {alert('У Вас старый Internet Explorer 8-й версии.\nБезопасность под угрозой!\n срочно обновите браузер!');}
+  }
   $('body').click(function() {
     $("#search_location_menu").hide();
     $("#search_budget_menu").hide();
@@ -50,6 +55,7 @@ $(document).ready(function() {
 			$('#best_picrute_upload_progress_bar').hide();
 			$('#best_picrute_upload_iframe').contentWindow.document.body.innerHTML = '';
 		});
+		$('#upload_best_picrute').attr('class','');
     return false;
   });
 	$('#signup_logo').change(function(event){
@@ -70,18 +76,28 @@ $(document).ready(function() {
     $('#live_image_description').text($(this).val());
 	});
 	$('#company_name').keyup(function(){
-    $('#live_company_name').text($(this).val());
+	  var c_name = $(this).val();
+    $('#live_company_name').text(c_name);    
+    var ch_cut_url = c_name.replace(/\s+/gi, "-");
+    ch_cut_url = ch_cut_url.toLowerCase();
+    $('#shortcut_url').val(ch_cut_url);
 	});
 	$('#business_type_id').change(function(){
-	  var business_type_id = $(this).val();
-	  if(business_type_id == 0){
-      $("a#inline").click();
-    }else{
-      if(business_type_id != -1){
-        var text = $('#business_type_id option:selected').html();
-	      $('#live_business_type').text(text);
-      }
-    }
+	  if(signup_id == 0){ 
+	    alert("Вы не загрузили лучшую фотографию Вашего бизнеса!");
+	    $('#upload_best_picrute').attr('class','thiserror');
+	    return false;
+	  }else{
+	    var business_type_id = $(this).val();
+  	  if(business_type_id == 0){
+        $("a#inline_business_type").click();
+      }else{
+        if(business_type_id != -1){
+          var text = $('#business_type_id option:selected').html();
+  	      $('#live_business_type').text(text);
+        }
+      } 
+	  }
 	});	
 	$('#location_id').change(function(){
 	  var location_id = $(this).val();
@@ -102,6 +118,7 @@ $(document).ready(function() {
 	  var cphn = $('#contact_phone').val();
 	  var ceml = $('#contact_email').val();
 	  var url = $('#website_url').val();
+	  var shcturl = $('#shortcut_url').val();
 	  var reEmail = new RegExp(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/);
 	  if(signup_id == 0){ 
 	    alert("Вы не загрузили лучшую фотографию Вашего бизнеса!");
@@ -148,12 +165,17 @@ $(document).ready(function() {
 	    $('#contact_email_err').attr('class','thiserror');
 	    return false;
 	  }
+	  if(shcturl == ''){
+	    alert("Вы не указали Короткое название каталога");
+	    return false;
+	  }
 	  $('#signup_bestpic_comment').val(bpc);
 	  $('#signup_company_name').val(cn);
 	  $('#signup_businesstype_id').val(btid);
 	  $('#signup_location_id').val(lid);
 	  $('#signup_phone').val(cphn);
 	  $('#signup_email').val(ceml);
+	  $('#signup_shortcut_url').val(shcturl);
 	  $('#signup_company_url').val(url);
 	});
 	$('#business_type_submit').click(function(){
@@ -166,7 +188,7 @@ $(document).ready(function() {
 	$('#save_and_contunue_btn2').click(function(){
 	  alert(signup_id + ' ' + best_picrute_desc + ' ' + company_name + ' ' + business_type_id + ' ' + location_id + ' ' + phone + ' ' + email + ' ' + url);
 	});
-	$("a#inline").fancybox({
+	$("a#inline_business_type").fancybox({
   		'hideOnContentClick': false ,
   		'onComplete': function(){ $("#business_type_name").focus(); },
 			'onClosed': function(){
@@ -177,6 +199,8 @@ $(document).ready(function() {
 					  $('#business_type_id').append('<option value="'+ item.business_type.id + '">' + item.business_type.name + '</option>');
 				  });
 				  $('#business_type_id').append('<option value="0">Моего бизнеса нет в списке</option>');
+				  var btn = $('#business_type_name').val();
+				  $("#business_type_id :contains(" + btn + ")").attr("selected", "selected");
 				});
 			}
   });

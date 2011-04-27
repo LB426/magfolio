@@ -4,6 +4,7 @@ module CatalogsHelper
   # дать ему возможность редактировать каталог
   def current_user_self?
     return true if !current_user.nil? && current_user.id == @catalog.user_id 
+    return true if !current_user.nil? && /admin/ =~ current_user.group
     return false
   end
   

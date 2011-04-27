@@ -16,7 +16,7 @@
       <% unless /missing/ =~ catalog.logo.url(:thumb) %> 
       <%= link_to image_tag(catalog.logo.url(:thumb), :align => 'right'), catalog %>
       <% end %>
-      <h2><%= link_to catalog.company_name, catalog %></h2>
+      <h2><%= link_to catalog.company_name, "/#{catalog.shortcut_name}" %></h2>
       <p>
         <%= BusinessType.find(catalog.businesstype_id).name %> &nbsp; 
         <span><%= Location.find(catalog.location_id).name %></span>
@@ -64,7 +64,12 @@
           <% end %>
             <div class="section">
               <div class="pro-image">
-                <%= link_to image_tag(pic.picture.url(:medium), :height => '300'), catalog -%>
+                <div style="position: relative;">
+                  <div class="show_on_map">
+                    <%= link_to image_tag('/images/show_on_map.gif'), "/maps/#{pic.id}", :title => 'посмотреть на карте' -%>
+                  </div>
+                  <%= link_to image_tag(pic.picture.url(:medium), :height => '300'), "/#{catalog.shortcut_name}" -%>
+                </div>
               </div>
               <div class="pro-caption">
                 <% unless pic.description.blank? %>

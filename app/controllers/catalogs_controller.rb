@@ -42,11 +42,19 @@ class CatalogsController < ApplicationController
   # GET /catalogs/1
   # GET /catalogs/1.xml
   def show
-    @catalog = Catalog.find(params[:id])
+    unless params[:shortcut_name].nil?
+      @catalog = Catalog.find_by_shortcut_name(params[:shortcut_name])
+    else
+      @catalog = Catalog.find(params[:id])
+    end
     if !current_user.nil? && current_user.id == @catalog.user_id
-      #@catalog = current_user.catalogs.find(params[:id])
       @picture = current_user.pictures.new
       @picture.user_id = current_user.id
+      @picture.catalog_id = @catalog.id
+    end
+    if !current_user.nil? && /admin/ =~ current_user.group
+      @picture = Picture.new
+      @picture.user_id = @catalog.user_id
       @picture.catalog_id = @catalog.id
     end
 
@@ -109,7 +117,11 @@ class CatalogsController < ApplicationController
   # DELETE /catalogs/1
   # DELETE /catalogs/1.xml
   def destroy
-    @catalog = current_user.catalogs.find(params[:id])
+    if !current_user.nil? && /admin/ =~ current_user.group
+      @catalog = Catalog.find(params[:id])
+    else
+      @catalog = current_user.catalogs.find(params[:id])
+    end
     @catalog.destroy
 
     respond_to do |format|

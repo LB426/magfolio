@@ -7,6 +7,7 @@ Magfolio::Application.routes.draw do
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
+  
   resources :users
   
   resources :sessions
@@ -38,7 +39,7 @@ Magfolio::Application.routes.draw do
   
   match 'about' => 'about#index', :as => :about
 
-  get "catalogs/index"
+  match '/:shortcut_name' => 'catalogs#show', :as => :shortcut_catalog
   root :to => "catalogs#index"
   
   # The priority is based upon order of creation:

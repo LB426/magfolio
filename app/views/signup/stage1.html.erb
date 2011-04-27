@@ -144,6 +144,13 @@
       <% end %>
       </div>
       <p> 
+        <label>Короткое название каталога</label> - обязательно<br /> 
+        <small>(чтоб можно было зайти в каталог по такому имени: www.klever.ru/мой-каталог )</small> 
+      </p>
+      <%= form_tag('/signup') do %>
+      <%= text_field_tag 'shortcut_url', @signup.shortcut_url, :size => 30 %>
+      <% end %>
+      <p> 
         <label>Вебсайт URL</label> - не обязательно<br /> 
         <small>(например: www.mydomain.ru)</small> 
       </p>
@@ -159,6 +166,7 @@
         <%= f.text_field :location_id %>
         <%= f.text_field :phone %>
         <%= f.text_field :email %>
+        <%= f.text_field :shortcut_url %>
         <%= f.text_field :company_url %>
     </div>
         <div id='signup_submit'> 
@@ -186,7 +194,7 @@
 <iframe id="location_add_iframe" name="location_add_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
 </iframe>
 
-<a id="inline" href="#add_business_type" style="display:none">&nbsp;</a>
+<a id="inline_business_type" href="#add_business_type" style="display:none">&nbsp;</a>
 <div style="display:none">
   <div id="add_business_type">
     <h2>Как называется Ваш вид бизнеса?</h2>

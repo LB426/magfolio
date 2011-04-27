@@ -33,6 +33,7 @@ class SignupController < ApplicationController
     @signup.tariff = 'free'
     @signup.save
     @user = User.new
+    @random_password = random_password
     rescue ActiveRecord::RecordNotFound
       redirect_to signup_path
   end
@@ -76,6 +77,11 @@ private
     signup = Signup.find_by_session_id(request.session_options[:id])
     signup = Signup.new if signup.nil?
     signup
+  end
+  
+  def random_password(size = 8)
+    chars = (('a'..'z').to_a + ('0'..'9').to_a) - %w(i o 0 1 l 0)
+    (1..size).collect{|a| chars[rand(chars.size)] }.join
   end
   
 end

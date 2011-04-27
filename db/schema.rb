@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110422131601) do
+ActiveRecord::Schema.define(:version => 20110427114536) do
 
   create_table "business_types", :force => true do |t|
     t.string   "name"
@@ -37,11 +37,13 @@ ActiveRecord::Schema.define(:version => 20110422131601) do
     t.datetime "logo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "shortcut_name"
   end
 
   add_index "catalogs", ["businesstype_id"], :name => "index_catalogs_on_businesstype_id"
   add_index "catalogs", ["id"], :name => "index_catalogs_on_id"
   add_index "catalogs", ["location_id"], :name => "index_catalogs_on_location_id"
+  add_index "catalogs", ["shortcut_name"], :name => "index_catalogs_on_shortcut_name"
   add_index "catalogs", ["user_id"], :name => "index_catalogs_on_user_id"
 
   create_table "locations", :force => true do |t|
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20110422131601) do
     t.string   "bestpicture_content_type"
     t.integer  "bestpicture_file_size"
     t.datetime "bestpicture_updated_at"
+    t.string   "shortcut_url"
   end
 
   add_index "signups", ["id"], :name => "index_signups_on_id"
@@ -107,6 +110,8 @@ ActiveRecord::Schema.define(:version => 20110422131601) do
     t.string   "password_salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "open_text_password"
+    t.string   "group"
   end
 
 end

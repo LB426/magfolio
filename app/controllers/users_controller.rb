@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    @user.open_text_password = params[:user][:password]
     if @user.save
       catalog = create_catalog(params[:signup_id])
       redirect_to root_url, :notice => "Signed up!"
@@ -19,6 +20,7 @@ private
                 :location_id => signup.location_id,
                 :phone => signup.phone,
                 :email => signup.email,
+                :shortcut_name => signup.shortcut_url,
                 :company_url => signup.company_url,
                 :tariff => signup.tariff,
                 :logo => signup.logo

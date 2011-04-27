@@ -51,13 +51,6 @@
       <%= render :inline => @catalog.company_description %>
       <% end %>
     </div>
-    <% if current_user_self? %>
-      <div class="<%= edit_block %>">
-      <p>
-        <a href="#catalog_galery_img" id="catalog_galery_img_add">
-          Добавить изображение в галерею</a></p>
-      </div>
-    <% end %>
     <% @catalog.pictures.each do |pic| %>
       <div class="gallery <%= edit_block %>">
         <% if current_user_self? %>
