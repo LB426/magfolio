@@ -88,6 +88,7 @@
       <div id="logo_upload_progress_bar" style="display:none"> 
         <img alt="Spinner-small" src="/images/spinner-small.gif" />
       </div>
+      
       <p><label>Какой вид бизнеса наиболее типичен для Вас?</label></p>
       <div id="business_type_err"> 
       <select id="business_type_id" name="business_type_id">
@@ -102,6 +103,24 @@
         <option value="0">Моего бизнеса нет в списке</option>
       </select>
       </div>
+      
+      <p><label>Какие виды товаров и услуг Вы предлагаете?</label></p>
+      <a id="inline_add_business_deal" href="#add_business_deal">Добавить или изменить список</a>
+      <div id="business_deal_err">
+        <% if @signup.business_deals.nil? %>
+        <select id="business_deal_id" name="business_deal_id" size="2" disabled>
+          <option value="-1">Выберите вид товара или услуги...</option>
+          <option value="0">Моего товара или услуги нет в списке</option>
+        </select>
+        <% else %>
+        <select id="business_deal_id" name="business_deal_id" size="<%= BusinessDeal.count(@signup.business_deals) -%>" multiple disabled >
+          <% BusinessDeal.find(@signup.business_deals).each do |business_deal| %>
+            <option selected value="<%= business_deal.id -%>"><%= "#{business_deal.name} #{business_deal.kind}" -%></option>
+          <% end %>
+        </select>
+        <% end %>
+      </div>      
+      
       <p> 
         <label>Какой населённый пункт является приоритетным для Вашей компании?</label><br /> 
         <small>
@@ -175,12 +194,6 @@
           </p> 
         </div>
       <% end %>
-<!--      <div id='signup_submit2'> 
-        <p>
-          <input id="save_and_contunue_btn2" alt="Сохранить и продолжить" class="submit_image" src="/images/btn_saveandcontinue.png" type="image" />
-        </p> 
-      </div>
--->
 </div>
 
 <div class="clear"></div>
@@ -192,6 +205,8 @@
 <iframe id="business_type_add_iframe" name="business_type_add_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
 </iframe>
 <iframe id="location_add_iframe" name="location_add_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
+</iframe>
+<iframe id="business_deals_iframe" name="business_deals_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
 </iframe>
 
 <a id="inline_business_type" href="#add_business_type" style="display:none">&nbsp;</a>
@@ -211,6 +226,20 @@
   <div id="add_location">
     <h2>Как называется Ваш населенный пункт?</h2>
     <p><small>введите полный адрес, укажите страну</small></p>
+  </div>
+</div>
+
+<div style="display:none">
+  <div id="add_business_deal">
+    <h2>Виды товаров и услуг</h2>
+    <p><small>введите один или несколько товаров или услуг</small></p>
+    <%= form_for @signup, :url => '/signup/setbusinessdeal', :html => { :target => 'business_deals_iframe', :id => "signup_add_business_deal" } do |f| %>
+      <% @business_deals.each do |business_deal| %>
+      <input id="business_deals_<%= business_deal.id -%>" name="business_deals[<%= business_deal.id -%>]" type="checkbox" value="<%= business_deal.id -%>" />
+      <%= business_deal.name -%>&nbsp<%= business_deal.kind -%><br />
+      <% end %>
+      <p><%= f.submit "Запомнить" %></p>
+    <% end %>
   </div>
 </div>
 

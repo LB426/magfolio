@@ -65,9 +65,11 @@
             <div class="section">
               <div class="pro-image">
                 <div style="position: relative;">
+                  <% unless catalog.lat.nil? || catalog.lng.nil? %>
                   <div class="show_on_map">
-                    <%= link_to image_tag('/images/show_on_map.gif'), "/maps/#{pic.id}", :title => 'посмотреть на карте' -%>
+                    <%= link_to image_tag('/images/show_on_map.gif'), "/catalogs/#{pic.id}/loadmap", :title => 'посмотреть на карте', :id => "map_pic_#{pic.id}", :onclick => "show_on_map = #{pic.id} ;" -%>
                   </div>
+                  <% end %>
                   <%= link_to image_tag(pic.picture.url(:medium), :height => '300'), "/#{catalog.shortcut_name}" -%>
                 </div>
               </div>

@@ -1,7 +1,10 @@
 Magfolio::Application.routes.draw do
   
+  resources :business_deals
+
   resources :pictures
 
+  match 'catalogs/:id/loadmap' => 'catalogs#loadmap', :as => :loadmap
   match 'catalogs/indexload' => 'catalogs#indexload', :as => :index_load
   resources :catalogs
 
@@ -28,6 +31,8 @@ Magfolio::Application.routes.draw do
 
   match 'cities' => 'cities#index', :as => :cities
   
+  match 'signup/getbusinessdeals' => 'signup#getbusinessdeals', :as => :getbusinessdeals
+  match 'signup/setbusinessdeal' => 'signup#setbusinessdeal', :as => :setbusinessdeal
   match 'signup' => 'signup#stage1', :as => :signup
   match 'signup/stage1' => 'signup#stage1', :as => :signup_stage1
   match 'signup/stage2' => 'signup#stage2', :as => :signup_stage2

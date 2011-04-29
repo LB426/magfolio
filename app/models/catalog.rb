@@ -8,6 +8,8 @@ class Catalog < ActiveRecord::Base
                     :url  => "/assets/logos/:id/:style/:basename.:extension"
 
   before_create :randomize_file_name
+  
+  serialize :business_deals
 
 private
 

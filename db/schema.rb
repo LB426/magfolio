@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110427114536) do
+ActiveRecord::Schema.define(:version => 20110429095050) do
+
+  create_table "business_deals", :force => true do |t|
+    t.string   "name"
+    t.string   "kind"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "business_types", :force => true do |t|
     t.string   "name"
@@ -38,6 +45,9 @@ ActiveRecord::Schema.define(:version => 20110427114536) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "shortcut_name"
+    t.string   "lat"
+    t.string   "lng"
+    t.text     "business_deals"
   end
 
   add_index "catalogs", ["businesstype_id"], :name => "index_catalogs_on_businesstype_id"
@@ -99,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20110427114536) do
     t.integer  "bestpicture_file_size"
     t.datetime "bestpicture_updated_at"
     t.string   "shortcut_url"
+    t.text     "business_deals"
   end
 
   add_index "signups", ["id"], :name => "index_signups_on_id"

@@ -1,0 +1,25 @@
+<%= form_for(@business_deal) do |f| %>
+  <% if @business_deal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@business_deal.errors.count, "error") %> prohibited this business_deal from being saved:</h2>
+
+      <ul>
+      <% @business_deal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :kind %><br />
+    <%= f.text_field :kind %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

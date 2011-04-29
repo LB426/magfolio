@@ -229,4 +229,60 @@ $(document).ready(function() {
       return false;
     }
 	});
+	
+	/* заполняем виды товаров и услуг */
+	/* $('#business_deal_id').change(function(){
+	  if(signup_id == 0){ 
+	    alert("Вы не загрузили лучшую фотографию Вашего бизнеса!");
+	    $('#upload_best_picrute').attr('class','thiserror');
+	    return false;
+	  }else{
+	    var business_deal_id = $(this).val();
+  	  if((business_deal_id == 0)||(business_deal_id == -1)){
+        $("a#inline_add_business_deal").click();
+      }
+	  }
+	}); */
+	$("#business_deals_iframe").load(function(){
+		$.fancybox.close();
+	});
+	$("a#inline_add_business_deal").fancybox({
+  		'hideOnContentClick': false,
+  		'onStart': function(){
+  		  if(signup_id == 0){ 
+    	    alert("Вы не загрузили лучшую фотографию Вашего бизнеса!");
+    	    $('#upload_best_picrute').attr('class','thiserror');
+    	    return false;
+    	  }else{
+  		    $('#business_deal_id option').each(function(){
+  		      var signup_business_deal_id = $(this).val()
+  		      $("form#signup_add_business_deal input[type='checkbox']").each(function() {
+  		        var business_deal_id = $(this).val();
+  		        if(signup_business_deal_id === business_deal_id){
+  		          $(this).attr('checked','checked');
+  		        }
+  		      });
+  		    });
+		    }
+  		},
+  		'onClosed': function(){
+  		  $('#business_deal_id').empty();
+  		  $.getJSON('/signup/getbusinessdeals', function(data){
+  		    $.each(data, function(i,item){
+  		      $('#business_deal_id').append('<option selected value="'+ item.id + '">' + item.name + '</option>');
+		      });
+		    });
+		  }
+  });
+  
+  /* вызывает окно ввода координат, для отображения на карте */
+  $("a#add_to_map").fancybox({
+  		'hideOnContentClick': false
+  });
+  
+  /* вызывает окно выбора товаров и услуг */
+  $("a#edit_business_deals").fancybox({
+  		'hideOnContentClick': false
+  });
+  
 })

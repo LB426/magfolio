@@ -1,0 +1,57 @@
+<div class="card-perma">
+  <div class="cardcap-perma">
+    <img alt="Card-top-perma" src="/images/card-top-perma.png">
+  </div>
+  <div class="cardcontent-perma">
+    <div class="cardtools">
+      <div class="printpage">
+        <a href="#" class="print" target="_blank">
+          Рейтинг
+          <%= @catalog.rating %>
+        </a>
+      </div>
+      <div class="listing">
+        <span class="favorite_links" data-listing-id="8805">
+          <a href="/favorites/8805/remove.js" class="favorites remove_from_favorites" onclick="return false" style="display: none; ">Удалить из избранного</a>
+          <a href="/favorites/8805/add.js" class="favorites add_to_favorites" onclick="return false" style="">Добавить в избранное</a>
+        </span>  
+      </div>
+    </div>
+      <% if /missing/ =~ @catalog.logo.url(:thumb) %>
+      <% else %>
+      <%= image_tag @catalog.logo.url(:thumb), :align => 'right' %>
+      <% end %>
+      <h2><%= @catalog.company_name %></h2>
+      <p>
+        Вид бизнеса: 
+        <strong><%= BusinessType.find(@catalog.businesstype_id).name %></strong><br />
+        Расположен в 
+        <strong>
+          <a href="/chicago"><%= Location.find(@catalog.location_id).name %></a>
+        </strong><br />
+        E-mail: 
+        <strong>
+          <a href="mailto:<%= @catalog.email -%>?subject=Вопросы о каталоге <%= @catalog.company_name -%>"><%= @catalog.email %></a>
+        </strong>
+      </p>
+      <% unless @catalog.company_description.blank? %>
+      <%= render :inline => @catalog.company_description %>
+      <% end %>
+      <div class="map">
+        <%= render :partial => 'map' %>
+      </div>
+    <div class="action">
+      <h2>Вам понравилось? Свяжитесь с <%= @catalog.company_name %>.</h2>
+      <h3>
+          <a href="mailto:<%= @catalog.email %>"><%= @catalog.email %></a>
+          •
+          <a href="<%= @catalog.company_url %>"><%= @catalog.company_url %></a>
+      </h3>
+    </div>
+  </div>
+  <div class="cardcap-perma">
+    <img alt="Card-bottom-perma" src="/images/card-bottom-perma.png">
+  </div>
+</div>
+
+

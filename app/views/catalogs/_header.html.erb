@@ -16,7 +16,7 @@
   <a href="/about">О каталогах</a> |
   <a href="/favorites">Избранное</a> |
   <% if current_user %>
-    <a href="/logout" class="guest_user">Выйти из каталога</a>
+    <a href="/logout" class="guest_user"><%= current_user.email -%></a>
   <% else %>
     <a href="/login" class="guest_user">Войти в каталог</a>
   <% end %>
@@ -56,9 +56,21 @@
           </div>
         </div>
       </li>
-    <li>&nbsp; и &nbsp;</li>
+    <li>&nbsp;,&nbsp;</li>
     <li class="menu">
       <a href="#" id="search_service_name">услугам</a>
+      <div id="search_service_menu" style="display:none" class="search_menu">
+        <a href="/3000-under">Одежда</a>
+        <a href="/3000-to-10000">Бытовую технику</a>
+        <a href="/10000-to-25000">Инструмент</a>
+        <div class="last_menu">
+          <a href="/" class="search_service_menu_links homepage">Весь список</a>
+        </div>
+      </div>
+    </li>
+    <li>&nbsp; и &nbsp;</li>
+    <li class="menu">
+      <a href="#" id="search_service_name">торговым центрам</a>
       <div id="search_service_menu" style="display:none" class="search_menu">
         <a href="/3000-under">Одежда</a>
         <a href="/3000-to-10000">Бытовую технику</a>

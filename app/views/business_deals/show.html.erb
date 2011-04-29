@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @business_deal.name %>
+</p>
+
+<p>
+  <b>Kind:</b>
+  <%= @business_deal.kind %>
+</p>
+
+
+<%= link_to 'Edit', edit_business_deal_path(@business_deal) %> |
+<%= link_to 'Back', business_deals_path %>

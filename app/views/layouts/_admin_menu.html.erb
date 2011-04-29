@@ -1,14 +1,20 @@
 <% if current_user%>
   <% if /admin/ =~ current_user.group %>
     <div class="admin_menu">
-      <a href="/adminka" title="Страница администратора">
-        <img src="/images/SysAdmin.png">
+      <a href="/users" title="Управление пользователями">
+        <img src="/images/users.png">
       </a>
-      <a href="/locations" title="Страница администратора">
+      <a href="/locations" title="Населённые пункты">
         <img src="/images/locations.png">
       </a>
-      <a href="/business_types" title="Страница администратора">
+      <a href="/business_types" title="Типы бизнесов">
         <img src="/images/business_type.png">
+      </a>
+      <a href="/business_deals" title="Виды товаров и услуг">
+        <img src="/images/services.png">
+      </a>
+      <a href="/logout" title="Выход">
+        <img src="/images/exit2.png">
       </a>
     </div>
   <% end %>

@@ -80,6 +80,7 @@
           </script>
         <% end %>
         <%= image_tag pic.picture.url(:large) %>
+        <%= link_to "Показать на карте", "/catalogs/#{pic.id}/loadmap", :title => 'посмотреть на карте' -%>
         <p>
           <% unless pic.description.blank? %>
           <%= render :inline => pic.description %>
@@ -142,6 +143,46 @@
       <p><%= f.submit "Внести изменения" %></p>
     <% end %>
   </div>
+  <div id="add_to_map">
+    <h2>Добавить компанию на карту</h2>
+    <%= form_for(@catalog) do |f| %>
+      <p><small>введите координаты, например:<br />широта - 45.8533228 и долгота - 40.1257947</small></p>
+      <p><%= f.label :Широта %><%= f.text_field :lat %></p>
+      <p><%= f.label :Долгота %><%= f.text_field :lng %></p>
+      <p><%= f.submit "Внести" %></p>
+    <% end %>
+  </div>
+  
+  <div id="edit_business_deals">
+    <h2>Виды товаров и услуг</h2>
+    <%= form_for(@catalog) do |f| %>
+      <% @all_business_deals.each do |all_business_deal| %>
+        <% unless @catalog.business_deals.nil? %>
+          <% arr = @catalog.business_deals %>
+          <% if arr.include?("#{all_business_deal.id}") %>
+            <input id="business_deals_<%= all_business_deal.id -%>" 
+                 name="business_deals[<%= all_business_deal.id -%>]"
+                 type="checkbox" value="<%= all_business_deal.id -%>" 
+                 checked="checked" />
+            <%= all_business_deal.name -%>&nbsp<%= all_business_deal.kind -%><br />
+          <% else %>
+            <input id="business_deals_<%= all_business_deal.id -%>" 
+                 name="business_deals[<%= all_business_deal.id -%>]"
+                 type="checkbox" value="<%= all_business_deal.id -%>" />
+            <%= all_business_deal.name -%>&nbsp<%= all_business_deal.kind -%><br />
+          <% end %>
+        <% else %>
+          <input id="business_deals_<%= all_business_deal.id -%>" 
+               name="business_deals[<%= all_business_deal.id -%>]"
+               type="checkbox" value="<%= all_business_deal.id -%>" />
+          <%= all_business_deal.name -%>&nbsp<%= all_business_deal.kind -%><br />
+        <% end %>
+      <% end %>
+      <input id="business_deals_0" name="business_deals[0]" type="checkbox" value="0" checked="checked" style="display:none;">
+      <p><%= f.submit "Внести" %></p>
+    <% end %>
+  </div>
+  
 </div>
 <% end %>
 

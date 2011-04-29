@@ -1,6 +1,7 @@
 
 var catalogs = new Array();
 var catalog_ids = new Array();
+var show_on_map = -1 ;
 
 function imgchg_link(a,b) {
   var catalog_id = a;
@@ -95,5 +96,10 @@ $(document).ready(function() {
       //alert('You have scrolled to an content.');
     }
   },{ offset: '100%' });
+  
+  /* вызов карты
+  $("a[id^=map_pic_]").fancybox({
+  		'hideOnContentClick': false
+  }); */
   
 })

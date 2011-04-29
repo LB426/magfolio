@@ -10,6 +10,7 @@ class SignupController < ApplicationController
     @business_type = BusinessType.new
     @locations = Location.all
     @location = Location.new
+    @business_deals = BusinessDeal.all
     logger.debug "session = #{session}"
     logger.debug "session_id = #{request.session_options[:id]}"
     rescue ActiveRecord::RecordNotFound
@@ -70,6 +71,35 @@ class SignupController < ApplicationController
     @signup = find_signup
     @signup.update_attributes(params[:signup])
     render :nothing => true
+  end
+  
+  def setbusinessdeal
+    business_deals = params[:business_deals]
+    unless business_deals.nil?
+      business_deal_ids = Array.new
+      business_deals.each_key do |key|
+        business_deal_ids << key
+      end
+      @signup = find_signup
+      @signup.business_deals = business_deal_ids
+      @signup.save
+    end
+    
+    render :nothing => true
+  end
+  
+  def getbusinessdeals
+    @signup = find_signup
+    business_deals = BusinessDeal.find(@signup.business_deals)
+    arr_bd = Array.new
+    business_deals.each do |business_deal|
+      logger.debug "business_deal = #{business_deal.name} #{business_deal.kind}"
+      arr_bd << { :id => business_deal.id, :name => "#{business_deal.name} #{business_deal.kind}" }
+    end
+    response.headers['Content-type'] = "text/plain; charset=utf-8"
+    render :text => arr_bd.to_json( :only => [ :id, :name ] )
+    rescue ActiveRecord::RecordNotFound
+      render :nothing => true
   end
   
 private

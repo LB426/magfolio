@@ -130,6 +130,14 @@ div.thiserror {
   text-decoration:none;
 }
 
+.map {
+  background-color: #FFC0CB;
+  padding: 10px ;
+  text-align: center;
+  margin: 30px 0;
+  clear: both;
+}
+
 /* STRUCTURE --------------------------------------------------*/
 
 div.container {

@@ -2,49 +2,44 @@ class BusinessTypesController < ApplicationController
   # GET /business_types
   # GET /business_types.xml
   def index
+    admin_logged_in?
+    
     @business_types = BusinessType.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @business_types }
-    end
   end
 
   # GET /business_types/1
   # GET /business_types/1.xml
   def show
+    admin_logged_in?
+    
     @business_type = BusinessType.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @business_type }
-    end
   end
 
   # GET /business_types/new
   # GET /business_types/new.xml
   def new
+    admin_logged_in?
+    
     @business_type = BusinessType.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @business_type }
-    end
   end
 
   # GET /business_types/1/edit
   def edit
+    admin_logged_in?
+    
     @business_type = BusinessType.find(params[:id])
   end
 
   # POST /business_types
   # POST /business_types.xml
   def create
+    admin_logged_in?
+    
     @business_type = BusinessType.new(params[:business_type])
 
     respond_to do |format|
       if @business_type.save
-        format.html { redirect_to(@business_type, :notice => 'Business type was successfully created.') }
+        format.html { redirect_to(business_types_path, :notice => 'Business type was successfully created.') }
         format.xml  { render :xml => @business_type, :status => :created, :location => @business_type }
       else
         format.html { render :action => "new" }
@@ -56,11 +51,15 @@ class BusinessTypesController < ApplicationController
   # PUT /business_types/1
   # PUT /business_types/1.xml
   def update
+    admin_logged_in?
+    
     @business_type = BusinessType.find(params[:id])
 
     respond_to do |format|
       if @business_type.update_attributes(params[:business_type])
-        format.html { redirect_to(@business_type, :notice => 'Business type was successfully updated.') }
+        # flash[:notice] = "Вы должны быть администратором для этого."
+        # redirect_to new_session_path
+        format.html { redirect_to(business_types_path, :notice => 'Business type was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,6 +71,8 @@ class BusinessTypesController < ApplicationController
   # DELETE /business_types/1
   # DELETE /business_types/1.xml
   def destroy
+    admin_logged_in?
+    
     @business_type = BusinessType.find(params[:id])
     @business_type.destroy
 

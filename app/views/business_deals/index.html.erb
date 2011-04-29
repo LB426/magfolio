@@ -1,0 +1,25 @@
+<h1>Виды товаров и услуг</h1>
+
+<table>
+  <tr>
+    <th>Название</th>
+    <th>Вид</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @business_deals.each do |business_deal| %>
+  <tr>
+    <td><%= business_deal.name %></td>
+    <td><%= business_deal.kind %></td>
+    <td><%= link_to 'Show', business_deal %></td>
+    <td><%= link_to 'Edit', edit_business_deal_path(business_deal) %></td>
+    <td><%= button_to 'Delete', business_deal_path(business_deal), :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Business deal', new_business_deal_path %>

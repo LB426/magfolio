@@ -9,17 +9,9 @@ class Signup < ActiveRecord::Base
                     :path => ":rails_root/public/assets/signups/pictures/:id/:style/:basename.:extension",
                     :url  => "/assets/signups/pictures/:id/:style/:basename.:extension"
   
-  Paperclip.interpolates :normalized_file_name do |attachment, style|
-    attachment.instance.normalized_file_name
-  end
-  
-  def normalized_file_name
-    # "#{self.id}-#{self.video_file_name.gsub( /[^a-zA-Z0-9_\.]/, '_')}"
-    # "#{Base64.decode64(self.bestpicture_file_name)}" 
-    logger.debug ""
-  end
-  
   before_create :randomize_file_name
+  
+  serialize :business_deals
   
 private
 

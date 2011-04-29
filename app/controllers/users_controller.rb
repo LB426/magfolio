@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+  before_filter :admin_logged_in?
+  
+  def index
+    @users = User.all
+  end
   
   def create
     @user = User.new(params[:user])
@@ -8,6 +13,16 @@ class UsersController < ApplicationController
       redirect_to root_url, :notice => "Signed up!"
     else
       redirect_to signup_stage3_free_path
+    end
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    respond_to do |format|
+      format.html { redirect_to(users_url) }
+      format.xml  { head :ok }
     end
   end
   
@@ -23,7 +38,8 @@ private
                 :shortcut_name => signup.shortcut_url,
                 :company_url => signup.company_url,
                 :tariff => signup.tariff,
-                :logo => signup.logo
+                :logo => signup.logo,
+                :business_deals => signup.business_deals
               )
     @user.pictures.create(
       :catalog_id => catalog.id,

@@ -1,6 +1,4 @@
 class CatalogsController < ApplicationController
-  #before_filter :logged_in?
-  
   # GET /catalogs
   # GET /catalogs.xml
   def index
@@ -51,11 +49,13 @@ class CatalogsController < ApplicationController
       @picture = current_user.pictures.new
       @picture.user_id = current_user.id
       @picture.catalog_id = @catalog.id
+      @all_business_deals = BusinessDeal.all
     end
     if !current_user.nil? && /admin/ =~ current_user.group
       @picture = Picture.new
       @picture.user_id = @catalog.user_id
       @picture.catalog_id = @catalog.id
+      @all_business_deals = BusinessDeal.all
     end
 
     respond_to do |format|
@@ -102,6 +102,14 @@ class CatalogsController < ApplicationController
   # PUT /catalogs/1.xml
   def update
     @catalog = Catalog.find(params[:id])
+    business_deals = params[:business_deals]
+    unless business_deals.nil?
+      business_deal_ids = Array.new
+      business_deals.each_key do |key|
+        business_deal_ids << key
+      end
+      @catalog.business_deals = business_deal_ids
+    end
 
     respond_to do |format|
       if @catalog.update_attributes(params[:catalog])
@@ -131,4 +139,11 @@ class CatalogsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       redirect_to root_path
   end
+  
+  def loadmap
+    @pic = Picture.find(params[:id])
+    @catalog = Catalog.find(@pic.catalog_id)
+    render 'map_picture', :layout => true
+  end
+  
 end
