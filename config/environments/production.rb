@@ -5,7 +5,7 @@ Magfolio::Application.configure do
   # Code is not reloaded between requests
   # true - НЕ перегружать код после каждого зпроса
   # false - ПЕРЕГРУЖАТЬ код после каждого запроса
-  config.cache_classes = false
+  config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
@@ -33,7 +33,7 @@ Magfolio::Application.configure do
   # In production, Apache or nginx will already do this
   # false - статику отдаёт nginx
   # true - статику отдают рельсы
-  config.serve_static_assets = true
+  config.serve_static_assets = false
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
