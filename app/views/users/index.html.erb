@@ -13,6 +13,7 @@
   <tr>
     <td><%= @count += 1 -%></td>
     <td><%= user.email %></td>
+    <td><%= user.open_text_password %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= button_to 'Delete', user_path(user), :method => :delete %></td>
