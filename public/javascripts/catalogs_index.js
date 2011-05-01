@@ -81,16 +81,16 @@ $(document).ready(function() {
     $('.footer').waypoint('remove');
     if(direction === 'down'){
       //$('#catalogs_upload_progress_bar').show();
-      $.get('/catalogs/indexload', 
-            { catalog_ids: catalog_ids },
-            function(data, textStatus, jqXHR) {
-              //alert(jqXHR.error());
-              $('div.content').append(data);
-              //alert('1');
-              if(data.length != 0){
-                $('.footer').waypoint({ offset: '100%' });
-              }
-            });
+      if(catalog_ids.lenght >= 1){
+        $.get('/catalogs/indexload', 
+              { catalog_ids: catalog_ids },
+              function(data, textStatus, jqXHR) {
+                $('div.content').append(data);
+                if(data.length != 0){
+                  $('.footer').waypoint({ offset: '100%' });
+                }
+        });
+      }
       //$('#catalogs_upload_progress_bar').hide();
     }else{
       //alert('You have scrolled to an content.');

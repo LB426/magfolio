@@ -21,14 +21,14 @@ class CatalogsController < ApplicationController
     @body_css_class = "home"
 
     sql = ""
-    params[:catalog_ids].each do |catalog_id|
-      sql = " id != #{catalog_id} AND" + sql
+    unless params[:catalog_ids].nil?
+      params[:catalog_ids].each do |catalog_id|
+        sql = " id != #{catalog_id} AND" + sql
+      end
+      sql.gsub!(/^\ /, 'SELECT `catalogs`.* FROM `catalogs` WHERE ( ' )
+      sql.gsub!(/\ AND$/,') ORDER BY id DESC LIMIT 4')
+      @catalogs = Catalog.find_by_sql(sql)
     end
-    sql.gsub!(/^\ /, 'SELECT `catalogs`.* FROM `catalogs` WHERE ( ' )
-    sql.gsub!(/\ AND$/,') ORDER BY id DESC LIMIT 4')
-    #logger.debug "sql=#{sql}"  
-    #@catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
-    @catalogs = Catalog.find_by_sql(sql)
     unless @catalogs.nil?
       render 'index', :layout => false
     else
