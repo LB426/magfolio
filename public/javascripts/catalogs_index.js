@@ -2,6 +2,7 @@
 var catalogs = new Array();
 var catalog_ids = new Array();
 var show_on_map = -1 ;
+var izbrannoe = new Array();
 
 function imgchg_link(a,b) {
   var catalog_id = a;
@@ -76,12 +77,15 @@ function img_prev(a) {
   return false;
 }
 
-$(document).ready(function() {
+$(document).ready(function() {  
+  
+  izbrannoe.push($.cookie("izbrannoe"));
+  
   $('.footer').waypoint(function(event, direction) {
     $('.footer').waypoint('remove');
     if(direction === 'down'){
       //$('#catalogs_upload_progress_bar').show();
-      if(catalog_ids.lenght >= 1){
+      if(catalog_ids.lenght != 0){
         $.get('/catalogs/indexload', 
               { catalog_ids: catalog_ids },
               function(data, textStatus, jqXHR) {
@@ -101,5 +105,21 @@ $(document).ready(function() {
   $("a[id^=map_pic_]").fancybox({
   		'hideOnContentClick': false
   }); */
+  
+  $('a[class$="add_to_favorites"]').click(function(){
+    var href = $(this).attr('href');
+    href = href.replace("/izbrannoe/","");
+    href = href.replace("/add","");
+    var catalog_id = parseInt(href);
+    $('a[href="/izbrannoe/'+catalog_id+'/add"]').hide();
+    $('a[href="/izbrannoe/'+catalog_id+'/remove"]').show();
+    var flag = 0;
+    for (var i = 0; i < izbrannoe.length; i++) {
+      if(izbrannoe[i] === catalog_id){ flag = 1 ;}
+    }
+    if(flag===0){izbrannoe.push(catalog_id);}
+    $.cookie("izbrannoe", izbrannoe.toString(), {expires: 2000});
+	  alert($.cookie("izbrannoe"));
+	}); 
   
 })

@@ -1,3 +1,7 @@
 надо добавить для ошибок и уведомлений
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
+
+# сменить кодировку базы и таблиц:
+ALTER DATABASE magfolio_production DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci 
+ALTER TABLE  `business_deals` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci

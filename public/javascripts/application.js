@@ -231,18 +231,7 @@ $(document).ready(function() {
 	});
 	
 	/* заполняем виды товаров и услуг */
-	/* $('#business_deal_id').change(function(){
-	  if(signup_id == 0){ 
-	    alert("Вы не загрузили лучшую фотографию Вашего бизнеса!");
-	    $('#upload_best_picrute').attr('class','thiserror');
-	    return false;
-	  }else{
-	    var business_deal_id = $(this).val();
-  	  if((business_deal_id == 0)||(business_deal_id == -1)){
-        $("a#inline_add_business_deal").click();
-      }
-	  }
-	}); */
+
 	$("#business_deals_iframe").load(function(){
 		$.fancybox.close();
 	});
@@ -284,5 +273,5 @@ $(document).ready(function() {
   $("a#edit_business_deals").fancybox({
   		'hideOnContentClick': false
   });
-  
+    
 })
