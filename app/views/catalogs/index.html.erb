@@ -91,8 +91,7 @@
     <div class="cardtools">
       <div class="listing">
         <span class="favorite_links">
-          <a href="/izbrannoe/<%= catalog.id -%>/remove" class="favorites remove_from_favorites" onclick="return false;" style="display: none; ">Удалить из избранного</a>
-          <a href="/izbrannoe/<%= catalog.id -%>/add" class="favorites add_to_favorites" onclick="return false;" style="">Добавить в избранное</a>
+          <a href="/izbrannoe/<%= catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= catalog.id -%>);return false;" ><%= izbrannoe?(catalog.id) -%></a>
         </span>
       </div>
     </div>

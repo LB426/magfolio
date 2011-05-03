@@ -1,0 +1,25 @@
+<%= form_for(@izbranno) do |f| %>
+  <% if @izbranno.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@izbranno.errors.count, "error") %> prohibited this izbranno from being saved:</h2>
+
+      <ul>
+      <% @izbranno.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :identificator %><br />
+    <%= f.text_field :identificator %>
+  </div>
+  <div class="field">
+    <%= f.label :catalog_id %><br />
+    <%= f.text_field :catalog_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

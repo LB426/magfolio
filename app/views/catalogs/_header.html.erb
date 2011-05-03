@@ -14,7 +14,7 @@
 <div class="nav">
   <a href="/cities">Поиск</a> |
   <a href="/about">О каталогах</a> |
-  <a href="/favorites">Избранное</a> |
+  <a href="/izbrannoe">Избранное<span id="izbrannoe_count" style="display:none;"></span></a> |
   <% if current_user %>
     <a href="/logout" class="guest_user"><%= current_user.email -%></a>
   <% else %>

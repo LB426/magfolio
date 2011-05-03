@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Identificator:</b>
+  <%= @izbranno.identificator %>
+</p>
+
+<p>
+  <b>Catalog:</b>
+  <%= @izbranno.catalog_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_izbranno_path(@izbranno) %> |
+<%= link_to 'Back', izbrannoes_path %>

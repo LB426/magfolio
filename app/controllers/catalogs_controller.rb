@@ -30,6 +30,9 @@ class CatalogsController < ApplicationController
       @catalogs = Catalog.find_by_sql(sql)
     end
     unless @catalogs.nil?
+      unless params[:izbrannoe_identificator].nil?
+        @izbrannoe = Izbrannoe.find_all_by_identificator(params[:izbrannoe_identificator])
+      end
       render 'index', :layout => false
     else
       render :nothing => true

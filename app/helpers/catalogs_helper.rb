@@ -17,4 +17,15 @@ module CatalogsHelper
     end
   end
   
+  def izbrannoe?(catalog_id)
+    unless @izbrannoe.nil?
+      @izbrannoe.each do |izbr|
+        if izbr.catalog_id == catalog_id
+          return "Удалить из избранного"
+        end
+      end
+    end
+    "Добавить в избранное"
+  end
+  
 end

@@ -1,5 +1,8 @@
 Magfolio::Application.routes.draw do
   
+  get '/izbrannoes/getmy' => 'izbrannoes#getmy', :as => :getmy_izbrannoe
+  resources :izbrannoes
+
   resources :business_deals
 
   resources :pictures

@@ -2,7 +2,7 @@
 var catalogs = new Array();
 var catalog_ids = new Array();
 var show_on_map = -1 ;
-var izbrannoe = new Array();
+var cookie_izbrannoe = null ;
 
 function imgchg_link(a,b) {
   var catalog_id = a;
@@ -77,21 +77,79 @@ function img_prev(a) {
   return false;
 }
 
+function to_izbrannoe(catalog_id) {
+  var atext = $('a[href="/izbrannoe/'+ catalog_id +'"]').text() ;
+  var izbrannoe_count = 0 ;
+  if(atext === 'Добавить в избранное'){
+    $('a[href="/izbrannoe/'+ catalog_id +'"]').text('Удалить из избранного');
+    if(cookie_izbrannoe == null){
+      $.post('/izbrannoes', 
+            { catalog_id: catalog_id },
+            function(data, textStatus, jqXHR) {
+              if(data.length != 0){
+                var obj = jQuery.parseJSON(data);
+                $.cookie("izbrannoe", obj.izbrannoe.identificator, {expires: 2000});
+                izbrannoe_count = izbrannoe_count + 1 ;
+                $('#izbrannoe_count').text('(' + izbrannoe_count + ')');
+              }
+      });
+    }else{
+      $.ajax({
+         type: "PUT",
+         url: "/izbrannoes/0",
+         data: { catalog_id: catalog_id, identificator: cookie_izbrannoe },
+         success: function(msg){
+           //alert( "Data Saved: " + msg );
+           $('#izbrannoe_count').text('(' + msg + ')');
+         }
+       });
+    }
+  }else{
+    $.ajax({
+       type: "DELETE",
+       url: "/izbrannoes/0",
+       data: { catalog_id: catalog_id, identificator: cookie_izbrannoe },
+       success: function(msg){
+         //alert( "Data Deleted: " + msg );
+         $('#izbrannoe_count').text('(' + msg + ')');
+       }
+     });
+    $('a[href="/izbrannoe/'+ catalog_id +'"]').text('Добавить в избранное');
+  }
+  return false;
+}
+
 $(document).ready(function() {  
+  cookie_izbrannoe = $.cookie("izbrannoe") ;
   
-  izbrannoe.push($.cookie("izbrannoe"));
+  if(cookie_izbrannoe != null){
+    //alert(cookie_izbrannoe);
+    var izbrannoe_count = 0 ;
+    $('#izbrannoe_count').show();
+    $.getJSON('/izbrannoes/getmy', { identificator: cookie_izbrannoe } ,function(data) {
+      $.each(data, function(key, val) {
+        var catalog_id = val.izbrannoe.catalog_id;
+        $('a[href="/izbrannoe/'+ catalog_id +'"]').text('Удалить из избранного');
+        izbrannoe_count = izbrannoe_count + 1 ;
+        $('#izbrannoe_count').text('(' + izbrannoe_count + ')');
+      });
+    });
+  }
   
   $('.footer').waypoint(function(event, direction) {
+    var flag = false ;
     $('.footer').waypoint('remove');
     if(direction === 'down'){
       //$('#catalogs_upload_progress_bar').show();
-      if(catalog_ids.lenght != 0){
+      if((catalog_ids.lenght != 0)&&(flag == false)){
         $.get('/catalogs/indexload', 
-              { catalog_ids: catalog_ids },
+              { catalog_ids: catalog_ids, izbrannoe_identificator: cookie_izbrannoe },
               function(data, textStatus, jqXHR) {
                 $('div.content').append(data);
-                if(data.length != 0){
+                if(data.length != 1){
                   $('.footer').waypoint({ offset: '100%' });
+                }else{
+                  flag = true;
                 }
         });
       }
@@ -105,21 +163,5 @@ $(document).ready(function() {
   $("a[id^=map_pic_]").fancybox({
   		'hideOnContentClick': false
   }); */
-  
-  $('a[class$="add_to_favorites"]').click(function(){
-    var href = $(this).attr('href');
-    href = href.replace("/izbrannoe/","");
-    href = href.replace("/add","");
-    var catalog_id = parseInt(href);
-    $('a[href="/izbrannoe/'+catalog_id+'/add"]').hide();
-    $('a[href="/izbrannoe/'+catalog_id+'/remove"]').show();
-    var flag = 0;
-    for (var i = 0; i < izbrannoe.length; i++) {
-      if(izbrannoe[i] === catalog_id){ flag = 1 ;}
-    }
-    if(flag===0){izbrannoe.push(catalog_id);}
-    $.cookie("izbrannoe", izbrannoe.toString(), {expires: 2000});
-	  alert($.cookie("izbrannoe"));
-	}); 
   
 })
