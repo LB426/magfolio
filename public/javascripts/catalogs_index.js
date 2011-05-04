@@ -78,6 +78,8 @@ function img_prev(a) {
 }
 
 function to_izbrannoe(catalog_id) {
+  //alert(catalog_id);
+  cookie_izbrannoe = $.cookie("izbrannoe") ;
   var atext = $('a[href="/izbrannoe/'+ catalog_id +'"]').text() ;
   var izbrannoe_count = 0 ;
   if(atext === 'Добавить в избранное'){
@@ -112,6 +114,7 @@ function to_izbrannoe(catalog_id) {
        success: function(msg){
          //alert( "Data Deleted: " + msg );
          $('#izbrannoe_count').text('(' + msg + ')');
+         if(msg === '0'){ $.cookie("izbrannoe", null); }
        }
      });
     $('a[href="/izbrannoe/'+ catalog_id +'"]').text('Добавить в избранное');
@@ -120,7 +123,7 @@ function to_izbrannoe(catalog_id) {
 }
 
 $(document).ready(function() {  
-  cookie_izbrannoe = $.cookie("izbrannoe") ;
+  /*cookie_izbrannoe = $.cookie("izbrannoe") ;
   
   if(cookie_izbrannoe != null){
     //alert(cookie_izbrannoe);
@@ -134,7 +137,7 @@ $(document).ready(function() {
         $('#izbrannoe_count').text('(' + izbrannoe_count + ')');
       });
     });
-  }
+  }*/
   
   $('.footer').waypoint(function(event, direction) {
     var flag = false ;

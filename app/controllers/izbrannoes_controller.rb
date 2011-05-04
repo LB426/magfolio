@@ -2,6 +2,10 @@ class IzbrannoesController < ApplicationController
   # GET /izbrannoes
   # GET /izbrannoes.xml
   def index
+    
+    logger.debug "sessions=#{session}"
+    logger.debug "request=#{cookies[:izbrannoe]}"
+    
     @izbrannoes = Izbrannoe.all
 
     respond_to do |format|
@@ -41,7 +45,8 @@ class IzbrannoesController < ApplicationController
   # POST /izbrannoes.xml
   def create
     client_ip = request.remote_ip
-    izbrannoe = Izbrannoe.new
+    izbrannoe = Izbrannoe.new(:catalog_id => params[:catalog_id])
+    #izbrannoe.catalog_id = params[:catalog_id]
     izbrannoe.identificator = BCrypt::Engine.hash_secret("#{client_ip}#{random_string}", BCrypt::Engine.generate_salt)
     if izbrannoe.save
       response.headers['Content-type'] = "text/plain; charset=utf-8"
@@ -77,7 +82,6 @@ class IzbrannoesController < ApplicationController
   # DELETE /izbrannoes/1
   # DELETE /izbrannoes/1.xml
   def destroy
-    #@izbranno = Izbrannoe.find(params[:id])
     @izbranno = Izbrannoe.find_by_identificator_and_catalog_id(params[:identificator], params[:catalog_id] )
 
     if @izbranno.destroy

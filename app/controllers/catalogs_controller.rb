@@ -9,7 +9,9 @@ class CatalogsController < ApplicationController
     
     # нужно для перчня нас.пунктов в фильтре
     @locations = Location.all
-
+    unless cookies[:izbrannoe].nil?
+      @izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
+    end
     #respond_to do |format|
     #  format.html # index.html.erb
     #  format.xml  { render :xml => @catalogs }
@@ -30,8 +32,10 @@ class CatalogsController < ApplicationController
       @catalogs = Catalog.find_by_sql(sql)
     end
     unless @catalogs.nil?
-      unless params[:izbrannoe_identificator].nil?
-        @izbrannoe = Izbrannoe.find_all_by_identificator(params[:izbrannoe_identificator])
+      #unless params[:izbrannoe_identificator].nil?
+      unless cookies[:izbrannoe].nil?
+        #@izbrannoe = Izbrannoe.find_all_by_identificator(params[:izbrannoe_identificator])
+        @izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
       end
       render 'index', :layout => false
     else

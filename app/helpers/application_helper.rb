@@ -17,5 +17,12 @@ module ApplicationHelper
       render 'layouts/header'
     end
   end
+  
+  def izbrannoe_count
+    unless cookies[:izbrannoe].nil?
+      return "(#{Izbrannoe.find_all_by_identificator(cookies[:izbrannoe]).count})"
+    end
+    ""
+  end
     
 end
