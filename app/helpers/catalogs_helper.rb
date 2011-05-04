@@ -18,8 +18,9 @@ module CatalogsHelper
   end
   
   def izbrannoe?(catalog_id)
-    unless @izbrannoe.nil?
-      @izbrannoe.each do |izbr|
+    unless cookies[:izbrannoe].nil?
+      izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
+      izbrannoe.each do |izbr|
         if izbr.catalog_id == catalog_id
           return "Удалить из избранного"
         end

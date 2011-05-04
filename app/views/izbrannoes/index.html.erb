@@ -1,25 +1,41 @@
-<h1>Listing izbrannoes</h1>
-
-<table>
-  <tr>
-    <th>Identificator</th>
-    <th>Catalog</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @izbrannoes.each do |izbranno| %>
-  <tr>
-    <td><%= izbranno.identificator %></td>
-    <td><%= izbranno.catalog_id %></td>
-    <td><%= link_to 'Show', izbranno %></td>
-    <td><%= link_to 'Edit', edit_izbranno_path(izbranno) %></td>
-    <td><%= link_to 'Destroy', izbranno, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% content_for :head do %>
+  <%= javascript_include_tag 'izbrannoe_index.js' %>
 <% end %>
-</table>
 
-<br />
+<h1>Мои любимые каталоги</h1>
+<% @catalogs.each do |catalog| %>
+<div class="card listing_content">
+  <div class="cardcap">
+    <img alt="Card-top" height="10" src="/images/card-top.png" width="225" />
+  </div> 
+  <div class="cardcontent"> 
+    <div class="cardcompany listing_content"> 
+      <h2><%= catalog.company_name %></h2>
+      <p>
+        <%= BusinessType.find(catalog.businesstype_id).name %><br />
+        <span>
+          <%= Location.find(catalog.location_id).name %>
+        </span>
+      </p> 
+    </div> 
+    <div class="free-image">
+      <% pic = catalog.pictures.first(:order => "id ASC") %>
+      <%= image_tag pic.picture.url(:small) %>
+    </div>
+    <div class="cardtools">
+      <div class="listing">
+        <span class="favorite_links">
+          <a href="/izbrannoes" class="favorites" onclick="to_izbrannoe(<%= catalog.id -%>);return false;" id="izbrannoe_<%= catalog.id -%>" ><%= izbrannoe?(catalog.id) -%></a>
+        </span>
+      </div>
+    </div>
+  </div> 
+  <div class="cardcap"><img alt="Card-bottom" src="/images/card-bottom.png" /></div> 
+</div>
+<% end %>
 
-<%= link_to 'New Izbrannoe', new_izbranno_path %>
+<div class="clear"></div>
+<div class="favorites_link">
+  <strong>Покажите своё избранное друзьям этой ссылкой:</strong> &nbsp; 
+  <a href="/izbrannoes/<%= izbrannoe_link -%>">http://klever.sever.kes.ru/izbrannoes/<%= izbrannoe_link -%></a>
+</div>

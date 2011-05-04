@@ -2,27 +2,35 @@ class IzbrannoesController < ApplicationController
   # GET /izbrannoes
   # GET /izbrannoes.xml
   def index
-    
-    logger.debug "sessions=#{session}"
-    logger.debug "request=#{cookies[:izbrannoe]}"
-    
-    @izbrannoes = Izbrannoe.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @izbrannoes }
+    @body_css_class = "home favorites"
+    unless cookies[:izbrannoe].nil?
+      @izbrannoes = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
+      catalog_ids = Array.new
+      @izbrannoes.each do |izbrannoe|
+        catalog_ids << izbrannoe.catalog_id
+      end
+      @catalogs = Catalog.find(catalog_ids, :order => "id DESC")
+      render 'index', :layout => true
+    else
+      render 'none', :layout => true
     end
   end
 
   # GET /izbrannoes/1
   # GET /izbrannoes/1.xml
   def show
-    @izbranno = Izbrannoe.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @izbranno }
+    @body_css_class = "home favorites"
+    
+    @izbrannoes = Izbrannoe.find_all_by_link(params[:id])
+    catalog_ids = Array.new
+    @izbrannoes.each do |izbrannoe|
+      catalog_ids << izbrannoe.catalog_id
     end
+    @catalogs = Catalog.find(catalog_ids, :order => "id DESC")
+    
+    render 'index', :layout => true
+    rescue ActiveRecord::RecordNotFound
+      redirect_to root_url
   end
 
   # GET /izbrannoes/new
@@ -46,8 +54,8 @@ class IzbrannoesController < ApplicationController
   def create
     client_ip = request.remote_ip
     izbrannoe = Izbrannoe.new(:catalog_id => params[:catalog_id])
-    #izbrannoe.catalog_id = params[:catalog_id]
     izbrannoe.identificator = BCrypt::Engine.hash_secret("#{client_ip}#{random_string}", BCrypt::Engine.generate_salt)
+    izbrannoe.link = random_string(8)
     if izbrannoe.save
       response.headers['Content-type'] = "text/plain; charset=utf-8"
       render :text => izbrannoe.to_json( :only => [ :identificator ] )
@@ -59,12 +67,12 @@ class IzbrannoesController < ApplicationController
   # PUT /izbrannoes/1
   # PUT /izbrannoes/1.xml
   def update
-    #@izbranno = Izbrannoe.find_by_identificator(params[:identificator])
     @izbranno = Izbrannoe.find_by_identificator_and_catalog_id(params[:identificator], params[:catalog_id] )
     if @izbranno.nil?
       izbrannoe = Izbrannoe.new
       izbrannoe.identificator = params[:identificator]
       izbrannoe.catalog_id = params[:catalog_id]
+      izbrannoe.link = Izbrannoe.find_by_identificator(params[:identificator], :first ).link
 
       if izbrannoe.save
         response.headers['Content-type'] = "text/plain; charset=utf-8"
@@ -94,15 +102,15 @@ class IzbrannoesController < ApplicationController
     
   end
   
-  def getmy
-    izbrannoe = Izbrannoe.find_all_by_identificator(params[:identificator])
-    unless izbrannoe.nil?
-      response.headers['Content-type'] = "text/plain; charset=utf-8"
-      render :text => izbrannoe.to_json( :only => [ :catalog_id ] )
-    else
-      render :nothing => true
-    end
-  end
+  #def getmy
+  #  izbrannoe = Izbrannoe.find_all_by_identificator(params[:identificator])
+  #  unless izbrannoe.nil?
+  #    response.headers['Content-type'] = "text/plain; charset=utf-8"
+  #    render :text => izbrannoe.to_json( :only => [ :catalog_id ] )
+  #  else
+  #    render :nothing => true
+  #  end
+  #end
   
 private
 

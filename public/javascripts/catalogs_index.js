@@ -78,7 +78,6 @@ function img_prev(a) {
 }
 
 function to_izbrannoe(catalog_id) {
-  //alert(catalog_id);
   cookie_izbrannoe = $.cookie("izbrannoe") ;
   var atext = $('a[href="/izbrannoe/'+ catalog_id +'"]').text() ;
   var izbrannoe_count = 0 ;
@@ -101,7 +100,6 @@ function to_izbrannoe(catalog_id) {
          url: "/izbrannoes/0",
          data: { catalog_id: catalog_id, identificator: cookie_izbrannoe },
          success: function(msg){
-           //alert( "Data Saved: " + msg );
            $('#izbrannoe_count').text('(' + msg + ')');
          }
        });
@@ -112,7 +110,6 @@ function to_izbrannoe(catalog_id) {
        url: "/izbrannoes/0",
        data: { catalog_id: catalog_id, identificator: cookie_izbrannoe },
        success: function(msg){
-         //alert( "Data Deleted: " + msg );
          $('#izbrannoe_count').text('(' + msg + ')');
          if(msg === '0'){ $.cookie("izbrannoe", null); }
        }
@@ -123,21 +120,6 @@ function to_izbrannoe(catalog_id) {
 }
 
 $(document).ready(function() {  
-  /*cookie_izbrannoe = $.cookie("izbrannoe") ;
-  
-  if(cookie_izbrannoe != null){
-    //alert(cookie_izbrannoe);
-    var izbrannoe_count = 0 ;
-    $('#izbrannoe_count').show();
-    $.getJSON('/izbrannoes/getmy', { identificator: cookie_izbrannoe } ,function(data) {
-      $.each(data, function(key, val) {
-        var catalog_id = val.izbrannoe.catalog_id;
-        $('a[href="/izbrannoe/'+ catalog_id +'"]').text('Удалить из избранного');
-        izbrannoe_count = izbrannoe_count + 1 ;
-        $('#izbrannoe_count').text('(' + izbrannoe_count + ')');
-      });
-    });
-  }*/
   
   $('.footer').waypoint(function(event, direction) {
     var flag = false ;
@@ -161,10 +143,5 @@ $(document).ready(function() {
       //alert('You have scrolled to an content.');
     }
   },{ offset: '100%' });
-  
-  /* вызов карты
-  $("a[id^=map_pic_]").fancybox({
-  		'hideOnContentClick': false
-  }); */
-  
+
 })
