@@ -19,7 +19,7 @@ $(document).ready(function() {
   if ($.browser.msie){
     if($.browser.version == '6.0') {alert('У Вас старый Internet Explorer 6-й версии.\nБезопасность под угрозой!\n срочно обновите браузер!');}
     if($.browser.version == '7.0') {alert('У Вас старый Internet Explorer 7-й версии.\nБезопасность под угрозой!\n срочно обновите браузер!');}
-    if($.browser.version == '8.0') {alert('У Вас старый Internet Explorer 8-й версии.\nБезопасность под угрозой!\n срочно обновите браузер!');}
+    //if($.browser.version == '8.0') {alert('У Вас старый Internet Explorer 8-й версии.\nБезопасность под угрозой!\n срочно обновите браузер!');}
   }
   $('body').click(function() {
     $("#search_location_menu").hide();

@@ -16,6 +16,11 @@ class CatalogsController < ApplicationController
     #  format.html # index.html.erb
     #  format.xml  { render :xml => @catalogs }
     #end
+    
+    logger.debug "request.domain=#{request.domain}"
+    logger.debug "request.fullpath=#{request.fullpath}"
+    logger.debug "request.url=#{request.url}"
+    
   end
   
   def indexload
