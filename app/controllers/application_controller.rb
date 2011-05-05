@@ -50,4 +50,20 @@ protected
     return false
   end
   
+  def myhost(city_name = nil)
+    unless city_name.nil?
+      if Rails.env == 'development'
+        return "http://localhost:3000/city/#{city_name}"
+      else
+        return "http://tihinfo.ru/city/#{city_name}"
+      end
+    else
+      if Rails.env == 'development'
+        return "http://localhost:3000"
+      else
+        return "http://tihinfo.ru"
+      end
+    end
+  end
+  
 end

@@ -32,10 +32,10 @@
     <ul class="search_bar">
       <li>Ваш навигатор в &nbsp;</li>
       <li class="menu">
-        <a href="#" id="search_location_name">Городе</a>
+        <a href="#" id="search_location_name"><%= this_city -%></a>
         <div id="search_location_menu" style="display:none" class="search_menu">
           <% @locations.each do |location| %>
-            <%= link_to location.name, location %>
+            <a href="<%= location_link(location.name) -%>"><%= location.name -%></a>
           <% end %>
           <div class="last_menu">
             <a href="/cities">Весь список</a>

@@ -273,5 +273,5 @@ $(document).ready(function() {
   $("a#edit_business_deals").fancybox({
   		'hideOnContentClick': false
   });
-    
+  
 })

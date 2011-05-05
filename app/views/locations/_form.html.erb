@@ -12,8 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+  <table align="center">
+    <tr>
+      <td><%= f.label :name %> 
+      <td><%= f.text_field :name %>
+    </tr>
+    <tr>
+      <td><%= f.label :domain %> 
+      <td><%= f.text_field :domain %>
+    </tr>
+    <tr>
+      <td><%= f.label :vid %> 
+      <td><%= f.text_field :vid %>
+    </tr>
+  </table>
   </div>
   <div class="actions">
     <%= f.submit %>

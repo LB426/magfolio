@@ -8,6 +8,8 @@
 # Magfolio::Application.config.session_store :active_record_store
 
 # это добавил я
-Rails.application.config.session_store :active_record_store, :expire_after => 60.minutes
+Rails.application.config.session_store  :active_record_store, 
+                                        :expire_after => 60.minutes
+
 # возможные ключи:
 # :key => 'whatever', :secret => 'nottellingyou',

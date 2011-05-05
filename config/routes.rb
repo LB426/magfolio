@@ -31,8 +31,6 @@ Magfolio::Application.routes.draw do
   get "atlanta/index"
 
   match 'success' => 'success#index', :as => :success
-
-  match 'cities' => 'cities#index', :as => :cities
   
   match 'signup/getbusinessdeals' => 'signup#getbusinessdeals', :as => :getbusinessdeals
   match 'signup/setbusinessdeal' => 'signup#setbusinessdeal', :as => :setbusinessdeal
@@ -47,6 +45,8 @@ Magfolio::Application.routes.draw do
   
   match 'about' => 'about#index', :as => :about
 
+  match 'cities' => 'cities#index', :as => :cities
+  match 'city/:city_name' => 'catalogs#index', :as => :city_name
   match '/:shortcut_name' => 'catalogs#show', :as => :shortcut_catalog
   root :to => "catalogs#index"
   

@@ -2,8 +2,9 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th></th>
+    <th>Название</th>
+    <th>Домен</th>
+    <th>вид</th>
     <th></th>
     <th></th>
   </tr>
@@ -11,7 +12,8 @@
 <% @locations.each do |location| %>
   <tr>
     <td><%= location.name %></td>
-    <td><%= link_to 'Show', location %></td>
+    <td><%= location.domain %></td>
+    <td><%= location.vid %></td>
     <td><%= link_to 'Edit', edit_location_path(location) %></td>
     <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

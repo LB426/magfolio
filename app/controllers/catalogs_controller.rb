@@ -4,11 +4,9 @@ class CatalogsController < ApplicationController
   def index
     @header_layout = 'catalogs/header'
     @body_css_class = "home"
-    @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
-    #@catalogs = Catalog.all(:limit => 6, :order => 'id ASC')
     
-    # нужно для перчня нас.пунктов в фильтре
-    @locations = Location.all
+    logger.debug "cookies[:izbrannoe]=#{cookies[:izbrannoe]}"
+    
     unless cookies[:izbrannoe].nil?
       @izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
     end
@@ -20,6 +18,25 @@ class CatalogsController < ApplicationController
     logger.debug "request.domain=#{request.domain}"
     logger.debug "request.fullpath=#{request.fullpath}"
     logger.debug "request.url=#{request.url}"
+    logger.debug "request.host=#{request.host}"
+    
+    if request.host != 'tihinfo.ru' && request.host != 'localhost'
+      location = Location.find_by_domain(request.host)
+      unless location.nil?
+        redirect_to URI.encode(myhost(location.name))
+      else
+        redirect_to URI.encode(myhost)
+      end
+    else
+      @location = Location.find_by_name(params[:city_name]) unless params[:city_name].nil?
+      unless @location.nil?
+        @locations = Location.where( "name != ?", @location.name )
+        @catalogs = Catalog.find_all_by_location_id( @location.id, :limit => 4, :order => 'id DESC' )
+      else
+        @locations = Location.all
+        @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
+      end
+    end
     
   end
   
@@ -28,24 +45,26 @@ class CatalogsController < ApplicationController
     @body_css_class = "home"
 
     sql = ""
-    unless params[:catalog_ids].nil?
+    if params[:catalog_ids] != ""
       params[:catalog_ids].each do |catalog_id|
         sql = " id != #{catalog_id} AND" + sql
       end
       sql.gsub!(/^\ /, 'SELECT `catalogs`.* FROM `catalogs` WHERE ( ' )
-      sql.gsub!(/\ AND$/,') ORDER BY id DESC LIMIT 4')
+      if params[:location_id] != 'null'
+        location = Location.find(params[:location_id])
+        sql.gsub!(/\ AND$/,") AND location_id = '#{location.id}' ORDER BY id DESC LIMIT 4")
+      else
+        sql.gsub!(/\ AND$/,") ORDER BY id DESC LIMIT 4")
+      end
       @catalogs = Catalog.find_by_sql(sql)
-    end
-    unless @catalogs.nil?
-      #unless params[:izbrannoe_identificator].nil?
       unless cookies[:izbrannoe].nil?
-        #@izbrannoe = Izbrannoe.find_all_by_identificator(params[:izbrannoe_identificator])
         @izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
       end
       render 'index', :layout => false
     else
       render :nothing => true
     end
+    
   end
 
   
@@ -57,23 +76,28 @@ class CatalogsController < ApplicationController
     else
       @catalog = Catalog.find(params[:id])
     end
-    if !current_user.nil? && current_user.id == @catalog.user_id
-      @picture = current_user.pictures.new
-      @picture.user_id = current_user.id
-      @picture.catalog_id = @catalog.id
-      @all_business_deals = BusinessDeal.all
-    end
-    if !current_user.nil? && /admin/ =~ current_user.group
-      @picture = Picture.new
-      @picture.user_id = @catalog.user_id
-      @picture.catalog_id = @catalog.id
-      @all_business_deals = BusinessDeal.all
+    if @catalog
+      if !current_user.nil? && current_user.id == @catalog.user_id
+        @picture = current_user.pictures.new
+        @picture.user_id = current_user.id
+        @picture.catalog_id = @catalog.id
+        @all_business_deals = BusinessDeal.all
+      end
+      if !current_user.nil? && /admin/ =~ current_user.group
+        @picture = Picture.new
+        @picture.user_id = @catalog.user_id
+        @picture.catalog_id = @catalog.id
+        @all_business_deals = BusinessDeal.all
+      end
+    else
+      redirect_to root_path, :alert => "Таких каталогов нет!"
     end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @catalog }
-    end
+    #respond_to do |format|
+    #  format.html # show.html.erb
+    #  format.xml  { render :xml => @catalog }
+    #end
+    
     rescue ActiveRecord::RecordNotFound
       redirect_to root_path, :alert => "Каталог не найден!"
   end
@@ -157,5 +181,5 @@ class CatalogsController < ApplicationController
     @catalog = Catalog.find(@pic.catalog_id)
     render 'map_picture', :layout => true
   end
-  
+
 end

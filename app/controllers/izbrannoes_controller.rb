@@ -22,15 +22,17 @@ class IzbrannoesController < ApplicationController
     @body_css_class = "home favorites"
     
     @izbrannoes = Izbrannoe.find_all_by_link(params[:id])
-    catalog_ids = Array.new
-    @izbrannoes.each do |izbrannoe|
-      catalog_ids << izbrannoe.catalog_id
-    end
-    @catalogs = Catalog.find(catalog_ids, :order => "id DESC")
+    if @izbrannoes.nil? || @izbrannoes.size != 0 
+      catalog_ids = Array.new
+      @izbrannoes.each do |izbrannoe|
+        catalog_ids << izbrannoe.catalog_id
+      end
+      @catalogs = Catalog.find(catalog_ids, :order => "id DESC")
     
-    render 'index', :layout => true
-    rescue ActiveRecord::RecordNotFound
+      render 'index', :layout => true
+    else
       redirect_to root_url
+    end
   end
 
   # GET /izbrannoes/new
@@ -72,7 +74,12 @@ class IzbrannoesController < ApplicationController
       izbrannoe = Izbrannoe.new
       izbrannoe.identificator = params[:identificator]
       izbrannoe.catalog_id = params[:catalog_id]
-      izbrannoe.link = Izbrannoe.find_by_identificator(params[:identificator], :first ).link
+      old_izbrannoe = Izbrannoe.find_by_identificator(params[:identificator], :first )
+      unless old_izbrannoe.nil?
+        izbrannoe.link = old_izbrannoe.link
+      else
+        izbrannoe.link = random_string(8)
+      end
 
       if izbrannoe.save
         response.headers['Content-type'] = "text/plain; charset=utf-8"

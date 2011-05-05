@@ -3,6 +3,7 @@ var catalogs = new Array();
 var catalog_ids = new Array();
 var show_on_map = -1 ;
 var cookie_izbrannoe = null ;
+var location_id = null ;
 
 function imgchg_link(a,b) {
   var catalog_id = a;
@@ -89,7 +90,8 @@ function to_izbrannoe(catalog_id) {
             function(data, textStatus, jqXHR) {
               if(data.length != 0){
                 var obj = jQuery.parseJSON(data);
-                $.cookie("izbrannoe", obj.izbrannoe.identificator, {expires: 2000});
+                $.cookie( "izbrannoe", obj.izbrannoe.identificator, 
+                          {expires: 2000});
                 izbrannoe_count = izbrannoe_count + 1 ;
                 $('#izbrannoe_count').text('(' + izbrannoe_count + ')');
               }
@@ -128,7 +130,7 @@ $(document).ready(function() {
       //$('#catalogs_upload_progress_bar').show();
       if((catalog_ids.lenght != 0)&&(flag == false)){
         $.get('/catalogs/indexload', 
-              { catalog_ids: catalog_ids, izbrannoe_identificator: cookie_izbrannoe },
+              { catalog_ids: catalog_ids, location_id: location_id },
               function(data, textStatus, jqXHR) {
                 $('div.content').append(data);
                 if(data.length != 1){
@@ -143,5 +145,17 @@ $(document).ready(function() {
       //alert('You have scrolled to an content.');
     }
   },{ offset: '100%' });
-
+  
+  /* обработка поиска по городу
+  $('a[href^="/locations"]').click(function(){
+    var href = $(this).attr('href');
+    location_id = parseInt(href.replace('/locations/',''));
+    alert(location_id);
+    $.get('/catalogs/indexload', 
+          { catalog_ids: catalog_ids, location_id: location_id },
+          function(data, textStatus, jqXHR) {
+            $('div.content').append(data);
+    });
+  }) */
+  
 })

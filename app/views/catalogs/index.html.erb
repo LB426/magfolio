@@ -6,6 +6,9 @@
 <% @catalogs.each do |catalog| %>
 <script type="text/javascript">
   catalog_ids.push(<%= catalog.id -%>);
+  <% unless @location.nil? %>
+    location_id = <%= @location.id -%> ;
+  <% end %>
 </script>
 <div class="card-upgrade listing_content">
   <div class="cardcap-upgrade">

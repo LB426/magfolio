@@ -29,4 +29,27 @@ module CatalogsHelper
     "Добавить в избранное"
   end
   
+  def location_link(city_name)
+    unless city_name.nil?
+      if Rails.env == 'development'
+        return URI.encode("http://localhost:3000/city/#{city_name}")
+      else
+        return URI.encode("http://tihinfo.ru/city/#{city_name}")
+      end
+    else
+      if Rails.env == 'development'
+        return "http://tihinfo.ru:3000"
+      else
+        return "http://tihinfo.ru"
+      end
+    end
+  end
+  
+  def this_city
+    unless @location.nil?
+      return @location.name
+    end
+    "Городе"
+  end
+  
 end
