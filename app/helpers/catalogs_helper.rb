@@ -34,13 +34,13 @@ module CatalogsHelper
       if Rails.env == 'development'
         return URI.encode("http://localhost:3000/city/#{city_name}")
       else
-        return URI.encode("http://tihinfo.ru/city/#{city_name}")
+        return URI.encode("http://klever.spknd.ru/city/#{city_name}")
       end
     else
       if Rails.env == 'development'
-        return "http://tihinfo.ru:3000"
+        return "http://klever.spknd.ru:3000"
       else
-        return "http://tihinfo.ru"
+        return "http://klever.spknd.ru"
       end
     end
   end
