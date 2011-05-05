@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user
   helper_method :is_admin
+  helper_method :maindomain
   
 private
   def current_user
@@ -14,6 +15,10 @@ private
       return true if /admin/ =~ current_user.group
     end
     return false
+  end
+  
+  def maindomain
+    "klever.spknd.ru"
   end
 
 protected
@@ -48,10 +53,6 @@ protected
     flash[:notice] = "Вы должны быть администратором для этого."
     redirect_to new_session_path
     return false
-  end
-  
-  def maindomain
-    "klever.spknd.ru"
   end
   
   def myhost(city_name = nil)
