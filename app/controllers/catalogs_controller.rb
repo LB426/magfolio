@@ -20,7 +20,7 @@ class CatalogsController < ApplicationController
     logger.debug "request.url=#{request.url}"
     logger.debug "request.host=#{request.host}"
     
-    if request.host != 'tihinfo.ru' && request.host != 'localhost'
+    if request.host != maindomain && request.host != 'localhost'
       location = Location.find_by_domain(request.host)
       unless location.nil?
         redirect_to URI.encode(myhost(location.name))

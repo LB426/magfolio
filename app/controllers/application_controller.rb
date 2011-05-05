@@ -50,18 +50,22 @@ protected
     return false
   end
   
+  def maindomain
+    "klever.spknd.ru"
+  end
+  
   def myhost(city_name = nil)
     unless city_name.nil?
       if Rails.env == 'development'
         return "http://localhost:3000/city/#{city_name}"
       else
-        return "http://klever.spknd.ru/city/#{city_name}"
+        return "http://#{maindomain}/city/#{city_name}"
       end
     else
       if Rails.env == 'development'
         return "http://localhost:3000"
       else
-        return "http://klever.spknd.ru"
+        return "http://#{}"
       end
     end
   end
