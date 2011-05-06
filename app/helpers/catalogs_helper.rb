@@ -65,10 +65,22 @@ module CatalogsHelper
   # генерим ссылку для товаров
   def product_link(product_name = nil)
     unless product_name.nil?
-      unless @location.nil?
+      unless @location.nil? 
         return URI.encode("#{current_host}/city/#{@location.name}/product/#{product_name}")
       else
         return URI.encode("#{current_host}/product/#{product_name}")
+      end
+    else
+      return "#{current_host}"
+    end   
+  end
+  
+  def service_link(service_name = nil)
+    unless service_name.nil?
+      unless @location.nil?       
+        return URI.encode("#{current_host}/city/#{@location.name}/service/#{service_name}")
+      else
+        return URI.encode("#{current_host}/service/#{service_name}")
       end
     else
       return "#{current_host}"

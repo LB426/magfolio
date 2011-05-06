@@ -25,17 +25,60 @@ class CatalogsController < ApplicationController
       end
     else
       @location = Location.find_by_name(params[:city_name]) unless params[:city_name].nil?
-      unless @location.nil?
-        @locations = Location.where( "name != ?", @location.name )
-        @products = BusinessDeal.find_all_by_kind("товар")
-        @services = BusinessDeal.find_all_by_kind("услуга")
-        @catalogs = Catalog.find_all_by_location_id( @location.id, :limit => 4, :order => 'id DESC' )
-      else
+      @product = BusinessDeal.find_by_name(params[:product_kind]) unless params[:product_kind].nil?
+      @service = BusinessDeal.find_by_name(params[:service_kind]) unless params[:service_kind].nil?
+      
+      # выдаёт весь каталог
+      if @location == nil && @product == nil && @service == nil
         @locations = Location.all
         @products = BusinessDeal.find_all_by_kind("товар")
         @services = BusinessDeal.find_all_by_kind("услуга")
         @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
       end
+      # поиск только по городу
+      if @location != nil && @product == nil && @service == nil
+        @locations = Location.all
+        @products = products_only_this_location(@location)
+        @services = services_only_this_location(@location)
+        @catalogs = Catalog.find_all_by_location_id( @location.id, :limit => 4, :order => 'id DESC' )
+      end
+      # посик по городу и товару - отобразить все каталоги по городу с товаром
+      if @location != nil && @product != nil && @service == nil
+        @locations = Location.all
+        @products = products_only_this_location(@location)
+        @services = services_only_this_location(@location)
+        @catalogs = catalogs_only_this_location_and_deal(@location, @product)
+      end
+      # поиск по городу и услуге - отобразить все каталоги по городу с услугой
+      if @location != nil && @product == nil && @service != nil
+        @locations = Location.all
+        @products = products_only_this_location(@location)
+        @services = services_only_this_location(@location)
+        @catalogs = catalogs_only_this_location_and_deal(@location, @service)
+      end
+      # поиск только по товару - отобразить все каталоги с данным товаром
+      if @location == nil && @product != nil && @service == nil
+        @locations = location_only_this_deal(@product)
+        @products = BusinessDeal.find_all_by_kind("товар")
+        @services = services_only_this_product(@product)
+        @catalogs = catalogs_only_this_deal(@product)
+      end
+      # поиск только по услуге - отобразить все каталоги с данной услугой
+      if @location == nil && @product == nil && @service != nil
+        @locations = location_only_this_deal(@service)
+        @products = products_only_this_service(@service)
+        @services = BusinessDeal.find_all_by_kind("услуга")
+        @catalogs = catalogs_only_this_deal(@service)
+      end
+      if @location == nil && @product != nil && @service != nil
+      end
+      if @location != nil && @product != nil && @service != nil
+      end
+      
+      if @catalogs.nil?
+        redirect_to root_url, :notice => "Ничего не найдено!"
+      end
+
     end
     
   end
@@ -57,6 +100,50 @@ class CatalogsController < ApplicationController
         sql.gsub!(/\ AND$/,") ORDER BY id DESC LIMIT 4")
       end
       @catalogs = Catalog.find_by_sql(sql)
+      
+      
+      if params[:product_kind] != "null" || params[:service_kind] != "null"
+        service_or_product_kind = params[:product_kind] if params[:product_kind] != "null"
+        service_or_product_kind = params[:service_kind] if params[:service_kind] != "null"
+        result = Array.new
+        @catalogs.each do |catalog|
+          unless catalog.business_deals.nil?
+            catalog.business_deals.each do |deal|
+              if "#{deal}" == "#{service_or_product_kind}"
+                result << catalog
+                break
+              end
+            end
+          end
+        end
+        @catalogs = result
+      end
+      
+      if params[:product_kind] != "null" && params[:service_kind] != "null"
+        result = Array.new
+        @catalogs.each do |catalog|
+          unless catalog.business_deals.nil?
+            catalog.business_deals.each do |deal|
+              if "#{deal}" == "#{params[:product_kind]}"
+                result << catalog
+                break
+              end
+            end
+          end
+        end
+        @catalogs.each do |catalog|
+          unless catalog.business_deals.nil?
+            catalog.business_deals.each do |deal|
+              if "#{deal}" == "#{params[:service_kind]}"
+                result << catalog
+                break
+              end
+            end
+          end
+        end
+        @catalogs = result
+      end
+      
       unless cookies[:izbrannoe].nil?
         @izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
       end
@@ -142,7 +229,7 @@ class CatalogsController < ApplicationController
     unless business_deals.nil?
       business_deal_ids = Array.new
       business_deals.each_key do |key|
-        business_deal_ids << key
+        business_deal_ids << key if key != "0"
       end
       @catalog.business_deals = business_deal_ids
     end
@@ -180,6 +267,109 @@ class CatalogsController < ApplicationController
     @pic = Picture.find(params[:id])
     @catalog = Catalog.find(@pic.catalog_id)
     render 'map_picture', :layout => true
+  end
+  
+private
+
+  def products_only_this_location(location)
+    result = Array.new
+    products = BusinessDeal.where( "kind = 'товар'" )
+    catalogs = Catalog.find_all_by_location_id( location.id )
+    products.each do |product|
+      catalogs.each do |catalog|
+        flag = false
+        unless catalog.business_deals.nil?
+          catalog.business_deals.each do |deal|
+            if "#{deal}" == "#{product.id}"
+              result << product
+              flag = true
+              break
+            end
+          end
+        end
+        break if flag == true
+      end
+    end
+    return result
+  end
+  
+  def services_only_this_location(location)
+    result = Array.new
+    products = BusinessDeal.where( "kind = 'услуга'" )
+    catalogs = Catalog.find_all_by_location_id( location.id )
+    products.each do |product|
+      catalogs.each do |catalog|
+        flag = false
+        unless catalog.business_deals.nil?
+          catalog.business_deals.each do |deal|
+            if "#{deal}" == "#{product.id}"
+              result << product
+              flag = true
+              break
+            end
+          end
+        end
+        break if flag
+      end
+    end
+    return result
+  end
+  
+  def catalogs_only_this_location_and_deal(location, product)
+    result = Array.new
+    catalogs = Catalog.find_all_by_location_id( location.id )
+    catalogs.each do |catalog|
+      unless catalog.business_deals.nil?
+        catalog.business_deals.each do |deal|
+          if "#{deal}" == "#{product.id}"
+            result << catalog
+            break
+          end
+        end
+      end
+    end
+    return result
+  end
+  
+  def location_only_this_deal(product)
+    result = Array.new
+    catalogs = Catalog.all
+    catalogs.each do |catalog|
+      unless catalog.business_deals.nil?
+        catalog.business_deals.each do |deal|
+          if "#{deal}" == "#{product.id}"
+            result << Location.find(catalog.location_id)
+          end
+        end
+      end 
+    end
+    result.uniq!
+    return result
+  end
+  
+  def catalogs_only_this_deal(product)
+    result = Array.new
+    catalogs = Catalog.all
+    catalogs.each do |catalog|
+      unless catalog.business_deals.nil?
+        catalog.business_deals.each do |deal|
+          if "#{deal}" == "#{product.id}"
+            result << catalog
+          end
+        end
+      end 
+    end
+    return result
+  end
+  
+  def services_only_this_product(product)
+    result = BusinessDeal.find_all_by_kind("услуга")
+    return result
+  end
+  
+  def products_only_this_service(service)
+    result = BusinessDeal.find_all_by_kind("товар")
+    return result
   end
 
 end

@@ -46,8 +46,10 @@ Magfolio::Application.routes.draw do
   match 'about' => 'about#index', :as => :about
 
   match 'cities' => 'cities#index', :as => :cities
-  match 'city/:city_name/product/:priduct_vid' => 'catalogs#index', :as => :search_city_name_product_vid
-  match 'product/:product_name' => 'catalogs#index', :as => :search_product_name
+  match 'city/:city_name/service/:service_kind' => 'catalogs#index', :as => :search_city_name_service_kind
+  match 'service/:service_kind' => 'catalogs#index', :as => :search_service_name
+  match 'city/:city_name/product/:product_kind' => 'catalogs#index', :as => :search_city_name_product_kind
+  match 'product/:product_kind' => 'catalogs#index', :as => :search_product_name
   match 'city/:city_name' => 'catalogs#index', :as => :search_city_name
   match '/:shortcut_name' => 'catalogs#show', :as => :shortcut_catalog
   root :to => "catalogs#index"

@@ -4,6 +4,8 @@ var catalog_ids = new Array();
 var show_on_map = -1 ;
 var cookie_izbrannoe = null ;
 var location_id = null ;
+var product_kind = null ;
+var service_kind = null ;
 
 function imgchg_link(a,b) {
   var catalog_id = a;
@@ -130,7 +132,7 @@ $(document).ready(function() {
       //$('#catalogs_upload_progress_bar').show();
       if((catalog_ids.lenght != 0)&&(flag == false)){
         $.get('/catalogs/indexload', 
-              { catalog_ids: catalog_ids, location_id: location_id },
+              { catalog_ids: catalog_ids, location_id: location_id, product_kind: product_kind, service_kind: service_kind },
               function(data, textStatus, jqXHR) {
                 $('div.content').append(data);
                 if(data.length != 1){
@@ -145,17 +147,5 @@ $(document).ready(function() {
       //alert('You have scrolled to an content.');
     }
   },{ offset: '100%' });
-  
-  /* обработка поиска по городу
-  $('a[href^="/locations"]').click(function(){
-    var href = $(this).attr('href');
-    location_id = parseInt(href.replace('/locations/',''));
-    alert(location_id);
-    $.get('/catalogs/indexload', 
-          { catalog_ids: catalog_ids, location_id: location_id },
-          function(data, textStatus, jqXHR) {
-            $('div.content').append(data);
-    });
-  }) */
   
 })

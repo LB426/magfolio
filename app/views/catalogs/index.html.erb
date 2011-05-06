@@ -9,6 +9,12 @@
   <% unless @location.nil? %>
     location_id = <%= @location.id -%> ;
   <% end %>
+  <% unless @product.nil? %>
+    product_kind = <%= @product.id -%> ;
+  <% end %>
+  <% unless @service.nil? %>
+    service_kind = <%= @service.id -%> ;
+  <% end %>
 </script>
 <div class="card-upgrade listing_content">
   <div class="cardcap-upgrade">
