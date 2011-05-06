@@ -1,5 +1,7 @@
 Magfolio::Application.routes.draw do
   
+  get "cartography" => "cartography#index", :as => "cartography"
+  
   #get '/izbrannoes/getmy' => 'izbrannoes#getmy', :as => :getmy_izbrannoe
   resources :izbrannoes
 
