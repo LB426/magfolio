@@ -10,7 +10,7 @@
   </div> 
   <div class="cardcontent"> 
     <div class="cardcompany listing_content"> 
-      <h2><%= catalog.company_name %></h2>
+      <h2><%= link_to catalog.company_name, "/#{catalog.shortcut_name}" %></h2>
       <p>
         <%= BusinessType.find(catalog.businesstype_id).name %><br />
         <span>
@@ -20,7 +20,7 @@
     </div> 
     <div class="free-image">
       <% pic = catalog.pictures.first(:order => "id ASC") %>
-      <%= image_tag pic.picture.url(:small) %>
+      <%= link_to image_tag(pic.picture.url(:small)), "/#{catalog.shortcut_name}" %>
     </div>
     <div class="cardtools">
       <div class="listing">

@@ -24,9 +24,6 @@ Magfolio::Application.routes.draw do
   match 'businesstype/ajaxcreate' => 'business_types#ajaxcreate'
   resources :business_types
 
-  match 'favorites' => 'favorites#index', :as => :favorites
-  get "favorites/index"
-
   match 'atlanta' => 'atlanta#index', :as => :atlanta
   get "atlanta/index"
 
