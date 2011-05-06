@@ -29,27 +29,50 @@ module CatalogsHelper
     "Добавить в избранное"
   end
   
-  def location_link(city_name)
-    unless city_name.nil?
-      if Rails.env == 'development'
-        return URI.encode("http://localhost:3000/city/#{city_name}")
+  def current_host
+    if Rails.env == 'development'
+      if request.host =~ /^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$/
+        return "http://#{request.host}:3000"
       else
-        return URI.encode("http://#{maindomain}/city/#{city_name}")
+        return "http://localhost:3000"
       end
     else
-      if Rails.env == 'development'
-        return "http://localhost:3000"
+      if request.host =~ /^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$/
+        return "http://#{request.host}"
       else
         return "http://#{maindomain}"
       end
     end
   end
   
+  # генерит ссылку для списка городов
+  def location_link(city_name)
+    unless city_name.nil?
+      return URI.encode("#{current_host}/city/#{city_name}")
+    else
+      return "#{current_host}"
+    end
+  end
+  
+  # генерит имя текущего города, если есть сортировка по этому городу
   def this_city
     unless @location.nil?
       return @location.name
     end
     "Городе"
+  end
+  
+  # генерим ссылку для товаров
+  def product_link(product_name = nil)
+    unless product_name.nil?
+      unless @location.nil?
+        return URI.encode("#{current_host}/city/#{@location.name}/product/#{product_name}")
+      else
+        return URI.encode("#{current_host}/product/#{product_name}")
+      end
+    else
+      return "#{current_host}"
+    end   
   end
   
 end

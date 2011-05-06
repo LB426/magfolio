@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :Название_товара_или_услуги %><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :kind %><br />
-    <%= f.text_field :kind %>
+    <%= f.label :Вид %><br />
+    <%= f.select :kind, [["товар","товар"],['услуга','услуга']] %>
   </div>
   <div class="actions">
     <%= f.submit %>

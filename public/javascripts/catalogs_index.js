@@ -91,7 +91,7 @@ function to_izbrannoe(catalog_id) {
               if(data.length != 0){
                 var obj = jQuery.parseJSON(data);
                 $.cookie( "izbrannoe", obj.izbrannoe.identificator, 
-                          {expires: 2000});
+                          {expires: 2000, path: "/"});
                 izbrannoe_count = izbrannoe_count + 1 ;
                 $('#izbrannoe_count').text('(' + izbrannoe_count + ')');
               }

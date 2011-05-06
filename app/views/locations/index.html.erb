@@ -15,7 +15,7 @@
     <td><%= location.domain %></td>
     <td><%= location.vid %></td>
     <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= button_to 'Delete', location_path(location), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

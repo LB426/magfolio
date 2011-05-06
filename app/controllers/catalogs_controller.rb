@@ -10,17 +10,13 @@ class CatalogsController < ApplicationController
     unless cookies[:izbrannoe].nil?
       @izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
     end
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.xml  { render :xml => @catalogs }
-    #end
-    
+
     logger.debug "request.domain=#{request.domain}"
     logger.debug "request.fullpath=#{request.fullpath}"
     logger.debug "request.url=#{request.url}"
     logger.debug "request.host=#{request.host}"
     
-    if request.host != maindomain && request.host != 'localhost'
+    if request.host != maindomain && request.host != 'localhost' && request.host !~ /^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$/
       location = Location.find_by_domain(request.host)
       unless location.nil?
         redirect_to URI.encode(myhost(location.name))
@@ -31,9 +27,13 @@ class CatalogsController < ApplicationController
       @location = Location.find_by_name(params[:city_name]) unless params[:city_name].nil?
       unless @location.nil?
         @locations = Location.where( "name != ?", @location.name )
+        @products = BusinessDeal.find_all_by_kind("товар")
+        @services = BusinessDeal.find_all_by_kind("услуга")
         @catalogs = Catalog.find_all_by_location_id( @location.id, :limit => 4, :order => 'id DESC' )
       else
         @locations = Location.all
+        @products = BusinessDeal.find_all_by_kind("товар")
+        @services = BusinessDeal.find_all_by_kind("услуга")
         @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
       end
     end
