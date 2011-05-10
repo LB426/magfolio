@@ -6,6 +6,13 @@ require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
 @bzip2 = `which bzip2`
 @tar = `which tar`
 @assets = "/home/magfolio/magfolio/shared/assets"
+@home.chomp!
+@date.chomp!
+@mysqldump.chomp!
+@bzip2.chomp!
+@tar.chomp!
+@assets.chomp!
+
 system("mkdir -p #{@home}/backup")
 
 namespace :dump do
@@ -18,8 +25,8 @@ namespace :dump do
     #db = Rails.configuration.database_configuration[Rails.env]["database"]
     #puts @home
     #puts "#{@date}"
-    dump_database
-    dump_assets
+    #dump_database
+    #dump_assets
   end
 end
 
