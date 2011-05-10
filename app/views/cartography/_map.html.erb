@@ -1,12 +1,21 @@
 <div id="cm-example" style="width: 900px; height: 630px"></div>
 <div id="message">Drag or click the map.</div>
 
+<a id="add_coord_to_catalog" href="#coord_to_catalog" style="display:none">&nbsp;</a>
+<div style="display:none">
+  <div id="coord_to_catalog">
+    <h2>Координаты точки</h2>
+    <p>Широта:</p>
+    <p>Долгота:</p>
+  </div>
+</div>
+
 <script type="text/javascript" src="http://tile.cloudmade.com/wml/0.4/web-maps-lite.js"></script>
 <script type="text/javascript">//<![CDATA[
 	var cloudmade = new CM.Tiles.CloudMade.Web({key: '8ee2a50541944fb9bcedded5165f09d9'});
 	var map = new CM.Map('cm-example', cloudmade);
 	map.addControl(new CM.LargeMapControl());
-	map.setCenter(new CM.LatLng(45.8533228, 40.1257947), 13);
+	map.setCenter(new CM.LatLng(45.8533228, 40.1257947), 14);
 	
 	function displayMessage(msg) {
 		document.getElementById('message').innerHTML = msg;
@@ -14,16 +23,7 @@
 	
 	CM.Event.addListener(map, 'click', function(latlng) {
 		displayMessage("Место1" + latlng.toString(4));
+		$("a#add_coord_to_catalog").click();
 	});
 	
-	CM.Event.addListener(map, 'dragend', function() {
-		displayMessage("Место2" + map.getCenter().toString(4));
-	});
-	
-	var geoxml1 = new CM.GeoXml('Mapperz_kml.kml');
-
-	CM.Event.addListener(geoxml1, 'load', function() {
-		map.zoomToBounds(geoxml.getDefaultBounds());
-		map.addOverlay(geoxml);
-	});
 //]]></script>

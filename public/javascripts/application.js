@@ -274,4 +274,8 @@ $(document).ready(function() {
   		'hideOnContentClick': false
   });
   
+  $("a#add_coord_to_catalog").fancybox({
+  		'hideOnContentClick': false
+  });
+  
 })
