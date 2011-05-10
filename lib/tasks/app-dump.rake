@@ -31,13 +31,13 @@ namespace :dump do
 end
 
 def dump_database
-  command = "#{@mysqldump} -uroot -P3306 -h127.0.0.1 -p9002sliarNOiburLQSyM magfolio_production| #{@bzip2} -c --best > #{@home}/backup/db_magfolio_production#{@date}.bz2"
+  command = "#{@mysqldump} -uroot -P3306 -h127.0.0.1 -p9002sliarNOiburLQSyM magfolio_production | #{@bzip2} -c --best > #{@home}/backup/db_magfolio_production#{@date}.bz2"
   puts command
   system("#{command}")
 end
 
 def dump_assets
-  caomman = "#{@tar} cf - #{@assets} | #{@bzip2} -c --best > #{@home}/backup/assets_magfolio#{@date}.bz2"
+  command = "#{@tar} cf - #{@assets} | #{@bzip2} -c --best > #{@home}/backup/assets_magfolio#{@date}.bz2"
   puts command
   system("#{command}")
 end
