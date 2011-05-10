@@ -25,8 +25,8 @@ namespace :dump do
     #db = Rails.configuration.database_configuration[Rails.env]["database"]
     #puts @home
     #puts "#{@date}"
-    #dump_database
-    #dump_assets
+    dump_database
+    dump_assets
   end
 end
 
