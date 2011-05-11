@@ -278,4 +278,42 @@ $(document).ready(function() {
   		'hideOnContentClick': false
   });
   
+  $('a[id="product_id"]').click(function(){
+    var href = $(this).attr("href");
+    $("#non_checked_product_"+href).toggle();
+    $("#checked_product_"+href).toggle();
+	});
+	
+	$('a[id="location_id"]').click(function(){
+    var href = $(this).attr("href");
+    $("#non_checked_location_"+href).toggle();
+    $("#checked_location_"+href).toggle();
+	});
+	
+	$('#search_btn').click(function(){
+	  var products = new Array();
+	  var locations = new Array();
+	  $('.content').find('a[href]').each(function(i, item){
+	    var href = $(item).attr('href');
+	    var link_id = $(item).attr('id');
+	    if(link_id === 'product_id'){
+	      var img = $('#checked_product_'+href);
+	      if(img.is(":visible")){
+	        //alert(i + ' ' + $(item).attr('id'));
+	        products.push(href);
+	      } 
+	    }
+	    if(link_id === 'location_id'){
+	      var img = $('#checked_location_'+href);
+	      if(img.is(":visible")){
+	        locations.push(href);
+	      } 
+	    }
+	  });
+	  //alert(products + ' ' + locations);
+	  $('#business_deals').val(products);
+	  $('#locations_for_search').val(locations);
+	  $('#search_form').submit();
+	});
+  
 })

@@ -2,13 +2,14 @@ Magfolio::Application.routes.draw do
   
   get "cartography" => "cartography#index", :as => "cartography"
   
-  #get '/izbrannoes/getmy' => 'izbrannoes#getmy', :as => :getmy_izbrannoe
   resources :izbrannoes
 
   resources :business_deals
 
   resources :pictures
 
+  match 'catalogs/myfind' => 'catalogs#myfind', :as => :catalogs_find
+  match '/search' => 'catalogs#search', :as => :search
   match 'catalogs/:id/loadmap' => 'catalogs#loadmap', :as => :loadmap
   match 'catalogs/indexload' => 'catalogs#indexload', :as => :index_load
   resources :catalogs

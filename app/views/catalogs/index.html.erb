@@ -15,6 +15,16 @@
   <% unless @service.nil? %>
     service_kind = <%= @service.id -%> ;
   <% end %>
+  <% unless @deal_ids.nil? %>
+    deal_ids = <%= "#{@deal_ids.join(",")}" -%> ;
+  <% end %>
+  <% unless @location_ids.nil? %>
+    <% if @location_ids.size == 1 %>
+      location_id = <%= "#{@location_ids.join(",")}" -%> ;
+    <% else %>
+      locations = '<%= "#{@location_ids.join(",")}" -%>' ;
+    <% end %>
+  <% end %>
 </script>
 <div class="card-upgrade listing_content">
   <div class="cardcap-upgrade">

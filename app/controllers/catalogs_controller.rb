@@ -89,7 +89,7 @@ class CatalogsController < ApplicationController
 
     sql = ""
     if params[:catalog_ids] != ""
-      params[:catalog_ids].each do |catalog_id|
+      params[:catalog_ids].each do |catalog_id| 
         sql = " id != #{catalog_id} AND" + sql
       end
       sql.gsub!(/^\ /, 'SELECT `catalogs`.* FROM `catalogs` WHERE ( ' )
@@ -99,6 +99,7 @@ class CatalogsController < ApplicationController
       else
         sql.gsub!(/\ AND$/,") ORDER BY id DESC LIMIT 4")
       end
+
       @catalogs = Catalog.find_by_sql(sql)
       
       
@@ -142,6 +143,23 @@ class CatalogsController < ApplicationController
           end
         end
         @catalogs = result
+      end
+      
+      if params[:locations] != "null"
+        locations = params[:locations].split(',')
+        result = Array.new
+        @catalogs.each do |catalog|
+          locations.each do |location_id|
+            if "#{catalog.location_id}" == "#{location_id}"
+              result << catalog
+              break
+            end
+          end
+        end
+        @catalogs = result
+      end
+      
+      if params[:deal_ids] != "null" && params[:locations] != "null"
       end
       
       unless cookies[:izbrannoe].nil?
@@ -269,6 +287,53 @@ class CatalogsController < ApplicationController
     render 'map_picture', :layout => true
   end
   
+  def search
+    @body_css_class = "perma cities"
+    @locations = Location.all
+    @products = BusinessDeal.find_all_by_kind("товар")
+    @services = BusinessDeal.find_all_by_kind("услуга")
+    @cols = 3
+    @products_in_col = (@products.size.to_f/@cols).ceil - 1
+    @services_in_col = (@services.size.to_f/@cols).ceil - 1
+  end
+  
+  def myfind
+    @header_layout = 'catalogs/header'
+    @body_css_class = "home"
+    
+    if params[:products].empty? && params[:locations].empty?
+      redirect_to root_url
+    else
+      unless params[:locations].empty? 
+
+        @location_ids = params[:locations].split(",")
+        sql = ""
+        @location_ids.each do |location_id|
+          sql = " location_id = #{location_id} OR" + sql
+        end
+        sql.gsub!(/^\ /, 'SELECT `catalogs`.* FROM `catalogs` WHERE ( ' )
+        sql.gsub!(/\ OR$/,") ORDER BY id DESC LIMIT 4")
+        @catalogs = Catalog.find_by_sql(sql)
+        sql = ""
+        @location_ids.each do |location_id|
+          sql = " id = #{location_id} OR" + sql
+        end
+        sql.gsub!(/^\ /, 'SELECT `locations`.* FROM `locations` WHERE ( ' )
+        sql.gsub!(/\ OR$/,") ORDER BY id")
+        @locations = Location.find_by_sql(sql)
+        @products = products_only_this_locations(@locations, @catalogs)
+        @services = services_only_this_locations(@locations, @catalogs)
+        
+        unless params[:products].empty?
+          @deal_ids = params[:products]
+        end
+
+      end
+        
+      render 'index', :layout => true
+    end
+  end
+  
 private
 
   def products_only_this_location(location)
@@ -292,7 +357,61 @@ private
     end
     return result
   end
+
+  def products_only_this_locations(locations, catalogs)
+    result = Array.new
+    business_deals = BusinessDeal.all
+    catalogs.each do |catalog|
+      unless catalog.business_deals.nil?
+        locations.each do |location|
+          catalog.business_deals.each do |deal|
+            if catalog.location_id == location.id
+              #product = BusinessDeal.find(deal)
+              #if product.kind == 'товар'
+              #  result << product
+              #  break
+              #end
+              business_deals.each do |bd|
+                if bd.id == deal && bd.kind == "товар"
+                  result << bd
+                  break
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+    return result
+  end
   
+  def services_only_this_locations(locations, catalogs)
+    result = Array.new
+    business_deals = BusinessDeal.all
+    catalogs.each do |catalog|
+      unless catalog.business_deals.nil?
+        locations.each do |location|
+          catalog.business_deals.each do |deal|
+            if catalog.location_id == location.id
+              #product = BusinessDeal.find(deal)
+              #if product.kind == 'услуга'
+              #  result << product
+              #  break
+              #end
+              business_deals.each do |bd|
+                if bd.id == deal && bd.kind == "услуга"
+                  result << bd
+                  break
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+    return result
+  end
+ 
   def services_only_this_location(location)
     result = Array.new
     products = BusinessDeal.where( "kind = 'услуга'" )

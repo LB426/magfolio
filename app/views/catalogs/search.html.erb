@@ -1,0 +1,110 @@
+<div class="card-perma"> 
+  <div class="cardcap-perma">
+    <img alt="Card-top-perma" src="/images/card-top-perma.png" />
+  </div> 
+  <div class="cardcontent-perma"> 
+    <div class="content">
+      <table cellpadding="0" cellspacing="0" width="920" class="topcities"> 
+      <tr> 
+        <td colspan="4" valign="top"><h2>Все товары</h2></td> 
+      </tr>
+      <tr>
+      <% products_count = 0 %>
+      <% for i in 0..@cols-1 do %>
+      <td valign="top">
+      <ul>
+      <% for j in 0..@products_in_col do %>
+        <% break if products_count == @products.size %>
+        <% logger.debug "#{i} @products[#{products_count}].id=#{@products[products_count].id}" %>
+        <li>
+          <% product = @products[products_count] %>
+          <a href="<%= product.id -%>" onclick="return false;" id="product_id" style="text-decoration: none;">
+          <img src="/images/check.png" style="display:none;" id="checked_product_<%= product.id -%>">
+          <img src="/images/non-checked.png" id="non_checked_product_<%= product.id -%>">
+            <%= product.name -%>
+          </a>
+        </li>
+        <% products_count += 1 %>
+      <% end %>
+      </ul>
+      </td>
+      <% end %>
+      </tr> 
+      </table>
+      <table cellpadding="0" cellspacing="0" width="920" class="topcities"> 
+      <tr> 
+        <td colspan="4" valign="top"><h2>Все услуги</h2></td> 
+      </tr> 
+      <tr>
+        <% services_count = 0 %>
+        <% for i in 0..@cols-1 do %>
+        <td valign="top">
+        <ul>
+        <% for j in 0..@services_in_col do %>
+          <% break if services_count == @services.size %>
+          <li>
+            <% service = @services[services_count] %>
+            <a href="<%= service.id -%>" onclick="return false;" id="product_id" style="text-decoration: none;">
+            <img src="/images/check.png" style="display:none;" id="checked_product_<%= service.id -%>">
+            <img src="/images/non-checked.png" id="non_checked_product_<%= service.id -%>">
+              <%= service.name -%>
+            </a>
+          </li>
+          <% services_count += 1 %>
+        <% end %>
+        </ul>
+        </td>
+        <% end %>
+      </tr> 
+      </table>
+      <table cellpadding="0" cellspacing="0" width="920"> 
+      <tr> 
+        <td colspan="5" valign="top"><h2 style="padding-top: 40px; margin-bottom: 0;">Регионы</h2></td> 
+      </tr> 
+      <tr> 
+        <td valign="top" colspan="5">
+          <a name="united-states"></a>
+          <h3>Россия
+            <span>&nbsp;&nbsp;
+              <a href="/united-states">показать все</a>
+            </span>
+          </h3> 
+        <td> 
+      </tr> 
+      <tr> 
+      <td valign="top"> 
+        <ul>
+          <li><h4><a href="/alabama">Краснодарский край</a></h4></li>
+          <% @locations.each do |location| %>
+            <li>
+            <a href="<%= location.id -%>" onclick="return false;" id="location_id" style="text-decoration: none;">
+            <img src="/images/check.png" style="display:none;" id="checked_location_<%= location.id -%>" width="15" height="15">
+            <img src="/images/non-checked.png" id="non_checked_location_<%= location.id -%>" width="15" height="15">
+              <%= location.name -%>
+            </a>
+            </li>
+          <% end %>
+        </ul> 
+      </td>
+      </tr> 
+      </table>
+    </div>
+    
+    <div style="text-align: center;">
+      <a href="/search" id="search_btn" style="text-align: center;" onclick="return false;">
+        <img src="/images/search.png">
+      </a>
+    </div>
+  </div>
+  <div class="cardcap-perma">
+    <img alt="Card-bottom-perma" src="/images/card-bottom-perma.png" />
+  </div>
+</div>
+
+<div style="display:none">
+  <%= form_tag('/catalogs/myfind', :id => "search_form") do %>
+  <%= text_field_tag 'products', "", :id => "business_deals" %>
+  <%= text_field_tag 'locations', "", :id => "locations_for_search" %>
+  <%= submit_tag "Submit", :id => 'send_search_form' %>
+  <% end %>
+</div>

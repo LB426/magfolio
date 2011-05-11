@@ -12,7 +12,7 @@
   </div>
 </div>
 <div class="nav">
-  <a href="/cities">Поиск</a> |
+  <%= link_to "Поиск", search_path -%> |
   <a href="/about">О каталогах</a> |
   <a href="/izbrannoes">Избранное<span id="izbrannoe_count"><%= izbrannoe_count -%></span></a> |
   <% if current_user %>

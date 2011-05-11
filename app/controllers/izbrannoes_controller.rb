@@ -14,6 +14,9 @@ class IzbrannoesController < ApplicationController
     else
       render 'none', :layout => true
     end
+    rescue
+      cookies.delete(:izbrannoe)
+      redirect_to root_path, :alert => "Ваше избранное не найдено!"
   end
 
   # GET /izbrannoes/1

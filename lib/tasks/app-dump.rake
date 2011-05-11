@@ -1,10 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
 
 @home = `echo $HOME`
-@date = Time.now.strftime("%Y-%m-%d:%H:%M")
+@date = Time.now.strftime("%Y-%m-%d_%H:%M")
 @mysqldump = `which mysqldump`
 @bzip2 = `which bzip2`
 @tar = `which tar`
+@scp = `which scp`
 @assets = "/home/magfolio/magfolio/shared/assets"
 @home.chomp!
 @date.chomp!
@@ -12,21 +13,36 @@ require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
 @bzip2.chomp!
 @tar.chomp!
 @assets.chomp!
+@scp.chomp!
+@db_archive_name = ""
+@assets_archive_name = ""
 
 system("mkdir -p #{@home}/backup")
 
 namespace :dump do
-  desc "Создание дампа базы данных и assets-ов"
+  desc "Создание дампа базы данных и assets-ов на сервере"
   task :all do |t, args|
-    #host = Rails.configuration.database_configuration[Rails.env]["host"]
-    #port = Rails.configuration.database_configuration[Rails.env]["port"]
-    #user = Rails.configuration.database_configuration[Rails.env]["username"]
-    #pass = Rails.configuration.database_configuration[Rails.env]["password"]
-    #db = Rails.configuration.database_configuration[Rails.env]["database"]
-    #puts @home
-    #puts "#{@date}"
-    dump_database
-    dump_assets
+    @db_archive_name = dump_database
+    @assets_archive_name = dump_assets
+  end
+  desc "Создание дампа на сервере, копирование его на локальную машину и заливка в базу и в ассеты"
+  task :risefromremote do |t, args|
+    system("ssh magfolio@tih.kuban.ru 'mysqldump -uroot -P3306 -h127.0.0.1 -p9002sliarNOiburLQSyM magfolio_production | bzip2 -c --best > /home/magfolio/backup/db_magfolio_production#{@date}.bz2'")
+    system("ssh magfolio@tih.kuban.ru 'cd /home/magfolio/magfolio/shared/assets ; tar cf - . | bzip2 -c --best > /home/magfolio/backup/assets_magfolio#{@date}.tar.bz2'")
+    system("scp magfolio@tih.kuban.ru:/home/magfolio/backup/db_magfolio_production#{@date}.bz2 /tmp/db_magfolio_production#{@date}.bz2")
+    system("scp magfolio@tih.kuban.ru:/home/magfolio/backup/assets_magfolio#{@date}.tar.bz2 /tmp/assets_magfolio#{@date}.tar.bz2")
+    system("mysqldump -uroot -P3306 -h127.0.0.1 magfolio_production | bzip2 -c --best > /Users/bliz/backup/db_magfolio_production#{@date}.bz2")
+    system("cd /Users/bliz/Desktop/proj/magfolio/public/assets ; tar cf - . | bzip2 -c --best > /Users/bliz/backup/assets_magfolio#{@date}.tar.bz2")
+    system("rm -rf /Users/bliz/Desktop/proj/magfolio/public/assets")
+    system("mkdir -p /Users/bliz/Desktop/proj/magfolio/public/assets")
+    system("bunzip2 /tmp/assets_magfolio#{@date}.tar.bz2")
+    system("mv '/tmp/assets_magfolio#{@date}.tar' /Users/bliz/Desktop/proj/magfolio/public/assets/assets.tar")
+    system("cd /Users/bliz/Desktop/proj/magfolio/public/assets ; tar -xf /Users/bliz/Desktop/proj/magfolio/public/assets/assets.tar")
+    system("rm /Users/bliz/Desktop/proj/magfolio/public/assets/assets.tar")
+    system("bunzip2 /tmp/db_magfolio_production#{@date}.bz2")
+    system("mysql -uroot -P3306 -h127.0.0.1 magfolio_production < '/tmp/db_magfolio_production#{@date}'")
+    system("mysql -uroot -P3306 -h127.0.0.1 magfolio_development < '/tmp/db_magfolio_production#{@date}'")
+    system("rm /tmp/db_magfolio_production#{@date}")
   end
 end
 
@@ -34,10 +50,12 @@ def dump_database
   command = "#{@mysqldump} -uroot -P3306 -h127.0.0.1 -p9002sliarNOiburLQSyM magfolio_production | #{@bzip2} -c --best > #{@home}/backup/db_magfolio_production#{@date}.bz2"
   puts command
   system("#{command}")
+  return "#{@home}/backup/db_magfolio_production#{@date}.bz2"
 end
 
 def dump_assets
   command = "#{@tar} cf - #{@assets} | #{@bzip2} -c --best > #{@home}/backup/assets_magfolio#{@date}.bz2"
   puts command
   system("#{command}")
+  return "#{@home}/backup/assets_magfolio#{@date}.bz2"
 end

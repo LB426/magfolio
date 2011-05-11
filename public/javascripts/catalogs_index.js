@@ -6,6 +6,8 @@ var cookie_izbrannoe = null ;
 var location_id = null ;
 var product_kind = null ;
 var service_kind = null ;
+var locations = null ;
+var deal_ids = null ;
 
 function imgchg_link(a,b) {
   var catalog_id = a;
@@ -132,7 +134,7 @@ $(document).ready(function() {
       //$('#catalogs_upload_progress_bar').show();
       if((catalog_ids.lenght != 0)&&(flag == false)){
         $.get('/catalogs/indexload', 
-              { catalog_ids: catalog_ids, location_id: location_id, product_kind: product_kind, service_kind: service_kind },
+              { catalog_ids: catalog_ids, location_id: location_id, product_kind: product_kind, service_kind: service_kind, deal_ids: deal_ids, locations: locations },
               function(data, textStatus, jqXHR) {
                 $('div.content').append(data);
                 if(data.length != 1){

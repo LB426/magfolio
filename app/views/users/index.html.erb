@@ -2,8 +2,10 @@
 
 <table>
   <tr>
-    <th>№п.п.</th>
+    <th>№</th>
+    <th>id</th>
     <th>email</th>
+    <th>Название</th>
     <th></th>
     <th></th>
   </tr>
@@ -12,10 +14,17 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= @count += 1 -%></td>
-    <td><%= user.email %></td>
+    <td><%= user.id -%></td>
+      <% if user.catalogs.size > 0  %>
+        <% user.catalogs.each do |catalog| %>
+        <td><%= link_to user.email, edit_user_path(user) %></td>
+        <td><%= link_to catalog.company_name, "/#{catalog.shortcut_name}" %></td>
+        <% end %>
+      <% else %>
+        <td><%= link_to user.email, edit_user_path(user) %></td>
+        <td>&nbsp;</td>
+      <% end %>
     <td><%= user.open_text_password %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= button_to 'Delete', user_path(user), :method => :delete %></td>
   </tr>
 <% end %>
