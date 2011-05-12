@@ -27,6 +27,7 @@ namespace :dump do
   end
   desc "Создание дампа на сервере, копирование его на локальную машину и заливка в базу и в ассеты"
   task :risefromremote do |t, args|
+    puts Time.now
     system("ssh magfolio@tih.kuban.ru 'mysqldump -uroot -P3306 -h127.0.0.1 -p9002sliarNOiburLQSyM magfolio_production | bzip2 -c --best > /home/magfolio/backup/db_magfolio_production#{@date}.bz2'")
     system("ssh magfolio@tih.kuban.ru 'cd /home/magfolio/magfolio/shared/assets ; tar cf - . | bzip2 -c --best > /home/magfolio/backup/assets_magfolio#{@date}.tar.bz2'")
     system("scp magfolio@tih.kuban.ru:/home/magfolio/backup/db_magfolio_production#{@date}.bz2 /tmp/db_magfolio_production#{@date}.bz2")
@@ -43,6 +44,7 @@ namespace :dump do
     system("mysql -uroot -P3306 -h127.0.0.1 magfolio_production < '/tmp/db_magfolio_production#{@date}'")
     system("mysql -uroot -P3306 -h127.0.0.1 magfolio_development < '/tmp/db_magfolio_production#{@date}'")
     system("rm /tmp/db_magfolio_production#{@date}")
+    puts Time.now
   end
 end
 

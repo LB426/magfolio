@@ -95,9 +95,9 @@ class CatalogsController < ApplicationController
       sql.gsub!(/^\ /, 'SELECT `catalogs`.* FROM `catalogs` WHERE ( ' )
       if params[:location_id] != 'null'
         location = Location.find(params[:location_id])
-        sql.gsub!(/\ AND$/,") AND location_id = '#{location.id}' ORDER BY id DESC LIMIT 4")
+        sql.gsub!(/\ AND$/,") AND location_id = '#{location.id}' ORDER BY id DESC")
       else
-        sql.gsub!(/\ AND$/,") ORDER BY id DESC LIMIT 4")
+        sql.gsub!(/\ AND$/,") ORDER BY id DESC")
       end
 
       @catalogs = Catalog.find_by_sql(sql)
@@ -160,11 +160,15 @@ class CatalogsController < ApplicationController
       end
       
       if params[:deal_ids] != "null" && params[:locations] != "null"
+        @deal_ids = params[:deal_ids].split(',')
+        @catalogs = catalogs_only_these_deals(@deal_ids, @catalogs)
       end
       
       unless cookies[:izbrannoe].nil?
         @izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
       end
+      
+      @catalogs = truncate_array_of_catalogs(@catalogs)
       render 'index', :layout => false
     else
       render :nothing => true
@@ -304,37 +308,58 @@ class CatalogsController < ApplicationController
     if params[:products].empty? && params[:locations].empty?
       redirect_to root_url
     else
-      unless params[:locations].empty? 
-
+      unless params[:locations].empty?
         @location_ids = params[:locations].split(",")
         sql = ""
         @location_ids.each do |location_id|
           sql = " location_id = #{location_id} OR" + sql
         end
         sql.gsub!(/^\ /, 'SELECT `catalogs`.* FROM `catalogs` WHERE ( ' )
-        sql.gsub!(/\ OR$/,") ORDER BY id DESC LIMIT 4")
+        sql.gsub!(/\ OR$/,") ORDER BY id DESC")
         @catalogs = Catalog.find_by_sql(sql)
         sql = ""
         @location_ids.each do |location_id|
           sql = " id = #{location_id} OR" + sql
         end
         sql.gsub!(/^\ /, 'SELECT `locations`.* FROM `locations` WHERE ( ' )
-        sql.gsub!(/\ OR$/,") ORDER BY id")
+        sql.gsub!(/\ OR$/,") ORDER BY id DESC")
         @locations = Location.find_by_sql(sql)
         @products = products_only_this_locations(@locations, @catalogs)
         @services = services_only_this_locations(@locations, @catalogs)
         
         unless params[:products].empty?
-          @deal_ids = params[:products]
+          @deal_ids = params[:products].split(",")
+          @catalogs = catalogs_only_these_deals(@deal_ids, @catalogs)
         end
-
+      else
+        @locations = Location.all
+        @catalogs = Catalog.all
+        @products = products_only_this_locations(@locations, @catalogs)
+        @services = services_only_this_locations(@locations, @catalogs)
+        unless params[:products].empty?
+          @deal_ids = params[:products].split(",")
+          @catalogs = catalogs_only_these_deals(@deal_ids, @catalogs)
+        end
       end
-        
+      
+      @catalogs = truncate_array_of_catalogs(@catalogs)
       render 'index', :layout => true
     end
   end
   
 private
+
+  def truncate_array_of_catalogs(catalogs_array)
+    result = Array.new
+    if catalogs_array.size > 4
+      for i in 0..3 do
+        result << catalogs_array[i]
+      end
+    else
+      result = catalogs_array
+    end
+    return result
+  end
 
   def products_only_this_location(location)
     result = Array.new
@@ -366,11 +391,6 @@ private
         locations.each do |location|
           catalog.business_deals.each do |deal|
             if catalog.location_id == location.id
-              #product = BusinessDeal.find(deal)
-              #if product.kind == 'товар'
-              #  result << product
-              #  break
-              #end
               business_deals.each do |bd|
                 if bd.id == deal && bd.kind == "товар"
                   result << bd
@@ -393,11 +413,6 @@ private
         locations.each do |location|
           catalog.business_deals.each do |deal|
             if catalog.location_id == location.id
-              #product = BusinessDeal.find(deal)
-              #if product.kind == 'услуга'
-              #  result << product
-              #  break
-              #end
               business_deals.each do |bd|
                 if bd.id == deal && bd.kind == "услуга"
                   result << bd
@@ -411,7 +426,25 @@ private
     end
     return result
   end
- 
+
+  def catalogs_only_these_deals(deal_ids, catalogs)
+    result = Array.new
+    catalogs.each do |catalog|
+      unless catalog.business_deals.nil?
+        catalog.business_deals.each do |deal_id_in_catalog|
+          deal_ids.each do |deal_id|
+            # logger.debug "#{catalog.company_name} #{deal_id_in_catalog} #{deal_id}"
+            if deal_id == deal_id_in_catalog
+              result << catalog
+              break
+            end
+          end
+        end
+      end
+    end
+    return result
+  end
+
   def services_only_this_location(location)
     result = Array.new
     products = BusinessDeal.where( "kind = 'услуга'" )

@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'catalog_show.js' %>
+<% end %>
+
 <div class="card-perma">
   <div class="cardcap-perma">
     <img alt="Card-top-perma" src="/images/card-top-perma.png">
@@ -11,9 +15,8 @@
         </a>
       </div>
       <div class="listing">
-        <span class="favorite_links" data-listing-id="8805">
-          <a href="/favorites/8805/remove.js" class="favorites remove_from_favorites" onclick="return false" style="display: none; ">Удалить из избранного</a>
-          <a href="/favorites/8805/add.js" class="favorites add_to_favorites" onclick="return false" style="">Добавить в избранное</a>
+        <span class="favorite_links">
+          <a href="/izbrannoe/<%= @catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= @catalog.id -%>);return false;" ><%= izbrannoe?(@catalog.id) -%></a>
         </span>  
       </div>
     </div>

@@ -6,21 +6,30 @@
 <% @catalogs.each do |catalog| %>
 <script type="text/javascript">
   catalog_ids.push(<%= catalog.id -%>);
+  
   <% unless @location.nil? %>
     location_id = <%= @location.id -%> ;
   <% end %>
+  
   <% unless @product.nil? %>
     product_kind = <%= @product.id -%> ;
   <% end %>
+  
   <% unless @service.nil? %>
     service_kind = <%= @service.id -%> ;
   <% end %>
+  
   <% unless @deal_ids.nil? %>
-    deal_ids = <%= "#{@deal_ids.join(",")}" -%> ;
+    <% if @deal_ids.size == 1 %>
+      product_kind = <%= "#{@deal_ids[0]}" -%> ;
+    <% else %>
+      deal_ids = '<%= "#{@deal_ids.join(",")}" -%>' ;
+    <% end %>
   <% end %>
+  
   <% unless @location_ids.nil? %>
     <% if @location_ids.size == 1 %>
-      location_id = <%= "#{@location_ids.join(",")}" -%> ;
+      location_id = <%= "#{@location_ids[0]}" -%> ;
     <% else %>
       locations = '<%= "#{@location_ids.join(",")}" -%>' ;
     <% end %>
