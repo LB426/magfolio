@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   
   def new
     @body_css_class = "login"
-    @header_layout = 'header'
+    # @header_layout = 'header'
   end
   
   def create

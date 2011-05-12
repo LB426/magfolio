@@ -324,7 +324,8 @@ class CatalogsController < ApplicationController
         sql.gsub!(/^\ /, 'SELECT `locations`.* FROM `locations` WHERE ( ' )
         sql.gsub!(/\ OR$/,") ORDER BY id DESC")
         @locations = Location.find_by_sql(sql)
-        @products = products_only_this_locations(@locations, @catalogs)
+        @location = @locations[0] if @locations.size == 1
+        @products = products_only_these_locations(@locations, @catalogs)
         @services = services_only_this_locations(@locations, @catalogs)
         
         unless params[:products].empty?
@@ -383,7 +384,7 @@ private
     return result
   end
 
-  def products_only_this_locations(locations, catalogs)
+  def products_only_these_locations(locations, catalogs)
     result = Array.new
     business_deals = BusinessDeal.all
     catalogs.each do |catalog|
@@ -392,7 +393,7 @@ private
           catalog.business_deals.each do |deal|
             if catalog.location_id == location.id
               business_deals.each do |bd|
-                if bd.id == deal && bd.kind == "товар"
+                if "#{bd.id}" == "#{deal}" && bd.kind == "товар"
                   result << bd
                   break
                 end
@@ -402,6 +403,7 @@ private
         end
       end
     end
+    result.uniq!
     return result
   end
   
@@ -414,7 +416,7 @@ private
           catalog.business_deals.each do |deal|
             if catalog.location_id == location.id
               business_deals.each do |bd|
-                if bd.id == deal && bd.kind == "услуга"
+                if "#{bd.id}" == "#{deal}" && bd.kind == "услуга"
                   result << bd
                   break
                 end
