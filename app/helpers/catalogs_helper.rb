@@ -87,4 +87,9 @@ module CatalogsHelper
     end   
   end
   
+  def zakaz_phraze(catalog)
+    return catalog.zakaz_phraze unless catalog.zakaz_phraze.nil? || catalog.zakaz_phraze.empty?
+    "Сделать заказ"
+  end
+  
 end

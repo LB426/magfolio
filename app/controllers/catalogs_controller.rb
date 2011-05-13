@@ -1,3 +1,13 @@
+class Array
+  def randomize
+    self.sort_by { rand }
+  end
+  
+  def randomize!
+    self.replace(self.randomize)
+  end
+end
+
 class CatalogsController < ApplicationController
   # GET /catalogs
   # GET /catalogs.xml
@@ -33,14 +43,16 @@ class CatalogsController < ApplicationController
         @locations = Location.all
         @products = BusinessDeal.find_all_by_kind("товар")
         @services = BusinessDeal.find_all_by_kind("услуга")
-        @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
+        # @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
+        @catalogs = Catalog.find_by_sql("SELECT * FROM catalogs WHERE tariff != 'free' ORDER BY id DESC LIMIT 4 ")
       end
       # поиск только по городу
       if @location != nil && @product == nil && @service == nil
         @locations = Location.all
         @products = products_only_this_location(@location)
         @services = services_only_this_location(@location)
-        @catalogs = Catalog.find_all_by_location_id( @location.id, :limit => 4, :order => 'id DESC' )
+        # @catalogs = Catalog.find_all_by_location_id( @location.id, :limit => 4, :order => 'id DESC' )
+        @catalogs = Catalog.find_by_sql("SELECT * FROM catalogs WHERE tariff != 'free' AND location_id = '#{@location.id}' ORDER BY id DESC LIMIT 4 ")
       end
       # посик по городу и товару - отобразить все каталоги по городу с товаром
       if @location != nil && @product != nil && @service == nil
@@ -75,6 +87,7 @@ class CatalogsController < ApplicationController
       if @location != nil && @product != nil && @service != nil
       end
       
+      @catalogs = free_tariff_in_end_catalogs(@catalogs)
       if @catalogs.nil?
         redirect_to root_url, :notice => "Ничего не найдено!"
       end
@@ -168,6 +181,9 @@ class CatalogsController < ApplicationController
         @izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
       end
       
+      #logger.debug "@catalogs.size=#{@catalogs.size} params[:catalog_ids].size=#{params[:catalog_ids].size}"
+      
+      @catalogs = free_tariff_in_end_catalogs(@catalogs)
       @catalogs = truncate_array_of_catalogs(@catalogs)
       render 'index', :layout => false
     else
@@ -523,6 +539,22 @@ private
   
   def products_only_this_service(service)
     result = BusinessDeal.find_all_by_kind("товар")
+    return result
+  end
+
+  def free_tariff_in_end_catalogs(catalogs)
+    payd_catalogs = Array.new
+    free_catalogs = Array.new
+    catalogs.each do |catalog|
+      if catalog.tariff =~ /free/
+        free_catalogs << catalog
+      else
+        payd_catalogs << catalog
+      end
+    end
+    payd_catalogs.randomize!
+    free_catalogs.randomize!
+    result = payd_catalogs + free_catalogs
     return result
   end
 

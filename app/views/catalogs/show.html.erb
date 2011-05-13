@@ -120,8 +120,6 @@
       <%= f.text_field :shortcut_name, :size => 40 %></p>
       <p><%= f.label :Вебсайт %><br />
       <%= f.text_field :company_url, :size => 40 %></p>
-      <p><%= f.label :Тариф %><br />
-      <%= f.text_field :tariff, :size => 40 %></p>
       <p><%= f.label :Логотип %><%= f.file_field :logo, :accept => "image/*" %></p>
       <p><%= f.submit "Внести изменения" %></p>
     <% end %>
@@ -184,6 +182,15 @@
         <% end %>
       <% end %>
       <input id="business_deals_0" name="business_deals[0]" type="checkbox" value="0" checked="checked" style="display:none;">
+      <p><%= f.submit "Внести" %></p>
+    <% end %>
+  </div>
+  
+  <div id="catalog_tariff_change">
+    <h2>Изменить тариф каталога</h2>
+    <%= form_for(@catalog) do |f| %>
+      <p><%= f.label :Тариф %><br />
+      <%= f.select :tariff, [["бесплатный","free"],['500 рублей в месяц','pay']] %>
       <p><%= f.submit "Внести" %></p>
     <% end %>
   </div>

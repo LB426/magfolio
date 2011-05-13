@@ -228,7 +228,10 @@ $(document).ready(function() {
     }else{
       return false;
     }
-	});
+	});	
+	$("a#catalog_tariff_change").fancybox({
+  		'hideOnContentClick': false
+  });
 	
 	/* заполняем виды товаров и услуг */
 

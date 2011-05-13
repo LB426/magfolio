@@ -26,6 +26,25 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    @user.open_text_password = params[:user][:password]
+    
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        format.html { redirect_to(users_path, :notice => 'Users was successfully updated.') }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
 private
   def create_catalog(signup_id)
     signup = Signup.find(signup_id)

@@ -482,6 +482,19 @@ div.cardtools a.favorites:hover {
   background: url('/images/icon_clover.png') 0px -16px no-repeat;
 }
 
+/* Заказ */
+div.cardtools a.makeorder {
+  background: url('/images/make-cart.gif') right 0px no-repeat;
+  padding-right: 20px;
+  border-bottom: none;
+  padding-top: 0px;
+  float: right;
+}
+
+div.cardtools a.makeorder:hover {
+  background: url('/images/make-cart.gif') right 0px no-repeat;
+}
+
 /* Навигация слайдшоу --------------------------*/
 
 div.slideshownav {

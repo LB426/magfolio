@@ -7,12 +7,15 @@ Magfolio::Application.routes.draw do
   resources :business_deals
 
   resources :pictures
-
+  
   match 'catalogs/myfind' => 'catalogs#myfind', :as => :catalogs_find
   match '/search' => 'catalogs#search', :as => :search
   match 'catalogs/:id/loadmap' => 'catalogs#loadmap', :as => :loadmap
   match 'catalogs/indexload' => 'catalogs#indexload', :as => :index_load
-  resources :catalogs
+  resources :catalogs do
+    resources :carts
+    resources :orders
+  end
 
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"

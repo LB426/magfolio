@@ -35,6 +35,8 @@
     <% end %>
   <% end %>
 </script>
+
+<% if catalog.tariff == 'pay' %>
 <div class="card-upgrade listing_content">
   <div class="cardcap-upgrade">
     <img alt="Card-top-large" height="10"src="/images/card-top-large.png" width="470">
@@ -119,7 +121,10 @@
     <div class="cardtools">
       <div class="listing">
         <span class="favorite_links">
-          <a href="/izbrannoe/<%= catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= catalog.id -%>);return false;" ><%= izbrannoe?(catalog.id) -%></a>
+          <a href="/izbrannoe/<%= catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= catalog.id -%>);return false;" >
+            <%= izbrannoe?(catalog.id) -%>
+          </a>
+          <%= link_to zakaz_phraze(catalog), new_catalog_cart_path(catalog), :class => "makeorder" -%>
         </span>
       </div>
     </div>
@@ -128,4 +133,35 @@
     <img alt="Card-bottom-large" src="/images/card-bottom-large.png">
   </div>
 </div>
+<% else %>
+<div class="card listing_content">
+  <div class="cardcap">
+    <img alt="Card-top" height="10" src="/images/card-top.png" width="225" />
+  </div>
+  <div class="cardcontent"> 
+    <div class="cardcompany listing_content"> 
+      <h2><%= link_to catalog.company_name, "/#{catalog.shortcut_name}" %></h2>
+      <p>
+        <%= BusinessType.find(catalog.businesstype_id).name %><br />
+        <span>
+          <%= Location.find(catalog.location_id).name %>
+        </span>
+      </p> 
+    </div> 
+    <div class="free-image">
+      <% pic = catalog.pictures.first(:order => "id ASC") %>
+      <%= link_to image_tag(pic.picture.url(:small)), "/#{catalog.shortcut_name}" %>
+    </div>
+    <div class="cardtools">
+      <div class="listing">
+        <span class="favorite_links">
+          <a href="/izbrannoes" class="favorites" onclick="to_izbrannoe(<%= catalog.id -%>);return false;" id="izbrannoe_<%= catalog.id -%>" ><%= izbrannoe?(catalog.id) -%></a>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="cardcap"><img alt="Card-bottom" src="/images/card-bottom.png" /></div>
+</div>
+<% end %>
+
 <% end %>

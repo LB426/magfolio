@@ -1,6 +1,8 @@
 class Catalog < ActiveRecord::Base
   belongs_to :user
   has_many :pictures, :dependent => :destroy
+  has_many :carts, :dependent => :destroy
+  has_many :orders, :dependent => :destroy
   
   has_attached_file :logo, 
                     :styles => { :medium => "300x300>", :thumb => "100x100>" },
