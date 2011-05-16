@@ -172,7 +172,7 @@ class CatalogsController < ApplicationController
         @catalogs = result
       end
       
-      if params[:deal_ids] != "null" && params[:locations] != "null"
+      if params[:deal_ids] != "null"
         @deal_ids = params[:deal_ids].split(',')
         @catalogs = catalogs_only_these_deals(@deal_ids, @catalogs)
       end
@@ -351,7 +351,7 @@ class CatalogsController < ApplicationController
       else
         @locations = Location.all
         @catalogs = Catalog.all
-        @products = products_only_this_locations(@locations, @catalogs)
+        @products = products_only_these_locations(@locations, @catalogs)
         @services = services_only_this_locations(@locations, @catalogs)
         unless params[:products].empty?
           @deal_ids = params[:products].split(",")
@@ -359,6 +359,7 @@ class CatalogsController < ApplicationController
         end
       end
       
+      @catalogs = free_tariff_in_end_catalogs(@catalogs)
       @catalogs = truncate_array_of_catalogs(@catalogs)
       render 'index', :layout => true
     end
