@@ -155,7 +155,9 @@
     <div class="cardtools">
       <div class="listing">
         <span class="favorite_links">
-          <a href="/izbrannoes" class="favorites" onclick="to_izbrannoe(<%= catalog.id -%>);return false;" id="izbrannoe_<%= catalog.id -%>" ><%= izbrannoe?(catalog.id) -%></a>
+          <a href="/izbrannoe/<%= catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= catalog.id -%>);return false;" >
+            <%= izbrannoe?(catalog.id) -%>
+          </a>
         </span>
       </div>
     </div>

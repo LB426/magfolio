@@ -3,9 +3,10 @@ class Picture < ActiveRecord::Base
   belongs_to :catalog
   
   has_attached_file :picture, 
-                    :styles => { :small => "195x136#", :medium => "430x300#", :large => "897x628#" },
+                    :styles => { :small => ["195x136#", :jpg], :medium => ["430x300#", :jpg], :large => ["897x628#", :jpg] },
                     :path => ":rails_root/public/assets/pictures/:id/:style/:basename.:extension",
-                    :url  => "/assets/pictures/:id/:style/:basename.:extension"
+                    :url  => "/assets/pictures/:id/:style/:basename.:extension",
+                    :convert_options => { :large => "-quality 42", :medium => "-quality 42" }
 
   before_create :randomize_file_name
 

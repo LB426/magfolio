@@ -86,7 +86,7 @@ function to_izbrannoe(catalog_id) {
   cookie_izbrannoe = $.cookie("izbrannoe") ;
   var atext = $('a[href="/izbrannoe/'+ catalog_id +'"]').text() ;
   var izbrannoe_count = 0 ;
-  if(atext === 'Добавить в избранное'){
+  if(atext =~ /Добавить в избранное/){
     $('a[href="/izbrannoe/'+ catalog_id +'"]').text('Удалить из избранного');
     if(cookie_izbrannoe == null){
       $.post('/izbrannoes', 
