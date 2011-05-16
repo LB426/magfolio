@@ -12,16 +12,15 @@
     <%= form_tag sessions_path do %>
       <h2>Вход в онлайн каталоги Клевер</h2> 
       <p><%= label_tag :email %></p> 
-      <%= text_field_tag :email, params[:email], :size => '40' %>
+      <%= text_field_tag :email, @email, :size => '40' %>
       <p><%= label_tag :password %></p>
-      <%= password_field_tag :password, '', :size => '40' %>
+      <%= password_field_tag :password, @password, :size => '40' %>
       <br />
       <a href="/password/reset">Я забыл пароль</a>
       <div class="remember">
         <label for="user_session_remember_me">
-          <input name="user_session[remember_me]" type="hidden" value="0" />
-          <input id="user_session_remember_me" name="user_session[remember_me]" type="checkbox" value="1" />
-            <span>Запомнить меня на этом компьютере</span>
+          <input id="remember_me" name="remember_me" type="checkbox" <%= memorized? -%> />
+          <span>Запомнить меня на этом компьютере</span>
           </label>
       </div>
       <p><%= submit_tag "Вход" %></p> 

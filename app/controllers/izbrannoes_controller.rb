@@ -112,16 +112,6 @@ class IzbrannoesController < ApplicationController
     
   end
   
-  #def getmy
-  #  izbrannoe = Izbrannoe.find_all_by_identificator(params[:identificator])
-  #  unless izbrannoe.nil?
-  #    response.headers['Content-type'] = "text/plain; charset=utf-8"
-  #    render :text => izbrannoe.to_json( :only => [ :catalog_id ] )
-  #  else
-  #    render :nothing => true
-  #  end
-  #end
-  
 private
 
   def random_string(size = 32)

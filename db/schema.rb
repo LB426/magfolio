@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110513114241) do
+ActiveRecord::Schema.define(:version => 20110516103800) do
 
   create_table "business_deals", :force => true do |t|
     t.string   "name"
@@ -147,6 +147,7 @@ ActiveRecord::Schema.define(:version => 20110513114241) do
     t.datetime "updated_at"
     t.string   "open_text_password"
     t.string   "group"
+    t.string   "remember_me_token"
   end
 
 end

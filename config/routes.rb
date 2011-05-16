@@ -17,6 +17,7 @@ Magfolio::Application.routes.draw do
     resources :orders
   end
 
+  match 'sessions/rememberme' => 'sessions#rememberme', :as => :session_rememberme
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   
