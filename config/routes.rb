@@ -13,11 +13,15 @@ Magfolio::Application.routes.draw do
   match 'catalogs/:id/loadmap' => 'catalogs#loadmap', :as => :loadmap
   match 'catalogs/indexload' => 'catalogs#indexload', :as => :index_load
   resources :catalogs do
+    resources :products
     resources :carts
     resources :orders
   end
 
-  match 'sessions/rememberme' => 'sessions#rememberme', :as => :session_rememberme
+  match 'sessions/edituser/:reset_password_token' => 'sessions#edituser', :as => :edit_user_with_rptoken
+  match 'sessions/updatepassword/:reset_password_token' => 'sessions#updatepassword', :as => :session_updatepassword
+  match 'sessions/sendresetpasswordmail' => 'sessions#sendresetpasswordmail', :as => :sendresetpasswordmail
+  match '/password/reset' => 'sessions#resetpassword', :as => :resetpassword
   get "logout" => "sessions#destroy", :as => "logout"
   get "login" => "sessions#new", :as => "login"
   

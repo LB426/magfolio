@@ -1,0 +1,27 @@
+<script type="text/javascript">
+  $(function() {
+    $("#password").focus();
+  });
+</script>
+
+<div class="card-upgrade">
+  <div class="cardcap-upgrade">
+    <img alt="Card-top-large" src="/images/card-top-large.png" />
+  </div>
+  <div class="cardcontent-upgrade login">
+    <%= form_tag session_updatepassword_path(@user.reset_password_token) do %>
+      <h2>Восстановление забытого пароля</h2> 
+      <p><%= label_tag :Ваш_email %></p> 
+      <%= text_field_tag :email, @user.email, :size => '40', :disabled => true %>
+      <br />
+      <p><%= label_tag :Введите_новый_пароль %></p> 
+      <%= password_field_tag :password, '', :size => '40' %>
+      <br />
+      <p><%= submit_tag "Обновить пароль" %></p> 
+    <% end %>
+  </div>
+  <div class="cardcap-upgrade">
+    <img alt="Card-bottom-large" src="/images/card-bottom-large.png" />
+  </div>
+  <div class="create">У Вас нет имени и пароля? <a href="/signup">Создать веб каталог Клевер.</a></div>
+</div>

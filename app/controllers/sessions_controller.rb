@@ -56,18 +56,46 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-  def rememberme
-    user = User.authenticate(params[:email], params[:password])
+  def resetpassword
+    @body_css_class = "login"
+  end
+  
+  def sendresetpasswordmail
+    user = User.find_by_email(params[:email])
     if user
-      remember_me_token = BCrypt::Engine.hash_secret("#{request.remote_ip}", BCrypt::Engine.generate_salt)
-      response.headers['Content-type'] = "text/plain; charset=utf-8"
-      render :text => [remember_me_token].to_json( :only => [ :remember_me_token ] )
+      user.reset_password_token = random_string(64)
+      user.save
+      ResetPassword.reset_password_email(user).deliver
+      redirect_to login_path, :notice => "Письмо для восстановления пароля отправлено на адрес #{params[:email]}."
     else
-      response.headers['Content-type'] = "text/plain; charset=utf-8"
-      render :text => ['authorise non successfull'].to_json( :only => [ :remember_me_token ] )
+      redirect_to resetpassword_path, :alert => "Указанный Вами адрес #{params[:email]} не найден в адресах пользователей каталога."
     end
-    rescue
-      render :nothing => true
+  end
+  
+  def edituser
+    @body_css_class = "login"
+    @user = User.find_by_reset_password_token(params[:reset_password_token])
+    unless @user
+      redirect_to login_path, :alert => "Пользователь не найден."
+    end
+  end
+  
+  def updatepassword
+    @user = User.find_by_reset_password_token(params[:reset_password_token])
+    if @user
+      if params[:password].size < 6
+        redirect_to edit_user_with_rptoken_path(@user.reset_password_token), :alert => "Пароль должен быть из 6 или более знаков"
+      else
+        @user.reset_password_token = nil
+        if @user.update_attributes({:password => params[:password]})
+          redirect_to login_path, :notice => "Пароль изменён, можете войти с новым паролем."
+        else
+          redirect_to login_path, :notice => "Не удалось изменить пароль."
+        end
+      end
+    else
+      redirect_to login_path, :alert => "Пользователь не найден."
+    end
   end
 
 private

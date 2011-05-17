@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110516103800) do
+ActiveRecord::Schema.define(:version => 20110517112311) do
 
   create_table "business_deals", :force => true do |t|
     t.string   "name"
@@ -101,6 +101,13 @@ ActiveRecord::Schema.define(:version => 20110516103800) do
     t.datetime "updated_at"
   end
 
+  create_table "products", :force => true do |t|
+    t.integer  "catalog_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -148,6 +155,7 @@ ActiveRecord::Schema.define(:version => 20110516103800) do
     t.string   "open_text_password"
     t.string   "group"
     t.string   "remember_me_token"
+    t.string   "reset_password_token"
   end
 
 end
