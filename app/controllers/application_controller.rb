@@ -2,12 +2,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   helper_method :current_user
+  helper_method :current_user_self?
   helper_method :is_admin
   helper_method :maindomain
   
 private
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  
+  # Определяет является ли current_user собственником каталога, для того чтобы
+  # дать ему возможность редактировать каталог
+  def current_user_self?
+    return true if !current_user.nil? && current_user.id == @catalog.user_id 
+    return true if !current_user.nil? && /admin/ =~ current_user.group
+    return false
   end
   
   def is_admin

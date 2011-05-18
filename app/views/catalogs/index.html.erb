@@ -124,7 +124,7 @@
           <a href="/izbrannoe/<%= catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= catalog.id -%>);return false;" >
             <%= izbrannoe?(catalog.id) -%>
           </a>
-          <%= link_to zakaz_phraze(catalog), new_catalog_cart_path(catalog), :class => "makeorder" -%>
+          <%= link_to zakaz_phraze(catalog), catalog_products_path(catalog), :class => "makeorder" -%>
         </span>
       </div>
     </div>

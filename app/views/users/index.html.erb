@@ -25,6 +25,7 @@
         <td>&nbsp;</td>
       <% end %>
     <td><%= user.open_text_password %></td>
+    <td><%= Russian::strftime(user.created_at, "%d %B %Y, %H:%M") -%></td>
     <td><%= button_to 'Delete', user_path(user), :method => :delete %></td>
   </tr>
 <% end %>

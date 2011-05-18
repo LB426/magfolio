@@ -10,6 +10,7 @@ gem 'mysql2', '0.2.6'
 #gem 'mysql2', '< 0.3'
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 gem "bcrypt-ruby", :require => "bcrypt"
+gem 'russian'
 
 # Use unicorn as the web server
 # gem 'unicorn'

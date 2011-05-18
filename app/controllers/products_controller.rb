@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
   def index
-    @products = Product.all
+    @catalog = Catalog.find(params[:catalog_id])
+    @products = @catalog.products
 
     respond_to do |format|
       format.html # index.html.erb
