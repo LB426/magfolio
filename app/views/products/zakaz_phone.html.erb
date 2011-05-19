@@ -16,7 +16,7 @@
         </span>  
       </div>
     </div>
-    <div class="cardcompany <%= edit_block %>">
+    <div class="cardcompany">
       <% if /missing/ =~ @catalog.logo.url(:thumb) %>
         <% if current_user_self? %>
           <%= image_tag "/images/your_logo.png", :align => 'right' %>
@@ -38,33 +38,14 @@
         </strong>
       </p>
     </div>
-    
-    
-    <h1>Listing products</h1>
-
-    <table>
-      <tr>
-        <th>Catalog</th>
-        <th>Name</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.catalog_id %></td>
-        <td><%= product.name %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>
-      </tr>
-    <% end %>
-    </table>
-
-    <br />
-
-    <%= link_to 'New Product', new_catalog_product_path(@catalog.id) if current_user_self? %>
+    <div class="action">
+      <h2>Мы принимаем заказы по телефону <%= @catalog.phone %></h2>
+      <h3>
+          <a href="mailto:<%= @catalog.email %>"><%= @catalog.email %></a>
+          •
+          <a href="<%= @catalog.company_url %>"><%= @catalog.company_url %></a>
+      </h3>
+    </div>
   </div>
   <div class="cardcap-perma">
     <img alt="Card-bottom-perma" src="/images/card-bottom-perma.png">

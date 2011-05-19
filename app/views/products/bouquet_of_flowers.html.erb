@@ -5,10 +5,7 @@
   <div class="cardcontent-perma">
     <div class="cardtools">
       <div class="printpage">
-        <a href="#" class="print" target="_blank">
-          Рейтинг
-          <%= @catalog.rating %>
-        </a>
+        <%= link_to zakaz_phraze(@catalog), catalog_products_path(@catalog), :class => 'print' -%>
       </div>
       <div class="listing">
         <span class="favorite_links">
@@ -16,7 +13,7 @@
         </span>  
       </div>
     </div>
-    <div class="cardcompany <%= edit_block %>">
+    <div class="cardcompany">
       <% if /missing/ =~ @catalog.logo.url(:thumb) %>
         <% if current_user_self? %>
           <%= image_tag "/images/your_logo.png", :align => 'right' %>
@@ -40,7 +37,7 @@
     </div>
     
     
-    <h1>Listing products</h1>
+    <h1>Заказ цветов</h1>
 
     <table>
       <tr>

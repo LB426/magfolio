@@ -4,10 +4,11 @@ class ProductsController < ApplicationController
   def index
     @catalog = Catalog.find(params[:catalog_id])
     @products = @catalog.products
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @products }
+    case @catalog.zakaz_layout
+    when /bouquet of flowers/
+      render 'bouquet_of_flowers', :layout => true
+    else
+      render 'zakaz_phone', :layout => true
     end
   end
 

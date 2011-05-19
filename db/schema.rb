@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110517112311) do
+ActiveRecord::Schema.define(:version => 20110518101058) do
 
   create_table "business_deals", :force => true do |t|
     t.string   "name"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20110517112311) do
     t.string   "lng"
     t.text     "business_deals"
     t.text     "zakaz_phraze"
+    t.string   "zakaz_layout"
   end
 
   add_index "catalogs", ["businesstype_id"], :name => "index_catalogs_on_businesstype_id"

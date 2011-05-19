@@ -9,10 +9,7 @@
   <div class="cardcontent-perma">
     <div class="cardtools">
       <div class="printpage">
-        <a href="#" class="print" target="_blank">
-          Рейтинг
-          <%= @catalog.rating %>
-        </a>
+        <%= link_to zakaz_phraze(@catalog), catalog_products_path(@catalog), :class => 'print' -%>
       </div>
       <div class="listing">
         <span class="favorite_links">
@@ -83,7 +80,7 @@
           </script>
         <% end %>
         <%= image_tag pic.picture.url(:large) %>
-        <%= link_to "Показать на карте", "/catalogs/#{pic.id}/loadmap", :title => 'посмотреть на карте' -%>
+        <%= link_to "Показать на карте", "/catalogs/#{pic.id}/loadmap", :title => 'посмотреть на карте' unless @catalog.lat.nil? || @catalog.lng.nil? -%>
         <p>
           <% unless pic.description.blank? %>
           <%= render :inline => pic.description %>
@@ -193,6 +190,15 @@
     <%= form_for(@catalog) do |f| %>
       <p><%= f.label :Тариф %><br />
       <%= f.select :tariff, [["бесплатный","free"],['500 рублей в месяц','pay']] %>
+      <p><%= f.submit "Внести" %></p>
+    <% end %>
+  </div>
+  
+  <div id="zakaz_layout_change">
+    <h2>Изменить форму заказа</h2>
+    <%= form_for(@catalog) do |f| %>
+      <p><%= f.label :Форма %><br />
+      <%= f.select :zakaz_layout, [['заказ по телефону','order by phone'],['заказ цветов','bouquet of flowers'],['заказ столика в ресторане','table in a restaurant']] %>
       <p><%= f.submit "Внести" %></p>
     <% end %>
   </div>

@@ -6,7 +6,7 @@ class Picture < ActiveRecord::Base
                     :styles => { :small => ["195x136#", :jpg], :medium => ["430x300#", :jpg], :large => ["897x628#", :jpg] },
                     :path => ":rails_root/public/assets/pictures/:id/:style/:basename.:extension",
                     :url  => "/assets/pictures/:id/:style/:basename.:extension",
-                    :convert_options => { :large => "-quality 52", :medium => "-quality 52" }
+                    :convert_options => { :large => "-quality 62", :medium => "-quality 62" }
 
   before_create :randomize_file_name
 
