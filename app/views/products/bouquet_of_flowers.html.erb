@@ -1,69 +1,88 @@
-<div class="card-perma">
-  <div class="cardcap-perma">
-    <img alt="Card-top-perma" src="/images/card-top-perma.png">
+<% content_for :head do %>
+  <%= javascript_include_tag 'products_flowers_index.js' %>
+<% end %>
+
+<h1>Заказ цветов в <%= BusinessType.find(@catalog.businesstype_id).name %> <%= @catalog.company_name %></h1>
+
+<% @products.each do |product| %>      
+  <div class="card listing_content">
+    <div class="cardcap">
+      <img alt="Card-top" height="10" src="/images/card-top.png" width="225" />
+    </div> 
+    <div class="cardcontent"> 
+      <div class="cardcompany listing_content"> 
+        <h3><%= product.name %></h3>
+        <p>
+          <%= product.price_notation %><br />
+          <span>
+            <%= product.price %>
+          </span>
+        </p> 
+      </div> 
+      <div class="free-image">
+        
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $("a[rel=<%= @catalog.id %>]").fancybox({
+              'transitionIn'          : 'none',
+              'transitionOut'         : 'none',
+              'titlePosition'         : 'over',
+              'titleFormat'           : function(title, currentArray, currentIndex, currentOpts){ return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>'; }
+            });
+          });
+        </script>
+        <a id="<%= @catalog.id %>" rel="<%= @catalog.id %>" href="<%= product.picture.url(:large) %>" title="<%= product.name %>"><img alt="" src="<%= product.picture.url(:small) %>" /></a>
+      </div>
+      <div class="cardtools">
+        <div class="listing">
+          <span class="favorite_links">
+          <% unless current_user_self? %>
+            <a href="#" onclick="alert('1');return false;">Купить</a>
+          <% else %>
+            <%= link_to "Редактировать", edit_catalog_product_path(@catalog,product), :id => "buket_edit" %>
+            <a href="product_id_<%= product.id %>" id="delete_buket">Удалить</a>
+            <form id="product_<%= product.id %>_delete_form" method="post" action="<%= catalog_product_path(@catalog,product) %>">
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+              <input name="_method" type="hidden" value="delete" />
+            </form>
+          <% end %>
+          </span>
+        </div>
+      </div>
+    </div> 
+    <div class="cardcap"><img alt="Card-bottom" src="/images/card-bottom.png" /></div> 
   </div>
-  <div class="cardcontent-perma">
-    <div class="cardtools">
-      <div class="printpage">
-        <%= link_to zakaz_phraze(@catalog), catalog_products_path(@catalog), :class => 'print' -%>
-      </div>
-      <div class="listing">
-        <span class="favorite_links">
-          <a href="/izbrannoe/<%= @catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= @catalog.id -%>);return false;" ><%= izbrannoe?(@catalog.id) -%></a>
-        </span>  
-      </div>
-    </div>
-    <div class="cardcompany">
-      <% if /missing/ =~ @catalog.logo.url(:thumb) %>
-        <% if current_user_self? %>
-          <%= image_tag "/images/your_logo.png", :align => 'right' %>
-        <% end %>
-      <% else %>
-      <%= image_tag @catalog.logo.url(:thumb), :align => 'right' %>
-      <% end %>
-      <h2><%= @catalog.company_name %></h2>
+<% end %>
+
+<div class="clear"></div>
+
+<% if current_user_self? %>
+<%= render :partial => 'user_menu' %>
+<div style="display:none">
+  <div id="product_add">
+    <h2>Добавить изображение в галерею</h2>
+    <%= form_for([@catalog,@product], :html => { :multipart => true }) do |f| %>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :catalog_id %>
       <p>
-        Вид бизнеса: 
-        <strong><%= BusinessType.find(@catalog.businesstype_id).name %></strong><br />
-        Расположен в 
-        <strong>
-          <a href="/chicago"><%= Location.find(@catalog.location_id).name %></a>
-        </strong><br />
-        E-mail: 
-        <strong>
-          <a href="mailto:<%= @catalog.email -%>?subject=Вопросы о каталоге <%= @catalog.company_name -%>"><%= @catalog.email %></a>
-        </strong>
+        <%= f.label :Название %><br />
+        <%= f.text_field :name %>
       </p>
-    </div>
-    
-    
-    <h1>Заказ цветов</h1>
-
-    <table>
-      <tr>
-        <th>Catalog</th>
-        <th>Name</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.catalog_id %></td>
-        <td><%= product.name %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %></td>
-      </tr>
+      <p>
+        <%= f.label :Надпись_в_поле_цена %><br />
+        <%= f.text_field :price_notation, :value => "цена, руб." %>
+      </p>
+      <p>
+        <%= f.label :price %><br />
+        <%= f.text_field :price %>
+      </p>
+      <p>
+        <%= f.label :Изображение %>
+        <%= f.file_field :picture, :accept => "image/*" %>
+      </p>
+      <p><%= f.submit "Добавить букет" %></p>
     <% end %>
-    </table>
-
-    <br />
-
-    <%= link_to 'New Product', new_catalog_product_path(@catalog.id) if current_user_self? %>
   </div>
-  <div class="cardcap-perma">
-    <img alt="Card-bottom-perma" src="/images/card-bottom-perma.png">
-  </div>
+
 </div>
+<% end %>

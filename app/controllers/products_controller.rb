@@ -4,10 +4,16 @@ class ProductsController < ApplicationController
   def index
     @catalog = Catalog.find(params[:catalog_id])
     @products = @catalog.products
+    if current_user
+      @product = @catalog.products.new
+      @product.user_id = @catalog.user_id
+    end
     case @catalog.zakaz_layout
     when /bouquet of flowers/
+      @body_css_class = "home favorites"
       render 'bouquet_of_flowers', :layout => true
     else
+      
       render 'zakaz_phone', :layout => true
     end
   end
@@ -26,7 +32,8 @@ class ProductsController < ApplicationController
   # GET /products/new
   # GET /products/new.xml
   def new
-    @product = Product.new
+    @catalog = Catalog.find(params[:catalog_id])
+    @product = @catalog.products.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,21 +43,27 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @product = Product.find(params[:id])
+    @catalog = Catalog.find(params[:catalog_id])
+    @product = @catalog.products.find(params[:id])
+    case @catalog.zakaz_layout
+    when /bouquet of flowers/
+      render 'edit_bouquet_of_flowers', :layout => false
+    else
+      redirect_to root_url, :alert => 'нет обработчика редактирования для такого типа товаров'
+    end
   end
 
   # POST /products
   # POST /products.xml
   def create
-    @product = Product.new(params[:product])
+    @catalog = Catalog.find(params[:catalog_id])
+    @product = @catalog.products.new(params[:product])
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to(@product, :notice => 'Product was successfully created.') }
-        format.xml  { render :xml => @product, :status => :created, :location => @product }
+        format.html { redirect_to(catalog_products_path(@catalog), :notice => 'Товар был успешно добавлен') }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @product.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -58,15 +71,14 @@ class ProductsController < ApplicationController
   # PUT /products/1
   # PUT /products/1.xml
   def update
-    @product = Product.find(params[:id])
+    @catalog = Catalog.find(params[:catalog_id])
+    @product = @catalog.products.find(params[:id])
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to(@product, :notice => 'Product was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(catalog_products_path(@catalog), :notice => 'Ценик был успешно изменён.') }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @product.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -74,11 +86,12 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.xml
   def destroy
-    @product = Product.find(params[:id])
+    @catalog = Catalog.find(params[:catalog_id])
+    @product = @catalog.products.find(params[:id])
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to(products_url) }
+      format.html { redirect_to(catalog_products_path(@catalog)) }
       format.xml  { head :ok }
     end
   end

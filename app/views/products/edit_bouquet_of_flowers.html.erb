@@ -1,3 +1,5 @@
+<h1>Изменить ценик</h1>
+
 <%= form_for([@catalog,@product], :html => { :multipart => true }) do |f| %>
   <% if @product.errors.any? %>
     <div id="error_explanation">
@@ -11,26 +13,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :catalog_id %><br />
-    <%= f.text_field :catalog_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
+  <p>
+    <%= f.label :Название %><br />
     <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :price_notation %><br />
+  </p>
+  <p>
+    <%= f.label :Надпись_в_поле_цена %><br />
     <%= f.text_field :price_notation %>
-  </div>
-  <div class="field">
+  </p>
+  <p>
     <%= f.label :price %><br />
     <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.file_field :picture %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </p>
+  <p>
+    <%= f.label :Изображение %>
+    <%= f.file_field :picture, :accept => "image/*" %>
+  </p>
+  <p><%= f.submit "Изменить ценик" %></p>
 <% end %>

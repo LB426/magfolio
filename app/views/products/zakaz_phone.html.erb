@@ -5,10 +5,7 @@
   <div class="cardcontent-perma">
     <div class="cardtools">
       <div class="printpage">
-        <a href="#" class="print" target="_blank">
-          Рейтинг
-          <%= @catalog.rating %>
-        </a>
+        <%= link_to zakaz_phraze(@catalog), catalog_products_path(@catalog), :class => 'print' -%>
       </div>
       <div class="listing">
         <span class="favorite_links">
