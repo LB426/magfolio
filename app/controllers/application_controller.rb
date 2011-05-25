@@ -33,7 +33,7 @@ private
 protected
   def logged_in?
     unless session[:user_id]
-      flash[:notice] = "Вы не вошли в каталог."
+      flash[:notice] = t('messages.auth_required')
       redirect_to new_session_path
       return false
     else
@@ -43,8 +43,8 @@ protected
   
   def registration_upon_request
     unless is_admin
-      flash[:notice] = "Извините в настоящий момент регистрация новых пользователей доступна только по приглашению."
-      @title = "Получение приглашения"
+      flash[:notice] = t('registration_upon_request.notice')
+      @title = t('registration_upon_request.title')
       @body_css_class = "perma about"
       render 'signup/registration-upon-request'
       return false
@@ -59,7 +59,7 @@ protected
         return true 
       end
     end
-    flash[:notice] = "Вы должны быть администратором для этого."
+    flash[:notice] = t('admin_logged_in.notice')
     redirect_to new_session_path
     return false
   end

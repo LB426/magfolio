@@ -1,0 +1,15 @@
+<%= form_for([@catalog,@product,@product_picture], :html => { :multipart => true }) do |f| %>
+  <p>
+    <%= f.label :Описание_картинки %><br />
+    <%= f.text_field :note %>
+  </p>
+  <p>
+    <%= f.label :Новая_картинка %>
+    <%= f.file_field :picture, :accept => "image/*" %>
+  </p>
+  <p><%= f.submit "Внести изменения" %></p>
+<% end %>
+
+<%= image_tag(@product_picture.picture.url(:small)) %>
+
+<%= button_to 'Удалить', catalog_product_product_picture_path(@catalog,@product,@product_picture), :method => :delete %>

@@ -26,8 +26,22 @@
     <%= f.text_field :price %>
   </p>
   <p>
-    <%= f.label :Изображение %>
-    <%= f.file_field :picture, :accept => "image/*" %>
+    <%= fields_for :product_pictures, @product_picture do |child_form| %>
+    <%= child_form.label :Добавить_картинку %>
+    <%= child_form.file_field :picture, :accept => "image/*" %>
+    <% end %>
+  </p>
+  <p>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('a[id^="picture_edit_"]').fancybox({
+        		'hideOnContentClick': false
+        });
+      });
+    </script>
+    <% for image in @product.product_pictures.all %>
+      <%= link_to image_tag(image.picture.url(:small)), edit_catalog_product_product_picture_path(@catalog,@product,image), :id => "picture_edit_#{image.id}" %>
+    <% end %>
   </p>
   <p><%= f.submit "Изменить ценик" %></p>
 <% end %>

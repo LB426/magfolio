@@ -1,0 +1,41 @@
+# Russian
+
+ru:
+  business_deal:
+    product: "товар"
+    service: "услуга"
+  messages:
+    nothing: "Ничего не найдено"
+    catalog_not_found: "Такого каталога нет"
+    catalogs_not_found: "Таких каталогов нет"
+    auth_required: "Вы не вошли в каталог!"
+  registration_upon_request:
+    notice: "Извините в настоящий момент регистрация новых пользователей доступна только по приглашению."
+    title: "Получение приглашения"
+  admin_logged_in:
+    notice: "Вы должны быть администратором для этого."
+  izbrannoe:
+    remove: "Удалить из избранного"
+    add: "Добавить в избранное"
+    msg_not_fount: "Ваше избранное не найдено!"
+  about:
+    title: "О веб каталогах Клевер"
+  session:
+    msg_new_alert: "Был выполнен вход с другого компьютера. Все сессии уничтожены введите логин и пароль!"
+    msg_send_reset_passwd_mail_notice: "Письмо для восстановления пароля отправлено на адрес"
+    msg_send_reset_passwd_mail_alert: "Указанный Вами адрес не найден в адресах пользователей каталога"
+    msg_password_size_fail: "Пароль должен быть из 6 или более знаков"
+    msg_change_password_success: "Пароль изменён, можете войти с новым паролем"
+    msg_change_password_fail: "Не удалось изменить пароль"
+    msg_user_not_found: "Пользователь не найден"
+  signup:
+    title_stage1: "Создание каталога"
+    title_stage2: "Изменение тарифного плана каталога"
+  product:
+    msg_edit_alert: "нет обработчика редактирования для такого типа товаров"
+    msg_create_success: "Товар был успешно добавлен"
+    msg_update_success: "Ценик был успешно изменён"
+  default:
+    page_title: "Клевер, каталоги онлайн"
+    this_city: "Городе"
+    make_order: "Сделать заказ"

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @product_picture.user_id %>
+</p>
+
+<p>
+  <b>Catalog:</b>
+  <%= @product_picture.catalog_id %>
+</p>
+
+<p>
+  <b>Product:</b>
+  <%= @product_picture.product_id %>
+</p>
+
+<p>
+  <b>Note:</b>
+  <%= @product_picture.note %>
+</p>
+
+
+<%= link_to 'Edit', edit_product_picture_path(@product_picture) %> |
+<%= link_to 'Back', product_pictures_path %>

@@ -4,6 +4,7 @@ class Catalog < ActiveRecord::Base
   has_many :products, :dependent => :destroy
   has_many :carts, :dependent => :destroy
   has_many :orders, :dependent => :destroy
+  has_many :product_pictures, :through => :products, :dependent => :destroy
   
   has_attached_file :logo, 
                     :styles => { :medium => "300x300>", :thumb => "100x100>" },

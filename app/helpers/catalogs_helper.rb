@@ -14,11 +14,11 @@ module CatalogsHelper
       izbrannoe = Izbrannoe.find_all_by_identificator(cookies[:izbrannoe])
       izbrannoe.each do |izbr|
         if izbr.catalog_id == catalog_id
-          return "Удалить из избранного"
+          return t('izbrannoe.remove')
         end
       end
     end
-    "Добавить в избранное"
+    t('izbrannoe.add')
   end
   
   def current_host
@@ -51,7 +51,7 @@ module CatalogsHelper
     unless @location.nil?
       return @location.name
     end
-    "Городе"
+    t('default.this_city')
   end
   
   # генерим ссылку для товаров
@@ -81,7 +81,7 @@ module CatalogsHelper
   
   def zakaz_phraze(catalog)
     return catalog.zakaz_phraze unless catalog.zakaz_phraze.nil? || catalog.zakaz_phraze.empty?
-    "Сделать заказ"
+    t('default.make_order')
   end
   
 end

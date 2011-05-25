@@ -9,10 +9,10 @@ class SessionsController < ApplicationController
       user = User.find_by_remember_me_token(cookies[:remember_me])
       if user
         @email = user.email
-        @password = "установлена кука remember_me"
+        @password = "setting up cookies remember_me"
       else
         cookies.delete(:remember_me)
-        redirect_to new_session_path, :alert => "Был выполнен вход с другого компьютера. Все сессии уничтожены введите логин и пароль!"
+        redirect_to new_session_path, :alert => t('session.msg_new_alert')
       end
     end
   end
@@ -66,9 +66,9 @@ class SessionsController < ApplicationController
       user.reset_password_token = random_string(64)
       user.save
       ResetPassword.reset_password_email(user).deliver
-      redirect_to login_path, :notice => "Письмо для восстановления пароля отправлено на адрес #{params[:email]}."
+      redirect_to login_path, :notice => "#{t('session.msg_send_reset_passwd_mail_notice')}: #{params[:email]}"
     else
-      redirect_to resetpassword_path, :alert => "Указанный Вами адрес #{params[:email]} не найден в адресах пользователей каталога."
+      redirect_to resetpassword_path, :alert => "#{t('session.msg_send_reset_passwd_mail_alert')}: #{params[:email]}"
     end
   end
   
@@ -76,7 +76,7 @@ class SessionsController < ApplicationController
     @body_css_class = "login"
     @user = User.find_by_reset_password_token(params[:reset_password_token])
     unless @user
-      redirect_to login_path, :alert => "Пользователь не найден."
+      redirect_to login_path, :alert => t('session.msg_user_not_found')
     end
   end
   
@@ -84,17 +84,17 @@ class SessionsController < ApplicationController
     @user = User.find_by_reset_password_token(params[:reset_password_token])
     if @user
       if params[:password].size < 6
-        redirect_to edit_user_with_rptoken_path(@user.reset_password_token), :alert => "Пароль должен быть из 6 или более знаков"
+        redirect_to edit_user_with_rptoken_path(@user.reset_password_token), :alert => t('session.msg_password_size_fail')
       else
         @user.reset_password_token = nil
         if @user.update_attributes({:password => params[:password]})
-          redirect_to login_path, :notice => "Пароль изменён, можете войти с новым паролем."
+          redirect_to login_path, :notice => t('session.msg_change_password_success')
         else
-          redirect_to login_path, :notice => "Не удалось изменить пароль."
+          redirect_to login_path, :alert => t('session.msg_change_password_fail')
         end
       end
     else
-      redirect_to login_path, :alert => "Пользователь не найден."
+      redirect_to login_path, :alert => t('session.msg_user_not_found')
     end
   end
 

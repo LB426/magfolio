@@ -7,6 +7,8 @@ class ProductsController < ApplicationController
     if current_user
       @product = @catalog.products.new
       @product.user_id = @catalog.user_id
+      @product_picture = @catalog.product_pictures.new
+      @product_picture.user_id = @catalog.user_id
     end
     case @catalog.zakaz_layout
     when /bouquet of flowers/
@@ -34,6 +36,8 @@ class ProductsController < ApplicationController
   def new
     @catalog = Catalog.find(params[:catalog_id])
     @product = @catalog.products.new
+    @product.user_id = @catalog.user_id
+    @product_picture = @catalog.product_pictures.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,11 +49,16 @@ class ProductsController < ApplicationController
   def edit
     @catalog = Catalog.find(params[:catalog_id])
     @product = @catalog.products.find(params[:id])
+    if current_user
+      @product_picture = @catalog.product_pictures.new
+      @product_picture.user_id = @catalog.user_id
+      @product_picture.product_id = @product.id
+    end
     case @catalog.zakaz_layout
     when /bouquet of flowers/
       render 'edit_bouquet_of_flowers', :layout => false
     else
-      redirect_to root_url, :alert => 'нет обработчика редактирования для такого типа товаров'
+      redirect_to root_url, :alert => t('product.msg_edit_alert')
     end
   end
 
@@ -60,8 +69,14 @@ class ProductsController < ApplicationController
     @product = @catalog.products.new(params[:product])
 
     respond_to do |format|
-      if @product.save
-        format.html { redirect_to(catalog_products_path(@catalog), :notice => 'Товар был успешно добавлен') }
+      if @product.save 
+        @product_picture = @product.product_pictures.new(params[:product_pictures])
+        @product_picture.user_id = @product.user_id
+        @product_picture.catalog_id = @product.catalog_id
+        
+        if @product_picture.save
+          format.html { redirect_to(catalog_products_path(@catalog), :notice => t('product.msg_create_success')) }
+        end
       else
         format.html { render :action => "new" }
       end
@@ -76,7 +91,12 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to(catalog_products_path(@catalog), :notice => 'Ценик был успешно изменён.') }
+        @product_picture = @product.product_pictures.new(params[:product_pictures])
+        @product_picture.user_id = @product.user_id
+        @product_picture.catalog_id = @product.catalog_id
+        if @product_picture.save
+          format.html { redirect_to(catalog_products_path(@catalog), :notice => t('product.msg_update_success') ) }
+        end
       else
         format.html { render :action => "edit" }
       end

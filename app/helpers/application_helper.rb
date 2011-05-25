@@ -2,7 +2,7 @@ module ApplicationHelper
   
   def render_title
     return @title if defined?(@title)
-    "Клевер, каталоги онлайн"
+    t('default.page_title')
   end
   
   def body_style

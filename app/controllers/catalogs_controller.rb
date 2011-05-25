@@ -41,8 +41,8 @@ class CatalogsController < ApplicationController
       # выдаёт весь каталог
       if @location == nil && @product == nil && @service == nil
         @locations = Location.all
-        @products = BusinessDeal.find_all_by_kind("товар")
-        @services = BusinessDeal.find_all_by_kind("услуга")
+        @products = BusinessDeal.find_all_by_kind t('business_deal.product')
+        @services = BusinessDeal.find_all_by_kind t('business_deal.service')
         # @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
         @catalogs = Catalog.find_by_sql("SELECT * FROM catalogs WHERE tariff != 'free' ORDER BY id DESC LIMIT 4 ")
       end
@@ -71,7 +71,7 @@ class CatalogsController < ApplicationController
       # поиск только по товару - отобразить все каталоги с данным товаром
       if @location == nil && @product != nil && @service == nil
         @locations = location_only_this_deal(@product)
-        @products = BusinessDeal.find_all_by_kind("товар")
+        @products = BusinessDeal.find_all_by_kind t('business_deal.product')
         @services = services_only_this_product(@product)
         @catalogs = catalogs_only_this_deal(@product)
       end
@@ -79,7 +79,7 @@ class CatalogsController < ApplicationController
       if @location == nil && @product == nil && @service != nil
         @locations = location_only_this_deal(@service)
         @products = products_only_this_service(@service)
-        @services = BusinessDeal.find_all_by_kind("услуга")
+        @services = BusinessDeal.find_all_by_kind t('business_deal.service')
         @catalogs = catalogs_only_this_deal(@service)
       end
       if @location == nil && @product != nil && @service != nil
@@ -89,7 +89,7 @@ class CatalogsController < ApplicationController
       
       @catalogs = free_tariff_in_end_catalogs(@catalogs)
       if @catalogs.nil?
-        redirect_to root_url, :notice => "Ничего не найдено!"
+        redirect_to root_url, :notice =>  t('messages.nothing')
       end
 
     end
@@ -215,7 +215,7 @@ class CatalogsController < ApplicationController
         @all_business_deals = BusinessDeal.all
       end
     else
-      redirect_to root_path, :alert => "Таких каталогов нет!"
+      redirect_to root_path, :alert => t('messages.catalogs_not_found')
     end
 
     #respond_to do |format|
@@ -224,7 +224,7 @@ class CatalogsController < ApplicationController
     #end
     
     rescue ActiveRecord::RecordNotFound
-      redirect_to root_path, :alert => "Каталог не найден!"
+      redirect_to root_path, :alert => t('messages.catalog_not_found')
   end
 
   # GET /catalogs/new
@@ -310,8 +310,8 @@ class CatalogsController < ApplicationController
   def search
     @body_css_class = "perma cities"
     @locations = Location.all
-    @products = BusinessDeal.find_all_by_kind("товар")
-    @services = BusinessDeal.find_all_by_kind("услуга")
+    @products = BusinessDeal.find_all_by_kind t('business_deal.product')
+    @services = BusinessDeal.find_all_by_kind t('business_deal.services')
     @cols = 3
     @products_in_col = (@products.size.to_f/@cols).ceil - 1
     @services_in_col = (@services.size.to_f/@cols).ceil - 1
@@ -381,7 +381,7 @@ private
 
   def products_only_this_location(location)
     result = Array.new
-    products = BusinessDeal.where( "kind = 'товар'" )
+    products = BusinessDeal.where( "kind = '#{t('business_deal.product')}'" )
     catalogs = Catalog.find_all_by_location_id( location.id )
     products.each do |product|
       catalogs.each do |catalog|
@@ -410,7 +410,7 @@ private
           catalog.business_deals.each do |deal|
             if catalog.location_id == location.id
               business_deals.each do |bd|
-                if "#{bd.id}" == "#{deal}" && bd.kind == "товар"
+                if "#{bd.id}" == "#{deal}" && bd.kind == t('business_deal.product')
                   result << bd
                   break
                 end
@@ -433,7 +433,7 @@ private
           catalog.business_deals.each do |deal|
             if catalog.location_id == location.id
               business_deals.each do |bd|
-                if "#{bd.id}" == "#{deal}" && bd.kind == "услуга"
+                if "#{bd.id}" == "#{deal}" && bd.kind == t('business_deal.service')
                   result << bd
                   break
                 end
@@ -466,7 +466,7 @@ private
 
   def services_only_this_location(location)
     result = Array.new
-    products = BusinessDeal.where( "kind = 'услуга'" )
+    products = BusinessDeal.where( "kind = '#{t('business_deal.service')}'" )
     catalogs = Catalog.find_all_by_location_id( location.id )
     products.each do |product|
       catalogs.each do |catalog|
@@ -534,12 +534,12 @@ private
   end
   
   def services_only_this_product(product)
-    result = BusinessDeal.find_all_by_kind("услуга")
+    result = BusinessDeal.find_all_by_kind( t('business_deal.service') )
     return result
   end
   
   def products_only_this_service(service)
-    result = BusinessDeal.find_all_by_kind("товар")
+    result = BusinessDeal.find_all_by_kind( t('business_deal.product') )
     return result
   end
 

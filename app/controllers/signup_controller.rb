@@ -2,7 +2,7 @@ class SignupController < ApplicationController
   before_filter :registration_upon_request
   
   def stage1
-    @title = "Создание каталога Клевер"
+    @title = t('signup.title_stage1')
     @body_css_class = "create"
     @header_layout = 'signup/header_stage1'
     @signup = find_signup
@@ -18,7 +18,7 @@ class SignupController < ApplicationController
   end
   
   def stage2
-    @title = "Изменение тарифного плана каталога Клевер"
+    @title = t('signup.title_stage2')
     @body_css_class = "upgrade"
     @header_layout = 'signup/header_stage2'
     @signup = find_signup
@@ -62,7 +62,6 @@ class SignupController < ApplicationController
   
   def bestpictureurl
     @signup = find_signup
-    logger.debug "1111111=#{@signup.bestpicture.url(:small)}"
     response.headers['Content-type'] = "text/html; charset=utf-8"
     render :text => "<img alt=\"image\" src=\"#{@signup.bestpicture.url(:small)}\" />"
   end

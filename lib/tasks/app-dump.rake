@@ -20,12 +20,12 @@ require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
 system("mkdir -p #{@home}/backup")
 
 namespace :dump do
-  desc "Создание дампа базы данных и assets-ов на сервере"
+  desc "Make database and assets on servers"
   task :all do |t, args|
     @db_archive_name = dump_database
     @assets_archive_name = dump_assets
   end
-  desc "Создание дампа на сервере, копирование его на локальную машину и заливка в базу и в ассеты"
+  desc "Make dump on server, download dump on localhost and restore database and assets"
   task :risefromremote do |t, args|
     puts Time.now
     system("ssh magfolio@tih.kuban.ru 'mysqldump -uroot -P3306 -h127.0.0.1 -p9002sliarNOiburLQSyM magfolio_production | bzip2 -c --best > /home/magfolio/backup/db_magfolio_production#{@date}.bz2'")

@@ -16,7 +16,7 @@ class IzbrannoesController < ApplicationController
     end
     rescue
       cookies.delete(:izbrannoe)
-      redirect_to root_path, :alert => "Ваше избранное не найдено!"
+      redirect_to root_path, :alert => t('izbrannoe.msg_not_fount')
   end
 
   # GET /izbrannoes/1

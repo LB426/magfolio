@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :catalogs, :dependent => :destroy
   has_many :pictures, :dependent => :destroy
+  has_many :product_pictures, :dependent => :destroy
   
   attr_accessible :email, :password, :password_confirmation
 

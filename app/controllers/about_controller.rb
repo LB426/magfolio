@@ -1,7 +1,7 @@
 class AboutController < ApplicationController
   
   def index
-    @title = "О веб каталогах Клевер"
+    @title = t('about.title')
     @body_css_class = "perma about"
   end
 

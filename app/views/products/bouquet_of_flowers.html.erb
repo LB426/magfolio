@@ -2,7 +2,7 @@
   <%= javascript_include_tag 'products_flowers_index.js' %>
 <% end %>
 
-<h1>Заказ цветов в <%= BusinessType.find(@catalog.businesstype_id).name %> <%= @catalog.company_name %></h1>
+<h1>Заказ цветов в <%= BusinessType.find(@catalog.businesstype_id).name.downcase %> <%= @catalog.company_name %></h1>
 
 <% @products.each do |product| %>      
   <div class="card listing_content">
@@ -20,18 +20,21 @@
         </p> 
       </div> 
       <div class="free-image">
-        
-        <script type="text/javascript">
-          $(document).ready(function() {
-            $("a[rel=<%= @catalog.id %>]").fancybox({
-              'transitionIn'          : 'none',
-              'transitionOut'         : 'none',
-              'titlePosition'         : 'over',
-              'titleFormat'           : function(title, currentArray, currentIndex, currentOpts){ return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>'; }
-            });
-          });
-        </script>
-        <a id="<%= @catalog.id %>" rel="<%= @catalog.id %>" href="<%= product.picture.url(:large) %>" title="<%= product.name %>"><img alt="" src="<%= product.picture.url(:small) %>" /></a>
+        <% counter = 0 %>
+        <% for image in product.product_pictures.all %>
+          <% if counter==0 then %>
+            <a rel="product_<%= product.id %>" href="<%= image.picture.url(:large) %>" title="<%= image.note %>">
+              <img src="<%= image.picture.url(:small) %>" />
+            </a>
+          <% else%>
+            <span style="display: none;VISIBILITY: hidden">
+              <a rel="product_<%= product.id %>" href="<%= image.picture.url(:large) %>" title="<%= image.note %>">
+                <img src="<%= image.picture.url(:small) %>" />
+              </a>
+            </span>
+          <% end %>
+          <% counter = counter + 1 %>
+        <% end %>
       </div>
       <div class="cardtools">
         <div class="listing">
@@ -77,8 +80,10 @@
         <%= f.text_field :price %>
       </p>
       <p>
-        <%= f.label :Изображение %>
-        <%= f.file_field :picture, :accept => "image/*" %>
+        <%= fields_for :product_pictures, @product_picture do |child_form| %>
+        <%= child_form.label :Изображение %>
+        <%= child_form.file_field :picture, :accept => "image/*" %>
+        <% end %>
       </p>
       <p><%= f.submit "Добавить букет" %></p>
     <% end %>

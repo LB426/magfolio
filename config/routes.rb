@@ -1,5 +1,5 @@
 Magfolio::Application.routes.draw do
-  
+
   get "cartography" => "cartography#index", :as => "cartography"
   
   resources :izbrannoes
@@ -13,7 +13,9 @@ Magfolio::Application.routes.draw do
   match 'catalogs/:id/loadmap' => 'catalogs#loadmap', :as => :loadmap
   match 'catalogs/indexload' => 'catalogs#indexload', :as => :index_load
   resources :catalogs do
-    resources :products
+    resources :products do
+      resources :product_pictures
+    end
     resources :carts
     resources :orders
   end
