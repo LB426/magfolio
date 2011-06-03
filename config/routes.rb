@@ -1,22 +1,25 @@
 Magfolio::Application.routes.draw do
 
-  get "cartography" => "cartography#index", :as => "cartography"
+  get "cartography/:catalog_id/show" => "cartography#show", :as => "catalog_map_show"
   
   resources :izbrannoes
 
   resources :business_deals
 
   resources :pictures
-  
+
+  match 'catalog/:id/mappopup' => "catalogs#mappopup", :as => :catalog_map_popup  
+  match 'catalog/:catalog_id/product/:product_id/cart/add' => 'carts#add', :as => :add_to_cart
   match 'catalogs/myfind' => 'catalogs#myfind', :as => :catalogs_find
   match '/search' => 'catalogs#search', :as => :search
+  match 'catalogs/:id/setcoordinate' => 'catalogs#setcoordinate', :as => :catalog_setcoordinate
   match 'catalogs/:id/loadmap' => 'catalogs#loadmap', :as => :loadmap
   match 'catalogs/indexload' => 'catalogs#indexload', :as => :index_load
   resources :catalogs do
     resources :products do
       resources :product_pictures
     end
-    resources :carts
+    # resources :carts
     resources :orders
   end
 

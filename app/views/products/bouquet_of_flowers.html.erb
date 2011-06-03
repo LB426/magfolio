@@ -1,5 +1,6 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'products_flowers_index.js' %>
+  <%= javascript_include_tag 'cart.js' %>
 <% end %>
 
 <h1>Заказ цветов в <%= BusinessType.find(@catalog.businesstype_id).name.downcase %> <%= @catalog.company_name %></h1>
@@ -40,7 +41,7 @@
         <div class="listing">
           <span class="favorite_links">
           <% unless current_user_self? %>
-            <a href="#" onclick="alert('1');return false;">Купить</a>
+            <a href="<%= add_to_cart_path(@catalog,product) %>" id="add_to_cart_<%= product.id %>">Купить</a>
           <% else %>
             <%= link_to "Редактировать", edit_catalog_product_path(@catalog,product), :id => "buket_edit" %>
             <a href="product_id_<%= product.id %>" id="delete_buket">Удалить</a>
@@ -91,3 +92,21 @@
 
 </div>
 <% end %>
+
+<!--
+<svg xmlns='http://www.w3.org/2000/svg'>
+<text x='-135' y='25' fill='#7a1249' font-family='Arial' font-size='25' transform='rotate(-90)'>
+  корзина
+</text>
+</svg>
+-->
+
+<% unless current_user %>
+<div class="user_menu">
+  <a href="/" title="Корзина" id="cart_link">
+    (&nbsp;<span id="cart_count">0</span>&nbsp;)
+    <img src="/images/cart-icon.png">
+  </a>
+</div>
+<% end %>
+

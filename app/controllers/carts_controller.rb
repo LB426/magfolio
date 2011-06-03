@@ -40,7 +40,7 @@ class CartsController < ApplicationController
 
   # POST /carts
   # POST /carts.xml
-  def create
+  def add
     @cart = Cart.new(params[:cart])
 
     respond_to do |format|

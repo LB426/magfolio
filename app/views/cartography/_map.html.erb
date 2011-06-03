@@ -1,29 +1,106 @@
-<div id="cm-example" style="width: 900px; height: 630px"></div>
-<div id="message">Drag or click the map.</div>
+<% content_for :head do %>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  
+  <script type="text/javascript">
+    var map;
+    var layer, markers;
+    var icon ;
+    var currentPopup;
+    
+    OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
+      defaultHandlerOptions: {
+          'single': true,
+          'double': false,
+          'pixelTolerance': 0,
+          'stopSingle': false,
+          'stopDouble': false
+      },
+      initialize: function(options) {
+        this.handlerOptions = OpenLayers.Util.extend({}, this.defaultHandlerOptions);
+        OpenLayers.Control.prototype.initialize.apply(this, arguments); 
+        this.handler = new OpenLayers.Handler.Click(  this, 
+                                                      {'click': this.trigger},  
+                                                      this.handlerOptions
+                                                    );
+      }, 
+      trigger: function(e) {
+        var lonlat = map.getLonLatFromViewPortPx(e.xy).transform(
+            new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"));
+  	    // alert("Устанавливаю координаты\n" + lonlat.lat + " N, " + lonlat.lon + " E");
+        $.ajax({
+          type: "PUT",
+          url: '<%= catalog_setcoordinate_path(@catalog) %>',
+          data: { longitude: lonlat.lon, latitude: lonlat.lat, authenticity_token: "<%= form_authenticity_token %>" },
+          success: function(msg){
+            if(msg == 'true'){
+    			    window.location = window.location ;
+    			  }else{
+    			    alert('не удалось установить Ваш <%= BusinessType.find(@catalog.businesstype_id).name %> на карте, обратитесь к администрации сайта для решения этой проблемы')
+    			  }
+          }
+        });
+      }
+    });
 
-<a id="add_coord_to_catalog" href="#coord_to_catalog" style="display:none">&nbsp;</a>
-<div style="display:none">
-  <div id="coord_to_catalog">
-    <h2>Координаты точки</h2>
-    <p>Широта:</p>
-    <p>Долгота:</p>
-  </div>
-</div>
+    AutoSizeFramedCloud = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+      'autoSize': true
+    });
 
-<script type="text/javascript" src="http://tile.cloudmade.com/wml/0.4/web-maps-lite.js"></script>
-<script type="text/javascript">//<![CDATA[
-	var cloudmade = new CM.Tiles.CloudMade.Web({key: '8ee2a50541944fb9bcedded5165f09d9'});
-	var map = new CM.Map('cm-example', cloudmade);
-	map.addControl(new CM.LargeMapControl());
-	map.setCenter(new CM.LatLng(45.8533228, 40.1257947), 14);
-	
-	function displayMessage(msg) {
-		document.getElementById('message').innerHTML = msg;
-	}
-	
-	CM.Event.addListener(map, 'click', function(latlng) {
-		displayMessage("Место1" + latlng.toString(4));
-		$("a#add_coord_to_catalog").click();
-	});
-	
-//]]></script>
+    function init(){
+      map = new OpenLayers.Map('map');
+      layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+      map.addLayer(layer);
+      map.addControl(new OpenLayers.Control.MousePosition());
+      
+      var popup = new OpenLayers.Layer.Text(  "text", 
+                                              { location: "/catalog/<%= @catalog.id %>/mappopup" }
+                                            );
+      map.addLayer(popup);
+      
+      map.setCenter(new OpenLayers.LonLat(<%= @lon -%>, <%= @lat -%>).transform(
+          new OpenLayers.Projection("EPSG:4326"),
+          map.getProjectionObject()
+      ), 15);
+      
+      var click = new OpenLayers.Control.Click();
+      map.addControl(click);
+      click.activate();
+    }
+  
+    function addMarker(ll, popupClass, popupContentHTML, closeBox, overflow){
+      var feature = new OpenLayers.Feature(markers, ll); 
+      feature.closeBox = closeBox;
+      feature.popupClass = popupClass;
+      feature.data.popupContentHTML = popupContentHTML;
+      feature.data.overflow = (overflow) ? "auto" : "hidden";
+      var marker = feature.createMarker();
+      var markerClick = function (evt) {
+        if (this.popup == null){
+          this.popup = this.createPopup(this.closeBox);
+          map.addPopup(this.popup);
+          this.popup.show();
+        }else{
+          this.popup.toggle();
+        }
+        currentPopup = this.popup;
+        OpenLayers.Event.stop(evt);
+      };
+      marker.events.register("mousedown", feature, markerClick);
+      markers.addMarker(marker);
+    }
+
+  </script>  
+  <style type="text/css">
+    .catalogmap{
+        width: 900px;
+        height: 600px;
+        border: 1px solid #ccc;
+    }
+    #tags{display: none;}
+    #docs p {margin-bottom: 0.5em;}
+  </style>
+<% end %>
+
+<div id="tags"></div>
+<div id="map" class="catalogmap"></div>
+<div id="docs"></div>

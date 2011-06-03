@@ -1,0 +1,24 @@
+<div id="cm-example" style="width: 900px; height: 630px"></div>
+	<script type="text/javascript" src="http://tile.cloudmade.com/wml/0.4/web-maps-lite.js"></script>
+	<script type="text/javascript">
+//<![CDATA[
+
+var cloudmade = new CM.Tiles.CloudMade.Web({key: '8ee2a50541944fb9bcedded5165f09d9'});
+var map = new CM.Map('cm-example', cloudmade);
+map.addControl(new CM.LargeMapControl());
+var myobject = new CM.LatLng(<%= @catalog.lat -%>, <%= @catalog.lng -%>);
+map.setCenter(myobject, 16);
+var marker = new CM.Marker(myobject, {title: "<%= @catalog.company_name -%>"});
+map.addOverlay(marker);
+
+CM.Event.addListener(marker, 'click', function(latlng) {
+  marker.openInfoWindow(
+    '<%= image_tag @pic.picture.url(:small) %>' +
+	  "<br />" + 
+	  "<h3 style='text-align: center'><a href='<%= shortcut_catalog_path(@catalog.shortcut_name) -%>'>" +
+	  "<%= @catalog.company_name -%></a></h3>",
+	  {maxWidth: 220}
+	);
+}); 
+
+//]]></script>

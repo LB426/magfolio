@@ -2,7 +2,6 @@ class Catalog < ActiveRecord::Base
   belongs_to :user
   has_many :pictures, :dependent => :destroy
   has_many :products, :dependent => :destroy
-  has_many :carts, :dependent => :destroy
   has_many :orders, :dependent => :destroy
   has_many :product_pictures, :through => :products, :dependent => :destroy
   

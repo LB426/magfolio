@@ -19,4 +19,17 @@ $(document).ready(function() {
       return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>'; 
     }
   });
+  $('a[id^="add_to_cart_"]').click(function(){
+    var link = $(this).attr('href')
+    var id = $(this).attr('id');
+    var product_id = id.replace('add_to_cart_', '');
+    $.getJSON(link, function(data){
+			$.each(data, function(i,item){
+			  alert('1');
+		  });
+		});
+    alert(link);
+    $(this).text('В корзине');
+    return false;
+	});
 })

@@ -51,7 +51,7 @@
       <%= render :inline => @catalog.company_description %>
       <% end %>
     </div>
-    <% @catalog.pictures.each do |pic| %>
+    <% @pictures.each do |pic| %>
       <div class="gallery <%= edit_block %>">
         <% if current_user_self? %>
           <p>

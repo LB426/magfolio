@@ -202,6 +202,7 @@ class CatalogsController < ApplicationController
       @catalog = Catalog.find(params[:id])
     end
     if @catalog
+	@pictures = @catalog.pictures.all(:order => "id DESC")
       if !current_user.nil? && current_user.id == @catalog.user_id
         @picture = current_user.pictures.new
         @picture.user_id = current_user.id
@@ -302,9 +303,34 @@ class CatalogsController < ApplicationController
   end
   
   def loadmap
+    @onload = 'init()'
     @pic = Picture.find(params[:id])
     @catalog = Catalog.find(@pic.catalog_id)
     render 'map_picture', :layout => true
+  end
+  
+  def setcoordinate
+    @catalog = Catalog.find(params[:id])
+    @catalog.lat = params[:latitude]
+    @catalog.lng = params[:longitude]
+    response.headers['Content-type'] = "text/plain; charset=utf-8"
+    if @catalog.save
+      render :text => "true"
+    else
+      render :text => "false"
+    end
+    rescue
+      render :text => "false"
+  end
+
+  def mappopup
+    @catalog = Catalog.find(params[:id])
+    @pic = @catalog.pictures.first
+    @business = BusinessType.find(@catalog.businesstype_id).name
+    title = "<img src='#{@pic.picture.url(:small)}'><br><a href='#{shortcut_catalog_path(@catalog.shortcut_name)}' >#{@catalog.company_name}</a>"
+    buffer = "point\ttitle\tdescription\ticon\n#{@catalog.lat}, #{@catalog.lng}\t#{title}\t<strong style='text-align: center'>#{@business}</strong>\t/images/map_marker_green.png\n"
+    response.headers['Content-type'] = "text/plain; charset=utf-8"
+    render :text => buffer, :layout => false
   end
   
   def search

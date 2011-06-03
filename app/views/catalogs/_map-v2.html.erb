@@ -1,0 +1,100 @@
+<% content_for :head do %>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script type="text/javascript">
+  OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
+    defaultHandlerOptions: {
+        'single': true,
+        'double': false,
+        'pixelTolerance': 0,
+        'stopSingle': false,
+        'stopDouble': false
+    },
+    initialize: function(options) {
+      this.handlerOptions = OpenLayers.Util.extend({}, this.defaultHandlerOptions);
+      OpenLayers.Control.prototype.initialize.apply(this, arguments); 
+      this.handler = new OpenLayers.Handler.Click(  this, 
+                                                    {'click': this.trigger},  
+                                                    this.handlerOptions
+                                                  );
+    }
+    <% if current_user_self? %>
+    , 
+    trigger: function(e) {
+      var lonlat = map.getLonLatFromViewPortPx(e.xy).transform(
+          new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"));
+	    // alert("Устанавливаю координаты\n" + lonlat.lat + " N, " + lonlat.lon + " E");
+      $.ajax({
+        type: "PUT",
+        url: '<%= catalog_setcoordinate_path(@catalog) %>',
+        data: { longitude: lonlat.lon, latitude: lonlat.lat, authenticity_token: "<%= form_authenticity_token %>" },
+        success: function(msg){
+          if(msg == 'true'){
+  			    window.location = window.location ;
+  			  }else{
+  			    alert('не удалось установить Ваш <%= BusinessType.find(@catalog.businesstype_id).name %> на карте, обратитесь к администрации сайта для решения этой проблемы')
+  			  }
+        }
+      });
+    }
+    <% end %>
+  });
+
+  var map, layer;
+  function init(){
+    map = new OpenLayers.Map( 'map');
+    layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+    map.addLayer(layer);
+    map.addControl(new OpenLayers.Control.MousePosition());
+    map.setCenter( new OpenLayers.LonLat(<%= @catalog.lng -%>, <%= @catalog.lat -%>).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+    ), 15);
+    addMarker();
+    var click = new OpenLayers.Control.Click();
+    map.addControl(click);
+    click.activate();
+  }
+
+  function addMarker() {
+    markers = new OpenLayers.Layer.Markers("zibo");
+    map.addLayer(markers);
+    popup= new OpenLayers.Popup.Anchored( "Example", 
+                                          new OpenLayers.LonLat(
+                                            <%= @catalog.lng -%>, 
+                                            <%= @catalog.lat -%> ).transform(
+                                                new OpenLayers.Projection("EPSG:4326"),
+                                                map.getProjectionObject()
+                                            ),
+                                          new OpenLayers.Size(200,100),
+                                          "Welcome!");
+    map.addPopup(popup);
+    popup.hide();
+    feature = new OpenLayers.Feature( layer, 
+                                      new OpenLayers.LonLat(
+                                        <%= @catalog.lng -%>, 
+                                        <%= @catalog.lat -%> ).transform(
+                                            new OpenLayers.Projection("EPSG:4326"),
+                                            map.getProjectionObject()
+                                        ));
+    marker = feature.createMarker();
+    markers.addMarker(marker);
+    marker.events.register("click", marker, function(e) {popup.toggle()});
+  }
+
+</script>  
+
+<style type="text/css">
+  .catalogmap{
+      width: 900px;
+      height: 600px;
+      border: 1px solid #ccc;
+  }
+  #tags{display: none;}
+  #docs p {margin-bottom: 0.5em;}
+</style>
+
+<% end %>
+
+<div id="tags"></div>
+<div id="map" class="catalogmap"></div>
+<div id="docs"></div>

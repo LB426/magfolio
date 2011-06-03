@@ -7,6 +7,7 @@
       <div class="printpage">
         <a href="#" class="print" target="_blank">
           Рейтинг
+          <%= @catalog.rating %>
         </a>
       </div>
       <div class="listing">
@@ -16,24 +17,35 @@
         </span>  
       </div>
     </div>
-      <h2>Карта</h2>
+      <% if /missing/ =~ @catalog.logo.url(:thumb) %>
+      <% else %>
+      <%= image_tag @catalog.logo.url(:thumb), :align => 'right' %>
+      <% end %>
+      <h2><%= @catalog.company_name %></h2>
       <p>
         Вид бизнеса: 
-        <strong>Карта</strong><br />
+        <strong><%= BusinessType.find(@catalog.businesstype_id).name %></strong><br />
         Расположен в 
         <strong>
-          <a href="/chicago">Карта></a>
+          <a href="/chicago"><%= Location.find(@catalog.location_id).name %></a>
         </strong><br />
         E-mail: 
         <strong>
+          <a href="mailto:<%= @catalog.email -%>?subject=Вопросы о каталоге <%= @catalog.company_name -%>"><%= @catalog.email %></a>
         </strong>
       </p>
+      <% unless @catalog.company_description.blank? %>
+      <%= render :inline => @catalog.company_description %>
+      <% end %>
       <div class="map">
         <%= render :partial => 'map' %>
       </div>
     <div class="action">
-      <h2>Вам понравилось? Свяжитесь с .</h2>
+      <h2>Вам понравилось? Свяжитесь с <%= @catalog.company_name %>.</h2>
       <h3>
+          <a href="mailto:<%= @catalog.email %>"><%= @catalog.email %></a>
+          •
+          <a href="<%= @catalog.company_url %>"><%= @catalog.company_url %></a>
       </h3>
     </div>
   </div>
@@ -41,5 +53,3 @@
     <img alt="Card-bottom-perma" src="/images/card-bottom-perma.png">
   </div>
 </div>
-
-

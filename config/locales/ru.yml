@@ -35,7 +35,10 @@ ru:
     msg_edit_alert: "нет обработчика редактирования для такого типа товаров"
     msg_create_success: "Товар был успешно добавлен"
     msg_update_success: "Ценик был успешно изменён"
+  cartography:
+    msg_add_marker_on_map_non_self_alert: "Вам запрещено редактировать чужую карту"
   default:
     page_title: "Клевер, каталоги онлайн"
     this_city: "Городе"
     make_order: "Сделать заказ"
+    rescue_error_in_controllers: "Ошибка в"
