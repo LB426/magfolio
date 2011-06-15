@@ -6,6 +6,10 @@ class CreateCarts < ActiveRecord::Migration
 
       t.timestamps
     end
+    
+    add_index :carts, :id
+    add_index :carts, :catalog_id
+    add_index :carts, :order_id
   end
 
   def self.down

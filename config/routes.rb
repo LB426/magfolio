@@ -7,7 +7,15 @@ Magfolio::Application.routes.draw do
   resources :business_deals
 
   resources :pictures
+  
+  # resources :orders
+  match 'order/new/:stage' => 'orders#new', :as => :make_order
 
+  match '/mycart/destroy' => "carts#destroy", :as => :destroy_cart
+  match '/mycart/:catalog_id/destroy/:product_id' => "carts#destroy_from_cart", :as => :destroy_from_cart
+  match '/mycart/edit' => "carts#edit", :as => :edit_mycart
+  match '/mycart' => "carts#show", :as => :show_mycart
+  
   match 'catalog/:id/mappopup' => "catalogs#mappopup", :as => :catalog_map_popup  
   match 'catalog/:catalog_id/product/:product_id/cart/add' => 'carts#add', :as => :add_to_cart
   match 'catalogs/myfind' => 'catalogs#myfind', :as => :catalogs_find
@@ -15,12 +23,12 @@ Magfolio::Application.routes.draw do
   match 'catalogs/:id/setcoordinate' => 'catalogs#setcoordinate', :as => :catalog_setcoordinate
   match 'catalogs/:id/loadmap' => 'catalogs#loadmap', :as => :loadmap
   match 'catalogs/indexload' => 'catalogs#indexload', :as => :index_load
+  
   resources :catalogs do
     resources :products do
       resources :product_pictures
     end
     # resources :carts
-    resources :orders
   end
 
   match 'sessions/edituser/:reset_password_token' => 'sessions#edituser', :as => :edit_user_with_rptoken
@@ -41,7 +49,6 @@ Magfolio::Application.routes.draw do
   resources :business_types
 
   match 'atlanta' => 'atlanta#index', :as => :atlanta
-  get "atlanta/index"
 
   match 'success' => 'success#index', :as => :success
   

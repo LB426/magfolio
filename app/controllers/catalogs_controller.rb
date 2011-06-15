@@ -328,7 +328,7 @@ class CatalogsController < ApplicationController
     @pic = @catalog.pictures.first
     @business = BusinessType.find(@catalog.businesstype_id).name
     title = "<img src='#{@pic.picture.url(:small)}'><br><a href='#{shortcut_catalog_path(@catalog.shortcut_name)}' >#{@catalog.company_name}</a>"
-    buffer = "point\ttitle\tdescription\ticon\n#{@catalog.lat}, #{@catalog.lng}\t#{title}\t<strong style='text-align: center'>#{@business}</strong>\t/images/map_marker_green.png\n"
+    buffer = "point\ttitle\tdescription\ticon\ticonSize\n#{@catalog.lat}, #{@catalog.lng}\t#{title}\t<strong style='text-align: center'>#{@business}</strong>\t/images/map_marker_green.png\t24,40\n"
     response.headers['Content-type'] = "text/plain; charset=utf-8"
     render :text => buffer, :layout => false
   end

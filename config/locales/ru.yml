@@ -35,6 +35,16 @@ ru:
     msg_edit_alert: "нет обработчика редактирования для такого типа товаров"
     msg_create_success: "Товар был успешно добавлен"
     msg_update_success: "Ценик был успешно изменён"
+    pay: "Купить"
+    in_cart: "В корзине"
+  cart:
+    msg_nothing: "У Вас нет корзины"
+    msg_del_prod: "Товар удалён из корзины"
+    msg_no_del_prod: "Ошибка удаления товара из корзины"
+    msg_cart_destroyed_no_products: "Ваша корзина удалена, т.к. в ней нет товаров"
+    msg_cart_destroyed: "Корзина удалена"
+  order:
+    msg_stage_not_found: "Такого этапа оформления заказа нет"
   cartography:
     msg_add_marker_on_map_non_self_alert: "Вам запрещено редактировать чужую карту"
   default:

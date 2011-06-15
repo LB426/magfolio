@@ -24,12 +24,21 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.xml
   def new
-    @catalog = Catalog.find(params[:catalog_id])
-    @order = @catalog.orders.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @order }
+    @body_css_class = "nullclass"
+    # @body_css_class = "create"
+    # @body_css_class = "home favorites"
+    case params[:stage]
+    when "1"
+      @header_layout = 'orders/header_stage1'
+      render 'stage1', :layout => true
+    when "2"
+      @header_layout = 'orders/header_stage2'
+      render 'stage2', :layout => true
+    when "3"
+      @header_layout = 'orders/header_stage3'
+      render 'stage3', :layout => true
+    else
+      redirect_to root_url, :alert =>  t('order.msg_stage_not_found')
     end
   end
 

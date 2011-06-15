@@ -7,7 +7,8 @@ class ProductPicture < ActiveRecord::Base
                     :styles => { :small => ["195x136#", :jpg], :medium => ["430x300#", :jpg], :large => ["897x628#", :jpg] },
                     :path => ":rails_root/public/assets/product-pictures/:id/:style/:basename.:extension",
                     :url  => "/assets/product-pictures/:id/:style/:basename.:extension",
-                    :convert_options => { :large => "-quality 82", :medium => "-quality 52" }
+                    :convert_options => { :large => "-quality 82", :medium => "-quality 52" },
+                    :default_url => "/images/missing.png"
 
   before_create :randomize_file_name
 

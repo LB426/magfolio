@@ -14,8 +14,7 @@ class ProductsController < ApplicationController
     when /bouquet of flowers/
       @body_css_class = "home favorites"
       render 'bouquet_of_flowers', :layout => true
-    else
-      
+    else    
       render 'zakaz_phone', :layout => true
     end
   end

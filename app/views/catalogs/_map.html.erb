@@ -55,8 +55,7 @@
       map.addControl(new OpenLayers.Control.MousePosition());
       
       var popup = new OpenLayers.Layer.Text(  "text", 
-                                              { location: "/catalog/<%= @catalog.id %>/mappopup" }
-                                            );
+                                              { location: "/catalog/<%= @catalog.id %>/mappopup" });
       map.addLayer(popup);
       
       map.setCenter(new OpenLayers.LonLat(<%= @catalog.lng -%>, <%= @catalog.lat -%> + 0.002).transform(

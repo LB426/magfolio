@@ -27,7 +27,7 @@ private
   end
   
   def maindomain
-    "klever.spknd.ru"
+    "tihinfo.ru"
   end
 
 protected

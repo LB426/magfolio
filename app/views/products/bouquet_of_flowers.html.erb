@@ -41,7 +41,7 @@
         <div class="listing">
           <span class="favorite_links">
           <% unless current_user_self? %>
-            <a href="<%= add_to_cart_path(@catalog,product) %>" id="add_to_cart_<%= product.id %>">Купить</a>
+            <a href="<%= add_to_cart_path(@catalog,product) %>" id="add_to_cart_<%= product.id %>"><%= product_in_carts?(@catalog.id, product.id) %></a>
           <% else %>
             <%= link_to "Редактировать", edit_catalog_product_path(@catalog,product), :id => "buket_edit" %>
             <a href="product_id_<%= product.id %>" id="delete_buket">Удалить</a>
@@ -101,12 +101,4 @@
 </svg>
 -->
 
-<% unless current_user %>
-<div class="user_menu">
-  <a href="/" title="Корзина" id="cart_link">
-    (&nbsp;<span id="cart_count">0</span>&nbsp;)
-    <img src="/images/cart-icon.png">
-  </a>
-</div>
-<% end %>
 

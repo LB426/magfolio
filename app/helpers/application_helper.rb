@@ -24,5 +24,15 @@ module ApplicationHelper
     end
     ""
   end
+  
+  def cart_exist?
+    @cart_count = 0
+    unless cookies[:cart].nil?
+      cart = Cart.find_by_unique_identifier(cookies[:cart])
+      @cart_count = cart.all_products_count
+      return true
+    end
+    return false
+  end
     
 end

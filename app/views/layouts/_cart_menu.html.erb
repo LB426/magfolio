@@ -1,0 +1,13 @@
+<div class="user_menu">
+  <% if cart_exist? && !current_user %>
+    <div id="mycart">
+  <% else %>
+    <div style="display:none" id="mycart">
+  <% end %>  
+  <a href="<%= show_mycart_path %>" title="Моя корзина">
+    <strong>(<span id="cart_count"><%= @cart_count %></span>)</strong>
+    <br />
+    <img src="/images/cart-icon.png">
+  </a>
+  </div>
+</div>

@@ -20,16 +20,24 @@ $(document).ready(function() {
     }
   });
   $('a[id^="add_to_cart_"]').click(function(){
+    var thislink = $(this);
+    var cart_count = parseInt($("#cart_count").text());
     var link = $(this).attr('href')
     var id = $(this).attr('id');
     var product_id = id.replace('add_to_cart_', '');
     $.getJSON(link, function(data){
 			$.each(data, function(i,item){
-			  alert('1');
+			  if(item.result == true){
+			    $('#mycart').show();
+			    $.cookie( "cart", item.cart_unique_id,{expires: 2000, path: "/"});
+			    cart_count = cart_count + 1 ;
+			    $("#cart_count").text(item.products_count);
+			    thislink.text('В корзине (' + item.product_count + ')');
+			  }else{
+			    alert('Не удалось добавить в корзину этот товар!'); 
+			  }
 		  });
 		});
-    alert(link);
-    $(this).text('В корзине');
     return false;
 	});
 })
