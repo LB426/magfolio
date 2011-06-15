@@ -47,6 +47,8 @@ ru:
     msg_stage_not_found: "Такого этапа оформления заказа нет"
   cartography:
     msg_add_marker_on_map_non_self_alert: "Вам запрещено редактировать чужую карту"
+  mailer:
+    subject_reset_password: "Сброс пароля на вход в веб каталог Клевер"
   default:
     page_title: "Клевер, каталоги онлайн"
     this_city: "Городе"
