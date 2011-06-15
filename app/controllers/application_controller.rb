@@ -75,7 +75,7 @@ protected
       if Rails.env == 'development'
         return "http://localhost:3000"
       else
-        return "http://#{}"
+        return "http://#{maindomain}"
       end
     end
   end
