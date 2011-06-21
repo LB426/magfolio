@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110609091403) do
+ActiveRecord::Schema.define(:version => 20110620064242) do
 
   create_table "business_deals", :force => true do |t|
     t.string   "name"
@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(:version => 20110609091403) do
   add_index "business_types", ["id"], :name => "index_business_types_on_id"
 
   create_table "carts", :force => true do |t|
-    t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "unique_identifier", :null => false
     t.text     "products"
+    t.text     "order_options"
   end
 
   create_table "catalogs", :force => true do |t|
@@ -86,10 +86,19 @@ ActiveRecord::Schema.define(:version => 20110609091403) do
   add_index "locations", ["id"], :name => "index_locations_on_id"
 
   create_table "orders", :force => true do |t|
-    t.integer  "catalog_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "catalog_id",                      :null => false
+    t.string   "customer_id",                     :null => false
+    t.text     "products",                        :null => false
+    t.text     "payment",                         :null => false
+    t.text     "delivery",                        :null => false
+    t.string   "state",       :default => "open", :null => false
   end
+
+  add_index "orders", ["catalog_id"], :name => "index_orders_on_catalog_id"
+  add_index "orders", ["customer_id"], :name => "index_orders_on_customer_id"
+  add_index "orders", ["id"], :name => "index_orders_on_id"
 
   create_table "pictures", :force => true do |t|
     t.integer  "user_id",              :null => false

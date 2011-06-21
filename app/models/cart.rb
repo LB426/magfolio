@@ -1,9 +1,9 @@
 class Cart < ActiveRecord::Base
   serialize :products
+  serialize :order_options
 
   # product - это хэш из каталог_ID и product_ID
   def add_product_to_products(catalog_id, product_id)
-    logger.debug "1 catalog_id=#{catalog_id} product_id=#{product_id}"
     if self.products == nil
       self.products = [{:catalog_id => catalog_id, 
                         :product_ids => [{:product_id => product_id, :product_count => 1}],
@@ -13,7 +13,6 @@ class Cart < ActiveRecord::Base
         if products[:catalog_id].to_i == catalog_id.to_i
           flag = true
           products[:product_ids].each do |product|
-            logger.debug "2 product=#{product}"
             if product[:product_id].to_i == product_id.to_i
               product[:product_count] = product[:product_count] + 1
               products[:products_count] = products[:products_count] + 1

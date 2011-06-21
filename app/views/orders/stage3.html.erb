@@ -1,63 +1,93 @@
-<style type="text/css">
-div.content {
-  border-top: 1px solid #ccc;
-}
-
-div.column{
-  margin-top:10px;
-  padding:0;
-}
-div.left{
-  float: left;
-  width: 24%;
-}
-div.right{
-  float: right;
-  width: 75%;
-}
-
-ul.orderstack{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-ul.orderstack li{
-  width: 100%;
-}
-ul.orderstack li{
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 1px;
-  color: #FAFAD2;
-  background-color: #4682B4;
-  border-radius: 15px 15px 15px 15px;
-  -moz-border-radius: 15px 15px 15px 15px;
-  -webkit-border-radius: 15px 15px 15px 15px;
-  border: 1px solid #ccc;
-}
-ul.orderstack li:hover {
-  color: #4682B4;
-  background-color: #FAFAD2;
-  border: 1px solid #ccc;
-}
-ul.orderstack li img {
-  float: right;
-  margin-right: 7px;
-}
-
-.myclass{
-  border: 1px solid #000000;
-  display: block;
-}
-</style>
+<% content_for :head do %>
+  <%= javascript_include_tag 'order.js' %>
+<% end %>
 
 <div class="column left">
+  <h3>Мой выбор</h3>
 	<ul class="orderstack">
-     <li>Доставка - самовывоз<a href="#"><img src="/images/delete.gif"></a></li>
-     <li>Оплата - наложенным платежём<a href="#"><img src="/images/delete.gif"></a></li>
+     <li>Доставка - <%= delivery %><a href="<%= make_order_path(1) %>" title="Изменить доставку"><img src="/images/delete.gif"></a></li>
+     <li>Оплата - <%= payment %><a href="<%= make_order_path(2) %>" title="Изменить оплату"><img src="/images/delete.gif"></a></li>
   </ul>
 </div>
 <div class="column right">
-<img src="/images/img_upsell-1.png" width="100px">
-<img src="/images/img_upsell-1.png" width="100px">
+<style type="text/css">
+  table{
+  	border-collapse: collapse;
+  	text-align:left;
+  	width: 100%;
+  }
+  caption{
+  	font-size: 			1em;
+  	color:				#000000;
+  	text-align:			center;
+  	font-weight:		bolder;
+  	border-bottom:  3px solid #000;
+  }
+  thead tr th{
+  	color:				#0099ff;
+  	text-transform:		uppercase;
+  	text-align:			center;	
+  	border-bottom:		3px solid #000;
+  }
+  tfoot tr th{
+  	border-top:		3px solid #000;
+  }
+  tr td, tr th{
+  	border: 1px solid #000;
+  	line-height:  1.5em;
+  }
+</style>
+<table>
+  <caption>Я хочу заказать</caption>
+  <thead>
+    <tr>
+      <th scope="col">Продавец</th>
+      <th scope="col">Товар</th>
+      <th scope="col">Количество</th>
+      <th scope="col">Цена</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% all_price = 0 %>
+    <% @cart.products.each do |products| %>
+    <% catalog = Catalog.find(products[:catalog_id]) %>
+    <% products[:product_ids].each do |prod| %>
+      <% product_count = prod[:product_count].to_i %>
+      <% product = Product.find(prod[:product_id]) %>
+      <% price = product_count * product.price %>
+      <% all_price = all_price + price %>
+        <tr>
+          <th scope="row">
+            <%= link_to catalog.company_name, catalog_path(catalog) %>
+          </th>
+          <td align="center">
+            <%= link_to product.name, "/" %>
+          </td>
+          <td align="center">
+            <%= product_count %>
+          </td>
+          <td align="center"><%= price %> руб.</td>
+        </tr>
+      <% end %>
+      <% end %>
+      <tr>
+        <td>&nbsp;</td>
+        <td align="center">доставка</td>
+        <td align="center">адрес</td>
+        <td align="center">100руб.</td>
+      </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row">Итого:</th>
+      <th>&nbsp</th>
+      <th align="center">
+        <strong><%= @cart.all_products_count %></strong> товаров
+      </th>
+      <th align="center">на сумму <strong><%= all_price %></strong> руб.</th>
+    </tr>
+  </tfoot>
+</table>
+<input type="checkbox" id="terms_of_confirm">Я согласен с <a href="">условиями предоставления услуг</a><br>
+<%= link_to image_tag("confirm_order.png"), make_order_path('4'), :id => "order_confirm" %>
 </div>

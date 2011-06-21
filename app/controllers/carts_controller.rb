@@ -11,7 +11,7 @@ class CartsController < ApplicationController
   end
 
   # GET /carts/1/edit
-  def edit
+  def edit_products
     response.headers['Content-type'] = "text/plain; charset=utf-8"
     unless cookies[:cart].nil?
       @cart = Cart.find_by_unique_identifier(cookies[:cart])
@@ -24,6 +24,54 @@ class CartsController < ApplicationController
     else
       render :text => false
     end
+  end
+  
+  def edit_delivery_order_options
+    @cart == find_cart
+    if @cart == nil
+      redirect_to root_url, :alert =>  t('cart.msg_nothing')
+      return false
+    end
+
+    case params[:delivery]
+    when 'samovyvoz'
+      order_options = @cart.order_options
+      order_options = {} if order_options.nil?
+      order_options['delivery'] = t('order.delivery_samovyvoz')
+      @cart.order_options = order_options
+      @cart.save
+      redirect_to make_order_path('2')
+    else    
+      redirect_to make_order_path('1'), :alert =>  t('order.msg_delivery_error')
+    end
+    
+    rescue 
+      msg = "#{t("default.rescue_error_in_controllers")} CartsController: #{$!}"
+      redirect_to root_url, :alert => msg    
+  end
+  
+  def edit_payment_order_options
+    @cart == find_cart
+    if @cart == nil
+      redirect_to root_url, :alert =>  t('cart.msg_nothing')
+      return false
+    end
+
+    case params[:payment]
+    when 'cash'
+      order_options = @cart.order_options
+      order_options = {} if order_options.nil?
+      order_options['payment'] = t('order.payment_cash_obtaining')
+      @cart.order_options = order_options
+      @cart.save
+      redirect_to make_order_path('3')
+    else    
+      redirect_to make_order_path('2'), :alert =>  t('order.msg_payment_error')
+    end
+    
+    #rescue 
+    #  msg = "#{t("default.rescue_error_in_controllers")} CartsController: #{$!}"
+    #  redirect_to root_url, :alert => msg
   end
 
   # POST /carts

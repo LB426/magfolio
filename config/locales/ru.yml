@@ -45,6 +45,16 @@ ru:
     msg_cart_destroyed: "Корзина удалена"
   order:
     msg_stage_not_found: "Такого этапа оформления заказа нет"
+    msg_delivery_error: "Такого вида доставки нет"
+    msg_delivery_nothing: "доставка не выбрана"
+    msg_payment_error: "Такого вида оплаты нет"
+    msg_payment_nothing: "оплата не выбрана"
+    msg_order_create_success: "Заказ успешно создан"
+    msg_order_create_non_success: "Заказ НЕ создан"
+    msg_orders_not_found: "Заказы не найдены"
+    delivery_samovyvoz: "самовывоз"
+    payment_cash: "наличные"
+    payment_cash_obtaining: "наличными при получении товара"
   cartography:
     msg_add_marker_on_map_non_self_alert: "Вам запрещено редактировать чужую карту"
   mailer:

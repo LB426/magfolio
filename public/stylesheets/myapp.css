@@ -138,6 +138,133 @@ div.thiserror {
   clear: both;
 }
 
+/* Оформление заказа ------------------------------------ */
+/* stage1 */
+body.orderstage1 div.content{
+  border-top: 1px solid #ccc;
+}
+
+body.orderstage1 div.column{
+  margin-top:10px;
+  padding:0;
+}
+
+body.orderstage1 div.left{
+  float: left;
+  width: 49%;
+}
+
+body.orderstage1 div.right{
+  float: right;
+  width: 49%;
+}
+
+div.box1 {
+  margin: 0px 30px 0px 30px;
+  padding: 20px 20px 20px 20px;
+}
+
+div.box1:hover {
+  margin: 0px 30px 0px 30px;
+  background-color: #4682B4;
+}
+
+div.box2 {
+  border: 1px solid #ccc;
+  background-color: #FFFFFF;
+}
+
+/* stage2 */
+body.orderstage2 div.content{
+  border-top: 1px solid #ccc;
+}
+
+body.orderstage2 div.column{
+  margin-top:10px;
+  padding:0;
+}
+
+body.orderstage2 div.left{
+  float: left;
+  width: 30%;
+}
+
+body.orderstage2 div.right{
+  float: right;
+  width: 69%;
+}
+
+body.orderstage2 div.right a img {
+  margin: 0px 10px 10px 0px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #FFFFFF;
+  border-radius: 10px 10px 10px 10px;
+}
+
+body.orderstage2 div.right a img:hover {
+  background-color: #4682B4;
+}
+
+/* stage3 */
+body.orderstage3 div.content{
+  border-top: 1px solid #ccc;
+}
+
+body.orderstage3 div.column{
+  margin-top:10px;
+  padding:0;
+}
+
+body.orderstage3 div.left{
+  float: left;
+  width: 30%;
+}
+
+body.orderstage3 div.right{
+  float: right;
+  width: 69%;
+}
+
+body.orderstage3 div.right a img {
+  margin: 0px 10px 10px 0px;
+  padding: 10px;
+  background-color: #FFFFFF;
+}
+
+ul.orderstack{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.orderstack li{
+  width: 100%;
+}
+
+ul.orderstack li{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 1px;
+  color: #FAFAD2;
+  background-color: #4682B4;
+  border-radius: 15px 15px 15px 15px;
+  -moz-border-radius: 15px 15px 15px 15px;
+  -webkit-border-radius: 15px 15px 15px 15px;
+  border: 1px solid #ccc;
+}
+
+ul.orderstack li:hover {
+  color: #4682B4;
+  background-color: #FAFAD2;
+  border: 1px solid #ccc;
+}
+
+ul.orderstack li img {
+  float: right;
+  margin-right: 7px;
+}
+
 /* STRUCTURE --------------------------------------------------*/
 
 div.container {

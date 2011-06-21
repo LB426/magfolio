@@ -7,7 +7,12 @@
   <a href="<%= show_mycart_path %>" title="Моя корзина">
     <strong>(<span id="cart_count"><%= @cart_count %></span>)</strong>
     <br />
-    <img src="/images/cart-icon.png">
+    <img src="/images/order-icon.gif">
   </a>
   </div>
+  <% if customer? %>
+    <div id="myorders">
+      <a href="<%= show_order_path(customer?) %>" title="Мои заказы"><img src="/images/order-icon.png"></a>
+    </div>
+  <% end %>
 </div>

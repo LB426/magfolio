@@ -9,11 +9,14 @@ Magfolio::Application.routes.draw do
   resources :pictures
   
   # resources :orders
+  match 'orders/:customer_id' => 'orders#show', :as => :show_order
   match 'order/new/:stage' => 'orders#new', :as => :make_order
 
   match '/mycart/destroy' => "carts#destroy", :as => :destroy_cart
   match '/mycart/:catalog_id/destroy/:product_id' => "carts#destroy_from_cart", :as => :destroy_from_cart
-  match '/mycart/edit' => "carts#edit", :as => :edit_mycart
+  match '/mycart/edit/payment/:payment' => "carts#edit_payment_order_options", :as => :edit_payment_order_options
+  match '/mycart/edit/delivery/:delivery' => "carts#edit_delivery_order_options", :as => :edit_delivery_order_options
+  match '/mycart/edit/products' => "carts#edit_products", :as => :edit_mycart_products
   match '/mycart' => "carts#show", :as => :show_mycart
   
   match 'catalog/:id/mappopup' => "catalogs#mappopup", :as => :catalog_map_popup  

@@ -37,7 +37,7 @@ $(document).ready(function() {
       if(new_amount != old_amount){
         $.ajax({
           type: "POST",
-          url: '/mycart/edit',
+          url: '/mycart/edit/products',
           data: { catalog_id: catalog_id, product_id: product_id, new_amount: new_amount },
           success: function(msg){
             if(msg === 'true'){

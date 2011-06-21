@@ -1,66 +1,26 @@
-<style type="text/css">
-div.content {
-  border-top: 1px solid #ccc;
-}
-
-div.column{
-  margin-top:10px;
-  padding:0;
-//  border: 1px solid #000000;
-}
-div.left{
-  float: left;
-  width: 24%;
-}
-div.right{
-  float: right;
-  width: 75%;
-}
-
-ul.orderstack{
-  margin: 0;
-  padding: 0;
-  list-style: none;
-//  width: 95%;
-}
-ul.orderstack li{
-//  float: left;
-  width: 100%;
-}
-ul.orderstack li{
-//  display: block;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 1px;
-  color: #FAFAD2;
-  background-color: #4682B4;
-  border-radius: 15px 15px 15px 15px;
-  -moz-border-radius: 15px 15px 15px 15px;
-  -webkit-border-radius: 15px 15px 15px 15px;
-  border: 1px solid #ccc;
-}
-ul.orderstack li:hover {
-  color: #4682B4;
-  background-color: #FAFAD2;
-  border: 1px solid #ccc;
-}
-ul.orderstack li img {
-  float: right;
-  margin-right: 7px;
-}
-
-.myclass{
-  border: 1px solid #000000;
-  display: block;
-}
-</style>
-
 <div class="column left">
+  <h3>Мой выбор</h3>
 	<ul class="orderstack">
-     <li>Доставка - Почта России<a href="#" title="Удалить"><img src="/images/delete.gif"></a></li>
+	  <li>Оформление заказа по каталогу: </li>
+    <li>Доставка - <%= delivery %><a href="<%= make_order_path(1) %>" title="Изменить доставку"><img src="/images/delete.gif"></a></li>
   </ul>
 </div>
+
 <div class="column right">
-<img src="/images/img_upsell-1.png" width="100px">
-<img src="/images/img_upsell-1.png" width="100px">
+  <a href="<%= edit_payment_order_options_path('cash') %>" id="payment" title="Клиент забирает товар самостоятельно"><img src="/images/oplata-cash.png" width="200px"></a>
+  
+  <a href="#" id="payment" title="Клиент забирает товар самостоятельно"><img src="/images/visa.png" width="200px"></a>
+
+  <a href="#" id="payment" title="Клиент забирает товар самостоятельно"><img src="/images/mastercard.png" width="200px"></a>
+
+  <a href="#" id="payment" title="Клиент забирает товар самостоятельно"><img src="/images/logo_qiwi.png" width="200px"></a>
+
+  <a href="#" id="payment" title="Клиент забирает товар самостоятельно"><img src="/images/webmoney_logo.png" width="200px"></a>
+
+  <a href="#" id="payment" title="Клиент забирает товар самостоятельно"><img src="/images/yamoney-logo.png" width="200px"></a>
+  
+  <a href="#" id="payment" title="Клиент забирает товар самостоятельно"><img src="/images/news_sms_payment.jpg" width="200px"></a>
+  
+  <a href="#" id="payment" title="Клиент забирает товар самостоятельно"><img src="/images/sberbank_logo.png" width="200px"></a>
+  
 </div>

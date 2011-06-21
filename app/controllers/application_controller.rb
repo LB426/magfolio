@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_self?
   helper_method :is_admin
   helper_method :maindomain
+  helper_method :customer?
   
 private
   def current_user
@@ -28,6 +29,26 @@ private
   
   def maindomain
     "tihinfo.ru"
+  end
+  
+  def find_cart
+    @cart = nil
+    unless cookies[:cart].nil?
+      @cart = Cart.find_by_unique_identifier(cookies[:cart])
+    else
+    end
+    @cart
+  end
+  
+  def customer?(customer_id = nil)
+    if current_user
+      # поиск customer_id
+    else
+      unless cookies[:customer].nil?
+        return cookies[:customer]
+      end
+    end
+    return nil
   end
 
 protected

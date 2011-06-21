@@ -1,13 +1,13 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.7'
+gem 'rails', '3.0.9'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 # gem "haml"
-gem 'mysql2', '0.2.7'
-#gem 'mysql2', '< 0.3'
+#gem 'mysql2', '0.2.7'
+gem 'mysql2', '< 0.3'
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'russian'
