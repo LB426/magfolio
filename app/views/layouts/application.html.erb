@@ -17,6 +17,7 @@
   <%= yield :head %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+  <%= render :partial => 'layouts/ga' if RAILS_ENV == 'production' %>
 </head>
 <body class="<%= body_style %>" <%= "onload='#{@onload}'" %> >
   <a name="top"></a>
