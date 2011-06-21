@@ -337,7 +337,7 @@ class CatalogsController < ApplicationController
     @body_css_class = "perma cities"
     @locations = Location.all
     @products = BusinessDeal.find_all_by_kind t('business_deal.product')
-    @services = BusinessDeal.find_all_by_kind t('business_deal.services')
+    @services = BusinessDeal.find_all_by_kind t('business_deal.service')
     @cols = 3
     @products_in_col = (@products.size.to_f/@cols).ceil - 1
     @services_in_col = (@services.size.to_f/@cols).ceil - 1
