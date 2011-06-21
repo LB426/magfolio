@@ -3,7 +3,7 @@ class ResetPassword < ActionMailer::Base
   
   def reset_password_email(user)
     @user = user
-    @url  = "http://tihinfo.ru/login"
+    @url  = "http://Tihinfo/login"
     unless Rails.env.development?
       recipient = @user.email
     else
