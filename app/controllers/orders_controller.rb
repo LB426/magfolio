@@ -13,6 +13,8 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.xml
   def show
+    @body_css_class = "orderstage3"
+    @header_layout = 'orders/header_show'
     @order = Order.find_by_customer_id(params[:customer_id])
     unless @order.nil?
     else

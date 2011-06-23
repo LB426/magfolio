@@ -1,1 +1,81 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'order.js' %>
+<% end %>
 
+<div class="column left">
+  <h3>Мой выбор</h3>
+	<ul class="orderstack">
+     <li>Доставка - <a href="" title="Изменить доставку"><img src="/images/delete.gif"></a></li>
+     <li>Оплата - <a href="" title="Изменить оплату"><img src="/images/delete.gif"></a></li>
+  </ul>
+</div>
+<div class="column right">
+<style type="text/css">
+  .order{
+  	border-collapse: collapse;
+  	text-align:left;
+  	width: 100%;
+  }
+  .order caption{
+  	font-size: 			1em;
+  	color:				#000000;
+  	text-align:			center;
+  	font-weight:		bolder;
+  	border-bottom:  3px solid #000;
+  }
+  .order thead tr th{
+  	color:				#0099ff;
+  	text-transform:		uppercase;
+  	text-align:			center;	
+  	border-bottom:		3px solid #000;
+  }
+  .order tfoot tr th{
+  	border-top:		3px solid #000;
+  }
+  .order tr td, tr th{
+  	border: 1px solid #000;
+  	line-height:  1.5em;
+  }
+</style>
+<table class="order">
+  <caption>Бланк заказа</caption>
+  <thead>
+    <tr>
+      <th scope="col">Продавец</th>
+      <th scope="col">Товар</th>
+      <th scope="col">Количество</th>
+      <th scope="col">Цена</th>
+    </tr>
+  </thead>
+  <tbody>
+        <tr>
+          <th scope="row">
+            <%= link_to '1111', root_path %>
+          </th>
+          <td align="center">
+            <%= link_to '2222', root_path %>
+          </td>
+          <td align="center">
+            111
+          </td>
+          <td align="center">100 руб.</td>
+        </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td align="center">доставка</td>
+        <td align="center">адрес</td>
+        <td align="center">100руб.</td>
+      </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th scope="row">Итого:</th>
+      <th>&nbsp</th>
+      <th align="center">
+        <strong>1</strong> товаров
+      </th>
+      <th align="center">на сумму <strong>100</strong> руб.</th>
+    </tr>
+  </tfoot>
+</table>
+</div>
