@@ -25,6 +25,7 @@ class CatalogsController < ApplicationController
     logger.debug "request.fullpath=#{request.fullpath}"
     logger.debug "request.url=#{request.url}"
     logger.debug "request.host=#{request.host}"
+    logger.debug "request.env[\"HTTP_REFERER\"]=#{request.env['HTTP_REFERER']}"
     
     if request.host != maindomain && request.host != 'localhost' && request.host !~ /^\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}$/
       location = Location.find_by_domain(request.host)
