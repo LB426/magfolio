@@ -2,6 +2,16 @@
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
+# посмотреть кодировку таблиц или др. параметры
+STATUS;
+SHOW VARIABLES LIKE "%version%";
+USE your_database_of_interest;
+SHOW CREATE DATABASE your_database_of_interest;
+SHOW TABLES IN your_database_of_interest;
+SHOW TABLE STATUS WHERE Name = 'table_name';
+SHOW VARIABLES LIKE 'character_set%';
+SHOW VARIABLES LIKE 'collation%'; 
+
 # сменить кодировку базы и таблиц:
 ALTER DATABASE magfolio_production DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci 
 ALTER TABLE  `business_deals` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci
