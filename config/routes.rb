@@ -53,8 +53,6 @@ Magfolio::Application.routes.draw do
 
   match 'atlanta' => 'atlanta#index', :as => :atlanta
 
-  match 'success' => 'success#index', :as => :success
-  
   match 'signup/getbusinessdeals' => 'signup#getbusinessdeals', :as => :getbusinessdeals
   match 'signup/setbusinessdeal' => 'signup#setbusinessdeal', :as => :setbusinessdeal
   match 'signup' => 'signup#stage1', :as => :signup
