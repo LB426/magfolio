@@ -3,10 +3,21 @@
 <% end %>
 
 <div class="column left">
-  <h3>Мой выбор</h3>
 	<ul class="orderstack">
-     <li>Доставка - <a href="" title="Изменить доставку"><img src="/images/delete.gif"></a></li>
-     <li>Оплата - <a href="" title="Изменить оплату"><img src="/images/delete.gif"></a></li>
+	  <li style="<%= order_state_color %>">
+      Состояние заказа : <%= order_state %>
+    </li>
+	  <li><strong>номер заказа: <%= @order.id %></strong></li>
+	  <li><strong>Продавец: <%= @catalog.company_name %></strong></li>
+	  <li>
+	    <strong>Доставка :</strong>
+	    <%= @order.delivery['method'] %>
+    </li>
+    <li>
+      <strong>Оплата :</strong>
+      <%= @order.payment['payd_system'] %>
+    </li>
+    <li>Версия для печати</li>
   </ul>
 </div>
 <div class="column right">
@@ -38,43 +49,46 @@
   }
 </style>
 <table class="order">
-  <caption>Бланк заказа</caption>
+  <!--<caption>перечень товаров</caption>-->
   <thead>
     <tr>
-      <th scope="col">Продавец</th>
-      <th scope="col">Товар</th>
-      <th scope="col">Количество</th>
+      <th scope="col">Название товара</th>
       <th scope="col">Цена</th>
+      <th scope="col">Количество</th>
     </tr>
   </thead>
   <tbody>
-        <tr>
-          <th scope="row">
-            <%= link_to '1111', root_path %>
-          </th>
-          <td align="center">
-            <%= link_to '2222', root_path %>
-          </td>
-          <td align="center">
-            111
-          </td>
-          <td align="center">100 руб.</td>
-        </tr>
+    <% itogo_summa = 0 %>
+    <% itogo_amount = 0 %>
+    <% @order.products.each do |product| %>
       <tr>
-        <td>&nbsp;</td>
-        <td align="center">доставка</td>
-        <td align="center">адрес</td>
-        <td align="center">100руб.</td>
+        <th scope="row">
+          <%= link_to product['name'], root_path %>
+        </th>
+        <td align="center">
+          <%= product['price'] %> р
+          <% itogo_summa = itogo_summa + product['price'].to_i %>
+        </td>
+        <td align="center">
+          <%= product['amount'] %>
+          <% itogo_amount = itogo_amount + product['amount'].to_i %>
+        </td>
       </tr>
+    <% end %>
+    <tr>
+      <td align="center">доставка</td>
+      <td align="center">0 руб.</td>
+      <td align="center">&nbsp;</td>
+    </tr>
   </tbody>
   <tfoot>
     <tr>
       <th scope="row">Итого:</th>
-      <th>&nbsp</th>
       <th align="center">
-        <strong>1</strong> товаров
+        <strong><%= itogo_summa %></strong> руб.
       </th>
-      <th align="center">на сумму <strong>100</strong> руб.</th>
+      <th align="center">
+        <strong><%= itogo_amount %></strong> шт.</th>
     </tr>
   </tfoot>
 </table>

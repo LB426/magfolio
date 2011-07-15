@@ -431,6 +431,12 @@ body.listings a.homepage img {
 
 /* FILTER ------------------------------------------------------*/
 
+div.filterbarorder {
+  border-top: 3px solid #e8e8e8;
+  padding: 10px 0 0px 0;
+  overflow: visible;
+}
+
 div.filterbar {
   border-top: 3px solid #e8e8e8;
   padding: 15px 0 10px 0;

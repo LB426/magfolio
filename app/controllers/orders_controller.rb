@@ -16,6 +16,7 @@ class OrdersController < ApplicationController
     @body_css_class = "orderstage3"
     @header_layout = 'orders/header_show'
     @order = Order.find_by_customer_id(params[:customer_id])
+    @catalog = Catalog.find(@order.catalog_id)
     unless @order.nil?
     else
       redirect_to root_url, :alert =>  t('order.msg_orders_not_found')
@@ -53,16 +54,18 @@ class OrdersController < ApplicationController
       customer_id = customer?
       if customer_id == nil
         # если новый покупатель, т.е.
-        # у него не установленна кука 
+        # у него не установленна кука customer
+        # то генерим ID для нового покупателя по которому он сможет видеть свои заказы
         customer_id = random_string(10) 
         @cart.products.each do |products|
           @order = Order.new
           @order.catalog_id = products[:catalog_id].to_i
           @order.customer_id = customer_id
+          # формируем массив с продуктами
           products_array = Array.new
           products[:product_ids].each do |product|
             price = product[:product_count].to_i * Product.find(product[:product_id]).price
-            products_array << {'product_id' => product[:product_id].to_i, 'amount' => product[:product_count].to_i, 'price' => price }
+            products_array << {'product_id' => product[:product_id].to_i, 'name' => Product.find(product[:product_id]).name, 'amount' => product[:product_count].to_i, 'price' => price }
           end
           @order.products = products_array
           @order.payment = { 'payd_system' => @cart.order_options['payment'] }
@@ -78,6 +81,7 @@ class OrdersController < ApplicationController
         # если есть другие неотработанные заказы
       end  
       
+      # flag - говорит что заказ успешно/неуспешно сохранился в БД
       if flag
         cookies[:customer] = customer_id
         @cart.destroy

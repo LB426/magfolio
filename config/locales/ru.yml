@@ -55,6 +55,8 @@ ru:
     delivery_samovyvoz: "самовывоз"
     payment_cash: "наличные"
     payment_cash_obtaining: "наличными при получении товара"
+    state_open: "принят к исполению"
+    state_close: "выполнен полностью, товар передан заказчику, оплата получена"
   cartography:
     msg_add_marker_on_map_non_self_alert: "Вам запрещено редактировать чужую карту"
   mailer:

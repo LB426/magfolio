@@ -22,4 +22,28 @@ module OrdersHelper
     t('order.msg_payment_nothing')
   end
   
+  def order_state
+    case @order.state
+    when 'open'
+      return t('order.state_open')
+    when 'close'
+      return t('order.state_close')
+    else
+      return 'state not defined'
+    end
+    'end of function'
+  end
+  
+  def order_state_color
+    case @order.state
+    when 'open'
+      return 'background-color:#00FA9A;color:#000000;'
+    when 'close'
+      return 'background-color:#000000;color:#FFFFFF;'
+    else
+      return 'state not defined'
+    end
+    'background-color:#000000;'
+  end
+  
 end

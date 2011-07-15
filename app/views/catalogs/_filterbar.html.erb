@@ -1,0 +1,54 @@
+<div class="filterbar">
+  <div class="filter search">
+    <ul class="search_bar">
+      <li>Ваш навигатор в &nbsp;</li>
+      <li class="menu">
+        <a href="#" id="search_location_name"><%= this_city %></a>
+        <div id="search_location_menu" style="display:none" class="search_menu">
+          <% if @locations.size != 0 %>
+            <% @locations.each do |location| %>
+            <a href="<%= location_link(location.name) -%>"><%= location.name -%></a>
+            <% end %>
+          <% else %>
+              <a href="#">Города нет</a>
+          <% end %>
+          <div class="last_menu">
+            <a href="/search#locations">Весь список</a>
+          </div>
+        </div>
+      </li>
+      <li>&nbsp; по &nbsp;</li>
+      <li class="menu">
+        <a href="#" id="search_budget_name">товарам</a>
+        <div id="search_budget_menu" style="display:none" class="search_menu">
+          <% if @products.size != 0 %>
+          <% @products.each do |product| %>
+            <a href="<%= product_link(product.name) -%>"><%= product.name -%></a>
+            <% end %>
+          <% else %>
+            <a href="#">Товаров нет</a>
+          <% end %>
+          <div class="last_menu">
+            <a href="/search#products">Весь список</a>
+          </div>
+        </div>
+      </li>
+    <li>&nbsp;и&nbsp;</li>
+    <li class="menu">
+      <a href="#" id="search_service_name">услугам</a>
+      <div id="search_service_menu" style="display:none" class="search_menu">
+        <% if @services.size != 0 %>
+          <% @services.each do |service| %>
+            <a href="<%= service_link(service.name) -%>"><%= service.name -%></a>
+          <% end %>
+        <% else %>
+          <a href="#">Услуг нет</a>
+        <% end %>
+        <div class="last_menu">
+          <a href="/search#services">Весь список</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+  </div>
+</div>

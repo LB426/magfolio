@@ -41,6 +41,13 @@
         <strong>
           <a href="mailto:<%= @catalog.email -%>?subject=Вопросы о каталоге <%= @catalog.company_name -%>"><%= @catalog.email %></a>
         </strong>
+        <% unless @catalog.phone =~ /\(86196\)41616/ %>
+          <br />
+          Телефон: 
+          <strong>
+            <%= @catalog.phone %>
+          </strong>
+        <% end %>
       </p>
     </div>
     <div class="description <%= edit_block %>">
@@ -93,7 +100,7 @@
       <h3>
           <a href="mailto:<%= @catalog.email %>"><%= @catalog.email %></a>
           •
-          <a href="<%= @catalog.company_url %>"><%= @catalog.company_url %></a>
+          <a href="<%= @catalog.company_url %>"><%= @catalog.phone %></a>
       </h3>
     </div>
   </div>
