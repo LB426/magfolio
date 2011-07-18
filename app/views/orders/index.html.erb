@@ -1,23 +1,37 @@
-<h1>Listing orders</h1>
+<% content_for :head do %>
+  <%= javascript_include_tag 'order.js' %>
+<% end %>
 
-<table>
-  <tr>
-    <th>Catalog</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<h1>Каталоги по которым у меня есть заказы</h1>
 
 <% @orders.each do |order| %>
-  <tr>
-    <td><%= order.catalog_id %></td>
-    <td><%= link_to 'Show', order %></td>
-    <td><%= link_to 'Edit', edit_order_path(order) %></td>
-    <td><%= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% catalog = Catalog.find(order.catalog_id) %>
+<div class="card listing_content">
+  <div class="cardcap">
+    <img alt="Card-top" height="10" src="/images/card-top.png" width="225" />
+  </div> 
+  <div class="cardcontent"> 
+    <div class="cardcompany listing_content"> 
+      <h2><%= link_to catalog.company_name, "/#{catalog.shortcut_name}" %></h2>
+      <p>
+        <%= BusinessType.find(catalog.businesstype_id).name %><br />
+        <span>
+          <%= Location.find(catalog.location_id).name %>
+        </span>
+      </p> 
+    </div> 
+    <div class="free-image">
+      <% pic = catalog.pictures.first(:order => "id ASC") %>
+      <%= link_to image_tag(pic.picture.url(:small)), "/#{catalog.shortcut_name}" %>
+    </div>
+    <div class="cardtools">
+      <div class="listing">
+        <span class="favorite_links">
+          <a href="<%= my_orders_for_catalog_path(@customer_id, catalog) %>" class="favorites">Перейти к заказам</a>
+        </span>
+      </div>
+    </div>
+  </div> 
+  <div class="cardcap"><img alt="Card-bottom" src="/images/card-bottom.png" /></div> 
+</div>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Order', new_order_path %>

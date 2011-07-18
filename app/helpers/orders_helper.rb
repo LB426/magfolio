@@ -22,8 +22,8 @@ module OrdersHelper
     t('order.msg_payment_nothing')
   end
   
-  def order_state
-    case @order.state
+  def order_state(order = nil)
+    case order.state
     when 'open'
       return t('order.state_open')
     when 'close'
@@ -34,8 +34,24 @@ module OrdersHelper
     'end of function'
   end
   
-  def order_state_color
-    case @order.state
+  def order_sum(order = nil)
+    itogo_summa = 0
+    order.products.each do |product|
+      itogo_summa += product['price'].to_i
+    end
+    itogo_summa
+  end
+  
+  def order_amount(order = nil)
+    itogo_amount = 0
+    order.products.each do |product|
+      itogo_amount += product['amount'].to_i
+    end
+    itogo_amount
+  end
+  
+  def order_state_color(order = nil)
+    case order.state
     when 'open'
       return 'background-color:#00FA9A;color:#000000;'
     when 'close'

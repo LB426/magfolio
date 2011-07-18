@@ -2,12 +2,25 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.xml
   def index
-    @orders = Order.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @orders }
+    @body_css_class = "home favorites"
+    
+    @customer_id = nil
+    unless cookies[:customer].nil?
+      @customer_id = cookies[:customer]
+    else
+      @customer_id = params[:customer_id]
     end
+    @orders = Order.find_all_by_customer_id(@customer_id)
+    
+    rescue 
+      msg = "#{t("default.rescue_error_in_controllers")} OrdersController.index: #{$!}"
+      redirect_to root_url, :alert => msg
+  end
+  
+  def for_catalog
+    @customer_id = params[:customer_id]
+    @orders = Order.find_all_by_customer_id_and_catalog_id(@customer_id, params[:catalog_id])
+    @catalog = Catalog.find(params[:catalog_id])
   end
 
   # GET /orders/1
@@ -15,7 +28,8 @@ class OrdersController < ApplicationController
   def show
     @body_css_class = "orderstage3"
     @header_layout = 'orders/header_show'
-    @order = Order.find_by_customer_id(params[:customer_id])
+    #@order = Order.find_by_customer_id(params[:customer_id])
+    @order = Order.find(params[:id])
     @catalog = Catalog.find(@order.catalog_id)
     unless @order.nil?
     else
@@ -23,7 +37,7 @@ class OrdersController < ApplicationController
     end
     
     rescue 
-      msg = "#{t("default.rescue_error_in_controllers")} OrdersController: #{$!}"
+      msg = "#{t("default.rescue_error_in_controllers")} OrdersController.show: #{$!}"
       redirect_to root_url, :alert => msg
   end
 

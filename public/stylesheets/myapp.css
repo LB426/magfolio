@@ -265,6 +265,33 @@ ul.orderstack li img {
   margin-right: 7px;
 }
 
+/* таблица */
+.order{
+	border-collapse: collapse;
+	text-align:left;
+	width: 100%;
+}
+.order caption{
+	font-size: 			1em;
+	color:				#000000;
+	text-align:			center;
+	font-weight:		bolder;
+	border-bottom:  3px solid #000;
+}
+.order thead tr th{
+	color:				#0099ff;
+	text-transform:		uppercase;
+	text-align:			center;	
+	border-bottom:		3px solid #000;
+}
+.order tfoot tr th{
+	border-top:		3px solid #000;
+}
+.order tr td, tr th{
+	border: 1px solid #000;
+	line-height:  1.5em;
+}
+
 /* STRUCTURE --------------------------------------------------*/
 
 div.container {
