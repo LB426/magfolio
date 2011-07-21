@@ -9,8 +9,11 @@ Magfolio::Application.routes.draw do
   resources :pictures
   
   # resources :orders
-  match 'orders/:customer_id' => 'orders#index', :as => :my_orders_catalog_view
-  match 'orders/:customer_id/catalog/:catalog_id' => 'orders#for_catalog', :as => :my_orders_for_catalog
+  match 'order/:id/editstate' => 'orders#editstate', :as => :editstate
+  match 'order/:id' => 'orders#catalog_order', :as => :catalog_order
+  match 'orders/catalog/:catalog_id' => 'orders#catalog_orders', :as => :catalog_orders
+  match 'orders/:customer_id' => 'orders#index', :as => :customer_orders
+  match 'orders/:customer_id/catalog/:catalog_id' => 'orders#customer_orders_for_catalog', :as => :customer_orders_for_catalog
   match 'order/:customer_id/show/:id' => 'orders#show', :as => :show_order
   match 'order/new/:stage' => 'orders#new', :as => :make_order
 

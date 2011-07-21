@@ -193,7 +193,6 @@ class CatalogsController < ApplicationController
     
   end
 
-  
   # GET /catalogs/1
   # GET /catalogs/1.xml
   def show

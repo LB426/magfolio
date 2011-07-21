@@ -1,113 +1,114 @@
 <% content_for :head do %>
-  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+
+<script type="text/javascript">
+  var map;
+  var layer, markers;
+  var icon 
+  var currentPopup;
   
-  <script type="text/javascript">
-    var map;
-    var layer, markers;
-    var icon 
-    var currentPopup;
-    
-    <% if current_user_self? %>
-    OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
-      defaultHandlerOptions: {
-          'single': true,
-          'double': false,
-          'pixelTolerance': 0,
-          'stopSingle': false,
-          'stopDouble': false
-      },
-      initialize: function(options) {
-        this.handlerOptions = OpenLayers.Util.extend({}, this.defaultHandlerOptions);
-        OpenLayers.Control.prototype.initialize.apply(this, arguments); 
-        this.handler = new OpenLayers.Handler.Click(  this, 
-                                                      {'click': this.trigger},  
-                                                      this.handlerOptions
-                                                    );
-      }, 
-      trigger: function(e) {
-        var lonlat = map.getLonLatFromViewPortPx(e.xy).transform(
-            new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"));
-  	    // alert("Устанавливаю координаты\n" + lonlat.lat + " N, " + lonlat.lon + " E");
-        $.ajax({
-          type: "PUT",
-          url: '<%= catalog_setcoordinate_path(@catalog) %>',
-          data: { longitude: lonlat.lon, latitude: lonlat.lat, authenticity_token: "<%= form_authenticity_token %>" },
-          success: function(msg){
-            if(msg == 'true'){
-    			    window.location = window.location ;
-    			  }else{
-    			    alert('не удалось установить Ваш <%= BusinessType.find(@catalog.businesstype_id).name %> на карте, обратитесь к администрации сайта для решения этой проблемы')
-    			  }
-          }
-        });
-      }
-    });
-    <% end %>
-
-    AutoSizeFramedCloud = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
-      'autoSize': true
-    });
-
-    function init(){
-      map = new OpenLayers.Map('map');
-      layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
-      map.addLayer(layer);
-      map.addControl(new OpenLayers.Control.MousePosition());
-      map.setCenter(
-        new OpenLayers.LonLat(<%= @catalog.lng -%>, <%= @catalog.lat -%> + 0.002).transform(
-          new OpenLayers.Projection("EPSG:4326"),
-          map.getProjectionObject()
-          ), 15
-        );    
-
-      markers = new OpenLayers.Layer.Markers("Markers");
-      map.addLayer(markers);
-      var size = new OpenLayers.Size(60,60);
-      var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-      icon = new OpenLayers.Icon('cloudmade.gif', size, offset);
-
-      var overflow;
-      var feature = new OpenLayers.Feature(markers, new OpenLayers.LonLat(<%= @catalog.lng -%>, <%= @catalog.lat -%>).transform( new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject())); 
-      feature.closeBox = true;
-      feature.popupClass = AutoSizeFramedCloud;
-      feature.data.popupContentHTML = '<%= image_tag @pic.picture.url(:small) %><br>' +
-  	  "<h3 style='text-align: center'><a href='<%= shortcut_catalog_path(@catalog.shortcut_name) -%>'>" +
-  	  "<%= @catalog.company_name %></a></h3>";
-      feature.data.overflow = (overflow) ? "auto" : "hidden";
-
-      var marker = feature.createMarker();
-
-      var markerClick = function (evt) {
-        if (this.popup == null) {
-          this.popup = this.createPopup(this.closeBox);
-          map.addPopup(this.popup);
-          this.popup.show();
-        } else {
-          this.popup.toggle();
+  <% if current_user_self? %>
+  OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {                
+    defaultHandlerOptions: {
+        'single': true,
+        'double': false,
+        'pixelTolerance': 0,
+        'stopSingle': false,
+        'stopDouble': false
+    },
+    initialize: function(options) {
+      this.handlerOptions = OpenLayers.Util.extend({}, this.defaultHandlerOptions);
+      OpenLayers.Control.prototype.initialize.apply(this, arguments); 
+      this.handler = new OpenLayers.Handler.Click(  this, 
+                                                    {'click': this.trigger},  
+                                                    this.handlerOptions
+                                                  );
+    }, 
+    trigger: function(e) {
+      var lonlat = map.getLonLatFromViewPortPx(e.xy).transform(
+          new OpenLayers.Projection("EPSG:900913"),new OpenLayers.Projection("EPSG:4326"));
+	    // alert("Устанавливаю координаты\n" + lonlat.lat + " N, " + lonlat.lon + " E");
+      $.ajax({
+        type: "PUT",
+        url: '<%= catalog_setcoordinate_path(@catalog) %>',
+        data: { longitude: lonlat.lon, latitude: lonlat.lat, authenticity_token: "<%= form_authenticity_token %>" },
+        success: function(msg){
+          if(msg == 'true'){
+  			    window.location = window.location ;
+  			  }else{
+  			    alert('не удалось установить Ваш <%= BusinessType.find(@catalog.businesstype_id).name %> на карте, обратитесь к администрации сайта для решения этой проблемы')
+  			  }
         }
-        currentPopup = this.popup;
-        OpenLayers.Event.stop(evt);
-      };
-      marker.events.register("mousedown", feature, markerClick);
-      markers.addMarker(marker);
-      <% if current_user_self? %>
-        var click = new OpenLayers.Control.Click();
-        map.addControl(click);
-        click.activate();
-      <% end %>
-  }
-
-  </script>
-
-  <style type="text/css">
-    .catalogmap{
-        width: 900px;
-        height: 600px;
-        border: 1px solid #ccc;
+      });
     }
-    #tags{display: none;}
-    #docs p {margin-bottom: 0.5em;}
-  </style>
+  });
+  <% end %>
+
+  AutoSizeFramedCloud = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+    'autoSize': true
+  });
+
+  function init(){
+    map = new OpenLayers.Map('map');
+    layer = new OpenLayers.Layer.OSM( "Simple OSM Map");
+    map.addLayer(layer);
+    map.addControl(new OpenLayers.Control.MousePosition());
+    map.setCenter(
+      new OpenLayers.LonLat(<%= @catalog.lng -%>, <%= @catalog.lat -%> + 0.002).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+        ), 15
+      );    
+
+    markers = new OpenLayers.Layer.Markers("Markers");
+    map.addLayer(markers);
+    var size = new OpenLayers.Size(60,60);
+    var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+    icon = new OpenLayers.Icon('cloudmade.gif', size, offset);
+
+    var overflow;
+    var feature = new OpenLayers.Feature(markers, new OpenLayers.LonLat(<%= @catalog.lng -%>, <%= @catalog.lat -%>).transform( new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject())); 
+    feature.closeBox = true;
+    feature.popupClass = AutoSizeFramedCloud;
+    feature.data.popupContentHTML = '<%= image_tag @pic.picture.url(:small) %><br>' +
+	  "<h3 style='text-align: center'><a href='<%= shortcut_catalog_path(@catalog.shortcut_name) -%>'>" +
+	  "<%= @catalog.company_name %></a></h3>";
+    feature.data.overflow = (overflow) ? "auto" : "hidden";
+
+    var marker = feature.createMarker();
+
+    var markerClick = function (evt) {
+      if (this.popup == null) {
+        this.popup = this.createPopup(this.closeBox);
+        map.addPopup(this.popup);
+        this.popup.show();
+      } else {
+        this.popup.toggle();
+      }
+      currentPopup = this.popup;
+      OpenLayers.Event.stop(evt);
+    };
+    marker.events.register("mousedown", feature, markerClick);
+    markers.addMarker(marker);
+    <% if current_user_self? %>
+      var click = new OpenLayers.Control.Click();
+      map.addControl(click);
+      click.activate();
+    <% end %>
+}
+
+</script>
+
+<style type="text/css">
+  .catalogmap{
+      width: 900px;
+      height: 600px;
+      border: 1px solid #ccc;
+  }
+  #tags{display: none;}
+  #docs p {margin-bottom: 0.5em;}
+</style>
+
 <% end %>
 
 <div id="tags"></div>

@@ -1,0 +1,6 @@
+<% for i in 0..@order.state.size-1 do %>
+  <%= state_to_string(@order.state[i]['state']) %>&nbsp;
+  <%= Russian::strftime(@order.state[i]['date'], "%d.%m.%Y %H:%M") %>
+  &nbsp;<a href="#" style="text-decoration:none;">+</a>
+  <br>
+<% end %>

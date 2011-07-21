@@ -1,4 +1,7 @@
 <div class="user_menu">
+  <a href="<%= catalog_orders_path(@catalog) %>" id="catalog_orders" title="Заказы по каталогу">
+    <img src="/images/order-icon.png">
+  </a>
   <% if /admin/ =~ current_user.group %>
     <a href="#zakaz_layout_change" id="zakaz_layout_change" title="изменить форму заказа">
       <img src="/images/zakaz_layout_change.jpg">

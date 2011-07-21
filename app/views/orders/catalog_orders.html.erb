@@ -1,0 +1,32 @@
+<table class="order">
+  <caption><h1>Таблица заказов по каталогу <%= link_to @catalog.company_name, "/#{@catalog.shortcut_name}" %> (<%= @orders.size %>)</h1></caption>
+  <thead>
+    <tr>
+      <th scope="col">№пп</th>
+      <th scope="col">Заказ</th>
+      <th scope="col">Заказчик</th>
+      <th scope="col">Сумма</th>
+      <th scope="col">Кол-во</th>
+      <th scope="col">Состояние</th>
+      <th scope="col">принят</th>
+      <th scope="col">изменён</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% order_count = 0 %>
+    <% @orders.each do |order| %>
+    <tr style="<%= order_state_color(order) %>">
+      <td align="center"><%= order_count+=1 %></td>
+      <th align="center">
+        <%= link_to order.id, catalog_order_path(order), :style => "color:#000000;" %>
+      </th>
+      <td align="center"><%= order.customer_id %></td>
+      <td align="center"><%= order_sum(order) %> руб.</td>
+      <td align="center"><%= order_amount(order) %> шт.</td>
+      <td align="center"><%= last_order_state(order) %></td>
+      <td align="center"><%= Russian::strftime(order.created_at, "%d %B %Y, %H:%M") %></td>
+      <td align="center"><%= last_order_state_date(order) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -55,8 +55,8 @@ ru:
     delivery_samovyvoz: "самовывоз"
     payment_cash: "наличные"
     payment_cash_obtaining: "наличными при получении товара"
-    state_open: "принят к исполению"
-    state_close: "выполнен полностью, товар передан заказчику, оплата получена"
+    state_open: "заказ принят"
+    state_close: "выполнен"
   cartography:
     msg_add_marker_on_map_non_self_alert: "Вам запрещено редактировать чужую карту"
   mailer:
@@ -66,3 +66,4 @@ ru:
     this_city: "Городе"
     make_order: "Сделать заказ"
     rescue_error_in_controllers: "Ошибка в"
+    you_not_owner_directory: "вы не собственник этого каталога"

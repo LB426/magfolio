@@ -3,6 +3,7 @@
     <img alt="clover" height="145" src="/images/logo_card.png" width="90">
   </a>
 </div>
+<% if !current_user || is_admin %>
 <div class="signup guest_user" id="signup">
   <a href="/signup"></a>
   <div class="signup_description" id="slide_listed" style="height: 70px; ">
@@ -11,12 +12,16 @@
     </div>
   </div>
 </div>
+<% end %>
 <div class="nav">
   <%= link_to "Поиск", search_path -%> |
   <a href="/about">О каталогах</a> |
   <a href="/izbrannoes">Избранное<span id="izbrannoe_count"><%= izbrannoe_count -%></span></a> |
   <% if current_user %>
-    <a href="/logout" class="guest_user"><%= current_user.email -%></a>
+    <% if !is_admin %>
+    <%= link_to current_user.email, shortcut_catalog_path(current_user.catalogs.first.shortcut_name) %> |
+    <% end %>
+    <a href="/logout" title="Выход">Выход</a>
   <% else %>
     <a href="/login" class="guest_user">Войти в каталог</a>
   <% end %>

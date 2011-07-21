@@ -22,16 +22,12 @@ module OrdersHelper
     t('order.msg_payment_nothing')
   end
   
-  def order_state(order = nil)
-    case order.state
-    when 'open'
-      return t('order.state_open')
-    when 'close'
-      return t('order.state_close')
-    else
-      return 'state not defined'
-    end
-    'end of function'
+  def last_order_state(order = nil)
+    return state_to_string(order.state[order.state.size-1]['state'])
+  end
+  
+  def last_order_state_date(order = nil)
+    return Russian::strftime(order.state[order.state.size-1]['date'], "%d.%m.%Y %H:%M")
   end
   
   def order_sum(order = nil)
@@ -51,10 +47,11 @@ module OrdersHelper
   end
   
   def order_state_color(order = nil)
-    case order.state
-    when 'open'
+    last = order.state[order.state.size - 1]['state']
+    case last
+    when 1
       return 'background-color:#00FA9A;color:#000000;'
-    when 'close'
+    when 2
       return 'background-color:#000000;color:#FFFFFF;'
     else
       return 'state not defined'

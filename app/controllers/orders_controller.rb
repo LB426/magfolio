@@ -9,6 +9,7 @@ class OrdersController < ApplicationController
       @customer_id = cookies[:customer]
     else
       @customer_id = params[:customer_id]
+      cookies[:customer] = @customer_id
     end
     @orders = Order.find_all_by_customer_id(@customer_id)
     
@@ -17,7 +18,7 @@ class OrdersController < ApplicationController
       redirect_to root_url, :alert => msg
   end
   
-  def for_catalog
+  def customer_orders_for_catalog
     @customer_id = params[:customer_id]
     @orders = Order.find_all_by_customer_id_and_catalog_id(@customer_id, params[:catalog_id])
     @catalog = Catalog.find(params[:catalog_id])
@@ -84,6 +85,7 @@ class OrdersController < ApplicationController
           @order.products = products_array
           @order.payment = { 'payd_system' => @cart.order_options['payment'] }
           @order.delivery = { 'method' => @cart.order_options['delivery'] }
+          @order.state = [{'state'=>1, 'date'=>Time.now}]
           if @order.save          
             flag = true
           else
@@ -100,7 +102,7 @@ class OrdersController < ApplicationController
         cookies[:customer] = customer_id
         @cart.destroy
         cookies.delete(:cart)
-        redirect_to show_order_path(customer_id), :notice =>  t('order.msg_order_create_success')
+        redirect_to show_order_path(customer_id, @order.id), :notice =>  t('order.msg_order_create_success')
       else
         redirect_to root_url, :alert =>  t('order.msg_order_create_non_success')
       end
@@ -110,8 +112,28 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1/edit
-  def edit
+  def editstate 
     @order = Order.find(params[:id])
+    @catalog = Catalog.find(@order.catalog_id)
+    if params[:future_state] != '0'
+      @order.state << {'state' => params[:future_state].to_i, 'date'=>Time.now}
+      @order.save
+    end
+    arr = Array.new
+    for i in 0..@order.state.size-1 do
+      # state_to_string(@order.state[i]['state'])
+      arr[i] = {
+                  'state_name' => state_to_string(@order.state[i]['state'].to_i),
+                  'state_val' => @order.state[i]['state'],
+                  'date' => Russian::strftime(@order.state[i]['date'], "%d.%m.%Y %H:%M") 
+               }
+    end
+    
+    response.headers['Content-type'] = "text/plain; charset=utf-8"
+    render :text => arr.to_json
+    
+    #response.headers['Content-type'] = "text/html; charset=utf-8"
+    #render 'orders/_order_state', :layout => false
   end
 
   # POST /orders
@@ -158,6 +180,27 @@ class OrdersController < ApplicationController
     end
   end
     
+  def catalog_orders
+    @catalog = Catalog.find(params[:catalog_id])
+    if current_user_self?
+      @orders = Order.find_all_by_catalog_id(@catalog.id, :order => 'id DESC')
+    else
+      redirect_to root_url, :alert =>  t('default.you_not_owner_directory')
+    end
+  end
+  
+  def catalog_order
+    @body_css_class = "orderstage3"
+    @header_layout = 'orders/header_show'
+    @order = Order.find(params[:id])
+    @catalog = Catalog.find(@order.catalog_id)
+    if current_user_self?
+      
+    else
+      redirect_to root_url, :alert =>  t('default.you_not_owner_directory')
+    end
+  end
+  
 private
 
   def random_string(size = 32)

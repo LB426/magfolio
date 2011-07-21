@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110620064242) do
+ActiveRecord::Schema.define(:version => 20110721073614) do
 
   create_table "business_deals", :force => true do |t|
     t.string   "name"
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20110620064242) do
     t.text     "products"
     t.text     "order_options"
   end
+
+  add_index "carts", ["unique_identifier"], :name => "index_carts_on_unique_identifier"
 
   create_table "catalogs", :force => true do |t|
     t.integer  "user_id",                            :null => false
@@ -88,12 +90,12 @@ ActiveRecord::Schema.define(:version => 20110620064242) do
   create_table "orders", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "catalog_id",                      :null => false
-    t.string   "customer_id",                     :null => false
-    t.text     "products",                        :null => false
-    t.text     "payment",                         :null => false
-    t.text     "delivery",                        :null => false
-    t.string   "state",       :default => "open", :null => false
+    t.integer  "catalog_id",  :null => false
+    t.string   "customer_id", :null => false
+    t.text     "products",    :null => false
+    t.text     "payment",     :null => false
+    t.text     "delivery",    :null => false
+    t.text     "state",       :null => false
   end
 
   add_index "orders", ["catalog_id"], :name => "index_orders_on_catalog_id"

@@ -12,7 +12,7 @@
   </div>
   <% if customer? %>
     <div id="myorders">
-      <a href="<%= my_orders_catalog_view_path(customer?) %>" title="Мои заказы"><img src="/images/order-icon.png"></a>
+      <a href="<%= customer_orders_path(customer?) %>" title="Мои заказы"><img src="/images/order-icon.png"></a>
     </div>
   <% end %>
 </div>

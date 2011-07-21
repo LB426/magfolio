@@ -2,13 +2,36 @@
   <%= javascript_include_tag 'order.js' %>
 <% end %>
 
+<script type="text/javascript">
+//<![CDATA[
+  var order_id = <%= @order.id %> ;
+  var form_authenticity_token = '<%= form_authenticity_token %>' ;
+//]]>
+</script>
+
 <div class="column left">
 	<ul class="orderstack">
 	  <li style="<%= order_state_color(@order) %>">
-      <%= render :partial => 'order_state' %>
+	    <strong><a href="#" title="свернуть/развернуть" id="state_show_hide">Состояние:</a></strong><br>
+	    <div id="last_state"></div>
+	    <div id="order_state">
+        <%= render :partial => 'order_state' %>
+      </div>
+      <% if current_user_self? %>
+      <select id="change_state">
+        <option value="0">изменить состояние заказа</option>
+        <option value="2">передан на компоновку</option>
+        <option value="3">компонуется</option>
+        <option value="4">передан на доставку</option>
+        <option value="5">получен покупателем</option>
+        <option value="6">закрыт, исполнен</option>
+        <option value="6">передать в архив</option>
+      </select><a href="#" title="добавить комментарий к последнему состоянию заказа">коммент</a>
+      <% end %>
     </li>
 	  <li><strong>номер заказа: <%= @order.id %></strong></li>
 	  <li><strong>Продавец: <%= @catalog.company_name %></strong></li>
+	  <li><strong>Покупатель: <%= @order.customer_id %></strong></li>
 	  <li>
 	    <strong>Доставка :</strong>
 	    <%= @order.delivery['method'] %>

@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_admin
   helper_method :maindomain
   helper_method :customer?
+  helper_method :state_to_string
   
 private
   def current_user
@@ -98,6 +99,17 @@ protected
       else
         return "http://#{maindomain}"
       end
+    end
+  end
+  
+  def state_to_string(state = nil)
+    case state
+    when 1
+      return t('order.state_open')
+    when 2
+      return t('order.state_close')
+    else
+      return 'state not defined'
     end
   end
   
