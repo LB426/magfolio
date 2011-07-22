@@ -1,17 +1,5 @@
-<div class="needle">
-  <a href="/" class="homepage">
-    <img alt="Sortfolio" height="100" src="/images/clover_logo_card-interior.png" width="90">
-  </a>
-</div>
-<div class="success"> 
-  <a href="/success"></a> 
-</div>
-<div class="nav"> 
-  <a href="/about">О каталогах</a> | <a href="/success">Успех наших клиентов</a> 
-</div>
-<div class="masthead"> 
-  <a href="/" class="homepage"><img alt="Clover" height="39" src="/images/logo_magfolio-type.png" width="230" /></a> 
-</div>
+<%= render :partial => 'orders/header' %>
+
 <div class="filterbar">
   <div class="steps">
     <%= link_to image_tag("/images/step_1-gray.png", :class=>'first', :align=>'absmiddle'), signup_stage1_path %>
