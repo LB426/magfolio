@@ -2,10 +2,18 @@
   <%= javascript_include_tag 'order.js' %>
 <% end %>
 
+<script type="text/javascript">
+//<![CDATA[
+  var order_id = <%= @order.id %> ;
+//]]>
+</script>
+
 <div class="column left">
 	<ul class="orderstack">
 	  <li style="<%= order_state_color(@order) %>">
-      <%= render :partial => 'order_state' %>
+      <strong><a href="#" title="свернуть/развернуть" id="state_show_hide">Состояние:</a></strong><br>
+	    <div id="last_state"></div>
+	    <div id="order_state"></div>
     </li>
 	  <li><strong>номер заказа: <%= @order.id %></strong></li>
 	  <li><strong>Продавец: <%= @catalog.company_name %></strong></li>

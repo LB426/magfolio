@@ -1,0 +1,11 @@
+<%= render :partial => 'header' %>
+
+<div class="filterbar">
+  <div class="filter">
+    <% if defined? @catalog %>
+    ← <a href="<%= shortcut_catalog_path(@catalog.shortcut_name) %>">Вернуться в каталог <%= @catalog.company_name %></a>
+    <% else %>
+     ← <a href="/">Вернуться к каталогам</a>
+    <% end %>
+  </div>
+</div>

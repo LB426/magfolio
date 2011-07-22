@@ -107,7 +107,29 @@ protected
     when 1
       return t('order.state_open')
     when 2
+      return t('order.state_awaiting_payment')
+    when 3
+      return t('order.state_paid')
+    when 4
+      return t('order.state_transferred_to_composition')
+    when 5
+      return t('order.state_composition')
+    when 6
+      return t('order.state_composition_completed')
+    when 7
+      return t('order.state_transferred_to_delivery')
+    when 8
+      return t('order.state_delivery')
+    when 9
+      return t('order.state_delivered')
+    when 10
+      return t('order.state_delivered_but_not_received_customer')
+    when 11
+      return t('order.state_received_by_the_customer')
+    when 12
       return t('order.state_close')
+    when 13
+      return t('order.state_transferred_to_archive')
     else
       return 'state not defined'
     end

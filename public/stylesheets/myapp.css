@@ -254,6 +254,11 @@ ul.orderstack li{
   border: 1px solid #ccc;
 }
 
+ul.orderstack li a{
+  color: #000080;
+  font-weight: bold;
+}
+
 ul.orderstack li:hover {
   color: #4682B4;
   background-color: #FAFAD2;
@@ -265,14 +270,85 @@ ul.orderstack li img {
   margin-right: 7px;
 }
 
-/* таблица */
+/* таблица в корзине */
+.carttable{
+  border-collapse: collapse;
+	text-align:left;
+	width: 100%;
+	font-family: Helvetica, Arial, "Franklin Gothic Medium", sans-serif;
+}
+
+.carttable caption{
+	/* text-transform:		uppercase;*/
+	font-size: 			2em;
+	color:				#000000;
+	text-align:			left;
+	font-weight:		bolder;
+	border-bottom:		6px solid #000;
+}
+
+.carttable caption em{
+  font-size:  12px;
+  color:  #ff0000;
+}
+
+.carttable caption em a{
+  font-size:  12px;
+  color:  #37a31e;
+}
+
+.carttable thead tr th{
+	color:				#0099ff;
+	text-transform:		uppercase;
+	text-align:			center;	
+	padding:			0.4em 0;
+	border-bottom: 3px solid #000;
+}
+
+.carttable tfoot th, tfoot td{
+	border-top: 3px solid #000;
+}
+
+.carttable tr td, tr th{
+	border-bottom: 1px solid #000;
+	padding: 0.6em 0.4em;
+	line-height: 1.5em;
+}
+
+.carttable tr.odd td, tr.odd th{
+	background:url(tablebkg.jpg) top left repeat-x;
+}
+
+.carttable tbody th a{
+	text-transform:uppercase;
+}
+
+.carttable tbody a, tbody a:link{
+	color:			#0099ff;
+	font-weight:	bold;	
+	/* text-decoration:none; */
+}
+
+.carttable tbody a:visited{
+	color:			#000FFF;
+}
+
+.carttable tbody tr:hover a {
+	color: #ffffff;
+}
+
+.carttable tbody tr:hover, tr.odd:hover {
+	background-color: #3d80df;
+	color: #ffffff;
+}
+
+/* таблица заказов */
 .order{
 	border-collapse: collapse;
-	text-align:left;
 	width: 100%;
 }
 .order caption{
-	font-size: 			1em;
+	font-size: 			1.5em;
 	color:				#000000;
 	text-align:			center;
 	font-weight:		bolder;
@@ -282,15 +358,24 @@ ul.orderstack li img {
 	color:				#0099ff;
 	text-transform:		uppercase;
 	text-align:			center;	
-	border-bottom:		3px solid #000;
+	border-bottom: 3px solid #000;
+	font-size: 0.8em;
+	line-height:  0.5em;
 }
 .order tfoot tr th{
-	border-top:		3px solid #000;
+	border-top:	3px solid #000;
+	line-height: 0.5em;
 }
-.order tr td, tr th{
+.order tr th{
 	border: 1px solid #000;
-	line-height:  1.5em;
 }
+.order tbody tr td{
+	border: 1px solid #000;
+	font-size: 0.9em;
+	line-height: 1.5em;
+	text-align: center;
+}
+
 
 /* STRUCTURE --------------------------------------------------*/
 
@@ -1583,10 +1668,6 @@ body.cities div.content li {
 	padding-bottom: 3px;
 }
 
-body.cities div.content table td {
-	padding-right: 30px;
-}
-
 body.cities div.filter {
   width: 960px;
   text-align: left;
@@ -1641,5 +1722,3 @@ body.cities div.cardcontent-perma table.topcities li {
   font-size: 18px;
   padding-bottom: 5px;
 }
-
-

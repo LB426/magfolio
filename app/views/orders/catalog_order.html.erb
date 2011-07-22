@@ -14,19 +14,23 @@
 	  <li style="<%= order_state_color(@order) %>">
 	    <strong><a href="#" title="свернуть/развернуть" id="state_show_hide">Состояние:</a></strong><br>
 	    <div id="last_state"></div>
-	    <div id="order_state">
-        <%= render :partial => 'order_state' %>
-      </div>
-      <% if current_user_self? %>
+	    <div id="order_state"></div>
+      <% if current_user_self? && !archive? %>
       <select id="change_state">
         <option value="0">изменить состояние заказа</option>
-        <option value="2">передан на компоновку</option>
-        <option value="3">компонуется</option>
-        <option value="4">передан на доставку</option>
-        <option value="5">получен покупателем</option>
-        <option value="6">закрыт, исполнен</option>
-        <option value="6">передать в архив</option>
-      </select><a href="#" title="добавить комментарий к последнему состоянию заказа">коммент</a>
+        <option value="3">оплачено</option>
+        <option value="4">передан на компоновку</option>
+        <option value="5">выполняется компоновка</option>
+        <option value="6">компоновка завершена</option>
+        <option value="7">передан на доставку</option>
+        <option value="8">доставляется</option>
+        <option value="9">доставлено</option>
+        <option value="10">доставлено, но не передано заказчику</option>
+        <option value="11">получено заказчиком</option>
+        <option value="12">выполнен</option>
+        <option value="13">передан в архив</option>
+      </select>
+      <a href="#add_comment_to_last_state_dialog" id="add_comment_to_last_state_link" title="добавить комментарий к последнему состоянию заказа">коммент</a>
       <% end %>
     </li>
 	  <li><strong>номер заказа: <%= @order.id %></strong></li>
@@ -45,7 +49,7 @@
 </div>
 <div class="column right">
 <table class="order">
-  <!--<caption>перечень товаров</caption>-->
+  <caption>Заказ №<%= @order.id %></caption>
   <thead>
     <tr>
       <th scope="col">Название товара</th>
@@ -58,7 +62,7 @@
     <% itogo_amount = 0 %>
     <% @order.products.each do |product| %>
       <tr>
-        <th scope="row">
+        <td align="left">
           <%= link_to product['name'], root_path %>
         </th>
         <td align="center">
@@ -80,12 +84,22 @@
   <tfoot>
     <tr>
       <th scope="row">Итого:</th>
-      <th align="center">
-        <strong><%= itogo_summa %></strong> руб.
-      </th>
-      <th align="center">
-        <strong><%= itogo_amount %></strong> шт.</th>
+      <th><strong><%= itogo_summa %></strong> руб.</th>
+      <th><strong><%= itogo_amount %></strong> шт.</th>
     </tr>
   </tfoot>
 </table>
 </div>
+
+<div style="display:none">
+  <div id="add_comment_to_last_state_dialog">
+    <h2>Добавить комментарий к<br>последнему состоянию заказа</h2>
+    <%= form_for(@order, :url => add_comment_to_last_state_path(@order), :html => { :target => 'add_comment_to_last_state_dialog_iframe' }) do |f| %>
+      <%= text_area_tag :last_state_comment, '', :size => "40x10" %></p>
+      <p><%= f.submit "Добавить", :id => 'add_comment_to_last_state_dialog_submit_button' %></p>
+    <% end %>
+  </div>
+</div>
+
+<iframe id="add_comment_to_last_state_dialog_iframe" name="add_comment_to_last_state_dialog_iframe" style="width:0;height:0" src="about:blank" frameborder="0">
+</iframe>

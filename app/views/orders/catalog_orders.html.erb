@@ -16,10 +16,10 @@
     <% order_count = 0 %>
     <% @orders.each do |order| %>
     <tr style="<%= order_state_color(order) %>">
-      <td align="center"><%= order_count+=1 %></td>
-      <th align="center">
+      <td><%= order_count+=1 %></td>
+      <td align="center">
         <%= link_to order.id, catalog_order_path(order), :style => "color:#000000;" %>
-      </th>
+      </td>
       <td align="center"><%= order.customer_id %></td>
       <td align="center"><%= order_sum(order) %> руб.</td>
       <td align="center"><%= order_amount(order) %> шт.</td>

@@ -52,11 +52,42 @@ module OrdersHelper
     when 1
       return 'background-color:#00FA9A;color:#000000;'
     when 2
-      return 'background-color:#000000;color:#FFFFFF;'
+      return 'background-color:#ADFF2F;color:#000000;'
+    when 3
+      return 'background-color:#00FF00;color:#000000;'
+    when 4
+      return 'background-color:#00FFFF;color:#000000;'
+    when 5
+      return 'background-color:#00FA9A;color:#000000;'
+    when 6
+      return 'background-color:#00FA9A;color:#000000;'
+    when 7
+      return 'background-color:#00FA9A;color:#000000;'
+    when 8
+      return 'background-color:#00FA9A;color:#000000;'
+    when 9
+      return 'background-color:#00FA9A;color:#000000;'
+    when 10
+      return 'background-color:#00FA9A;color:#000000;'
+    when 11
+      return 'background-color:#00FA9A;color:#000000;'
+    when 12
+      return 'background-color:#00FA9A;color:#000000;'
+    when 13
+      return 'background-color:#00FA9A;color:#000000;'
     else
-      return 'state not defined'
+      return 'background-color:#2F4F4F;color:#FFFFFF;'
     end
-    'background-color:#000000;'
+  end
+  
+  def archive?
+    last_state = @order.state[@order.state.size - 1]['state'].to_i
+    logger.debug "last_state=#{last_state}"
+    if last_state == 13
+      return true
+    else
+      return false
+    end
   end
   
 end

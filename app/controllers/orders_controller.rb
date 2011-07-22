@@ -1,9 +1,7 @@
 class OrdersController < ApplicationController
-  # GET /orders
-  # GET /orders.xml
   def index
     @body_css_class = "home favorites"
-    
+        
     @customer_id = nil
     unless cookies[:customer].nil?
       @customer_id = cookies[:customer]
@@ -24,8 +22,6 @@ class OrdersController < ApplicationController
     @catalog = Catalog.find(params[:catalog_id])
   end
 
-  # GET /orders/1
-  # GET /orders/1.xml
   def show
     @body_css_class = "orderstage3"
     @header_layout = 'orders/header_show'
@@ -42,8 +38,6 @@ class OrdersController < ApplicationController
       redirect_to root_url, :alert => msg
   end
 
-  # GET /orders/new
-  # GET /orders/new.xml
   def new
     @cart == find_cart
     if @cart == nil
@@ -71,7 +65,7 @@ class OrdersController < ApplicationController
         # если новый покупатель, т.е.
         # у него не установленна кука customer
         # то генерим ID для нового покупателя по которому он сможет видеть свои заказы
-        customer_id = random_string(10) 
+        customer_id = generate_customer_identifer 
         @cart.products.each do |products|
           @order = Order.new
           @order.catalog_id = products[:catalog_id].to_i
@@ -85,7 +79,7 @@ class OrdersController < ApplicationController
           @order.products = products_array
           @order.payment = { 'payd_system' => @cart.order_options['payment'] }
           @order.delivery = { 'method' => @cart.order_options['delivery'] }
-          @order.state = [{'state'=>1, 'date'=>Time.now}]
+          @order.state = [{'state'=>1, 'date'=>Time.now}, {'state'=>2, 'date'=>Time.now}]
           if @order.save          
             flag = true
           else
@@ -102,7 +96,7 @@ class OrdersController < ApplicationController
         cookies[:customer] = customer_id
         @cart.destroy
         cookies.delete(:cart)
-        redirect_to show_order_path(customer_id, @order.id), :notice =>  t('order.msg_order_create_success')
+        redirect_to show_order_path(customer_id, @order.id), :alert =>  "#{t('default.alert')} #{t('default.remember')} #{t('default.your')} #{t('order.customer_id')}: #{customer_id} #{t('default.and')} #{t('order.number')}: #{@order.id}"
       else
         redirect_to root_url, :alert =>  t('order.msg_order_create_non_success')
       end
@@ -111,76 +105,41 @@ class OrdersController < ApplicationController
     end
   end
 
-  # GET /orders/1/edit
   def editstate 
     @order = Order.find(params[:id])
     @catalog = Catalog.find(@order.catalog_id)
-    if params[:future_state] != '0'
-      @order.state << {'state' => params[:future_state].to_i, 'date'=>Time.now}
-      @order.save
+    if current_user_self?
+      if params[:future_state] != '0'
+        @order.state << {'state' => params[:future_state].to_i, 'date'=>Time.now}
+        @order.save
+      end
+    else
+      logger.debug "#{t('default.you_not_owner_directory')} OrdersController.editstate"
     end
+    render :nothing => true
+  end
+  
+  def getstate
+    @order = Order.find(params[:id])
+    @catalog = Catalog.find(@order.catalog_id)
     arr = Array.new
     for i in 0..@order.state.size-1 do
-      # state_to_string(@order.state[i]['state'])
       arr[i] = {
                   'state_name' => state_to_string(@order.state[i]['state'].to_i),
                   'state_val' => @order.state[i]['state'],
-                  'date' => Russian::strftime(@order.state[i]['date'], "%d.%m.%Y %H:%M") 
+                  'date' => Russian::strftime(@order.state[i]['date'], "%d.%m.%Y %H:%M")                    
                }
+      unless @order.state[i]['comment'].nil?
+        arr[i]['comment'] = @order.state[i]['comment']
+      end
     end
-    
     response.headers['Content-type'] = "text/plain; charset=utf-8"
     render :text => arr.to_json
-    
-    #response.headers['Content-type'] = "text/html; charset=utf-8"
-    #render 'orders/_order_state', :layout => false
   end
 
-  # POST /orders
-  # POST /orders.xml
-  def create
-    @order = Order.new(params[:order])
-
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to(@order, :notice => 'Order was successfully created.') }
-        format.xml  { render :xml => @order, :status => :created, :location => @order }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /orders/1
-  # PUT /orders/1.xml
-  def update
-    @order = Order.find(params[:id])
-
-    respond_to do |format|
-      if @order.update_attributes(params[:order])
-        format.html { redirect_to(@order, :notice => 'Order was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /orders/1
-  # DELETE /orders/1.xml
-  def destroy
-    @order = Order.find(params[:id])
-    @order.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(orders_url) }
-      format.xml  { head :ok }
-    end
-  end
-    
   def catalog_orders
+    @header_layout = 'orders/header_orders'
+    @body_css_class = "perma orderstage3"
     @catalog = Catalog.find(params[:catalog_id])
     if current_user_self?
       @orders = Order.find_all_by_catalog_id(@catalog.id, :order => 'id DESC')
@@ -190,8 +149,8 @@ class OrdersController < ApplicationController
   end
   
   def catalog_order
-    @body_css_class = "orderstage3"
-    @header_layout = 'orders/header_show'
+    @body_css_class = "perma orderstage3"
+    @header_layout = 'orders/header_order'
     @order = Order.find(params[:id])
     @catalog = Catalog.find(@order.catalog_id)
     if current_user_self?
@@ -201,11 +160,31 @@ class OrdersController < ApplicationController
     end
   end
   
+  def add_comment_to_last_state
+    @order = Order.find(params[:id])
+    @catalog = Catalog.find(@order.catalog_id)
+    if current_user_self?
+      @order.state[@order.state.size-1]['comment'] = params[:last_state_comment]
+      @order.save
+    else
+      logger.debug "#{t('default.you_not_owner_directory')} OrdersController.editstate"
+    end
+    render :nothing => true
+  end
+  
 private
 
   def random_string(size = 32)
     chars = ('0'..'9').to_a
     (1..size).collect{|a| chars[rand(chars.size)] }.join
-  end  
+  end
+  
+  def generate_customer_identifer
+    customer_id = random_string(10)
+    unless Order.find_by_customer_id(customer_id).nil?
+      generate_customer_identifer
+    end
+    customer_id
+  end
   
 end

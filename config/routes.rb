@@ -9,6 +9,8 @@ Magfolio::Application.routes.draw do
   resources :pictures
   
   # resources :orders
+  match 'order/:id/comment/add' => 'orders#add_comment_to_last_state', :as => 'add_comment_to_last_state'
+  match 'order/:id/getstate' => 'orders#getstate', :as => :getstate
   match 'order/:id/editstate' => 'orders#editstate', :as => :editstate
   match 'order/:id' => 'orders#catalog_order', :as => :catalog_order
   match 'orders/catalog/:catalog_id' => 'orders#catalog_orders', :as => :catalog_orders

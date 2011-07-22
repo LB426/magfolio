@@ -19,6 +19,7 @@
   <a href="/izbrannoes">Избранное<span id="izbrannoe_count"><%= izbrannoe_count -%></span></a> |
   <% if current_user %>
     <% if !is_admin %>
+    <a href="<%= catalog_orders_path(@catalog) %>" title="Заказы по каталогу">Заказы</a> |
     <%= link_to current_user.email, shortcut_catalog_path(current_user.catalogs.first.shortcut_name) %> |
     <% end %>
     <a href="/logout" title="Выход">Выход</a>
@@ -33,6 +34,6 @@
 </div>
 <div class="filterbar">
   <div class="filter">
-    ← <a href="/">Вернуться в каталог</a>
+    ← <a href="/">Вернуться к каталогам</a>
   </div>
 </div>
