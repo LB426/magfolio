@@ -73,6 +73,9 @@ ru:
     state_received_by_the_customer: "получено заказчиком"
     state_close: "выполнен"
     state_transferred_to_archive: "передан в архив"
+    state_malicious: "злонамеренно ложный"
+    state_false: "ошибочный"
+    state_failure: "заказчик отказался"
   cartography:
     msg_add_marker_on_map_non_self_alert: "Вам запрещено редактировать чужую карту"
   mailer:

@@ -104,6 +104,12 @@ protected
   
   def state_to_string(state = nil)
     case state
+    when -1
+      return t('order.state_false')
+    when -2
+      return t('order.state_malicious')
+    when -3
+      return t('order.state_failure')
     when 1
       return t('order.state_open')
     when 2

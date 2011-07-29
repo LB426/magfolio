@@ -33,15 +33,15 @@ $(document).ready(function() {
   $('#signup').mouseleave(function() {
     $("#slide_listed").hide("slide", { direction: "up" }, 700);
   });
-  $('#search_location_name').click(function(event) {
+  $('#search_location_name').hover(function(event) {
     $("#search_location_menu").show();
     event.stopPropagation();
   });
-  $('#search_budget_name').click(function(event) {
+  $('#search_budget_name').hover(function(event) {
     $("#search_budget_menu").show();
     event.stopPropagation();
   });
-  $('#search_service_name').click(function(event) {
+  $('#search_service_name').hover(function(event) {
     $("#search_service_menu").show();
     event.stopPropagation();
   });
@@ -241,6 +241,7 @@ $(document).ready(function() {
 	$("#business_deals_iframe").load(function(){
 		$.fancybox.close();
 	});
+	
 	$("a#inline_add_business_deal").fancybox({
   		'hideOnContentClick': false,
   		'onStart': function(){

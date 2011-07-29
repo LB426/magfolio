@@ -46,8 +46,7 @@ $(document).ready(function() {
     $('#delivery_services').show();
   });
   $('#order_confirm').click(function(){
-    if($('#terms_of_confirm').is(':checked')){
-      //alert('1');
+    if($('#agreement').is(':checked')){
       return true;
     }else{
       alert('Вы не подтвердили своё согласие с предоставляемыми услугами');
@@ -89,4 +88,72 @@ $(document).ready(function() {
   $('#add_comment_to_last_state_dialog_submit_button').click(function(){
     $.fancybox.close();
   });
+  $("a#terms_of_confirm_link").fancybox({
+  		'hideOnContentClick': false,
+  		'onClosed': function(){
+  		  var phone = $('#customer_phone').val();
+    	  var email = $('#customer_email').val();
+    	  var reEmail = new RegExp(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/);
+    	  var rePhoneNumber1 = new RegExp(/^\([1-9]\d{4}\)\d{5}$/);
+    	  var rePhoneNumber2 = new RegExp(/^\+7\([1-9]\d{2}\)\d{3}\-\d{2}\-\d{2}$/);
+    	  if(email == '' && phone == ''){
+    	    alert('Вы ничего не ввели');
+    	    $("input#agreement").attr('checked', false);
+        }else{
+          if(phone != ''){
+    	      if(!rePhoneNumber1.test(phone)){
+        	    if(!rePhoneNumber2.test(phone)){
+        	      alert('Номер должен соответствовать формату - (86196)41199\nили +7(918)123-44-56');
+        	      $("input#agreement").attr('checked', false);
+        	    }
+            }
+          }
+          if(email != ''){
+    		    if(!reEmail.test(email)){
+        	    alert("Неправильно указан e-mail!");
+        	    $("input#agreement").attr('checked', false);
+        	  }
+    	    }
+        }
+		  }
+  });
+  $('#agreement').click(function(){
+    $("a#terms_of_confirm_link").click();
+  });
+  $('#use_terms_of_confirm').click(function(){
+    var phone = $('#customer_phone').val();
+	  var email = $('#customer_email').val();
+	  var reEmail = new RegExp(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/);
+	  var rePhoneNumber1 = new RegExp(/^\([1-9]\d{4}\)\d{5}$/);
+	  var rePhoneNumber2 = new RegExp(/^\+7\([1-9]\d{2}\)\d{3}\-\d{2}\-\d{2}$/);
+	  $("input#agreement").attr('checked', false);
+	  if(email == '' && phone == ''){
+	    alert('Вы ничего не ввели');
+	    return false;
+    }else{
+      if(phone != ''){
+	      if(!rePhoneNumber1.test(phone)){
+    	    if(!rePhoneNumber2.test(phone)){
+    	      alert('Номер должен соответствовать формату - (86196)41199\nили +7(918)123-44-56');
+    	      return false;
+    	    }
+        }
+      }
+      if(email != ''){
+		    if(!reEmail.test(email)){
+    	    alert("Неправильно указан e-mail!");
+    	    return false;
+    	  }
+	    }
+    }
+    $("input#agreement").attr('checked', true);
+    $.fancybox.close();
+  });
+  $('#state_filter').fancybox({
+    'hideOnContentClick': false,
+		'onClosed': function(){
+		  //set_filter_params_for_catalog();
+	  }
+  });
+  
 })

@@ -6,3 +6,4 @@ class Order < ActiveRecord::Base
   # validates_uniqueness_of :customer_identifer
   
 end
+

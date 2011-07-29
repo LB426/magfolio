@@ -2,6 +2,17 @@
   <%= javascript_include_tag 'catalog_show.js' %>
 <% end %>
 
+<script type="text/javascript">
+//<![CDATA[
+  var ps_default = [ 'заказ принят', 'заказ закрыт', 'передан в архив' ] ;
+  <% if @catalog.order_statuses.empty? %>
+    var ps = new Array() ;
+  <% else %>
+    var ps = [ <%= @order_statuses -%> ] ;
+  <% end %>
+//]]>
+</script>
+
 <div class="card-perma">
   <div class="cardcap-perma">
     <img alt="Card-top-perma" src="/images/card-top-perma.png">
@@ -161,7 +172,6 @@
       <p><%= f.submit "Внести" %></p>
     <% end %>
   </div>
-  
   <div id="edit_business_deals">
     <h2>Виды товаров и услуг</h2>
     <%= form_for(@catalog) do |f| %>
@@ -191,7 +201,6 @@
       <p><%= f.submit "Внести" %></p>
     <% end %>
   </div>
-  
   <div id="catalog_tariff_change">
     <h2>Изменить тариф каталога</h2>
     <%= form_for(@catalog) do |f| %>
@@ -200,7 +209,6 @@
       <p><%= f.submit "Внести" %></p>
     <% end %>
   </div>
-  
   <div id="zakaz_layout_change">
     <h2>Изменить форму заказа</h2>
     <%= form_for(@catalog) do |f| %>
@@ -209,7 +217,19 @@
       <p><%= f.submit "Внести" %></p>
     <% end %>
   </div>
-  
+  <div id="possible_order_status">
+    <h2>Возможные состояния моих заказов</h2>
+    <input type="text" id="possible_status_text" />
+    <a href="" id="status_add">внести</a>
+    <a href="" onclick="filldefault(); return false;">автомат</a>
+    <br>
+    <table id="possible_statuses">  
+    </table>
+    <%= form_for(@catalog) do |f| %>
+    <%= hidden_field_tag(:order_statuses, nil, :id=>"all_statuses")%>
+    <p><%= f.submit "Сохранить" %></p>
+    <% end %>
+  </div>
 </div>
 <% end %>
 

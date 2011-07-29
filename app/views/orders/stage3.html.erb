@@ -10,34 +10,7 @@
   </ul>
 </div>
 <div class="column right">
-<style type="text/css">
-  table{
-  	border-collapse: collapse;
-  	text-align:left;
-  	width: 100%;
-  }
-  caption{
-  	font-size: 			1em;
-  	color:				#000000;
-  	text-align:			center;
-  	font-weight:		bolder;
-  	border-bottom:  3px solid #000;
-  }
-  thead tr th{
-  	color:				#0099ff;
-  	text-transform:		uppercase;
-  	text-align:			center;	
-  	border-bottom:		3px solid #000;
-  }
-  tfoot tr th{
-  	border-top:		3px solid #000;
-  }
-  tr td, tr th{
-  	border: 1px solid #000;
-  	line-height:  1.5em;
-  }
-</style>
-<table>
+<table class="order">
   <caption>Я хочу заказать</caption>
   <thead>
     <tr>
@@ -88,6 +61,38 @@
     </tr>
   </tfoot>
 </table>
-<input type="checkbox" id="terms_of_confirm">Я согласен с <a href="">условиями предоставления услуг</a><br>
-<%= link_to image_tag("confirm_order.png"), make_order_path('4'), :id => "order_confirm" %>
+
+<%= form_tag(make_order_path('4')) do -%>
+  <div style="display:none">
+    <a href="#terms_of_confirm_dialog" id="terms_of_confirm_link"></a>
+    <div id="terms_of_confirm_dialog">
+      <h4>Чтобы не получать этого сообщения</h4>
+      <h1>ЗАРЕГИСТИРУЙТЕСЬ!</h1>
+      </br>
+      <h2>Обратная связь</h2>
+      <p>Для оформления заказа нам необходимо связаться с Вами</p>
+      <p>Пожалуйста, введите Ваш</p>
+      <p>
+        <strong>номер телефона с кодом</strong><br>
+        пример (86196)41616 или +7(961)352-29-09<br>
+        <input type="text" size="30" id="customer_phone" name="customer_phone">
+      </p>
+      или
+      <p>
+        <strong>адрес электронной почты</strong><br>
+        <input type="text" size="30" id="customer_email" name="customer_email">
+      </p>
+      <p>
+        <input type="submit" value="Использовать" id="use_terms_of_confirm">
+      </p>
+    </div>
+  </div>
+  <input type="checkbox" id="agreement" name="agreement">Я согласен с <a href="">условиями предоставления услуг</a>
+  <br>
+  <br>
+  <button type="submit" id="order_confirm">
+    <strong style="vertical-align: middle; font-size: 20px;">Подтвердить заказ</strong>
+    <img src="/images/red-arrow-icon.png" width="50px" height="30px" style="vertical-align: middle">
+  </button>
+<% end -%>
 </div>

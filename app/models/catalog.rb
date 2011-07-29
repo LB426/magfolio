@@ -14,6 +14,12 @@ class Catalog < ActiveRecord::Base
   before_create :randomize_file_name
   
   serialize :business_deals
+  serialize :order_statuses
+  serialize :filter_params
+
+  def set_possible_order_status
+    
+  end 
 
 private
 
@@ -25,3 +31,4 @@ private
   end
 
 end
+

@@ -29,13 +29,24 @@
         <option value="11">получено заказчиком</option>
         <option value="12">выполнен</option>
         <option value="13">передан в архив</option>
+        <option value="-1">ошибочный заказ</option>
+        <option value="-2">ложный заказ</option>
+        <option value="-3">заказчик отказался</option>
       </select>
       <a href="#add_comment_to_last_state_dialog" id="add_comment_to_last_state_link" title="добавить комментарий к последнему состоянию заказа">коммент</a>
       <% end %>
     </li>
 	  <li><strong>номер заказа: <%= @order.id %></strong></li>
 	  <li><strong>Продавец: <%= @catalog.company_name %></strong></li>
-	  <li><strong>Покупатель: <%= @order.customer_id %></strong></li>
+	  <li>
+	    <strong>Покупатель: <%= @order.customer_id %></strong><br>
+	    <% unless @order.customer_phone.nil? %>
+	    <strong>телефон: <%= @order.customer_phone %></strong><br>
+	    <% end %>
+	    <% unless @order.customer_email.nil? %>
+	    <strong>email: <%= @order.customer_email %></strong>
+	    <% end %>
+	  </li>
 	  <li>
 	    <strong>Доставка :</strong>
 	    <%= @order.delivery['method'] %>

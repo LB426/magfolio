@@ -1,5 +1,13 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'order.js' %>
+<% end %>
+
 <table class="order">
-  <caption><h1>Таблица заказов по каталогу <%= link_to @catalog.company_name, "/#{@catalog.shortcut_name}" %> (<%= @orders.size %>)</h1></caption>
+  <caption>
+    <h1>
+      Таблица заказов по каталогу <%= link_to @catalog.company_name, "/#{@catalog.shortcut_name}" %> (<%= @orders.size %>)
+    </h1>
+  </caption>
   <thead>
     <tr>
       <th scope="col">№пп</th>
@@ -7,7 +15,7 @@
       <th scope="col">Заказчик</th>
       <th scope="col">Сумма</th>
       <th scope="col">Кол-во</th>
-      <th scope="col">Состояние</th>
+      <th scope="col"><a href="#state_filter_params" id="state_filter" title="фильтр по состоянию">Состояние</a></th>
       <th scope="col">принят</th>
       <th scope="col">изменён</th>
     </tr>
@@ -30,3 +38,13 @@
     <% end %>
   </tbody>
 </table>
+
+<div style="display:none">
+  <div id="state_filter_params">
+    <h2>Выберите состояния, заказы с которыми хотите отобразить</h2>
+    <%= form_for(@catalog) do |f| -%>
+      <input name="state" type="checkbox" />
+      <p><%= f.submit "Внести" %></p>
+    <% end %>
+  </div>
+</div>

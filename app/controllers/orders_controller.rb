@@ -59,6 +59,12 @@ class OrdersController < ApplicationController
       @header_layout = 'orders/header_stage3'
       render 'stage3', :layout => true
     when "4"
+      customer_phone = nil
+      customer_email = nil
+      agreement = nil
+      customer_phone = params[:customer_phone] unless params[:customer_phone].empty?
+      customer_email = params[:customer_email] unless params[:customer_email].empty?
+      agreement = params[:agreement] unless params[:agreement].empty?
       flag = false
       customer_id = customer?
       if customer_id == nil
@@ -80,6 +86,9 @@ class OrdersController < ApplicationController
           @order.payment = { 'payd_system' => @cart.order_options['payment'] }
           @order.delivery = { 'method' => @cart.order_options['delivery'] }
           @order.state = [{'state'=>1, 'date'=>Time.now}, {'state'=>2, 'date'=>Time.now}]
+          @order.customer_phone = customer_phone
+          @order.customer_email = customer_email
+          @order.agreement = agreement
           if @order.save          
             flag = true
           else

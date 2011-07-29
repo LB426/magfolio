@@ -201,8 +201,12 @@ class CatalogsController < ApplicationController
     else
       @catalog = Catalog.find(params[:id])
     end
+    unless @catalog.order_statuses.empty?
+      @order_statuses = @catalog.order_statuses.collect {|x| "\'" + x + "\'"}
+      @order_statuses = @order_statuses.join(",")
+    end
     if @catalog
-	@pictures = @catalog.pictures.all(:order => "id DESC")
+      @pictures = @catalog.pictures.all(:order => "id DESC")
       if !current_user.nil? && current_user.id == @catalog.user_id
         @picture = current_user.pictures.new
         @picture.user_id = current_user.id
@@ -219,11 +223,6 @@ class CatalogsController < ApplicationController
       redirect_to root_path, :alert => t('messages.catalogs_not_found')
     end
 
-    #respond_to do |format|
-    #  format.html # show.html.erb
-    #  format.xml  { render :xml => @catalog }
-    #end
-    
     rescue ActiveRecord::RecordNotFound
       redirect_to root_path, :alert => t('messages.catalog_not_found')
   end
@@ -247,6 +246,7 @@ class CatalogsController < ApplicationController
   # POST /catalogs
   # POST /catalogs.xml
   def create
+=begin
     @catalog = Catalog.new(params[:catalog])
 
     respond_to do |format|
@@ -258,29 +258,40 @@ class CatalogsController < ApplicationController
         format.xml  { render :xml => @catalog.errors, :status => :unprocessable_entity }
       end
     end
+=end
   end
 
   # PUT /catalogs/1
   # PUT /catalogs/1.xml
   def update
     @catalog = Catalog.find(params[:id])
-    business_deals = params[:business_deals]
-    unless business_deals.nil?
-      business_deal_ids = Array.new
-      business_deals.each_key do |key|
-        business_deal_ids << key if key != "0"
+    if current_user_self?
+      business_deals = params[:business_deals]
+      unless business_deals.nil?
+        business_deal_ids = Array.new
+        business_deals.each_key do |key|
+          business_deal_ids << key if key != "0"
+        end
+        @catalog.business_deals = business_deal_ids
       end
-      @catalog.business_deals = business_deal_ids
-    end
+      order_statuses = params[:order_statuses]
+      unless order_statuses.nil?
+        os = order_statuses.split(",")
+        @catalog.order_statuses = os
+      end
+      
 
-    respond_to do |format|
-      if @catalog.update_attributes(params[:catalog])
-        format.html { redirect_to(@catalog, :notice => 'Catalog was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @catalog.errors, :status => :unprocessable_entity }
+      respond_to do |format|
+        if @catalog.update_attributes(params[:catalog])
+          format.html { redirect_to(@catalog, :notice => 'Catalog was successfully updated.') }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @catalog.errors, :status => :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_url, :alert =>  t('default.you_not_owner_directory')
     end
   end
 
@@ -389,6 +400,10 @@ class CatalogsController < ApplicationController
       @catalogs = truncate_array_of_catalogs(@catalogs)
       render 'index', :layout => true
     end
+  end
+
+  def set_filter_params
+    
   end
   
 private

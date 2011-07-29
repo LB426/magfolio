@@ -42,3 +42,53 @@ function to_izbrannoe(catalog_id) {
   }
   return false;
 }
+
+function deleterow(row){
+  ps.splice(row, 1);
+  refreshtable();
+}
+
+function pickup(row){
+  if(row > 0){
+    var pre = ps[row - 1];
+    var cur = ps[row];
+    ps.splice(row-1, 2, cur, pre);
+    refreshtable();
+  }
+}
+
+function putdown(row){
+  var last = ps.length - 1 ;
+  if(row < last){
+    var cur = ps[row];
+    var next = ps[row + 1];
+    ps.splice(row, 2, next, cur);
+    refreshtable();
+  }
+}
+
+function filldefault(){
+  ps = ps.concat(ps_default);
+  refreshtable();
+}
+
+function refreshtable(){
+  $('#possible_statuses').empty();
+  for(var i=0; i<ps.length; i++){
+    $('#possible_statuses').append('<tr><td>'+ps[i]+'</td><td><a href="" onclick="deleterow('+ i +'); return false;">удалить</a></td><td><a href="" onclick="pickup('+i+'); return false;">поднять</a></td><td><a href="" onclick="putdown('+i+');return false;">опустить</a></td></tr>');
+  }
+  $('#all_statuses').val(ps.toString());
+}
+
+$(document).ready(function() {
+  $("a#possible_order_status_link").fancybox({
+  		'hideOnContentClick': false,
+  		'onStart': refreshtable()
+  });
+  $('#status_add').click(function(){
+    var text = $('#possible_status_text').val();
+    ps.push(text);
+    refreshtable();
+    return false;
+  });
+})
