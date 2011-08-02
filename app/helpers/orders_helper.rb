@@ -23,7 +23,7 @@ module OrdersHelper
   end
   
   def last_order_state(order = nil)
-    return state_to_string(order.state[order.state.size-1]['state'])
+    order.state[order.state.size-1]['state']
   end
   
   def last_order_state_date(order = nil)
@@ -47,47 +47,35 @@ module OrdersHelper
   end
   
   def order_state_color(order = nil)
-    last = order.state[order.state.size - 1]['state']
-    case last
-    when 1
-      return 'background-color:#00FA9A;color:#000000;'
-    when 2
-      return 'background-color:#ADFF2F;color:#000000;'
-    when 3
-      return 'background-color:#00FF00;color:#000000;'
-    when 4
-      return 'background-color:#00FFFF;color:#000000;'
-    when 5
-      return 'background-color:#00FA9A;color:#000000;'
-    when 6
-      return 'background-color:#00FA9A;color:#000000;'
-    when 7
-      return 'background-color:#00FA9A;color:#000000;'
-    when 8
-      return 'background-color:#00FA9A;color:#000000;'
-    when 9
-      return 'background-color:#00FA9A;color:#000000;'
-    when 10
-      return 'background-color:#00FA9A;color:#000000;'
-    when 11
-      return 'background-color:#00FA9A;color:#000000;'
-    when 12
-      return 'background-color:#00FA9A;color:#000000;'
-    when 13
-      return 'background-color:#00FA9A;color:#000000;'
-    else
-      return 'background-color:#2F4F4F;color:#FFFFFF;'
-    end
+    color = ""
+    color << 'background-color:'
+    color << order.state[order.state.size - 1]['bgcolor']
+    color << ';color:'
+    color << order.state[order.state.size - 1]['color']
+    color << ';'
+    color
   end
   
   def archive?
-    last_state = @order.state[@order.state.size - 1]['state'].to_i
-    logger.debug "last_state=#{last_state}"
-    if last_state == 13
+    last_state = @order.state[@order.state.size - 1]['state']
+    if last_state == t('order.state_transferred_to_archive')
       return true
     else
       return false
     end
+  end
+  
+  def possible_statuses
+    html = ""
+    if current_user_self? && !archive?
+      html << "<select id=\"change_state\">"
+      for i in 0..@catalog.order_statuses.size-1 do
+        html << "<option value=\"#{i}\">#{@catalog.order_statuses[i]['text']}</option>"
+      end
+      html << "</select>"
+      html << "<a href=\"#add_comment_to_last_state_dialog\" id=\"add_comment_to_last_state_link\" title=\"#{t('order.statuses_select_title')}\">#{t('default.comment')}</a>"
+    end
+    html.html_safe
   end
   
 end

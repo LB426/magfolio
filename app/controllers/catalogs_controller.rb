@@ -201,9 +201,12 @@ class CatalogsController < ApplicationController
     else
       @catalog = Catalog.find(params[:id])
     end
-    unless @catalog.order_statuses.empty?
-      @order_statuses = @catalog.order_statuses.collect {|x| "\'" + x + "\'"}
-      @order_statuses = @order_statuses.join(",")
+    unless @catalog.order_statuses.nil? || @catalog.order_statuses.empty?
+      #@order_statuses = @catalog.order_statuses.collect {|x| "\'" + x + "\'"}
+      #@order_statuses = @order_statuses.join(",")
+      @order_statuses = @catalog.order_statuses.to_json.html_safe
+      #@order_statuses = ActiveSupport::JSON.encode(@catalog.order_statuses)
+      #@order_statuses = "[{'text':'asdfgh','color':'#000000','bgcolor':'#FFFFFF'}]"
     end
     if @catalog
       @pictures = @catalog.pictures.all(:order => "id DESC")
@@ -276,14 +279,13 @@ class CatalogsController < ApplicationController
       end
       order_statuses = params[:order_statuses]
       unless order_statuses.nil?
-        os = order_statuses.split(",")
+        os = ActiveSupport::JSON.decode(order_statuses)
         @catalog.order_statuses = os
       end
-      
 
       respond_to do |format|
         if @catalog.update_attributes(params[:catalog])
-          format.html { redirect_to(@catalog, :notice => 'Catalog was successfully updated.') }
+          format.html { redirect_to(@catalog, :notice => t('default.deal_successful') ) }
           format.xml  { head :ok }
         else
           format.html { render :action => "edit" }

@@ -85,7 +85,12 @@ class OrdersController < ApplicationController
           @order.products = products_array
           @order.payment = { 'payd_system' => @cart.order_options['payment'] }
           @order.delivery = { 'method' => @cart.order_options['delivery'] }
-          @order.state = [{'state'=>1, 'date'=>Time.now}, {'state'=>2, 'date'=>Time.now}]
+          # @order.state = [{'state'=>1, 'date'=>Time.now}, {'state'=>2, 'date'=>Time.now}]
+          @catalog = Catalog.find(products[:catalog_id])
+          @order.state = [  { 'state'=>@catalog.order_statuses[0]['text'],
+                              'color'=>@catalog.order_statuses[0]['color'],
+                              'bgcolor'=>@catalog.order_statuses[0]['bgcolor'],
+                              'date'=>Time.now  } ]
           @order.customer_phone = customer_phone
           @order.customer_email = customer_email
           @order.agreement = agreement
@@ -118,8 +123,13 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @catalog = Catalog.find(@order.catalog_id)
     if current_user_self?
-      if params[:future_state] != '0'
-        @order.state << {'state' => params[:future_state].to_i, 'date'=>Time.now}
+      unless params[:future_state].empty?
+        i = params[:future_state].to_i
+        @order.state << { 'state'=>@catalog.order_statuses[i]['text'],
+                          'color'=>@catalog.order_statuses[i]['color'],
+                          'bgcolor'=>@catalog.order_statuses[i]['bgcolor'],
+                          'date'=>Time.now }
+        
         @order.save
       end
     else
@@ -134,8 +144,9 @@ class OrdersController < ApplicationController
     arr = Array.new
     for i in 0..@order.state.size-1 do
       arr[i] = {
-                  'state_name' => state_to_string(@order.state[i]['state'].to_i),
-                  'state_val' => @order.state[i]['state'],
+                  'state' => @order.state[i]['state'],
+                  'color' => @order.state[i]['color'],
+                  'bgcolor' => @order.state[i]['bgcolor'],
                   'date' => Russian::strftime(@order.state[i]['date'], "%d.%m.%Y %H:%M")                    
                }
       unless @order.state[i]['comment'].nil?

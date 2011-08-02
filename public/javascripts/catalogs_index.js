@@ -1,4 +1,3 @@
-
 var catalogs = new Array();
 var catalog_ids = new Array();
 var show_on_map = -1 ;
@@ -134,7 +133,7 @@ $(document).ready(function() {
       //$('#catalogs_upload_progress_bar').show();
       if((catalog_ids.lenght != 0)&&(flag == false)){
         $.post('/catalogs/indexload', 
-              { catalog_ids: catalog_ids, location_id: location_id, product_kind: product_kind, service_kind: service_kind, deal_ids: deal_ids, locations: locations },
+              { catalog_ids: catalog_ids, location_id: location_id, product_kind: product_kind, service_kind: service_kind, deal_ids: deal_ids, locations: locations, authenticity_token: form_authenticity_token },
               function(data, textStatus, jqXHR) {
                 $('div.content').append(data);
                 if(data.length != 1){

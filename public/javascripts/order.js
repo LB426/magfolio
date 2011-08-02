@@ -15,19 +15,22 @@ function get_order_state() {
         $('#order_state').html('');
         $.each(obj, function(i,item){
           if(item.comment != undefined){
-            $('#order_state').append('<a href="#" onclick="showcomment(\''+item.comment+'\');" id="show_state_comment_' + i + '" style="text-decoration:none;" title="'+ item.comment +'">' + item.state_name + '</a>&nbsp;' + item.date + '<br>');
+            $('#order_state').append('<a href="#" onclick="showcomment(\''+item.comment+'\');" id="show_state_comment_' + i + '" style="text-decoration:none;" title="'+ item.comment +'">' + item.state + '</a>&nbsp;' + item.date + '<br>');
           }else{
-            $('#order_state').append(item.state_name + '&nbsp;' + item.date + '<br>'); 
+            $('#order_state').append(item.state + '&nbsp;' + item.date + '<br>'); 
           }
-          state = item.state_val;
+          state = item.state;
+          $('#order_statuses_all').attr('style','background-color:'+item.bgcolor+';color:'+item.color+';');
   		  });
-  		  if(state == '13'){
+  		  if(state == "передан в архив"){
   		    $('#order_state').hide();
   		    var str = $('#order_state').html();
           var arr = str.split('<br>');
           var last = arr.length - 2 ;
   		    $('#last_state').html(arr[last]);
   		    $('#last_state').show();
+  		    $('#change_state').hide();
+  		    $('#add_comment_to_last_state_link').hide();
   		  }else{
           $('#order_state').show();
         }
@@ -69,6 +72,7 @@ $(document).ready(function() {
   });
   $('#change_state').change(function(){
     var state = $(this).val();
+    //var state = $(this).find("option:selected").text();
     $('#last_state').hide();
     $.ajax({
       type: "POST",

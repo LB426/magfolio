@@ -76,6 +76,7 @@ ru:
     state_malicious: "злонамеренно ложный"
     state_false: "ошибочный"
     state_failure: "заказчик отказался"
+    statuses_select_title: "добавить комментарий к последнему состоянию заказа"
   cartography:
     msg_add_marker_on_map_non_self_alert: "Вам запрещено редактировать чужую карту"
   mailer:
@@ -91,3 +92,6 @@ ru:
     you: "Вы"
     your: "Ваш"
     and: "и"
+    deal_successful: "выполнено успешно"
+    comment: "комментарий"
+    

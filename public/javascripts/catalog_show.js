@@ -68,16 +68,19 @@ function putdown(row){
 }
 
 function filldefault(){
+  ps = new Array() ;
   ps = ps.concat(ps_default);
   refreshtable();
 }
 
 function refreshtable(){
-  $('#possible_statuses').empty();
-  for(var i=0; i<ps.length; i++){
-    $('#possible_statuses').append('<tr><td>'+ps[i]+'</td><td><a href="" onclick="deleterow('+ i +'); return false;">удалить</a></td><td><a href="" onclick="pickup('+i+'); return false;">поднять</a></td><td><a href="" onclick="putdown('+i+');return false;">опустить</a></td></tr>');
+  if(typeof(ps) != "undefined"){
+    $('#possible_statuses').empty();
+    for(var i=0; i<ps.length; i++){
+      $('#possible_statuses').append('<tr><td style="background-color:'+ps[i].bgcolor+';color:'+ps[i].color+'">'+ps[i].text+'</td><td><a href="" onclick="deleterow('+ i +'); return false;">удалить</a></td><td><a href="" onclick="pickup('+i+'); return false;">поднять</a></td><td><a href="" onclick="putdown('+i+');return false;">опустить</a></td><td>'+ps[i].color+'</td><td>'+ps[i].bgcolor+'</td></tr>');
+    }
+    $('#all_statuses').val($.toJSON(ps));
   }
-  $('#all_statuses').val(ps.toString());
 }
 
 $(document).ready(function() {
@@ -86,8 +89,11 @@ $(document).ready(function() {
   		'onStart': refreshtable()
   });
   $('#status_add').click(function(){
-    var text = $('#possible_status_text').val();
-    ps.push(text);
+    var hash = new Object();
+    hash.text = $.trim($('#possible_status_text').val());
+    hash.color = $.trim($('#possible_status_color').val());
+    hash.bgcolor = $.trim($('#possible_status_bg_color').val());
+    ps.push(hash);
     refreshtable();
     return false;
   });

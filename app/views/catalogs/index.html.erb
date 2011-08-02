@@ -3,6 +3,12 @@
   <%= javascript_include_tag 'catalogs_index.js' %>
 <% end %>
 
+<script type="text/javascript">
+//<![CDATA[
+  var form_authenticity_token = '<%= form_authenticity_token %>' ;
+//]]>
+</script>
+
 <% @catalogs.each do |catalog| %>
 <script type="text/javascript">
   catalog_ids.push(<%= catalog.id -%>);

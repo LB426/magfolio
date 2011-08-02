@@ -1,17 +1,8 @@
 <% content_for :head do %>
+  <%= javascript_include_tag 'jquery.json-2.2.js' %>
+  <%= javascript_include_tag 'iColorPicker.js' %>
   <%= javascript_include_tag 'catalog_show.js' %>
 <% end %>
-
-<script type="text/javascript">
-//<![CDATA[
-  var ps_default = [ 'заказ принят', 'заказ закрыт', 'передан в архив' ] ;
-  <% if @catalog.order_statuses.empty? %>
-    var ps = new Array() ;
-  <% else %>
-    var ps = [ <%= @order_statuses -%> ] ;
-  <% end %>
-//]]>
-</script>
 
 <div class="card-perma">
   <div class="cardcap-perma">
@@ -121,6 +112,21 @@
 </div>
 
 <% if current_user_self? %>
+
+<script type="text/javascript">
+
+  var ps_default = [  {'text':'заказ принят','color':'#000000','bgcolor':'#FFFFFF'},
+                      {'text':'заказ закрыт','color':'#000000','bgcolor':'#FFFFFF'},
+                      {'text':'передан в архив','color':'#000000','bgcolor':'#FFFFFF'} ] ;
+
+  <% unless @catalog.order_statuses.nil? || @catalog.order_statuses.empty? %>
+    var ps = new Array() ;
+  <% else %>
+    var ps = <%= @order_statuses %> ;
+  <% end %>
+
+</script>
+
 <div style="display:none">
   <div id="catalog_base_data">
     <h2>Редактирование основных данных каталога</h2>
@@ -221,12 +227,14 @@
     <h2>Возможные состояния моих заказов</h2>
     <input type="text" id="possible_status_text" />
     <a href="" id="status_add">внести</a>
-    <a href="" onclick="filldefault(); return false;">автомат</a>
+    <a href="" onclick="filldefault(); return false;" title="заполнить автоматически">автоматически</a>
+    <input type="text" class="iColorPicker" id="possible_status_color" value="#000000" size="8">
+    <input type="text" class="iColorPicker" id="possible_status_bg_color" value="#AFAFFF" size="8">
     <br>
     <table id="possible_statuses">  
     </table>
     <%= form_for(@catalog) do |f| %>
-    <%= hidden_field_tag(:order_statuses, nil, :id=>"all_statuses")%>
+    <%= hidden_field_tag(:order_statuses, nil, :id=>"all_statuses") %>
     <p><%= f.submit "Сохранить" %></p>
     <% end %>
   </div>

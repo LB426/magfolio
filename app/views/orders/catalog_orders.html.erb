@@ -26,7 +26,7 @@
     <tr style="<%= order_state_color(order) %>">
       <td><%= order_count+=1 %></td>
       <td align="center">
-        <%= link_to order.id, catalog_order_path(order), :style => "color:#000000;" %>
+        <%= link_to order.id, catalog_order_path(order) %>
       </td>
       <td align="center"><%= order.customer_id %></td>
       <td align="center"><%= order_sum(order) %> руб.</td>

@@ -11,30 +11,11 @@
 
 <div class="column left">
 	<ul class="orderstack">
-	  <li style="<%= order_state_color(@order) %>">
+	  <li id="order_statuses_all" style="<%= order_state_color(@order) %>">
 	    <strong><a href="#" title="свернуть/развернуть" id="state_show_hide">Состояние:</a></strong><br>
 	    <div id="last_state"></div>
 	    <div id="order_state"></div>
-      <% if current_user_self? && !archive? %>
-      <select id="change_state">
-        <option value="0">изменить состояние заказа</option>
-        <option value="3">оплачено</option>
-        <option value="4">передан на компоновку</option>
-        <option value="5">выполняется компоновка</option>
-        <option value="6">компоновка завершена</option>
-        <option value="7">передан на доставку</option>
-        <option value="8">доставляется</option>
-        <option value="9">доставлено</option>
-        <option value="10">доставлено, но не передано заказчику</option>
-        <option value="11">получено заказчиком</option>
-        <option value="12">выполнен</option>
-        <option value="13">передан в архив</option>
-        <option value="-1">ошибочный заказ</option>
-        <option value="-2">ложный заказ</option>
-        <option value="-3">заказчик отказался</option>
-      </select>
-      <a href="#add_comment_to_last_state_dialog" id="add_comment_to_last_state_link" title="добавить комментарий к последнему состоянию заказа">коммент</a>
-      <% end %>
+      <%= possible_statuses %>
     </li>
 	  <li><strong>номер заказа: <%= @order.id %></strong></li>
 	  <li><strong>Продавец: <%= @catalog.company_name %></strong></li>
