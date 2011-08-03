@@ -8,3 +8,17 @@ Disallow: /search
 Disallow: /login
 Disallow: /signup
 Disallow: /users
+Disallow: /order
+Disallow: /orders
+Disallow: /catalog
+Disallow: /catalogs
+Disallow: /sessions
+Disallow: /session
+Disallow: /locations
+Disallow: /location
+Disallow: /product
+Disallow: /products
+Disallow: /catalog/product
+Disallow: /catalogs/product
+Disallow: /business_deals
+Disallow: /pictures

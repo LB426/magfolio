@@ -94,4 +94,6 @@ ru:
     and: "и"
     deal_successful: "выполнено успешно"
     comment: "комментарий"
+    filter_settins_up: "фильтр установлен"
+    none_filter_settins_up: "фильтр не установлен, вы отменили все позиции!"
     

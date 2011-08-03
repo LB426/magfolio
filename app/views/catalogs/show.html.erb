@@ -115,11 +115,11 @@
 
 <script type="text/javascript">
 
-  var ps_default = [  {'text':'заказ принят','color':'#000000','bgcolor':'#FFFFFF'},
-                      {'text':'заказ закрыт','color':'#000000','bgcolor':'#FFFFFF'},
-                      {'text':'передан в архив','color':'#000000','bgcolor':'#FFFFFF'} ] ;
+  var ps_default = [  {'text':'заказ принят','color':'#000000','bgcolor':'#AFAFFF'},
+                      {'text':'заказ закрыт','color':'#000000','bgcolor':'#AFAFFF'},
+                      {'text':'передан в архив','color':'#000000','bgcolor':'#AFAFFF'} ] ;
 
-  <% unless @catalog.order_statuses.nil? || @catalog.order_statuses.empty? %>
+  <% if @catalog.order_statuses.nil? || @catalog.order_statuses.empty? %>
     var ps = new Array() ;
   <% else %>
     var ps = <%= @order_statuses %> ;

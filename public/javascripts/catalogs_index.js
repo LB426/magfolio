@@ -128,6 +128,7 @@ $(document).ready(function() {
   
   $('.footer').waypoint(function(event, direction) {
     var flag = false ;
+    var form_authenticity_token = $('meta[name=csrf-token]').attr("content") ;
     $('.footer').waypoint('remove');
     if(direction === 'down'){
       //$('#catalogs_upload_progress_bar').show();
@@ -143,6 +144,7 @@ $(document).ready(function() {
                 }
         });
       }
+      //alert(1);
       //$('#catalogs_upload_progress_bar').hide();
     }else{
       //alert('You have scrolled to an content.');

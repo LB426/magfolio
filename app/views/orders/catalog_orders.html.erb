@@ -42,9 +42,9 @@
 <div style="display:none">
   <div id="state_filter_params">
     <h2>Выберите состояния, заказы с которыми хотите отобразить</h2>
-    <%= form_for(@catalog) do |f| -%>
-      <input name="state" type="checkbox" />
-      <p><%= f.submit "Внести" %></p>
+    <%= form_for(@catalog, :url => catalog_set_filter_path(@catalog)) do |f| -%>
+      <%= statuse_filter %>
+      <p><%= f.submit "Установить фильтр" %></p>
     <% end %>
   </div>
 </div>

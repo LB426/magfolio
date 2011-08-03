@@ -16,10 +16,8 @@ class Catalog < ActiveRecord::Base
   serialize :business_deals
   serialize :order_statuses
   serialize :filter_params
-
-  def set_possible_order_status
-    
-  end 
+  
+  after_save :show_filter_params
 
 private
 
@@ -27,6 +25,14 @@ private
     unless logo_file_name.nil?
       extension = File.extname(logo_file_name).downcase
       self.logo.instance_write(:file_name, "#{ActiveSupport::SecureRandom.hex(16)}#{extension}")
+    end
+  end
+  
+  def show_filter_params
+    logger.debug "after_save :show_filter_params"
+    logger.debug "self.filter_params[:status].size: #{self.filter_params[:status].size}"
+    self.filter_params[:status].each do |key, val|
+      logger.debug "self.filter_params[:status]['#{key}']=#{val}"
     end
   end
 

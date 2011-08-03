@@ -26,6 +26,7 @@ Magfolio::Application.routes.draw do
   match '/mycart/edit/products' => "carts#edit_products", :as => :edit_mycart_products
   match '/mycart' => "carts#show", :as => :show_mycart
   
+  match 'catalog/:id/setfilter' => "catalogs#setfilter", :as => :catalog_set_filter
   match 'catalog/:id/mappopup' => "catalogs#mappopup", :as => :catalog_map_popup  
   match 'catalog/:catalog_id/product/:product_id/cart/add' => 'carts#add', :as => :add_to_cart
   match 'catalogs/myfind' => 'catalogs#myfind', :as => :catalogs_find

@@ -160,6 +160,7 @@ class OrdersController < ApplicationController
   def catalog_orders
     @header_layout = 'orders/header_orders'
     @body_css_class = "perma orderstage3"
+    
     @catalog = Catalog.find(params[:catalog_id])
     if current_user_self?
       @orders = Order.find_all_by_catalog_id(@catalog.id, :order => 'id DESC')

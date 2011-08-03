@@ -278,9 +278,22 @@ class CatalogsController < ApplicationController
         @catalog.business_deals = business_deal_ids
       end
       order_statuses = params[:order_statuses]
-      unless order_statuses.nil?
+      unless order_statuses.nil? && order_statuses.empty?
         os = ActiveSupport::JSON.decode(order_statuses)
         @catalog.order_statuses = os
+        if @catalog.filter_params.nil? || @catalog.filter_params.empty?
+          filter_params = Hash.new
+          for i in 0..@catalog.order_statuses.size-1 do
+            status = @catalog.order_statuses[i]
+            filter_params["#{status['text']}"] = true 
+          end
+          @catalog.filter_params = { :status => filter_params }
+        else
+          for i in 0..@catalog.order_statuses.size-1 do
+            status = @catalog.order_statuses[i]
+            @catalog.filter_params[:status]["#{status['text']}"] = true 
+          end
+        end
       end
 
       respond_to do |format|
@@ -403,9 +416,29 @@ class CatalogsController < ApplicationController
       render 'index', :layout => true
     end
   end
-
-  def set_filter_params
-    
+  
+  def setfilter
+    @catalog = Catalog.find(params[:id])
+    unless params[:statuses].nil?
+      old_filter_hash = @catalog.filter_params[:status]
+      new_filter_hash = params[:statuses]
+      old_filter_hash.each do |key, val|
+        old_filter_hash[key] = false
+      end
+      logger.debug "old_filter_hash = #{old_filter_hash}"
+      new_filter_hash.each do |key, val|
+        logger.debug "key=#{key} val=#{val} #{new_filter_hash[key]}"
+        logger.debug "key=#{key} val=#{val} #{old_filter_hash[key]}"
+        old_filter_hash[key] = true
+        logger.debug "key=#{key} val=#{val} #{old_filter_hash[key]}"
+      end
+      logger.debug "old_filter_hash = #{old_filter_hash}"
+      @catalog.filter_params[:status] = old_filter_hash
+      @catalog.save
+      redirect_to catalog_orders_path(@catalog), :notice =>  t('default.filter_settins_up')
+    else
+      redirect_to catalog_orders_path(@catalog), :alert =>  t('default.none_filter_settins_up')
+    end
   end
   
 private

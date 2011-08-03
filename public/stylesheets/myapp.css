@@ -376,6 +376,12 @@ ul.orderstack li img {
 	text-align: center;
 }
 
+/* фильтр в таблице заказов */
+.status_checkbox{
+  display: inline-block;
+  margin: 5px;
+}
+
 
 /* STRUCTURE --------------------------------------------------*/
 

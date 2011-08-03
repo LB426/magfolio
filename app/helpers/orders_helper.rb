@@ -78,4 +78,23 @@ module OrdersHelper
     html.html_safe
   end
   
+  def statuse_filter
+    html = ""
+    @catalog.filter_params[:status].each do |key, val|
+      html << '<div class="status_checkbox">'
+      if val == true
+        html << '<input name="statuses[' 
+        html << key
+        html << ']" type="checkbox" checked /></br>'
+      else
+        html << '<input name="statuses[' 
+        html << key
+        html << ']" type="checkbox" /></br>'
+      end
+      html << key
+      html << '</div>'
+    end
+    html.html_safe
+  end
+  
 end
