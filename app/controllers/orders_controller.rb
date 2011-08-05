@@ -163,7 +163,9 @@ class OrdersController < ApplicationController
     
     @catalog = Catalog.find(params[:catalog_id])
     if current_user_self?
-      @orders = Order.find_all_by_catalog_id(@catalog.id, :order => 'id DESC')
+      #@orders = Order.find_all_by_catalog_id(@catalog.id, :order => 'id DESC')
+      #@orders.page(params[:page])
+      @orders = Order.where(:catalog_id => @catalog.id).order('id DESC').page(params[:page])
     else
       redirect_to root_url, :alert =>  t('default.you_not_owner_directory')
     end

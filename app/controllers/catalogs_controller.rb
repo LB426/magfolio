@@ -278,7 +278,7 @@ class CatalogsController < ApplicationController
         @catalog.business_deals = business_deal_ids
       end
       order_statuses = params[:order_statuses]
-      unless order_statuses.nil? && order_statuses.empty?
+      unless order_statuses.nil?
         os = ActiveSupport::JSON.decode(order_statuses)
         @catalog.order_statuses = os
         if @catalog.filter_params.nil? || @catalog.filter_params.empty?

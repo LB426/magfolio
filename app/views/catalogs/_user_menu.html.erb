@@ -1,10 +1,13 @@
 <div class="user_menu">
+  <% unless @catalog.zakaz_layout.nil? %>
   <a href="<%= catalog_orders_path(@catalog) %>" id="catalog_orders" title="Заказы по каталогу">
     <img src="/images/order-icon.png">
   </a>
   <a href="#possible_order_status" id="possible_order_status_link" title="Возможные состояния заказов">
     <img src="/images/possibli-order-status.png">
   </a>
+  <% end %>
+  
   <% if /admin/ =~ current_user.group %>
     <a href="#zakaz_layout_change" id="zakaz_layout_change" title="изменить форму заказа">
       <img src="/images/zakaz_layout_change.jpg">

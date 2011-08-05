@@ -7,10 +7,12 @@ gem 'rails', '3.0.9'
 
 # gem "haml"
 #gem 'mysql2', '0.2.7'
+
 gem 'mysql2', '< 0.3'
 gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 gem "bcrypt-ruby", :require => "bcrypt"
 gem 'russian'
+gem 'kaminari'
 
 # Use unicorn as the web server
 group :production do

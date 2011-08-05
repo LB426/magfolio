@@ -94,7 +94,7 @@ module OrdersHelper
       html << key
       html << '</div>'
     end
-    html.html_safe
+    html.html_safe  
   end
   
 end

@@ -30,9 +30,11 @@ private
   
   def show_filter_params
     logger.debug "after_save :show_filter_params"
-    logger.debug "self.filter_params[:status].size: #{self.filter_params[:status].size}"
-    self.filter_params[:status].each do |key, val|
-      logger.debug "self.filter_params[:status]['#{key}']=#{val}"
+    unless self.filter_params.nil?
+      logger.debug "self.filter_params[:status].size: #{self.filter_params[:status].size}"
+      self.filter_params[:status].each do |key, val|
+        logger.debug "self.filter_params[:status]['#{key}']=#{val}"
+      end
     end
   end
 
