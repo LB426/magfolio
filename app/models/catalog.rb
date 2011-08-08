@@ -38,5 +38,15 @@ private
     end
   end
 
+  def products_index_page
+    case @catalog.zakaz_layout
+    when /bouquet of flowers/
+      @body_css_class = "home favorites"
+      render 'bouquet_of_flowers', :layout => true
+    else    
+      render 'zakaz_phone', :layout => true
+    end
+  end
+
 end
 

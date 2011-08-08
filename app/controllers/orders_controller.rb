@@ -85,7 +85,6 @@ class OrdersController < ApplicationController
           @order.products = products_array
           @order.payment = { 'payd_system' => @cart.order_options['payment'] }
           @order.delivery = { 'method' => @cart.order_options['delivery'] }
-          # @order.state = [{'state'=>1, 'date'=>Time.now}, {'state'=>2, 'date'=>Time.now}]
           @catalog = Catalog.find(products[:catalog_id])
           @order.state = [  { 'state'=>@catalog.order_statuses[0]['text'],
                               'color'=>@catalog.order_statuses[0]['color'],
@@ -103,7 +102,7 @@ class OrdersController < ApplicationController
           end
         end
       else
-        # если есть другие неотработанные заказы
+        # если есть другие неотработанные заказы 
       end  
       
       # flag - говорит что заказ успешно/неуспешно сохранился в БД

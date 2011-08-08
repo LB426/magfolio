@@ -136,8 +136,9 @@ $(document).ready(function() {
         $.post('/catalogs/indexload', 
               { catalog_ids: catalog_ids, location_id: location_id, product_kind: product_kind, service_kind: service_kind, deal_ids: deal_ids, locations: locations, authenticity_token: form_authenticity_token },
               function(data, textStatus, jqXHR) {
+                //alert('"'+data + '" data.length=' + data.length);
                 $('div.content').append(data);
-                if(data.length != 1){
+                if(data.length > 10){
                   $('.footer').waypoint({ offset: '100%' });
                 }else{
                   flag = true;
