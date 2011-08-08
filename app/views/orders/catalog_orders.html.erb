@@ -4,9 +4,9 @@
 
 <table class="order">
   <caption>
-    <h1>
+    <h3>
       Таблица заказов по каталогу <%= link_to @catalog.company_name, "/#{@catalog.shortcut_name}" %> (<%= @orders.size %>)
-    </h1>
+    </h3>
   </caption>
   <thead>
     <tr>
@@ -46,7 +46,24 @@
     <h2>Выберите состояния, заказы с которыми хотите отобразить</h2>
     <%= form_for(@catalog, :url => catalog_set_filter_path(@catalog)) do |f| -%>
       <%= statuse_filter %>
-      <p><%= f.submit "Установить фильтр" %></p>
+      <p><%= f.submit "Установить фильтр по статусам заказов" %></p>
     <% end %>
+    <h2>Установите количество строк на странице</h2>
+    <%= form_for(@catalog, :url => catalog_set_filter_path(@catalog)) do |f| -%>
+      <%= row_per_page %>
+      <p><%= f.submit "Установить фильтр по количеству строк в таблице" %></p>
+    <% end %>
+    <h2>Установить фильтр по номеру заказа</h2>
+    <%= form_for(@catalog, :url => catalog_set_filter_path(@catalog)) do |f| -%>
+      <p><%= f.submit "Установить фильтр по номеру заказа" %></p>
+    <% end %>
+    <h2>Установить фильтр по идентификатору покупателя</h2>
+    <%= form_for(@catalog, :url => catalog_set_filter_path(@catalog)) do |f| -%>
+      <p><%= f.submit "Установить фильтр по покупателю" %></p>
+    <% end %>
+    <h2>Установить фильтр по сумме</h2>
+    <h2>Установить фильтр по количеству</h2>
+    <h2>Установить фильтр по дате принятия</h2>
+    <h2>Установить фильтр по дате последнего изменения</h2>
   </div>
 </div>

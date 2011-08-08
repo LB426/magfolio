@@ -3,9 +3,6 @@ class Order < ActiveRecord::Base
   serialize :payment
   serialize :delivery
   serialize :state
-  # validates_uniqueness_of :customer_identifer
-  
-  paginates_per 10
-  
+  # validates_uniqueness_of :customer_identifer  
 end
 

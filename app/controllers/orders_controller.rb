@@ -91,6 +91,7 @@ class OrdersController < ApplicationController
                               'color'=>@catalog.order_statuses[0]['color'],
                               'bgcolor'=>@catalog.order_statuses[0]['bgcolor'],
                               'date'=>Time.now  } ]
+          @order.last_status = @catalog.order_statuses[0]['text']
           @order.customer_phone = customer_phone
           @order.customer_email = customer_email
           @order.agreement = agreement
@@ -129,7 +130,7 @@ class OrdersController < ApplicationController
                           'color'=>@catalog.order_statuses[i]['color'],
                           'bgcolor'=>@catalog.order_statuses[i]['bgcolor'],
                           'date'=>Time.now }
-        
+        @order.last_status = @catalog.order_statuses[i]['text']
         @order.save
       end
     else
@@ -163,9 +164,15 @@ class OrdersController < ApplicationController
     
     @catalog = Catalog.find(params[:catalog_id])
     if current_user_self?
-      #@orders = Order.find_all_by_catalog_id(@catalog.id, :order => 'id DESC')
-      #@orders.page(params[:page])
-      @orders = Order.where(:catalog_id => @catalog.id).order('id DESC').page(params[:page])
+      last_statuses = Array.new
+      unless @catalog.filter_params[:status].nil?
+        @catalog.filter_params[:status].each do |key, val|
+          if val == true
+            last_statuses << key
+          end
+        end
+      end
+      @orders = Order.where(:catalog_id => @catalog.id, :last_status => last_statuses ).order('id DESC').page(params[:page]).per(@catalog.filter_params[:row_per_page])
     else
       redirect_to root_url, :alert =>  t('default.you_not_owner_directory')
     end

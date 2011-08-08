@@ -97,4 +97,16 @@ module OrdersHelper
     html.html_safe  
   end
   
+  def row_per_page
+    html = ""
+    unless @catalog.filter_params[:row_per_page].nil?
+      html << '<p><input type="text" name="row_per_page" value="'
+      html << @catalog.filter_params[:row_per_page]
+      html << '"></p>'
+    else
+      html << '<p><input type="text" name="row_per_page" value="25"></p>'
+    end
+    html.html_safe
+  end
+  
 end

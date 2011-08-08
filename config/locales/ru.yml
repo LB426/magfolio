@@ -1,6 +1,12 @@
 # Russian
 
 ru:
+  views:
+    pagination:
+      previous: "&laquo; Предидущая"
+      next: "Следующая &raquo;"
+      first: "Вперёд"
+      last: "Назад"
   business_deal:
     product: "товар"
     service: "услуга"
@@ -94,6 +100,6 @@ ru:
     and: "и"
     deal_successful: "выполнено успешно"
     comment: "комментарий"
-    filter_settins_up: "фильтр установлен"
-    none_filter_settins_up: "фильтр не установлен, вы отменили все позиции!"
+    filter_settings_up: "фильтр установлен"
+    none_filter_settings_up: "фильтр не установлен, вы отменили все позиции!"
     
