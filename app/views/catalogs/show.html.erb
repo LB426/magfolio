@@ -3,6 +3,7 @@
   <%= javascript_include_tag 'iColorPicker.js' %>
   <%= javascript_include_tag 'catalog_show.js' %>
 <% end %>
+<%= render :partial => 'layouts/ya' if RAILS_ENV == 'production' %>
 
 <div class="card-perma">
   <div class="cardcap-perma">
