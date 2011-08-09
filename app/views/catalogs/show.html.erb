@@ -77,7 +77,7 @@
                   <%= f.file_field :picture, :accept => "image/*" %></p>
                 <p>
                   <%= f.label :Комментарий_к_изображению %><br />
-                  <%= f.text_area :description, :cols => 50, :rows => 10 %></p>
+                  <%= f.text_area :description, :cols => 100, :rows => 30 %></p>
                <p><%= f.submit "Внести изменения" %></p> 
               <% end %>
               <%= button_to 'Удалить блок', picture_path(pic), :method => :delete %>
@@ -113,7 +113,6 @@
 </div>
 
 <% if current_user_self? %>
-
 <script type="text/javascript">
 
   var ps_default = [  {'text':'заказ принят','color':'#000000','bgcolor':'#AFAFFF'},
@@ -127,7 +126,6 @@
   <% end %>
 
 </script>
-
 <div style="display:none">
   <div id="catalog_base_data">
     <h2>Редактирование основных данных каталога</h2>
