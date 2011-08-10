@@ -2,7 +2,7 @@
   <%= javascript_include_tag 'waypoints.js' %>
   <%= javascript_include_tag 'catalogs_index.js' %>
 <% end %>
-<%= render :partial => 'layouts/ya' if RAILS_ENV == 'production' %>
+<%= render :partial => 'layouts/ya' if Rails.env.production? %>
 
 <% @catalogs.each do |catalog| %>
 <script type="text/javascript">

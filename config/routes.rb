@@ -59,8 +59,6 @@ Magfolio::Application.routes.draw do
   match 'businesstype/ajaxcreate' => 'business_types#ajaxcreate'
   resources :business_types
 
-  match 'atlanta' => 'atlanta#index', :as => :atlanta
-
   match 'signup/getbusinessdeals' => 'signup#getbusinessdeals', :as => :getbusinessdeals
   match 'signup/setbusinessdeal' => 'signup#setbusinessdeal', :as => :setbusinessdeal
   match 'signup' => 'signup#stage1', :as => :signup

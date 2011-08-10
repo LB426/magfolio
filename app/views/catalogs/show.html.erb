@@ -3,7 +3,7 @@
   <%= javascript_include_tag 'iColorPicker.js' %>
   <%= javascript_include_tag 'catalog_show.js' %>
 <% end %>
-<%= render :partial => 'layouts/ya' if RAILS_ENV == 'production' %>
+<%= render :partial => 'layouts/ya' if Rails.env.production? %>
 
 <div class="card-perma">
   <div class="cardcap-perma">
@@ -38,8 +38,13 @@
         <strong><%= BusinessType.find(@catalog.businesstype_id).name %></strong><br />
         Расположен в 
         <strong>
-          <a href="/chicago"><%= Location.find(@catalog.location_id).name %></a>
-        </strong><br />
+          <% location = Location.find(@catalog.location_id).name %>
+          <a href="<%= search_city_name_path(location) %>"><%= location %></a>
+        </strong>
+        <% unless @catalog.address.nil? %>
+          ,&nbsp;<%= @catalog.address %>
+        <% end %>
+        <br />
         E-mail: 
         <strong>
           <a href="mailto:<%= @catalog.email -%>?subject=Вопросы о каталоге <%= @catalog.company_name -%>"><%= @catalog.email %></a>

@@ -90,6 +90,10 @@
     };
     marker.events.register("mousedown", feature, markerClick);
     markers.addMarker(marker);
+    feature.popup = feature.createPopup(feature.closeBox);
+    map.addPopup(feature.popup);
+    feature.popup.show();
+    
     <% if current_user_self? %>
       var click = new OpenLayers.Control.Click();
       map.addControl(click);
