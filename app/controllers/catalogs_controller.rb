@@ -52,8 +52,8 @@ class CatalogsController < ApplicationController
         @locations = Location.all
         @products = products_only_this_location(@location)
         @services = services_only_this_location(@location)
-        # @catalogs = Catalog.find_all_by_location_id( @location.id, :limit => 4, :order => 'id DESC' )
-        @catalogs = Catalog.find_by_sql("SELECT * FROM catalogs WHERE tariff != 'free' AND location_id = '#{@location.id}' ORDER BY id DESC LIMIT 4 ")
+        #@catalogs = Catalog.find_all_by_location_id( @location.id, :limit => 4, :order => 'id DESC' )
+        @catalogs = Catalog.find_by_sql("(SELECT * FROM catalogs WHERE tariff != 'free' AND location_id = '#{@location.id}' ORDER BY id DESC LIMIT 4) UNION (SELECT * FROM catalogs WHERE tariff = 'free' AND location_id = '#{@location.id}' ORDER BY id DESC LIMIT 4)")
       end
       # посик по городу и товару - отобразить все каталоги по городу с товаром
       if @location != nil && @product != nil && @service == nil
