@@ -3,7 +3,7 @@
   <%= javascript_include_tag 'cart.js' %>
 <% end %>
 
-<h1>Заказ цветов в <%= BusinessType.find(@catalog.businesstype_id).name.downcase %> <%= @catalog.company_name %></h1>
+<h1><%= @catalog.zakaz_phraze %> в <%= BusinessType.find(@catalog.businesstype_id).name.downcase %> <%= @catalog.company_name %></h1>
 
 <% @products.each do |product| %>      
   <div class="card listing_content">
