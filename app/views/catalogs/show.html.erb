@@ -149,7 +149,10 @@
       <%= f.text_field :zakaz_phraze, :size => 40 %></p>
       <p><%= f.label :Вебсайт %><br />
       <%= f.text_field :company_url, :size => 40 %></p>
-      <p><%= f.label :Логотип %><%= f.file_field :logo, :accept => "image/*" %></p>
+      <p><%= f.label :Ключевые_слова_для_тега_keywords %><br />
+      <%= f.text_area :keywords, :size => "45x3" %></p>
+      <p><%= f.label :Логотип %><br />
+      <%= f.file_field :logo, :accept => "image/*" %></p>
       <p><%= f.submit "Внести изменения" %></p>
     <% end %>
   </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110810042047) do
+ActiveRecord::Schema.define(:version => 20110818094817) do
 
   create_table "business_deals", :force => true do |t|
     t.string   "name"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20110810042047) do
     t.text     "filter_params"
     t.text     "order_statuses"
     t.string   "address"
+    t.text     "keywords"
   end
 
   add_index "catalogs", ["businesstype_id"], :name => "index_catalogs_on_businesstype_id"

@@ -37,4 +37,14 @@ module ApplicationHelper
     return false
   end
   
+  def keywords
+    keywords = t('default.keywords')
+    unless @catalog.nil?
+      keywords = @catalog.company_name
+      keywords << ' ' << BusinessType.find(@catalog.businesstype_id).name
+      keywords << " #{@catalog.keywords}"
+    end
+    keywords
+  end
+  
 end
