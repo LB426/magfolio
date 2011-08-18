@@ -42,6 +42,7 @@ module ApplicationHelper
     unless @catalog.nil?
       keywords = @catalog.company_name
       keywords << ' ' << BusinessType.find(@catalog.businesstype_id).name
+      keywords << ' ' << Location.find(@catalog.location_id).name
       keywords << " #{@catalog.keywords}"
     end
     keywords
