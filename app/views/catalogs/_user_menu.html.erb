@@ -12,6 +12,9 @@
     <a href="#zakaz_layout_change" id="zakaz_layout_change" title="изменить форму заказа">
       <img src="/images/zakaz_layout_change.jpg">
     </a>
+    <a href="#catalog_tariff_change" id="catalog_tariff_change" title="изменить тарифный план">
+      <img src="/images/dollar-icon.png">
+    </a>
   <% end %>
   <a href="#edit_business_deals" id="edit_business_deals" title="Изменить виды товаров и услуг">
     <img src="/images/goods.png">
@@ -21,9 +24,6 @@
   </a>
   <a href="#catalog_galery_img" id="catalog_galery_img_add" title="Добавить изображение в галерею">
     <img src="/images/img-add-icon.png">
-  </a>
-  <a href="#catalog_tariff_change" id="catalog_tariff_change" title="изменить тарифный план">
-    <img src="/images/dollar-icon.png">
   </a>
   <form id="catalog_delete_form" method="post" action="<%= catalog_path(@catalog) %>">
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
