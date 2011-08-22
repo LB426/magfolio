@@ -45,7 +45,8 @@ class CatalogsController < ApplicationController
         @products = BusinessDeal.find_all_by_kind t('business_deal.product')
         @services = BusinessDeal.find_all_by_kind t('business_deal.service')
         # @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
-        @catalogs = Catalog.find_by_sql("SELECT * FROM catalogs WHERE tariff != 'free' ORDER BY id DESC LIMIT 4 ")
+        # @catalogs = Catalog.find_by_sql("SELECT * FROM catalogs WHERE tariff != 'free' ORDER BY id DESC LIMIT 4 ")
+        @catalogs = Catalog.find_by_sql("(SELECT * FROM catalogs WHERE tariff != 'free' ORDER BY id DESC LIMIT 4) UNION (SELECT * FROM catalogs WHERE tariff = 'free' ORDER BY id DESC LIMIT 4)")
       end
       # поиск только по городу
       if @location != nil && @product == nil && @service == nil
