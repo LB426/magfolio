@@ -202,12 +202,18 @@ class CatalogsController < ApplicationController
     else
       @catalog = Catalog.find(params[:id])
     end
+    @stat = Statistic.find_by_catalog_id(@catalog.id)
+    unless @stat.nil?
+      @stat.views_counter += 1
+      @stat.save
+    else
+      @stat = Statistic.new
+      @stat.catalog_id = @catalog.id
+      @stat.views_counter = 1
+      @stat.save
+    end
     unless @catalog.order_statuses.nil? || @catalog.order_statuses.empty?
-      #@order_statuses = @catalog.order_statuses.collect {|x| "\'" + x + "\'"}
-      #@order_statuses = @order_statuses.join(",")
       @order_statuses = @catalog.order_statuses.to_json.html_safe
-      #@order_statuses = ActiveSupport::JSON.encode(@catalog.order_statuses)
-      #@order_statuses = "[{'text':'asdfgh','color':'#000000','bgcolor':'#FFFFFF'}]"
     end
     if @catalog
       @pictures = @catalog.pictures.all(:order => "id DESC")

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110818094817) do
+ActiveRecord::Schema.define(:version => 20110829093348) do
 
   create_table "business_deals", :force => true do |t|
     t.string   "name"
@@ -35,7 +36,6 @@ ActiveRecord::Schema.define(:version => 20110818094817) do
     t.text     "order_options"
   end
 
-  add_index "carts", ["id"], :name => "index_carts_on_id"
   add_index "carts", ["unique_identifier"], :name => "index_carts_on_unique_identifier"
 
   create_table "catalogs", :force => true do |t|
@@ -184,6 +184,16 @@ ActiveRecord::Schema.define(:version => 20110818094817) do
 
   add_index "signups", ["id"], :name => "index_signups_on_id"
   add_index "signups", ["session_id"], :name => "index_signups_on_session_id"
+
+  create_table "statistics", :force => true do |t|
+    t.integer  "catalog_id"
+    t.integer  "views_counter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "statistics", ["catalog_id"], :name => "index_statistics_on_catalog_id"
+  add_index "statistics", ["id"], :name => "index_statistics_on_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

@@ -40,6 +40,7 @@ Magfolio::Application.routes.draw do
       resources :product_pictures
     end
     # resources :carts
+    resources :statistics
   end
 
   match 'sessions/edituser/:reset_password_token' => 'sessions#edituser', :as => :edit_user_with_rptoken

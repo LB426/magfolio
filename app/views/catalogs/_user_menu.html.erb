@@ -7,6 +7,10 @@
     <img src="/images/possibli-order-status.png">
   </a>
   <% end %>
+
+  <a href="<%= catalog_statistic_path(@catalog,@stat) %>" title="Статистика">
+    <img src="/images/chart-icon.png">
+  </a>
   
   <% if /admin/ =~ current_user.group %>
     <a href="#zakaz_layout_change" id="zakaz_layout_change" title="изменить форму заказа">
