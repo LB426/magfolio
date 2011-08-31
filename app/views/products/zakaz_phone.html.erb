@@ -36,11 +36,17 @@
       </p>
     </div>
     <div class="action">
+      <% unless @catalog.phone =~ /\(86196\)41616/ %>
       <h2>Мы принимаем заказы по телефону <%= @catalog.phone %></h2>
+      <% end %>
       <h3>
           <a href="mailto:<%= @catalog.email %>"><%= @catalog.email %></a>
           •
+          <% unless @catalog.company_url.nil? || @catalog.company_url.empty? %>
           <a href="<%= @catalog.company_url %>"><%= @catalog.company_url %></a>
+          <% else %>
+          <a href="<%= shortcut_catalog_path(@catalog.shortcut_name) %>"><%= @catalog.company_name %>
+          <% end %>
       </h3>
     </div>
   </div>
