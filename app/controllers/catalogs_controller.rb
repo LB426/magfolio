@@ -42,6 +42,7 @@ class CatalogsController < ApplicationController
       # выдаёт весь каталог
       if @location == nil && @product == nil && @service == nil
         @locations = Location.all
+    
         @products = BusinessDeal.find_all_by_kind t('business_deal.product')
         @services = BusinessDeal.find_all_by_kind t('business_deal.service')
         # @catalogs = Catalog.all(:limit => 4, :order => 'id DESC')
