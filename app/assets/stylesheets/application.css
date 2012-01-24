@@ -1,0 +1,2550 @@
+/* GENERAL ----------------------------------------------------*/
+
+body {
+  margin: 0;
+  padding: 0;
+	background-color: #F6F6F6;
+	font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  color: #333;
+  line-height: 1.4em;
+}
+
+body.print {
+  background-color: #ffffff;
+}
+
+a {
+  color: #3399cc;
+	margin: 0;
+	padding: 0;
+}
+
+a:hover, div.nav a:hover, div.nav a.signup:hover {
+  color: #0099ff;
+}
+
+a:focus { 
+  outline: none; 
+}
+
+a img {
+  border: 0;
+	padding: 0;
+}
+
+h1 {
+  font-family: Georgia, Times, serif;
+  font-weight: normal;
+  margin: 0 0 15px 0;
+  line-height: 1.3em;
+  font-size: 28px;
+  color: #555;
+}
+
+div.clear {
+  clear: both;
+}
+
+span.highlight {
+  background-color: #ffcc00;
+  padding: 3px;
+}
+
+div.ruleline {
+  margin-top: 25px;
+  border-top: 5px solid #e8e8e8;
+}
+
+/* STRUCTURE --------------------------------------------------*/
+
+div.container {
+  width: 100%;
+  margin: 0 auto;
+	padding: 0;
+	text-align: center;
+}
+
+body.home div.header {
+  background-image: url(/images/bkgd-abstractcards.png);
+  background-repeat: no-repeat;
+}
+
+body.listings div.header {
+  background-image: url(/images/bkgd-abstractcards-small.png);
+  background-repeat: no-repeat;
+}
+
+div.header {
+  background-image: url(/images/bkgd-abstractcards-interior.png);
+  background-repeat: no-repeat;
+}
+
+div.nav {
+  padding: 20px 10px 0 0;
+  color: #ccc;
+  text-align: right;
+  font-size: 13px;
+  float: right;
+}
+
+span.favorites_count {
+  color: #999;
+}
+
+div.needle {
+  float: left;
+  width: 90px;
+  overflow: hidden;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+body.listings div.needle {
+  width: 48px;
+}
+
+body.home div.masthead {
+  padding: 38px 0 0 0;
+  text-align: left;
+  width: 890px;
+}
+
+div.masthead {
+  padding: 39px 0 5px 0;
+  text-align: left;
+  width: 890px;
+}
+
+div.container div.content {
+  width: 980px;
+  overflow: hidden;
+  margin: 10px auto;
+  padding: auto;
+}
+
+div.scroller_content {
+  width: 9800px;
+  overflow: hidden;
+  margin: 10px auto;
+  padding: auto;
+}
+
+div.spinner {
+  text-align: right;
+  padding: 30px 0 30px 15px;
+  clear: both;
+}
+
+div.footer {
+  text-align: left;
+  padding: 150px 0 50px 15px;
+  color: #999;
+  clear: both;
+}
+
+div.footer a {
+  color: #999;
+}
+
+div.footer img {
+  margin-right: 15px;
+}
+
+body.listings div.header h1 {
+  margin: 12px 0 15px 0;
+  font-size: 31px;
+}
+
+/* NAV ---------------------------------------------------------*/
+
+div.nav a {
+  color: #999;
+}
+
+div.nav a.signup {
+  color: #333;
+  font-weight: bold;
+}
+
+div.nav a.selected {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+div.back_to_top {
+  position: fixed;
+  bottom: 0;
+  margin-left: 380px;
+}
+
+div.back_to_top a {
+  display: block;
+  width: 200px;
+  background-image: url(/images/bkgd-backtotop.png);
+  background-repeat: no-repeat;
+  color: #444;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 15px 0 15px 20px;
+}
+
+div.signup {
+  float: right;
+  margin-top: 10px;
+  margin-right: 15px;
+  position: relative;
+}
+
+div.signup a {
+  display: block;
+  width: 135px;
+  height: 38px;
+  background: url('/images/btn_getlisted.png') 0px 0px no-repeat;
+}
+
+div.signup:hover a {
+  background: url('/images/btn_getlisted.png') 0px -38px no-repeat;
+}
+
+div.signup_description {
+  position: absolute;
+  top: 35px;
+  z-index: 50;
+  margin: 0;
+  overflow: hidden;
+}
+
+div.signup_description div.signup_text {
+  font-size: 12px;
+  text-align: left;
+  color: #fff;
+}
+
+div.signup_description div.signup_text {
+  padding: 0
+  width: 110px;
+}
+
+div.signup_description div.signup_text a {
+  background: url('/images/bkgd-signupdescription.png') no-repeat;
+  color: #fff;
+  line-height: 1.3em;
+  padding: 5px 10px 28px 15px;
+  width: 110px;
+  text-decoration: none;
+}
+
+div.last_menu {
+  border-top: 1px solid #dbdbdb;
+}
+
+div.success {
+  float: right;
+  margin-top: 10px;
+  margin-right: 15px;
+  position: relative;
+}
+
+div.success a {
+  display: block;
+  width: 135px;
+  height: 50px;
+  background: url('/images/btn_success.png') 0px 0px no-repeat;
+}
+
+div.success:hover a {
+  background: url('/images/btn_success.png') 0px -50px no-repeat;
+}
+
+body.listings a.homepage img {
+  margin-top: -20px;
+}
+
+/* FILTER ------------------------------------------------------*/
+
+div.filterbar {
+  border-top: 3px solid #e8e8e8;
+  padding: 15px 0 10px 0;
+  overflow: visible;
+}
+
+div.filter {
+  font-weight: bold;
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+
+div.search a {
+  font-size: 26px;
+  font-weight: normal;
+  color: #3399cc;
+  text-decoration: none;
+  font-family: Georgia, Times, serif;
+  border-bottom: 3px solid #3399cc;
+}
+
+div.search a:hover {
+  color: #111;
+  border-bottom: 3px solid #0099ff;
+}
+
+div.no_results {
+  text-align: center;
+  padding: 15px;
+  margin: 20px 15px;
+  border: 5px solid #ccc;
+  background-color: #efefef;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+div#related_locations {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+div#related_locations ul {
+  margin: 0;
+  margin-left: -30px;
+}
+
+div#related_locations li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding-right: 10px;
+}
+
+/* CARDS -------------------------------------------------------*/
+
+div.card-upgrade {
+  width: 470px;
+  margin: 10px;
+  overflow: hidden;
+  float: left;
+  background-color: #fff;
+}
+
+div.cardcap-upgrade {
+  width: 470px;
+  height: 10px;
+  margin: 0;
+  background-color: #f5f6f7;
+}
+
+div.cardcontent-upgrade {
+  background-image: url('/images/card-bkgd-large.png');
+  padding: 5px 20px;
+  text-align: left;
+}
+
+div.cardcontent-upgrade h2 {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  color: #222;
+  margin: 5px 0;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+div.card {
+  width: 225px;
+  margin: 10px;
+  overflow: hidden;
+  float: left;
+  background-color: #fff;
+}
+
+div.cardcap {
+  width: 225px;
+  height: 10px;
+  margin: 0;
+  background-color: #f5f6f7;
+}
+
+div.cardcontent {
+  background-image: url('/images/card-bkgd.png');
+  padding: 5px 15px;
+  text-align: left;
+  font-size: 11px;
+  line-height: 1.3em;
+}
+
+div.cardcontent h2 {
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  color: #222;
+  margin: 5px 0;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+div.cardcontent-upgrade h2 a, div.cardcontent h2 a {
+  color: #222;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+div.cardcontent-upgrade h2 a:hover, div.cardcontent h2 a:hover {
+  border-bottom: 2px solid #0099ff;
+}
+
+div.cardcontent-upgrade p, div.cardcontent p, div.cardcontent-perma p {
+  margin: 0 0 10px 0;
+}
+
+div.cardcontent-upgrade span, div.cardcontent span, div.cardcontent-perma span {
+  color: #999;
+}
+
+div.cardcontent div.moderate_flag, div.cardcontent-upgrade div.moderate_flag {
+  margin: 0;
+  color: #fff;
+  background-color: #222;
+  padding: 10px 15px;
+}
+
+div.cardcontent div.reject, div.cardcontent-upgrade div.reject {
+  background-color: red;
+}
+
+
+div.cardcompany {
+  overflow: hidden;
+  height: 63px;
+}
+
+
+div.card div.cardcompany p {
+  font-size: 10px;
+  line-height: normal;
+}
+
+
+div.scroller {
+  /* modify width and height of scrolling section if necessary  */
+  width: 430px;
+  overflow: hidden;
+/*  border:1px solid #cccccc;*/
+}
+
+div.scroller div.section {
+  /* modify width and height of each section as needed (should match the size of the scroller window) */
+  width:450px;
+  overflow:hidden;
+  float:left;
+}
+
+div.caption {
+  background-color: #fff;
+  padding: 10px 5px 5px 5px;
+  color: #666;
+}
+
+div.pro-caption {
+  background-color: #fff;
+  padding: 10px 0 0 0;
+  margin-right: 20px;
+  color: #666;
+  height: 65px;
+  overflow: hidden;
+}
+
+div.free-caption {
+  background-color: #fff;
+  padding: 10px 5px 5px 5px;
+  color: #666;
+  height: 40px;
+  overflow: hidden;
+}
+
+div.cardtools {
+  text-align: left;
+  margin: 10px 0;
+  padding-top: 10px;
+}
+
+div.card-upgrade div.cardtools {
+  margin: 5px 0 10px 0;
+}
+
+div.cardtools a {
+  color: #888;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+div.cardtools a:hover {
+ color: #222;
+ border-bottom: 2px solid #0099ff;
+}
+
+div.cardtools img {
+  margin-right: 5px;
+}
+
+div.cardtools a.favorites {
+  background: url('/images/icon_clover.png') 0px 0px no-repeat;
+  padding-left: 20px;
+  border-bottom: none;
+  padding-top: 1px;
+}
+
+div.cardtools a.favorites:hover {
+  background: url('/images/icon_clover.png') 0px -16px no-repeat;
+}
+
+div.slideshownav {
+  text-align: center;
+  padding-top: 8px;
+  overflow: hidden;
+  border-top: 1px solid #ccc;
+  margin-top: 5px;
+  height: 22px;
+}
+
+div.slideshownav a.next {
+  background: url('/images/icon_rightarrow.gif') 0px 0px no-repeat;
+  width: 22px;
+  height: 22px;
+  float: right;
+}
+
+div.slideshownav a.next:hover {
+  background: url('/images/icon_rightarrow.gif') 0px -22px no-repeat;
+}
+
+div.slideshownav a.previous {
+  background: url('/images/icon_leftarrow.gif') 0px 0px no-repeat;
+  width: 22px;
+  height: 22px;
+  float: left;
+}
+
+div.slideshownav a.previous:hover {
+  background: url('/images/icon_leftarrow.gif') 0px -22px no-repeat;
+}
+
+div.slides {
+  text-align: center;
+  float: left;
+  margin: auto;
+  margin-top: -6px;
+}
+
+div.slides ul {
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  text-align: center;
+}
+
+div.slides li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+div.slides li a {
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+  outline-color: -moz-use-text-color;
+  outline-style: none;
+  outline-width: medium;
+  -moz-background-clip: border;
+  -moz-background-inline-policy:continuous;
+  -moz-background-origin:padding;
+  background:transparent url(/images/icon_slides.gif) no-repeat scroll center top;
+  display:block;
+  float:left;
+  height:6px;
+  margin:0 2px;
+  overflow:hidden;
+  padding:2px;
+  text-indent:-9999px;
+  width:10px;
+}
+
+div.slides li a.active {
+  background-position:center -10px;
+}
+
+div.pro-image {
+  width: 430px;
+  height: 300px;
+  overflow: hidden;
+}
+
+div.free-image {
+  width: 195px;
+  height: 136px;
+  overflow: hidden;
+}
+
+div.violator-upgrade {
+  padding-top: 0;
+  position: absolute;
+}
+
+div.violator-upgrade img {
+  margin-left: -10px;
+  margin-top: -12px;
+}
+
+div.violator {
+  padding-top: 0;
+  position: absolute;
+}
+
+div.violator img {
+  margin-left: -10px;
+  margin-top: -12px;
+}
+
+div.new {
+  padding-top: 0;
+  text-align: left;
+}
+
+div.new img {
+  margin-left: -10px;
+  margin-top: -10px;
+}
+
+/* PERMA -------------------------------------------------------*/
+
+body.perma div.filter {
+  width: 960px;
+  text-align: left;
+  margin:auto;
+}
+
+body.perma div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.perma div.cardtools {
+  border-bottom: 1px dotted #ccc;
+}
+
+div.card-perma {
+  width: 960px;
+  margin: 10px;
+  overflow: hidden;
+  float: left;
+  background-color: #fff;
+}
+
+div.cardcap-perma {
+  width: 960px;
+  height: 10px;
+  margin: 0;
+  background-color: #f5f6f7;
+}
+
+div.cardcontent-perma {
+  background-image: url('/images/card-bkgd-perma.png');
+  padding: 5px 20px 0 20px;
+  text-align: left;
+  overflow: hidden;
+}
+
+body.print div.cardcontent-perma {
+  background-image: none;
+  padding: 5px 20px 0 20px;
+  text-align: left;
+  overflow: hidden;
+}
+
+div.cardcontent-perma h2 {
+  font-family: Helvetica, sans-serif;
+  font-size: 28px;
+  letter-spacing: -1px;
+  color: #222;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+body.perma div.cardcompany {
+  margin-top: 15px;
+  height: auto;
+}
+
+body.perma div.cardtools {
+  clear:both;
+  padding-bottom: 20px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+div.tweetpage {
+  float: right;
+  color: #e8e8e8;
+  margin-right: 30px;
+}
+
+div.tweetpage a.tweet {
+  background: url('/images/icon_tweet.gif') 0px 0px no-repeat;
+  padding-left: 20px;
+  border-bottom: none;
+  padding-top: 1px;
+}
+
+div.tweetpage a.tweet:hover {
+  background: url('/images/icon_tweet.gif') 0px -16px no-repeat;
+}
+
+div.printpage {
+  float: right;
+  color: #e8e8e8;
+}
+
+div.printpage a.print {
+  background: url('/images/icon_print.gif') 0px 0px no-repeat;
+  padding-left: 20px;
+  border-bottom: none;
+  padding-top: 1px;
+}
+
+div.printpage a.print:hover {
+  background: url('/images/icon_print.gif') 0px -16px no-repeat;
+}
+
+body.perma div.description {
+  margin: 10px 0 15px 0;
+  width: 660px;
+  clear: both;
+}
+
+body.perma div.description p {
+  margin: 0 0 15px 0;
+}
+
+body.perma div.gallery {
+  background-color: #e8e8e8;
+  padding: 10px 0 5px 0;
+  text-align: center;
+  margin: 30px 0;
+  clear: both;
+}
+
+body.perma div.gallery p {
+  text-align: left;
+  margin: 15px;
+}
+
+div.prelaunch-perma {
+  background-color: #d7ecac;
+	line-height: 1.3em;
+  font-size: 17px;
+  margin: 0 15px 15px 15px;
+  padding: 20px 0;
+  color: #587f25;
+  text-align: center;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+div.prelaunch-perma a {
+  font-weight: bold;
+  color: #48671f;
+  text-decoration: none;
+  border-bottom: 3px solid #99cc66;
+}
+
+div.prelaunch-perma a:hover {
+  border-bottom: 3px solid #48671f;
+}
+
+body.perma div.action {
+	padding: 20px;
+	margin-bottom: 10px;
+	background-color: #222;
+	text-align: center;
+	color: #999;
+	font-size: 12px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+body.perma div.action h2 {
+	color: #f7eaac;
+	font-size: 16px;
+	letter-spacing: normal;
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+body.perma div.action h3 {
+	color: #999;
+	font-size: 18px;
+	letter-spacing: normal;
+	margin: 0 0 12px 0;
+	padding: 0;
+}
+
+/* CREATE ---------------------------------------------------*/
+
+body.create div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+div.errormessage {
+  background-color: #ffcccc;
+  margin-bottom: 25px;
+  padding: 15px;
+  color: red;
+  text-align: left;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+div.errormessage h2 {
+  margin: 0 0 5px 0;
+  font-size: 17px;
+  color: #222;
+  letter-spacing: normal;
+}
+
+div.confirmmessage {
+  background-color: #d7ecac;
+  font-size: 17px;
+  margin: 0 15px 15px 15px;
+  padding: 20px 0;
+  color: #587f25;
+  text-align: left;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+div.confirmmessage h2 {
+  margin: 0;
+  margin-left: 15px;
+  font-size: 17px;
+  color: #222;
+  letter-spacing: normal;
+}
+
+.liveValidationErrors {
+  color: red;
+}
+
+span.fieldWithErrors {
+  margin: 0;
+  padding: 0;
+}
+
+span.fieldWithErrors label {
+  margin: 0;
+  padding: 0;
+  color: red;
+}
+
+span.fieldWithErrors input {
+  border: 2px solid red;
+}
+
+div.steps {
+  width: 960px;
+  text-align: center;
+  font-size: 18px;
+  font-family: Georgia, serif;
+  color: #777;
+  margin:auto;
+}
+
+div.steps img {
+  margin-bottom: 5px;
+  margin-left: 50px;
+}
+
+div.steps img.first {
+  margin-left: 0;
+}
+
+div.steps a {
+  color: #777;
+}
+
+body.create div.content {
+  margin-top: 20px;
+  text-align: left;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+body.create h1, body.publish h1 {
+  margin: 15px 0;
+}
+
+body.create h3, body.publish h3, body.account h3 {
+  margin: 20px 0 10px 0;
+}
+
+body.create div.example_card {
+  width: 350px;
+  text-align: center;
+  float: left;
+  background-image: url(/images/bkgd-create.png);
+  background-repeat: no-repeat;
+  position: fixed;
+}
+
+body.create div.card {
+  margin-left: 65px;
+}
+
+body.create div.create_form {
+  text-align: left;
+  margin-top: 0;
+  padding-top: 0;
+  width: 560px;
+  float: right;
+}
+
+body.create div.create_form {
+  padding: 0 30px 20px 30px;
+}
+
+body.create div.create_form p {
+  margin: 20px 0 3px 0;
+}
+
+body.create div.create_form label {
+  font-weight: bold;
+}
+
+input {
+  height: 21px;
+  color: #333;
+  padding: 3px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input[type=submit], input[type=file] {
+  font-size: 11px;
+  font-weight: normal;  
+  padding: 0;
+  height: auto;
+}
+
+input#listing_company_name  {
+  width:300px;
+}
+
+input#ZIP, input#card_zip_code {
+  width:75px;
+}
+
+input.submit_image {
+  height: 38px;
+}
+
+textarea {
+  color: #333;
+  padding: 5px;
+  font-family: 'Lucida Grande','Lucida Sans Unicode',Verdana,Helvetica,Arial,sans-serif;
+  font-size:12px;
+  line-height:1.4em;
+}
+
+textarea#listing_overview, textarea#description {
+  width:500px;
+  height: 200px;
+}
+
+input#listing_website_url, input#email, input#firstname, input#lastname, input#acctemail, input#username, input#password, input#passwordverify, input#subject, input#email_address, input#screen, input#user_session_email {
+  width:300px;
+}
+
+input#user_login, input#user_password, input#user_password_confirmation, input#user_email, input#user_session_login, input#user_session_password {
+  width:300px;
+}
+
+input#login {
+  width:300px;
+}
+
+body.create div.image_upload {
+  background-color: #f6def8;
+  border: 1px solid #ccc;
+  padding: 30px;
+  padding-right: 15px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+body.create div.image_upload h2 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+body.create div.image_upload p {
+  margin: 15px 0;
+}
+
+body.create textarea {
+  width: 455px;
+  height: 40px;
+}
+
+body.create div.about_company, body.create div.contact, body.update div.about_company, body.update div.contact {
+  background-color: #f6def8;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  padding: 30px;
+  padding-right: 15px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+body.create div.about_company h2, body.create div.contact h2, body.update div.about_company h2, body.update div.contact h2 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+div.screenupload {
+  width: 465px;
+  margin: 15px 0;
+  padding: 10px 0;
+}
+
+div.delete {
+  padding: 5px 0;
+}
+
+div.delete a {
+  color: red;
+}
+
+span#live_budget {
+  color: #333;
+}
+
+div.budget_choices {
+  padding: 0;
+  clear: both;
+  overflow: hidden;
+}
+
+div.budget_choices label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+div.budget_choices input {
+  vertical-align: middle;
+}
+
+div.budget_choices span {
+  vertical-align: middle;
+  font-weight: normal;
+}
+
+div.us_select {
+  margin: 5px 0 0 0;
+  overflow: hidden;
+}
+
+div.us {
+  padding: 0;
+  clear: both;
+  overflow: hidden;
+}
+
+div.us label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+div.us input {
+  vertical-align: middle;
+}
+
+div.us span {
+  vertical-align: middle;
+  font-weight: normal;
+}
+
+div.autocomplete {
+  background: #fff;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+div.autocomplete ul {
+  list-style: none;
+  margin-left: -40px;
+}
+
+div.autocomplete li {
+  margin: 0;
+  padding: 5px;
+  padding-left: 10px;
+}
+
+div.autocomplete li.selected {
+  margin: 0;
+  padding: 5px;
+  padding-left: 10px;
+  background-color: #efefef;
+}
+
+div.autocomplete li a {
+  display: block;
+  font-weight: bold;
+  text-decoration: none;
+  color: #222;
+}
+
+div.autocomplete li a:hover {
+  color: #0099ff;
+}
+
+/* UPGRADE & DOWNGRADE --------------------------------------------------*/
+
+body.upgrade div.filterbar, body.downgrade div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+
+body.upgrade div.card, body.upgrade div.card-upgrade {
+  margin: 0;
+}
+
+body.upgrade div.content {
+  padding: 20px 0;
+  margin-top: 0;
+  text-align: left;
+}
+
+body.upgrade h3 {
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+body.upgrade div.bulletsleft ul, body.upgrade div.bulletsright ul, body.upgrade div.upgrade ul, body.downgrade div.downgrade ul {
+  margin: 0 0 10px 0;
+  list-style-image: url(/images/icon_check.png);
+}
+
+body.upgrade div.bulletsleft ul li, body.upgrade div.bulletsright ul li, body.upgrade div.upgrade ul li, body.downgrade div.downgrade ul li {
+  padding: 0 0 5px 0;
+}
+
+body.upgrade div.free {
+  width: 317px;
+  padding: 0 20px;
+  float: left;
+  text-align: left;
+  overflow: hidden;
+  background-image: url(/images/bkgd-free.png);
+  background-repeat: no-repeat;
+  margin-right: 20px;
+}
+
+body.upgrade div.freebutton {
+  margin: 20px 0 0 0;
+  width: 207px;
+  text-align: center;
+}
+
+/* body.upgrade div.freebutton p {
+  margin: 5px 0 0 0;
+} */
+
+body.upgrade div.pro {
+  width: 580px;
+  margin-bottom: 15px;
+  padding: 0 10px;
+  float: left;
+  text-align: center;
+  overflow: hidden;
+  background-image: url(/images/bkgd-pro.png);
+  background-repeat: no-repeat;
+}
+
+body.upgrade div.bulletsleft {
+  float: left;
+  width: 200px;
+  overflow: hidden;
+  text-align: left;
+  margin-left: 65px;
+}
+
+body.upgrade div.bulletsright {
+  float: left;
+  width: 240px;
+  overflow: hidden;
+  text-align: left;
+}
+
+
+/* body.upgrade div.clear p {
+  margin: 5px 0 0 0;
+} */
+
+body.upgrade div.freecard {
+  margin-right: 20px;
+  overflow: hidden;
+  width: 357px;
+  float: left;
+}
+
+body.upgrade div.procard {
+  float: left;
+  overflow: hidden;
+}
+
+body.downgrade div.downgrade {
+  background-color: #ffffcc;
+  border: 1px solid #ccc;
+  padding: 20px;
+  padding-top: 10px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  overflow: hidden;
+  text-align: left;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+body.downgrade div.downgrade h2 {
+  font-size: 16px;
+  margin: 15px 0 20px 0;
+}
+
+body.downgrade div.downgrade p {
+  margin-left: 5px;
+}
+
+/* PUBLISH -------------------------------------------------------*/
+
+body.publish div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.publish div.container div.content {
+  margin-top: 20px;
+  text-align: left;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+body.free div.example_card {
+  width: 350px;
+  text-align: center;
+  float: left;
+  background-image: url(/images/bkgd-publish-free.png);
+  background-repeat: no-repeat;
+}
+
+body.free div.card {
+  margin-left: 60px;
+}
+
+body.pro div.example_card {
+  width: auto;
+  text-align: center;
+  float: left;
+  padding: 0 25px;
+  background-image: url(/images/bkgd-publish-pro.png);
+  background-repeat: no-repeat;
+}
+
+body.pro div.card {
+  margin-left: 60px;
+}
+
+body.publish div.create_form {
+  text-align: left;
+  margin-top: 0;
+  padding: 0 30px 20px 30px;
+  width: 375px;
+  float: left;
+}
+
+body.publish div.create_form p {
+  margin: 20px 0 3px 0;
+}
+
+body.publish div.create_form label {
+  font-weight: bold;
+}
+
+body.publish div.companyinfo {
+  border: 1px dashed #ccc;
+  padding: 10px;
+  margin: 20px 0;
+  color: #666;
+  background-color: #fff;
+}
+
+body.publish div.companyinfo a {
+  font-weight: bold;
+}
+
+div.ccnumber {
+  width: auto;
+  overflow: hidden;
+  padding: 0 15px 15px 15px;
+  background-color: #efefef;
+  border: 1px solid #ccc;
+}
+
+body.pro div.ccnumber {
+  margin-top: 30px;
+}
+
+div.ccnumber img {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+div.ccnumber span {
+  background-color: #ffffcc;
+  color: #222;
+  font-weight: bold;
+  padding: 2px;
+}
+
+input#card_number {
+  width: 200px;
+}
+
+div.cc_upgrade {
+  margin: 15px 0;
+  overflow: hidden;
+  width: 370px;
+}
+
+div.cc_upgrade span {
+  background-color: #ffffcc;
+  color: #222;
+  font-weight: bold;
+  padding: 2px;
+}
+
+div.billingfaq {
+  width: auto;
+  overflow: hidden;
+  background-color: #e8e8e8;
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+}
+
+div.billingfaq a {
+  color: #666;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #ccc;
+}
+
+div.billingfaq a:hover {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #0099ff;
+}
+
+/* DASHBOARD ------------------------------------------------*/
+
+body.account div.filter {
+  width: 960px;
+  text-align: left;
+  padding-left: 0;
+  margin:auto;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+body.account div.filterbar {
+  padding: 15px 0;
+}
+
+body.account div.content {
+  margin-top: 0;
+  text-align: left;
+  padding-top: 0;
+}
+
+body.account div.welcome {
+  text-align: left;
+  margin-top: 0;
+  padding: 0 30px 20px 20px;
+  width: 375px;
+  float: left;
+  overflow: hidden;
+}
+
+body.account h1 {
+  margin-left: 5px;
+}
+
+body.account div.stats {
+  background-color: #d7ecac;
+  font-size: 17px;
+  margin: 0 100px 30px 20px;
+  padding: 20px 30px;
+  color: #587f25;
+  text-align: left;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+body.account div.stats p {
+  font-size: 16px;
+  line-height: 1.4em;
+  margin-top: 5px;
+}
+
+body.account div.minty {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  padding: 15px;
+}
+
+body.account div.minty img {
+  margin-right: 5px;
+  margin-top: 2px;
+}
+
+body.account div.update div.minty p {
+  margin: 8px 0 3px 0;
+}
+
+body.account div.update {
+  border-bottom: 2px solid #e8e8e8;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+
+body.account div.update p {
+  margin-left: 35px;
+}
+
+body.account div.welcome h2 {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+  color: #999;
+  margin: 20px 5px 5px 5px;
+  font-weight: bold;
+}
+
+body.account div.welcome h2 a {
+  color: #3399cc;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #ccc;
+}
+
+body.account div.welcome h2 a:hover {
+  color: #222;
+  border-bottom: 2px solid #0099ff;
+}
+
+body.account div.upgrade {
+  background-color: #ffffcc;
+  border: 1px solid #ccc;
+  padding: 20px;
+  padding-top: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  text-align: left;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+body.account div.upgrade h2 {
+  font-size: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body.account div.upgrade h2 a {
+  color: #222;
+  border-bottom: 2px solid #ffcc66;
+  text-decoration: none;
+}
+
+body.account div.upgrade h2 a:hover {
+  color: #222;
+  border-bottom: 2px solid #0099ff;
+  text-decoration: none;
+}
+
+body.account div.upgrade ul {
+  padding-top: 10px;
+}
+
+body.account div.upgrade p {
+  margin-left: 5px;
+}
+
+body.account div.upgrade ul {
+  margin: 0 0 10px -15px;
+  list-style-image: url(/images/icon_check.png);
+}
+
+body.account div.upgrade li {
+  padding: 0 0 10px 0;
+  font-weight: bold;
+}
+
+div.overlay_moderate {
+  position: relative;
+}
+
+div.overlay_moderate img {
+  position: absolute;
+}
+
+/* UPLOAD ---------------------------------------------------*/
+
+body.upload div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.upload div.cardcontent-perma {
+  padding: 20px 40px 40px 40px;
+}
+
+body.upload div.cardcontent-perma p {
+  margin: 10px 0 5px 0;
+}
+
+div.upload-container {
+  width: 250px;
+  /* height: 315px; */
+  height: auto;
+  margin: 20px 40px 20px 0;
+  overflow: hidden;
+  float: left;
+}
+
+body.upload div.top {
+  margin: 15px 40px 20px 0;
+}
+
+div.upload-image {
+  background-color: #F5F6F7;
+  padding: 15px;
+  text-align: center;
+  height: 136px;
+  margin-bottom: 10px;
+}
+
+div.moderate {
+  background-color: #222;
+}
+
+div.flag {
+  float: left;
+  background-color: #222;
+  padding: 10px 15px;
+  color: #fff;
+  margin-top: -15px;
+  margin-left: -15px;
+  position: absolute;
+}
+
+div.reject {
+  background-color: red;
+}
+
+div.upload-container label {
+  font-weight: bold;
+}
+
+div.upload-container textarea {
+  width: 230px;
+  height: 40px;
+}
+
+/* UPDATE ---------------------------------------------------*/
+
+body.update div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.update div.cardcontent-perma {
+  padding: 20px 40px 40px 40px;
+}
+
+body.update div.cardcontent-perma p {
+  margin: 20px 0 3px 0;
+}
+
+body.update div.cardcontent-perma label {
+  font-weight: bold;
+}
+
+body.update div.upload-container {
+  border-top: 1px solid #ccc;
+  clear: both;
+}
+
+body.update div.upload-container p {
+  margin: 10px 0 5px 0;
+}
+
+body.update span.budget_label {
+  color: #222;
+}
+
+body.update div.about_company, body.update div.contact {
+  padding-top: 10px;
+  width: 540px;
+}
+
+div.manage_logo {
+  border-top: 2px solid #ccc;
+  margin-top: 30px;
+  width: 515px;
+  padding: 15px 0 0 0;
+}
+
+/* MANAGE ---------------------------------------------------*/
+
+body.manage div.filter {
+  width: 960px;
+  text-align: left;
+  margin:auto;
+}
+
+body.manage div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.manage div.subscribe {
+  padding: 15px 0 30px 0;
+}
+
+body.manage div.subscribe label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+body.manage div.subscribe input {
+  vertical-align: middle;
+}
+
+body.manage div.subscribe span {
+  vertical-align: middle;
+  font-weight: normal;
+}
+
+body.manage div.ccnumber {
+  width: 340px;
+  margin-top: 20px;
+}
+
+body.manage div.billing {
+  float: left;
+  padding: 0 0 30px 30px;
+  overflow: hidden;
+}
+
+body.manage div.billing div.ccnumber {
+  margin-top: 0;
+}
+
+body.manage div.billingfaq {
+  width: 340px;
+}
+
+body.manage div.ccnumber p {
+  margin: 20px 0 3px 0;
+}
+
+body.manage div.ccnumber label {
+  font-weight: bold;
+}
+
+body.manage div.upgrade {
+  background-color: #ffffcc;
+  border: 1px solid #ccc;
+  padding: 20px;
+  padding-top: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  text-align: left;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  overflow: hidden;
+  width: 360px;
+  margin-left: 30px;
+  margin-top: 65px;
+  float: left;
+}
+
+body.manage div.upgrade h2 {
+  font-size: 16px;
+  margin: 15px 0 20px 0;
+}
+
+body.manage div.upgrade p {
+  margin-left: 5px;
+}
+
+body.manage ul {
+  list-style-type: none;
+  margin: 0 0 10px -40px;
+}
+
+body.manage li {
+  padding: 0 0 10px 0;
+  font-weight: bold;
+}
+
+body.manage div.invoice {
+  border: 3px solid #e8e8e8;
+  float: left;
+  padding: 0 15px 15px 15px;
+  overflow: hidden;
+  width: 450px;
+  margin-left: 30px;
+  margin-top: 70px;
+}
+
+body.manage div.invoice h3 {
+  margin-bottom: 20px;
+}
+
+div.cancel {
+  margin-top: 60px;
+}
+
+div.cancel a {
+  color: red;
+}
+
+/* ABOUT ----------------------------------------------------*/
+
+body.about div.filter, body.upgrade div.filter {
+  width: 960px;
+  text-align: left;
+  margin:auto;
+}
+
+body.about div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.about div.cardcontent-perma {
+  padding: 20px;
+}
+
+body.about h2 {
+  margin: 20px;
+}
+
+body.about h3 {
+  margin: 5px 0 5px 0;
+  font-size: 16px;
+}
+
+body.about h4 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: normal;
+  color: #999;
+  line-height: 1.3em;
+  margin-top: 0;
+  margin-left: 20px;
+}
+
+body.about div.about {
+  overflow: hidden;
+  width: 400px;
+  line-height: 1.5em;
+  float: left;
+  margin: 0 20px 20px 20px;
+}
+
+body.about div.cardcontent-perma p {
+  font-size: 14px;
+  color: #666;
+}
+
+body.about div.cardcontent-perma img {
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+body.about div.cardcontent-perma p a {
+  color: #0099ff;
+  border-bottom: 2px solid #0099ff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+body.about div.cardcontent-perma div.faq p a {
+  color: #0099ff;
+  border: none;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+body.about div.cardcontent-perma p a:hover {
+ color: #222;
+ border-bottom: 2px solid #0099ff;
+}
+
+body.about div.faq {
+  border-top: 1px solid #ccc;
+  margin-top: 30px;
+}
+
+body.about div.faq h2 {
+  margin-bottom: 30px;
+}
+
+body.about div.faq h3 {
+  margin-left: 20px;
+}
+
+body.about div.faq p {
+  margin-left: 20px;
+  margin-bottom: 20px;
+	width: 65%;
+	line-height: 1.3em;
+}
+
+body.about div.faq div.background {
+	float: right;
+	width: 220px;
+	padding: 10px;
+	border-left: 1px solid #ccc;
+	margin-top: 20px;
+}
+
+body.about div.faq div.background h3 {
+	font-size: 14px;
+}
+
+body.about div.faq div.background p {
+	font-size: 12px;
+	width: auto;
+}
+
+body.about div.faq div.background a {
+	border-bottom: none;
+}
+
+body.about div.cardcontent-perma div.tweet {
+  float: left;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  width: 200px;
+}
+
+body.about div.cardcontent-perma div.tweet div.tweet-content {
+  padding: 15px;
+  padding-bottom: 5px;
+  background-color: #b3fcce;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+body.about div.cardcontent-perma div.tweet div.tweet-content p {
+  color: #444;
+}
+
+body.about div.cardcontent-perma div.tweet div.bubble {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  height: 16px;
+}
+
+body.about div.cardcontent-perma div.tweet div.avatar {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+body.about div.cardcontent-perma div.tweet div.avatar span {
+  color: #222;
+  float: left;
+  margin-top: 10px;
+}
+
+body.about div.cardcontent-perma div.tweet div.avatar p {
+  float: left;
+  margin-top: 3px;
+}
+
+body.about div.cardcontent-perma div.tweet div.avatar a {
+  color: #888;
+  font-weight: normal;
+  border-bottom: none;
+  text-decoration: underline;
+  font-size: 11px;
+}
+
+body.about div.cardcontent-perma div.tweet div.avatar a:hover {
+  color: #222;
+}
+
+body.about div.cardcontent-perma div.tweet div.avatar img {
+  border: 1px solid #ccc;
+  padding: 1px;
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+
+/* SUCCESS -------------------------------------------------*/
+
+body.success h2 {
+  margin-bottom: 35px;
+}
+
+body.success div.upsell {
+  margin-top: 30px;
+}
+
+/* DESIGNER -------------------------------------------------*/
+
+body.designer div.violator {
+  padding-top: 5px;
+  position: absolute;
+  text-align: right;
+  width: 955px;
+}
+
+body.designer h2 {
+  font-size: 41px;
+  letter-spacing: -2px;
+  line-height: normal;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+body.designer div.confirmmessage {
+  background-color: #F5F6F7;
+  font-size: 17px;
+  margin: 0 0 15px 15px;
+  padding: 0 0 10px 0;
+  color: #222;
+}
+
+body.designer div.confirmmessage h2 {
+  font-size: 17px;
+  letter-spacing: normal;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+body.designer h4 {
+  margin-bottom: 15px;
+}
+
+body.designer div.cardcontent-perma {
+  padding-right: 5px;
+  padding-top: 0;
+}
+
+body.designer div.cardcontent-perma img {
+  margin: 0;
+}
+
+body.designer div.cardcontent-perma div.signup {
+  float: none;
+  margin-left: 15px;
+}
+
+body.designer div.cardcontent-perma div.signup a {
+  display: block;
+  width: 350px;
+  height: 70px;
+  background: url('/images/btn_getlisted-large.png') 0px 0px no-repeat;
+}
+
+body.designer div.cardcontent-perma div.signup a:hover {
+  background: url('/images/btn_getlisted-large.png') 0px -70px no-repeat;
+}
+
+body.designer div.cardcontent-perma div.welcome_back {
+  float: none;
+  margin-left: 15px;
+}
+
+body.designer div.cardcontent-perma div.welcome_back a {
+  display: block;
+  width: 350px;
+  height: 70px;
+  background: url('/images/btn_viewaccount-large.png') 0px 0px no-repeat;
+}
+
+body.designer div.cardcontent-perma div.welcome_back a:hover {
+  background: url('/images/btn_viewaccount-large.png') 0px -70px no-repeat;
+}
+
+body.designer div.about {
+  margin-top: 30px;
+  width: 350px;
+}
+
+body.designer div.about img {
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+
+body.designer div.card-upgrade {
+  width: 470px;
+  margin: 10px;
+  overflow: hidden;
+  float: left;
+  background-color: #fff;
+}
+
+body.designer div.cardcap-upgrade {
+  width: 470px;
+  height: 10px;
+  margin: 0;
+  background-color: #f5f6f7;
+}
+
+body.designer div.cardcontent-upgrade {
+  background-image: url('/images/card-bkgd-large.png');
+  padding: 5px 20px;
+  text-align: left;
+}
+
+body.designer div.cardcontent-upgrade h2 {
+  font-family: Helvetica, sans-serif;
+  font-size: 21px;
+  color: #222;
+  margin: 5px 0;
+  margin-top: 0;
+  font-weight: bold;
+  white-space: nowrap;
+  letter-spacing: normal;
+}
+
+body.designer div.cardcontent-upgrade h2 a {
+  color: #222;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+body.designer div.cardcontent-upgrade h2 a:hover {
+  border-bottom: 2px solid #0099ff;
+}
+
+body.designer div.cardcontent-upgrade p {
+  color: #222;
+  font-size: 12px;
+  margin: 0 0 10px 0;
+}
+
+body.designer div.cardcontent-upgrade span {
+  color: #999;
+}
+
+div.upsell {
+  background-color: #f6def8;
+  font-size: 17px;
+  margin-right: 20px;
+  margin-left: 5px;
+  padding: 20px 0;
+  color: #0099ff;
+  text-align: center;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+div.upsell a {
+  font-weight: bold;
+  color: #0099ff;
+  text-decoration: none;
+  border-bottom: 3px solid #0099ff;
+}
+
+div.upsell a:hover {
+	color: #000000;
+  border-bottom: 3px solid #0099ff;
+}
+
+/* FAVORITES ------------------------------------------------*/
+
+body.favorites div.header {
+  background-image: url(/images/bkgd-abstractcards-interior.png);
+  background-repeat: no-repeat;
+}
+
+body.favorites div.masthead {
+  padding: 39px 0 5px 0;
+  text-align: left;
+  width: 890px;
+}
+
+body.favorites div.filter {
+  width: 960px;
+  text-align: left;
+  margin:auto;
+}
+
+body.favorites div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.favorites h1 {
+  text-align: left;
+}
+
+body.favorites div.printpage {
+  float: right;
+  color: #ccc;
+}
+
+body.favorites div.printpage a {
+  color: #888;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+body.favorites div.printpage a:hover {
+ color: #222;
+ border-bottom: 2px solid #0099ff;
+}
+
+body.favorites div.favorites_link {
+  background-color: #ffffcc;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  padding: 20px;
+  margin-top: 20px;
+  overflow: hidden;
+  text-align: left;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+body.favorites div.cardcontent-perma {
+  padding: 20px;
+}
+
+body.favorites div.cardcontent-perma h2 {
+  margin: 20px;
+}
+
+body.favorites h3 {
+  margin: 5px 0 5px 0;
+  font-size: 16px;
+}
+
+body.favorites h4 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: normal;
+  color: #999;
+  line-height: 1.3em;
+  margin-top: 0;
+  margin-left: 20px;
+}
+
+body.favorites div.about {
+  overflow: hidden;
+  width: 400px;
+  line-height: 1.5em;
+  float: left;
+  margin: 0 20px 20px 20px;
+}
+
+body.favorites div.cardcontent-perma p {
+  font-size: 14px;
+  color: #666;
+}
+
+body.favorites div.cardcontent-perma img {
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+body.favorites div.cardcontent-perma p a {
+  color: #0099ff;
+  border-bottom: 2px solid #0099ff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+body.favorites div.cardcontent-perma p a:hover {
+ color: #222;
+ border-bottom: 2px solid #0099ff;
+}
+
+/* LOGIN ----------------------------------------------------*/
+
+body.login div.card-upgrade {
+  margin-left: 275px;
+}
+
+body.login h2 {
+  color:#222222;
+  font-family:Helvetica,sans-serif;
+  font-size:21px;
+  font-weight:bold;
+  margin-top: 20px;
+}
+
+body.login div.errormessage h2 {
+  margin-top: 0;
+  letter-spacing: normal;
+}
+
+body.login div.login p {
+  margin: 20px 0 3px 0;
+}
+
+body.login div.login label {
+  font-weight: bold;
+}
+
+body.login div.create {
+  padding: 10px 0;
+  text-align: right;
+  font-size: 11px;
+  color: #666;
+  background-color: #f5f6f7;
+}
+
+body.login div.remember {
+  padding: 15px 0 30px 0;
+}
+
+body.login div.remember label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+
+body.login div.remember input {
+  vertical-align: middle;
+}
+
+body.login div.remember span {
+  color: #222;
+  vertical-align: middle;
+  font-weight: normal;
+}
+
+/* SEARCH BAR */
+
+ul.search_bar {
+  list-style: none;
+  margin: 20px 0 0 0;
+  padding: 0;
+}
+
+ul.search_bar li {
+  font-size: 15px;
+  color: #222;
+  line-height: 13px;
+  position: relative;
+  z-index: 500;
+  display: inline;
+}
+
+ul.search_bar li.menu {
+  margin-right: 3px;
+}
+
+ul.search_bar li img {
+  vertical-align: top;
+  margin-left: 4px;
+}
+
+ul.search_bar li div.search_menu {
+  left: -1px;
+}
+
+ul.search_bar li div.search_menu {
+  position: absolute;
+  margin-top: 8px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #999;
+  border-bottom: 1px solid #999;
+  border-top: 1px solid #ccc;
+  width: 160px;
+  z-index: 5000;
+  background-color: white;
+  text-align: left;
+}
+
+ul.search_bar li div.search_menu a {
+  font-weight: normal;
+  display: block;
+  margin: 10px;
+  padding: 0;
+  font-size: 14px;
+  text-decoration: none;
+  color: #3399cc;
+  border: none;
+}
+
+ul.search_bar li div.search_menu a:hover {
+  text-decoration: underline;
+}
+
+/* LEGAL ----------------------------------------------------*/
+
+body.legal div.filter {
+  width: 960px;
+  text-align: left;
+  margin:auto;
+}
+
+body.legal div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.legal div.cardcontent-perma {
+  padding: 20px;
+}
+
+body.legal h2 {
+  margin: 20px 0;
+}
+
+/* TURK -----------------------------------------------------*/
+
+div.turkbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #e8e8e8;
+  border-top: 3px solid #ccc;
+  padding: 25px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+div.turkbuttons {
+  width: 450px;
+  overflow: hidden;
+  margin: auto;
+}
+
+div.turkinstructions {
+  background-color: #ffffcc;
+  padding: 0 15px 10px 25px;
+  font-size: 18px;
+  border: 2px solid #ccc;
+  border-top: 1px solid #ccc;
+  overflow: hidden;
+}
+
+div.turkinstructions h2 {
+  font-size: 21px;
+}
+
+
+/* FIRST TIME -----------------------------------------------*/
+
+div.dim_zum_window {
+  padding: 0 20px;
+}
+
+div#first_time {
+  width: 980px;
+}
+
+div.dim_zum_window div.card-perma {
+  background: none;
+}
+
+div.dim_zum_window div.cardcap-perma {
+  background: none;
+}
+
+div.dim_zum_window div.cardcontent-perma {
+  padding: 20px;
+  background-image: url(/images/card-bkgd-perma-firsttime.png)
+}
+
+div.dim_zum_window h2 {
+  margin: 20px;
+}
+
+div.dim_zum_window h3 {
+  margin: 5px 0 5px 0;
+  font-size: 16px;
+}
+
+div.dim_zum_window h4 {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: normal;
+  color: #999;
+  line-height: 1.3em;
+  margin-top: 0;
+  margin-left: 20px;
+}
+
+div.dim_zum_window div.about {
+  overflow: hidden;
+  width: 400px;
+  line-height: 1.5em;
+  float: left;
+  margin: 0 20px 20px 20px;
+}
+
+div.dim_zum_window div.cardcontent-perma p {
+  font-size: 14px;
+  color: #666;
+}
+
+div.dim_zum_window div.cardcontent-perma img {
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+div.dim_zum_window div.cardcontent-perma p a {
+  color: #0099ff;
+  border-bottom: 2px solid #0099ff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+div.dim_zum_window div.cardcontent-perma p a:hover {
+ color: #222;
+ border-bottom: 2px solid #0099ff;
+}
+
+/* HELP ------------------------------------------------------*/
+
+body.legal div.support-container {
+  font-size: 14px;
+  line-height: 1.4em;
+  padding: 40px;
+  padding-top: 30px;
+}
+
+div.support {
+  margin: 30px 0 15px 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 20px 0;
+}
+
+div.support h4 {
+  margin-bottom: 5px;
+  margin-top: 30px;
+}
+
+div.support span {
+  color: #339900;
+  font-weight: normal;
+  font-style: italic;
+}
+
+div.support p {
+  margin: 5px 0;
+}
+
+div.support p.submit {
+  margin-top: 30px;
+}
+
+/* CITIES ---------------------------------------------------*/
+
+body.cities div.content {
+}
+
+body.cities div.content ul {
+	list-style: none;
+	margin: 0 0 0 20px;
+	padding: 0;
+}
+
+body.cities div.content li {
+	font-size: 14px;
+	line-height: 1.3em;
+	padding-bottom: 3px;
+}
+
+body.cities div.content table td {
+	padding-right: 30px;
+}
+
+body.cities div.filter {
+  width: 960px;
+  text-align: left;
+  margin:auto;
+}
+
+body.cities div.filterbar {
+  padding: 20px 0 0 0;
+}
+
+body.cities div.cardcontent-perma {
+  padding: 20px;
+}
+
+body.cities div.cardcontent-perma h2 {
+  margin: 20px;
+  font-size: 28px;
+}
+
+body.cities div.cardcontent-perma h3 {
+  text-transform: uppercase;
+  margin-left: 20px;
+  border-top: 1px dotted #ccc;
+  padding: 10px 0 0 0;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+body.cities div.cardcontent-perma h3 span {
+  font-size: 12px;
+  text-transform: none;
+  font-weight: normal;
+}
+
+body.cities div.cardcontent-perma h4 {
+  font-weight: bold;
+  font-size: 14px;
+  margin: 10px 0 0 0;
+}
+
+body.cities div.cardcontent-perma h4 a {
+  color: #222;
+  border-bottom: 2px solid #3399CC;
+  text-decoration: none;
+}
+
+body.cities div.cardcontent-perma h4 a:hover {
+  color: #3399CC;
+}
+
+body.cities div.cardcontent-perma table.topcities li {
+  font-size: 21px;
+  padding-bottom: 5px;
+}
