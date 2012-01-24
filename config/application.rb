@@ -44,6 +44,11 @@ module Magfolio
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    config.assets.precompile += ['waypoints.js', 'catalogs_index.js', 'myapp.css']    
+    config.assets.precompile += [ 'waypoints.js', 
+                                  'catalogs_index.js', 
+                                  'myapp.css', 
+                                  'iColorPicker.js', 
+                                  'jquery.json-2.2.js', 
+                                  'catalog_show.js' ]    
   end
 end
