@@ -56,3 +56,5 @@ ALTER TABLE  `business_deals` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci
 11) получено заказчиком
 12) выполнен
 13) передан в архив
+
+неизвестный косяк
