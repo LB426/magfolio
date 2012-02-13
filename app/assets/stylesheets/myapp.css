@@ -421,10 +421,10 @@ span.favorites_count {
 
 div.needle {
   float: left;
-  width: 90px;
   overflow: hidden;
   margin-right: 5px;
   margin-left: 5px;
+  padding:5px;
 }
 
 body.listings div.needle {
@@ -432,11 +432,11 @@ body.listings div.needle {
 }
 
 body.home div.masthead {
-  padding: 38px 0 0 0;
-  text-align: left;
-  width: 890px;
+  clear:both;
+  margin:0;
+  padding:0;
 }
-
+div.needle h1 {font-size:18px; margin:0; color:#888;}
 div.masthead {
   padding: 39px 0 5px 0;
   text-align: left;

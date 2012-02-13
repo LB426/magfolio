@@ -421,7 +421,6 @@ span.favorites_count {
 
 div.needle {
   float: left;
-  width: 90px;
   overflow: hidden;
   margin-right: 5px;
   margin-left: 5px;
