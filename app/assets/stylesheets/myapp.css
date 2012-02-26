@@ -41,7 +41,6 @@ h1 {
 div.clear {
   clear: both;
 }
-
 /* Ошибки, уведомления для флэша -------------------------------*/
 
 p.alert {
@@ -392,10 +391,6 @@ div.container {
 	text-align: center;
 }
 
-body.home div.header {
-  background-image: url(/images/bkgd-abstractcards.png);
-  background-repeat: no-repeat;
-}
 
 body.listings div.header {
   background-image: url(/images/bkgd-abstractcards-small.png);
@@ -403,8 +398,11 @@ body.listings div.header {
 }
 
 div.header {
-  background-image: url(/images/bkgd-abstractcards-interior.png);
-  background-repeat: no-repeat;
+ /* background-image: url(/images/bkgd-abstractcards-interior.png);*/
+  width:100%;   
+  z-index:101;
+  position: fixed;
+  background: url('/images/header_bg.png') 0 100% repeat-x;
 }
 
 div.nav {
@@ -444,10 +442,12 @@ div.masthead {
 }
 
 div.container div.content {
-  width: 980px;
+  /*width: 980px;
   overflow: hidden;
   margin: 10px auto;
-  padding: auto;
+  padding: auto;*/
+  float:left;
+  margin: 120px 0 0 250px;
 }
 
 div.scroller_content {
@@ -556,24 +556,23 @@ div.filterbarorder {
 }
 
 div.filterbar {
-  border-top: 3px solid #e8e8e8;
-  padding: 15px 0 10px 0;
   overflow: visible;
 }
 
 div.filter {
-  font-weight: bold;
+  font-weight: normal;
   margin-top: 3px;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 div.search a {
-  font-size: 26px;
+  font-size: 12px;
   font-weight: normal;
   color: #3399cc;
   text-decoration: none;
   font-family: Georgia, Times, serif;
-  border-bottom: 3px solid #3399cc;
+  border-bottom: 1px dashed #3399cc;
 }
 
 div.search a:hover {
@@ -873,11 +872,13 @@ body.perma div.description p {
 }
 
 body.perma div.gallery {
-  background-color: #e8e8e8;
-  padding: 10px 0 5px 0;
+  padding: 5px 5px 0 0;
   text-align: center;
-  margin: 30px 0;
-  clear: both;
+  float: left;
+}
+body.perma div.gallery  img {
+	width: 109px;
+	border: 3px solid #6cf;
 }
 
 body.perma div.gallery p {
@@ -1603,13 +1604,13 @@ body.login div.remember span {
 
 ul.search_bar {
   list-style: none;
-  margin: 20px 0 0 0;
-  padding: 0;
+  margin:0;
+  padding: 5px 0 0;
 }
 
 ul.search_bar li {
-  font-size: 15px;
-  color: #222;
+  font-size: 12px;
+  color: #999;
   line-height: 13px;
   position: relative;
   z-index: 500;
@@ -1685,12 +1686,27 @@ body.cities div.filterbar {
 }
 
 body.cities div.cardcontent-perma {
-  padding: 20px;
+  padding: 5px 20px;
 }
 
 body.cities div.cardcontent-perma h2 {
-  margin: 20px;
-  font-size: 28px;
+    color: #fff;
+	background: url("/images/fon_button.gif") repeat scroll 0 50% transparent;
+    font-size: 22px;
+    margin: 0 5px 5px 0;
+    padding: 5px 0;
+    text-align: center;
+	box-shadow: 1px 1px 1px #888;
+	text-shadow: 1px 1px 1px #888;
+}
+#left_col_opisaniya_obekta_kataloga {
+	width: 40%;
+	float: left;
+	padding-bottom: 5px;
+}
+#right_col_opisaniya_obekta_kataloga {
+	width:59%;
+	float: left;
 }
 
 body.cities div.cardcontent-perma h3 {
@@ -1728,3 +1744,287 @@ body.cities div.cardcontent-perma table.topcities li {
   font-size: 18px;
   padding-bottom: 5px;
 }
+
+/*Правки MeTaN*/
+div#left_col {width: 250px; float: left; text-align: left; padding: 5px; position: fixed; top:100px; padding-top: 30px;}
+
+div#left_col ul {margin:0; padding: 5px;}
+div#left_col li {list-style: none;}
+div#left_col h3{padding: 5px; margin:0; color: #fff;}
+div#left_col a:link,div#left_col a:visited,div#left_col a:active { text-decoration: none; border-bottom: 1px dashed #39c;font-size: 12px; display: block; padding: 3px 0; }
+div#left_col a:hover,div#left_col a:focus {background: #39c; color:#fff; letter-spacing: 0.05em; padding-left: 1em;}
+
+
+
+#menu_tovarov h3, #menu_uslugi  h3 {background: #39c; border-bottom: 2px solid #069;border-right: 2px solid #069}
+div#header.header div.needle h1 {margin:0; font-size:18px;} 
+div#potrebOboz_top_menu {margin-left: 10px; float:left; }
+
+#potreb_oboz_search {height:28px;}
+#potreb_oboz_search form input {height: 20px; border-radius:0 10px 10px 0; border:2px solid #39c; margin:0; display: block; float: left;}
+#potreb_oboz_search form button {margin: 0; padding:0; overflow:visible; background: none; border: none; cursor: pointer; height:25px; display: block; float: left;}
+#potreb_oboz_search form button span {color: #39c; font-weight: bold; background: url('search_icon.gif') 10% 50% no-repeat;  border-radius:10px; padding: 0px 8px 0px 35px; line-height:25px; display:block; } 
+
+#potrebOboz_top_menu p {margin: 0px;}
+#potrebOboz_top_menu div p.po_top_p {margin: 5px 0; font-weight: bold; font-size: 14px; color:#999;}
+#potrebOboz_top_menu div.button ul li {display: inline; margin:0 5px; background: url('fon_button.gif') 0 50%; padding:5px; border-radius: 15px;}
+#potrebOboz_top_menu div.button ul li a:link,#potrebOboz_top_menu div.button ul li a:visited {text-decoration: none; color:#fff; padding: 0 5px; font-weight: bold;}
+#potrebOboz_top_menu div.button ul li a:hover,#potrebOboz_top_menu div.button ul li a:active {text-decoration: underline;}
+#potrebOboz_top_menu div.button ul li a span {background: #fff; color: #39c; padding: 0 2px; border-radius:3px;}
+#potrebOboz_top_menu div.button ul li a span.red {background: #f60; color: #fff; padding: 0 2px; border-radius:3px;}
+
+#menu_discont {display:none;}
+#menu_my_catalog {display:none;}
+#menu_discont div.left_col_menu h3 {background: #090;}
+#menu_my_catalog div.left_col_menu h3 {background: #f93;}
+/*--------------*/
+div#left_col div#menu_discont a:link,
+div#left_col div#menu_discont a:visited,
+div#left_col div#menu_discont a:active {
+	color:#090;
+	}
+div#left_col div#menu_discont a:hover,
+div#left_col div#menu_discont a:focus {
+	color:#fff;
+	background: #090;
+	}
+
+div#left_col div#menu_my_catalog a:link,
+div#left_col div#menu_my_catalog a:visited,
+div#left_col div#menu_my_catalog a:active {
+	color:#f93;
+	font-weight: bold;
+	}
+div#left_col div#menu_my_catalog a:hover,
+div#left_col div#menu_my_catalog a:focus {
+	color:#fff;
+	background: #f93;
+	font-weight: bold;
+	}
+	
+	
+/*-----------*/
+
+
+/*Start Описание блока Инфо дисконта, во вкладке дисконат*/
+div#info_discont {background:#fff; color:#090; padding:5px; font-size:1.1em; border: 2px solid #090; border-radius: 5px;}
+div#info_discont h4 {margin: -4px; background: #090; color:#fff; border-radius:5px; padding: 3px;}
+div#left_col div#info_discont a:link,
+div#left_col div#info_discont a:visited,
+div#left_col div#info_discont a:active {
+	text-decoration: none;
+	border-bottom: 1px dashed #fff;
+	font-size: 12px;
+	display: block;
+	padding: 3px 0;
+	color:#090;
+	}
+div#left_col div#info_discont a:hover,
+div#left_col div#info_discont a:focus {
+	background: #fff;
+	color:#090;
+	text-decoration: underline;
+	letter-spacing:none;
+	}	
+div#left_col div#info_discont a:link span,
+div#left_col div#info_discont a:visited span,
+div#left_col div#info_discont a:active span{
+	background:#fff;
+	padding: 3px;
+	color:#090;
+	border-radius: 3px;
+	}
+div#left_col div#info_discont a:hover span,
+div#left_col div#info_discont a:focus span{
+	background:#090;
+	color:#fff;
+	border-radius: 3px;
+	}
+/*End Описание блока Инфо дисконта, во вкладке дисконат*/
+
+/*Start Описание блока горизонтальных закладок в левой колонке*/
+div#select_menu {margin-bottom:-1px;}
+div#select_menu a:link,
+div#select_menu a:visited,
+div#select_menu a:active {
+	display:inline;
+	margin-right: 10px;
+	padding: 0 3px;
+	border: 1px solid #999;
+	border-bottom:none;
+	border-radius: 5px 5px 0 0;
+	color: #fff;
+	}
+div#select_menu a:hover,
+div#select_menu a:focus {
+	letter-spacing: 0;
+	color: #fff;
+	}
+	
+div#select_menu a#but_katalog:link,
+div#select_menu a#but_katalog:visited{
+	background:#9cf;
+}
+
+div#select_menu a#but_katalog:hover,
+div#select_menu a#but_katalog:focus{
+	background:#39C;
+	}
+	
+div#select_menu a#but_discont:link,
+div#select_menu a#but_discont:visited{
+	background:#6c6;
+}
+
+div#select_menu a#but_discont:hover,
+div#select_menu a#but_discont:focus {
+	background:#090;
+	}
+div#select_menu a#but_my_catalog:link,
+div#select_menu a#but_my_catalog:visited{
+	background:#fc9;
+	}
+
+div#select_menu a#but_my_catalog:hover,
+div#select_menu a#but_my_catalog:focus {
+	background:#f93;
+	} 
+	
+/*Start Блок*/
+div#select_menu a.active_menu {
+	color:#fff;
+}
+div#select_menu a#but_katalog.active_menu:link,
+div#select_menu a#but_katalog.active_menu:visited,
+div#select_menu a#but_katalog.active_menu:active,
+div#select_menu a#but_katalog.active_menu:hover,
+div#select_menu a#but_katalog.active_menu:focus{
+	background:#3399CC;
+	}
+div#select_menu a#but_discont.active_menu:link,
+div#select_menu a#but_discont.active_menu:visited,
+div#select_menu a#but_discont.active_menu:active,
+div#select_menu a#but_discont.active_menu:hover,
+div#select_menu a#but_discont.active_menu:focus {
+	background:#090;
+	}
+div#select_menu a#but_my_catalog.active_menu:link,
+div#select_menu a#but_my_catalog.active_menu:visited,
+div#select_menu a#but_my_catalog.active_menu:active,
+div#select_menu a#but_my_catalog.active_menu:hover,
+div#select_menu a#but_my_catalog.active_menu:focus {
+	background:#f93;
+	} 
+/*End Блок*/
+
+div#potrebOboz_top_menu {
+    float: left;
+    margin-left: 10px;
+}
+#potreb_oboz_search {
+    height: 28px;
+}
+#potreb_oboz_search form input {
+    border: 2px solid #3399CC;
+    border-radius: 0 10px 10px 0;
+    display: block;
+    float: left;
+    height: 28px;
+    margin: 0;
+}
+#potreb_oboz_search form button {
+    background: none repeat scroll 0 0 transparent;
+    border: medium none;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 25px;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+}
+#potreb_oboz_search form button span {
+    background: url("/images/search_icon.gif") no-repeat scroll 10% 50% transparent;
+    border-radius: 10px 10px 10px 10px;
+    color: #3399CC;
+    display: block;
+    font-weight: bold;
+    line-height: 25px;
+    padding: 0 8px 0 35px;
+}
+#potrebOboz_top_menu p {
+    margin: 0;
+}
+#potrebOboz_top_menu div p.po_top_p {
+    color: #999999;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+#potrebOboz_top_menu div.button ul li,div#g_menu_opisaniya_obekta_cataloga ul li {
+    background: url("/images/fon_button.gif") repeat scroll 0 50% transparent;
+    border-radius: 15px 15px 15px 15px;
+    display: inline;
+    margin: 0 5px;
+    padding: 5px;
+}
+#potrebOboz_top_menu div.button ul li a:link, #potrebOboz_top_menu div.button ul li a:visited, 
+div#g_menu_opisaniya_obekta_cataloga ul li a:link, div#g_menu_opisaniya_obekta_cataloga ul li a:visited {
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 0 5px;
+    text-decoration: none;
+}
+#potrebOboz_top_menu div.button ul li a:hover, #potrebOboz_top_menu div.button ul li a:active, 
+div#g_menu_opisaniya_obekta_cataloga ul li a:hover, div#g_menu_opisaniya_obekta_cataloga ul li a:active {
+    text-decoration: underline;
+}
+div.button ul li a span  {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    color: #3399CC;
+    padding: 0 2px;
+}
+div.button ul li a span.red {
+    background: none repeat scroll 0 0 #FF6600;
+    border-radius: 3px 3px 3px 3px;
+    color: #FFFFFF;
+    padding: 0 2px;
+}
+div#main_pic img  {
+	width: 350px;
+	border:3px solid #3cf;
+}
+div#g_menu_opisaniya_obekta_cataloga ul {margin:5px 0; padding: 0;}
+div#g_menu_opisaniya_obekta_cataloga.button ul li {margin: 0 2px 0 0;}
+div#g_menu_opisaniya_obekta_cataloga.button ul li a {font-size: 12px;}
+
+div#opisanie_obekta_pod_foto {clear: both; padding: 10px 0;}
+div#opisanie_obekta_pod_foto dt {
+	clear:both;
+	width: 30%;
+	float: left;
+	color: #5d5d5d;
+	line-height: 18px;
+}
+div#opisanie_obekta_pod_foto dl dd {
+	margin:0;
+	line-height: 18px;
+	padding-left: 30%;
+	}
+div#opisanie_obekta_pod_foto dl dd.grey {
+	background: none repeat scroll 0 0 #F2F2F2;
+}
+div#menu_under_opisanie_obekta_pod_foto ul {margin: 0 10%;}
+div#menu_under_opisanie_obekta_pod_foto ul li a {
+	font-weight: bold;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	background: url("/images/fon_button.gif") repeat scroll 0 50% transparent;
+	display: block;
+	width: 100%;
+	line-height: 16px;
+	padding: 3px 0;
+}
+div#menu_under_opisanie_obekta_pod_foto ul li a:hover {text-decoration: underline;}

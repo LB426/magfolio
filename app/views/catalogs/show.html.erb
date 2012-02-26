@@ -14,50 +14,13 @@
       <div class="printpage">
         <%= link_to zakaz_phraze(@catalog), catalog_products_path(@catalog), :class => 'print' -%>
       </div>
-      <div class="listing">
+	      <div class="listing">
         <span class="favorite_links">
           <a href="/izbrannoe/<%= @catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= @catalog.id -%>);return false;" ><%= izbrannoe?(@catalog.id) -%></a>
         </span>  
       </div>
     </div>
-    <div class="cardcompany <%= edit_block %>">
-      <% if current_user_self? %>
-        <p><a href="#catalog_base_data" id="catalog_base_data_edit">
-          Редактировать блок</a></p>
-      <% end %>
-      <% if /missing/ =~ @catalog.logo.url(:thumb) %>
-        <% if current_user_self? %>
-          <%= image_tag "/images/your_logo.png", :align => 'right' %>
-        <% end %>
-      <% else %>
-        <%= image_tag @catalog.logo.url(:thumb), :align => 'right' %>
-      <% end %>
-      <h2><%= @catalog.company_name %></h2>
-      <p>
-        Вид бизнеса: 
-        <strong><%= BusinessType.find(@catalog.businesstype_id).name %></strong><br />
-        Расположен в 
-        <strong>
-          <% location = Location.find(@catalog.location_id).name %>
-          <a href="<%= search_city_name_path(location) %>"><%= location %></a>
-        </strong>
-        <% unless @catalog.address.nil? %>
-          ,&nbsp;<%= @catalog.address %>
-        <% end %>
-        <br />
-        E-mail: 
-        <strong>
-          <a href="mailto:<%= @catalog.email -%>?subject=Вопросы о каталоге <%= @catalog.company_name -%>"><%= @catalog.email %></a>
-        </strong>
-        <% unless @catalog.phone =~ /\(86196\)41616/ %>
-          <br />
-          Телефон: 
-          <strong>
-            <%= @catalog.phone %>
-          </strong>
-        <% end %>
-      </p>
-    </div>
+
     <div class="description <%= edit_block %>">
       <% if current_user_self? %>
         <p><a href="#catalog_description" id="catalog_description_edit">Редактировать блок</a></p>
@@ -66,43 +29,100 @@
       <%= render :inline => @catalog.company_description %>
       <% end %>
     </div>
-    <% @pictures.each do |pic| %>
-      <div class="gallery <%= edit_block %>">
-        <% if current_user_self? %>
-          <p>
-            <a href="#catalog_picture_<%= pic.id %>" id="catalog_picture_edit_<%= pic.id %>">
-              Редактировать блок</a>
-          </p>
-          <div style="display:none">
-            <div id="catalog_picture_<%= pic.id %>">
-              <h2>Заменить изображение</h2>
-              <%= form_for(pic, :html => {:multipart => true} ) do |f| %>
-                <p>
-                  <%= f.label :Изображение %>
-                  <%= f.file_field :picture, :accept => "image/*" %></p>
-                <p>
-                  <%= f.label :Комментарий_к_изображению %><br />
-                  <%= f.text_area :description, :cols => 100, :rows => 30 %></p>
-                <p><%= f.submit "Внести изменения" %></p> 
-              <% end %>
-              <%= button_to 'Удалить блок', picture_path(pic), :method => :delete %>
-            </div>
-          </div>
-          <script type="text/javascript">
-            $("a#catalog_picture_edit_<%= pic.id %>").fancybox({
-            		'hideOnContentClick': false
-            });
-          </script>
-        <% end %>
-        <%= image_tag pic.picture.url(:large) %>
-        <%= link_to "Показать на карте", "/catalogs/#{pic.id}/loadmap", :title => 'посмотреть на карте' unless @catalog.lat.nil? || @catalog.lng.nil? -%>
-        <p>
-          <% unless pic.description.blank? %>
-          <%= render :inline => pic.description %>
-          <% end %>
-        </p>
-      </div>
-    <% end %>
+
+	<div id="left_col_opisaniya_obekta_kataloga">
+		<h2><%= @catalog.company_name %></h2>
+	<div id = "main_pic">
+			<%= image_tag @pictures[0].picture.url(:large) %>
+		</div>
+		
+		<% @pictures.each do |pic| %>
+		  <div class="gallery <%= edit_block %>">
+			<% if current_user_self? %>
+			  <p>
+				<a href="#catalog_picture_<%= pic.id %>" id="catalog_picture_edit_<%= pic.id %>">
+				  Редактировать блок</a>
+			  </p>
+			  <div style="display:none">
+				<div id="catalog_picture_<%= pic.id %>">
+				  <h2>Заменить изображение</h2>
+				  <%= form_for(pic, :html => {:multipart => true} ) do |f| %>
+					<p>
+					  <%= f.label :Изображение %>
+					  <%= f.file_field :picture, :accept => "image/*" %></p>
+					<p>
+					  <%= f.label :Комментарий_к_изображению %><br />
+					  <%= f.text_area :description, :cols => 100, :rows => 30 %></p>
+					<p><%= f.submit "Внести изменения" %></p> 
+				  <% end %>
+				  <%= button_to 'Удалить блок', picture_path(pic), :method => :delete %>
+				</div>
+			  </div>
+			  <script type="text/javascript">
+				$("a#catalog_picture_edit_<%= pic.id %>").fancybox({
+						'hideOnContentClick': false
+				});
+			  </script>
+			<% end %>
+			<%= image_tag pic.picture.url(:small) %>
+			<%= link_to "Показать на карте", "/catalogs/#{pic.id}/loadmap", :title => 'посмотреть на карте' unless @catalog.lat.nil? || @catalog.lng.nil? -%>
+		  </div> 
+		<% end %>
+
+		<div id="opisanie_obekta_pod_foto">
+			<dl>
+				<dt>Pегион:</dt><dd class="grey">Краснодарский край</dd>
+				<dt>Город:</dt><dd>Тихорецк</dd>
+				<dt>Адрес:</dt><dd  class="grey">ул. Богдана Хмельницкого 148A корп.2, 3 этаж, оф. 231</dd>
+				<dt>Тип бизнеса:</dt><dd>Магазин</dd>
+				<dt>График  работы:</dt><dd  class="grey">пн-пт 8:00 до 18:00; сб-вс 8:00 до 13:00</dd>
+			
+			</dl>
+
+		
+		</div>
+		
+		<div id="menu_under_opisanie_obekta_pod_foto">
+			<ul>
+				<li><a href="#">Добавить в мои каталоги</a></li>
+				<li><a href="#">Подписаться на рассылку</a></li>
+				<li><a href="#">Контакты</a></li>
+				<li><a href="#">Вакансии/Отправить резюме</a></li>
+				<li><a href="#">Записаться на приём</a></li>
+				<li><a href="#">Написать отзыв</a></li>
+				<li><a href="#">Был здесь/ Посоветоваться</a></li>
+			</ul>
+		</div>
+		
+		
+	</div>
+
+	<div id="right_col_opisaniya_obekta_kataloga">
+	<div id="g_menu_opisaniya_obekta_cataloga" class="button">
+	<ul>
+		<li><a href="#">Клиенты <span>143</span></a></li>
+		<li><a href="#">Представительства <span>2</span></a></li>
+		<li><a href="#">Презентации <span class="red">3</span></a></li>
+		<li><a href="#">Прайс</a></li>
+	</ul>
+	</div>
+		<p>Основной целью создания и деятельности компании <b>«<%= @catalog.company_name %>»</b> является представительство интересов и защита законных прав членов Партнерства во взаимоотношениях с органами государственной власти и местного самоуправления, иными субъектами, осуществляющими деятельность в сферах производства строительных материалов, строительства, а также смежных с ними отраслях, и их объединениями, способствование повышению конкурентоспособности членов Партнерства, для полноценного, комплексного подхода к обеспечению высокого качества, ответственности и безопасности работ в строительстве при взаимодействии и поддержке саморегулируемых организаций строителей и проектировщиков в дальнейшем.</p>
+		<p>В своей деятельности некоммерческое партнёрство руководствуется Конституцией Российской Федерации, Федеральными законами «О некоммерческих партнерствах», «О техническом регулировании», «О Техническом  регламенте «о безопасности зданий и сооружений», требованиями проекта Технического регламента «О безопасности строительных материалов и изделий» и другими нормативно-правовыми актами Российской Федерации.</p>
+		<p>В соответствии с федеральными законами <b>«<%= @catalog.company_name %>»</b> гарантирует и несет, в том числе субсидиарную материальную ответственность за действия своих членов и качество выпускаемой ими продукции перед потребителями. Это то, что объединяет участников строительного рынка, что позволяет вместе решать комплексные задачи, что дает возможность более полноценно вести диалог с органами местного самоуправления и государственной власти.</p>
+	<h3>Актуальные акции</h3>
+		<p>В соответствии с федеральными законами <b>«<%= @catalog.company_name %>»</b> гарантирует и несет, в том числе субсидиарную материальную ответственность за действия своих членов и качество выпускаемой ими продукции перед потребителями. Это то, что объединяет участников строительного рынка, что позволяет вместе решать комплексные задачи, что дает возможность более полноценно вести диалог с органами местного самоуправления и государственной власти.</p>
+	<h3>Отзывы</h3>
+	<p>
+	Покупкой мультиварки я запарила мозг не только своим домашним, но и всем местным интернет-магазинам :) И, пока я металась между трех сосен :„) моя мама просто поехала в <b>«<%= @catalog.company_name %>»</b> и купила мультю :) А там, только услышав слово "мультиварка", сразу спросили, не мы ли звонили в интернет-магазин?? Ну да, мы. Цена и так была почти самая низкая в городе, а нам продали еще дешевле - по цене с сайта. Дома мы быстренько сварганили жареную курочку и, хочу вам сказать, <b>«<%= @catalog.company_name %>»</b> честно заработал свой очередной положительный отзыв. <a href="#">читать дальше</a>
+	</p><p>
+	Заказали холодильник в этом магазине,менеджер не позвонил ни в этот же,ни на следующий день, ни через два дня. Решили написать электронное письмо,оказалось,что холодильника нет в наличии,поэтому на заявку просто не реагировали, хотя на сайте в наличии был и магазине и на складе!Попросили подождать пару дней нового завоза товара. Согласились,так как цена была самая приятная 19420 руб.при других ценах в других магазинах на 1000-1500 руб.выше + в интернет-магазине есть скидка 3%,которая делает этот холодильник… ещё <a href="#">читать дальше</a>
+	</p>
+	
+	</div>
+	
+	
+	
+	<div style="clear: both;"></div>
     <div class="action">
       <h2>Вам понравилось? Свяжитесь с <%= @catalog.company_name %>.</h2>
       <h3>
