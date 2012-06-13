@@ -1,5 +1,24 @@
 Magfolio::Application.routes.draw do
 
+  
+
+  get "top/top_mneniy"
+
+  get "top/top_presentation"
+
+  get "top/top_catalogov"
+
+  get "top/top_user"
+
+  get "userpg/user1"
+
+  get "about1/xxx4"
+  get "about1/xxx1"
+
+  get "about1/xxx2"
+
+  get "about1/xxx3"
+
   get "cartography/:catalog_id/show" => "cartography#show", :as => "catalog_map_show"
   
   resources :izbrannoes

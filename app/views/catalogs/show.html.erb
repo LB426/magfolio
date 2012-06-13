@@ -4,23 +4,44 @@
   <%= javascript_include_tag 'catalog_show.js' %>
 <% end %>
 <%= render :partial => 'layouts/ya' if Rails.env.production? %>
-
+<script>
+  $(document).ready(function(){
+    $("div.gallery img").click(function () 
+						{
+						
+						 $("div#main_pic img").attr("src",$(this).attr("src"));
+						}
+				);
+	
+	$("div#main_pic img").click(function(){
+			var bg = "url('"+$('div#main_pic img').attr('src')+"') 50% 50% no-repeat";
+			
+			$('#show_main_pic').show(500).css('background',bg);
+			return false;
+	})
+	
+	$('#show_main_pic').click(function(){$(this).hide(500)});
+	
+  });
+  </script>
+  
 <div class="card-perma">
-  <div class="cardcap-perma">
-    <img alt="Card-top-perma" src="/images/card-top-perma.png">
-  </div>
   <div class="cardcontent-perma">
     <div class="cardtools">
       <div class="printpage">
-        <%= link_to zakaz_phraze(@catalog), catalog_products_path(@catalog), :class => 'print' -%>
+       <!-- <%= link_to zakaz_phraze(@catalog), catalog_products_path(@catalog), :class => 'print' -%> -->
       </div>
 	      <div class="listing">
-        <span class="favorite_links">
+       <!--<span class="favorite_links">
           <a href="/izbrannoe/<%= @catalog.id -%>" class="favorites remove_from_favorites" onclick="to_izbrannoe(<%= @catalog.id -%>);return false;" ><%= izbrannoe?(@catalog.id) -%></a>
-        </span>  
+        </span>
+		-->
+		
+		<span class="favorite_links">
+		<a href="#" class="favorites remove_from_favorites" >Добавить в мои каталоги</a> </span>
       </div>
     </div>
-
+	
     <div class="description <%= edit_block %>">
       <% if current_user_self? %>
         <p><a href="#catalog_description" id="catalog_description_edit">Редактировать блок</a></p>
@@ -34,6 +55,14 @@
 		<h2><%= @catalog.company_name %></h2>
 	<div id = "main_pic">
 			<%= image_tag @pictures[0].picture.url(:large) %>
+			<div id="label_obekta_kataloga">
+			<a href="#">
+			<script type="text/javascript">
+			document.write(Math.round(Math.random()*10000));
+			</script>
+			
+			</a>
+			</div>
 		</div>
 		
 		<% @pictures.each do |pic| %>
@@ -64,7 +93,7 @@
 				});
 			  </script>
 			<% end %>
-			<%= image_tag pic.picture.url(:small) %>
+			<%= image_tag pic.picture.url(:large) %>
 			<%= link_to "Показать на карте", "/catalogs/#{pic.id}/loadmap", :title => 'посмотреть на карте' unless @catalog.lat.nil? || @catalog.lng.nil? -%>
 		  </div> 
 		<% end %>
@@ -76,66 +105,294 @@
 				<dt>Адрес:</dt><dd  class="grey">ул. Богдана Хмельницкого 148A корп.2, 3 этаж, оф. 231</dd>
 				<dt>Тип бизнеса:</dt><dd>Магазин</dd>
 				<dt>График  работы:</dt><dd  class="grey">пн-пт 8:00 до 18:00; сб-вс 8:00 до 13:00</dd>
+				<dt>Телефон:</dt><dd>+7(123) 456-78-90</dd>
+				<dt>Сайт</dt><dd  class="grey"><a href="#">http://www.site.ru</a></dd>
 			
 			</dl>
-
-		
+		<div style="overflow: hidden;">
+				<h3>Предсавительства</h3>
+				<div style="overflow: hidden; margin: 0 auto;">
+					<div  class="representation"><a href="#"><%= image_tag @pictures[2].picture.url(:small) %><br />г. Кропоткин</a></div>
+					<div  class="representation"><a href="#"><%= image_tag @pictures[3].picture.url(:small) %><br />г. Краснодар</a></div>
+					<div  class="representation"><a href="#"><%= image_tag @pictures[4].picture.url(:small) %><br />ст. Павтовская</a></div>
+				</div>
 		</div>
 		
-		<div id="menu_under_opisanie_obekta_pod_foto">
-			<ul>
-				<li><a href="#">Добавить в мои каталоги</a></li>
-				<li><a href="#">Подписаться на рассылку</a></li>
-				<li><a href="#">Контакты</a></li>
-				<li><a href="#">Вакансии/Отправить резюме</a></li>
-				<li><a href="#">Записаться на приём</a></li>
-				<li><a href="#">Написать отзыв</a></li>
-				<li><a href="#">Был здесь/ Посоветоваться</a></li>
-			</ul>
+			<div id="specialist_list">
+				<h3>Специалисты</h3>
+				<div class="object_specialist">
+					<a class="foto_spec" href="#"><img src="http://tihinfo.ru:3000/images/spec1.jpg"><br>Егор</a>
+					Менеджер по связям.<br />
+					<a class="ask" href="#">Задать вопрос</a><br />
+					<a class="rate_it" href="#">Оценить работу</a>
+				</div>
+				<div class="object_specialist">
+					<a class="foto_spec" href="#"><img src="http://tihinfo.ru:3000/images/spec4.jpg"><br>Gold</a>
+					Технический специалист.<br />
+					<a class="ask" href="#">Задать вопрос</a><br />
+					<a class="rate_it" href="#">Оценить работу</a>
+				</div>
+			</div>
+			<div id="klient_list">
+				<h3>Клиенты <a href="#">248</a></h3>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_1.jpg">
+						<span>Kisa1988</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_2.jpg">
+						<span>Аватар</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_3.jpg">
+						<span>ЧилдРен</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_4.jpg">
+						<span>Аватар</span>
+						</a>
+					</div>
+<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_1.jpg">
+						<span>Kisa1988</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_2.jpg">
+						<span>Аватар</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_3.jpg">
+						<span>ЧилдРен</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_4.jpg">
+						<span>Аватар</span>
+						</a>
+					</div>
+<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_5.jpg">
+						<span>Kisa1988</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_1.jpg">
+						<span>Аватар</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_5.jpg">
+						<span>ЧилдРен</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_4.jpg">
+						<span>Аватар</span>
+						</a>
+					</div>
+<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_1.jpg">
+						<span>Kisa1988</span>
+						</a>
+					</div>
+					<div class="object_klient">
+						<a href="#">
+						<img src="http://tihinfo.ru:3000/images/user_icon_2.jpg">
+						<span>Аватар</span>
+						</a>
+					</div>
+			</div>
 		</div>
-		
-		
-	</div>
+		</div>
+<style type="text/css">
+#g_menu_opisaniya_obekta_cataloga li {
+	position: relative;
+}
+#g_menu_opisaniya_obekta_cataloga li div{
+	position: absolute;
+	width: 100%;
+	left: 0px;
+	top: 25px;
+	display: none;
+}
+#g_menu_opisaniya_obekta_cataloga li div li{
+	display: block;
+	padding-top: 2px;
+}
 
+</style>
 	<div id="right_col_opisaniya_obekta_kataloga">
-	<div id="g_menu_opisaniya_obekta_cataloga" class="button">
-	<ul>
-		<li><a href="#">Клиенты <span>143</span></a></li>
-		<li><a href="#">Представительства <span>2</span></a></li>
-		<li><a href="#">Презентации <span class="red">3</span></a></li>
-		<li><a href="#">Прайс</a></li>
-	</ul>
+	
+	<!-- Всплывающее окно c визуальным редактором - Начало блока -->
+<div id="TinyMCE">
+<script type="text/javascript">
+	tinyMCE.init({
+		// General options
+		mode : "textareas",
+		theme : "advanced",
+		editor_selector : "mceEditor",
+
+		plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,inlinepopups,autosave",
+
+		// Theme options
+		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+		theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+		theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,pagebreak,restoredraft",
+		theme_advanced_toolbar_location : "top",
+		theme_advanced_toolbar_align : "left",
+		theme_advanced_statusbar_location : "bottom",
+		theme_advanced_resizing : true,
+
+		// Example word content CSS (should be your site CSS) this one removes paragraph margins
+		content_css : "css/word.css",
+
+		// Drop lists for link/image/media/template dialogs
+		template_external_list_url : "lists/template_list.js",
+		external_link_list_url : "lists/link_list.js",
+		external_image_list_url : "lists/image_list.js",
+		media_external_list_url : "lists/media_list.js",
+		language : "ru",
+		// Replace values for the template plugin
+		template_replace_values : {
+			username : "Some User",
+			staffid : "991234"
+		}
+	});
+</script>
+	<form method="post" action="http://tinymce.moxiecode.com/dump.php?example=true">
+	<h3 style="margin: 3px 10px;">Добавить презентацию <a href="#" style="display: block; float: right; color: #fff; ">Закрыть окно &#215;</a></h3>
+	<textarea id="elm1" class="mceEditor" name="elm1" rows="50" cols="80" style="margin: 0 5px; width: 98%, height: 200px;">
+     
+	<img src="/assets/pictures/1118/small/946f689ed91090fba351ac7a11ae3000.jpg?1326192447" alt="946f689ed91090fba351ac7a11ae3000" style="float: left; padding: 5px;"><p>Основной целью создания и деятельности компании «Гараж» является представительство интересов и защита законных прав членов Партнерства во взаимоотношениях с органами государственной власти и местного самоуправления, иными субъектами, осуществляющими деятельность в сферах производства строительных материалов, строительства, а также смежных с ними отраслях, и их объединениями, способствование повышению конкурентоспособности членов Партнерства, для полноценного, комплексного подхода к обеспечению высокого качества, ответственности и безопасности работ в строительстве при взаимодействии и поддержке саморегулируемых организаций строителей и проектировщиков в дальнейшем.</p>
+
+<p>В своей деятельности некоммерческое партнёрство руководствуется Конституцией Российской Федерации, Федеральными законами «О некоммерческих партнерствах», «О техническом регулировании», «О Техническом регламенте «о безопасности зданий и сооружений», требованиями проекта Технического регламента «О безопасности строительных материалов и изделий» и другими нормативно-правовыми актами Российской Федерации.
+</p>
+ </textarea>
+
+<div style="text-align: center;">
+	<input type="submit" name="save" style="font-size: 14px; font-weight: normal;" value="Опубликовать" />
+	<input type="reset" name="reset" style="font-size: 14px; font-weight: normal;" value="Очистить" />
 	</div>
+</form>
+
+</div>
+<script language="javascript">
+			$(document).ready(function() {
+				
+				
+				$("#actual_akcii h3 a").click(function(){
+					var pos_left = Math.round($(window).width()/2-$('#TinyMCE').width()/2);
+					$('#TinyMCE').css('left',pos_left+'px');
+					$("#TinyMCE").show(1000);
+					return false;
+				});
+				$("#TinyMCE a:contains('Закрыть окно')").click(function(){
+					$("#TinyMCE").hide(1000);
+					return false;
+				});
+							
+				})
+		</script>
+	<!-- Всплывающее окно c визуальным редактором - Конец блока -->
+
+	
 		<p>Основной целью создания и деятельности компании <b>«<%= @catalog.company_name %>»</b> является представительство интересов и защита законных прав членов Партнерства во взаимоотношениях с органами государственной власти и местного самоуправления, иными субъектами, осуществляющими деятельность в сферах производства строительных материалов, строительства, а также смежных с ними отраслях, и их объединениями, способствование повышению конкурентоспособности членов Партнерства, для полноценного, комплексного подхода к обеспечению высокого качества, ответственности и безопасности работ в строительстве при взаимодействии и поддержке саморегулируемых организаций строителей и проектировщиков в дальнейшем.</p>
 		<p>В своей деятельности некоммерческое партнёрство руководствуется Конституцией Российской Федерации, Федеральными законами «О некоммерческих партнерствах», «О техническом регулировании», «О Техническом  регламенте «о безопасности зданий и сооружений», требованиями проекта Технического регламента «О безопасности строительных материалов и изделий» и другими нормативно-правовыми актами Российской Федерации.</p>
-		<p>В соответствии с федеральными законами <b>«<%= @catalog.company_name %>»</b> гарантирует и несет, в том числе субсидиарную материальную ответственность за действия своих членов и качество выпускаемой ими продукции перед потребителями. Это то, что объединяет участников строительного рынка, что позволяет вместе решать комплексные задачи, что дает возможность более полноценно вести диалог с органами местного самоуправления и государственной власти.</p>
-	<h3>Актуальные акции</h3>
-		<p>В соответствии с федеральными законами <b>«<%= @catalog.company_name %>»</b> гарантирует и несет, в том числе субсидиарную материальную ответственность за действия своих членов и качество выпускаемой ими продукции перед потребителями. Это то, что объединяет участников строительного рынка, что позволяет вместе решать комплексные задачи, что дает возможность более полноценно вести диалог с органами местного самоуправления и государственной власти.</p>
-	<h3>Отзывы</h3>
-	<p>
-	Покупкой мультиварки я запарила мозг не только своим домашним, но и всем местным интернет-магазинам :) И, пока я металась между трех сосен :„) моя мама просто поехала в <b>«<%= @catalog.company_name %>»</b> и купила мультю :) А там, только услышав слово "мультиварка", сразу спросили, не мы ли звонили в интернет-магазин?? Ну да, мы. Цена и так была почти самая низкая в городе, а нам продали еще дешевле - по цене с сайта. Дома мы быстренько сварганили жареную курочку и, хочу вам сказать, <b>«<%= @catalog.company_name %>»</b> честно заработал свой очередной положительный отзыв. <a href="#">читать дальше</a>
-	</p><p>
-	Заказали холодильник в этом магазине,менеджер не позвонил ни в этот же,ни на следующий день, ни через два дня. Решили написать электронное письмо,оказалось,что холодильника нет в наличии,поэтому на заявку просто не реагировали, хотя на сайте в наличии был и магазине и на складе!Попросили подождать пару дней нового завоза товара. Согласились,так как цена была самая приятная 19420 руб.при других ценах в других магазинах на 1000-1500 руб.выше + в интернет-магазине есть скидка 3%,которая делает этот холодильник… ещё <a href="#">читать дальше</a>
-	</p>
+		<div style="text-align: right">
+			<a href="#">Редактировать</a>
+		</div>
+		
+		
+	<div id="actual_akcii">	
+		<h3>Акции и скидки  <span><a href="#">9</a></span> <a href="#" style="float: right; color: #fff;">&dArr;Добавить новую&dArr;</a></h3>
+	<div class="object_actual_akcii">		
+		<div class="inner_object_actual_akcii">
+			<h4>«Счастливые часы 10-12» <span class="data_time">29.04.2012</span></h4>
+			<p><img src="/images/clock.gif" style="float: left;">Мы рады сообщить о начале бессрочной акции «Счастливые часы 10-12», в рамках которой при покупке любого тура в офисах продаж сети <b>«<%= @catalog.company_name %>»</b> в период с 10.00 до 12.00 местного (московского) времени в любой день недели
+			</p><a href="#">Редактировать</a>
+		</div>
+	</div>
+	
+	<div class="object_actual_akcii">		
+		<div class="inner_object_actual_akcii">	
+			<h4>100% уверенность <span class="data_time">24.04.2012</span></h4>
+			<p><img src="/images/uverennost100.gif" style="float: left;">Маркетинговое направление большинства российских малых, а иногда и средних предприятий <b>«<%= @catalog.company_name %>»</b>, зачастую представлено небольшим и затратным числом сотрудников, более того, в половине 
+			</p><a href="#">Редактировать</a>
+		</div>
+	</div>
+	
+	
+	
+	</div>
+	<div id="block_akciy">
+			<h3>Презентации <span><a href="#">4</a></span></h3>
+			<ul>
+				<li><h4>Презентация новой коллекции <span class="data_time">29.04.2012</span></h4>
+					<p><%= image_tag @pictures[0].picture.url(:small) %> <b><%= @catalog.company_name %></b> мы проводим беспрецендентную акцию, по продвижению наших товаров и услуг к нашим покупателям, только в этом месяце, обратившись к нам, вы можете преобрести два пакета услуг по цене одного.<a href="" class="show_shadow_box">посмотреть презентацию >>></a></p><a href="#" style="display: block; text-align: right">Редактировать</a></li>
+				<li><h4>Весеннее обострение <span class="data_time">25.04.2012</span></h4>
+					<p><%= image_tag @pictures[1].picture.url(:small) %> <b><%= @catalog.company_name %></b> мы проводим беспрецендентную акцию, по продвижению наших товаров и услуг к нашим покупателям, только в этом месяце, обратившись к нам, вы можете преобрести два пакета услуг по цене одного.<a href="" class="show_shadow_box">посмотреть презентацию >>></a></p><a href="#" style="display: block; text-align: right">Редактировать</a></li>
+			</ul>
+		</div>
+	
+	<div id="otzivy">
+		<h3>Мнения <span><a href="#">28</a></span></h3>
+			<div class="mneniya">
+				<p><span class="data_time">14.03.2012</span></p>
+				<div class="small_block_user_info"><a href="#">
+				<img src="/images/kino_i_deti.jpg"><span>Baby</span></a><br />
+				<a href="#">Знаток</a>
+				</div>
+				<p>Покупкой мультиварки я запарила мозг не только своим домашним, но и всем местным интернет-магазинам :) И, пока я металась между трех сосен :„) моя мама просто поехала в <b>«<%= @catalog.company_name %>»</b> и купила мультю :) Цена и так была почти самая низкая в городе, а нам продали еще дешевле - по цене с сайта. Хочу вам сказать, <b>«<%= @catalog.company_name %>»</b> честно заработал свой очередной положительный отзыв. <a href="#">читать дальше</a>
+				</p>
+			</div>
+			<div class="mneniya">
+			<div class="small_block_user_info"><a href="#">
+				<img src="/images/pritcha.jpg"><span>Nensy</span></a><br />
+				<a href="#">Знаток</a>
+				</div>
+				<p class="grey"><span class="data_time">16.03.2012</span>
+				Заказали холодильник в этом магазине,менеджер не позвонил ни в этот же,ни на следующий день, ни через два дня. Решили написать электронное письмо,оказалось,что холодильника нет в наличии,поэтому на заявку просто не реагировали, хотя на сайте в наличии был и магазине и на складе!Попросили подождать пару дней нового завоза товара. Согласились,так как цена была самая приятная 19420 руб.при других ценах в других магазинах на 1000-1500 руб.выше + в интернет-магазине есть скидка 3%,которая делает этот холодильник… ещё <a href="#">читать дальше</a>
+				</p>
+			</div>
+			<a class="button" style="float: right;" href="#"><b>Оставить отзыв</b></a>
+			
+	</div>
 	
 	</div>
 	
 	
 	
-	<div style="clear: both;"></div>
+	<div class="clear"></div>
+	<br />
     <div class="action">
-      <h2>Вам понравилось? Свяжитесь с <%= @catalog.company_name %>.</h2>
-      <h3>
+     
+      <p>
           <a href="mailto:<%= @catalog.email %>"><%= @catalog.email %></a>
           <% unless @catalog.phone =~ /\(86196\)41616/ %>
           •
           <a href="<%= @catalog.company_url %>"><%= @catalog.phone %></a>
           <% end %>
-      </h3>
+      <p>
     </div>
-  </div>
-  <div class="cardcap-perma">
-    <img alt="Card-bottom-perma" src="/images/card-bottom-perma.png">
   </div>
 </div>
 
@@ -275,3 +532,8 @@
 <% if current_user_self? %>
 <%= render :partial => 'user_menu' %>
 <% end %>
+
+<div id="show_main_pic"></div>
+
+<br />
+

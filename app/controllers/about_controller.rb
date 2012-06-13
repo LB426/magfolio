@@ -5,4 +5,7 @@ class AboutController < ApplicationController
     @body_css_class = "perma about"
   end
 
+  def xxx1
+  end
+
 end

@@ -9,6 +9,7 @@
   <title><%= render_title %></title>
   <%= stylesheet_link_tag 'myapp' %>
   <%= stylesheet_link_tag 'jquery.fancybox-1.3.4.css' %>
+  <%= stylesheet_link_tag 'shadowbox303/shadowbox.css' %>
   <%= javascript_include_tag 'jquery-1.5.1.min.js' %>
   <%= javascript_include_tag 'jquery.effects.core.js' %>
   <%= javascript_include_tag 'jquery.effects.slide.js' %>
@@ -18,20 +19,25 @@
   <%= javascript_include_tag 'jquery.mousewheel-3.0.4.pack.js' %>
   <%= javascript_include_tag 'jquery.scrollFollow.js' %>
   <%= javascript_include_tag 'application.js' %>
+  <%= javascript_include_tag 'jquery.carouFredSel-5.5.0-packed.js' %>
+  <%= javascript_include_tag 'tiny_mce/tiny_mce.js' %>
+  <%= javascript_include_tag 'jquery.dropDown.pack.js' %>
+  
   <%= yield :head %>
   <%= csrf_meta_tag %>
   <%= render :partial => 'layouts/ga' if Rails.env.production? %>
-  <!-- 
-  Скрипт для скольжения блока меню в левой колонке.
+
+  <!--Скрипт для скольжения блока меню в левой колонке.
   <script type="text/javascript">
    		$( document ).ready( function ()
 			{
-				$( '#left_col' ).scrollFollow(); // выбираем элемент с id example и просто прицепляем ему ф-цию
+				$( '#left_col' ).scrollFollow();
 			}
 		);
    	</script> -->
 </head>
 <body class="<%= body_style %>" <%= "onload='#{@onload}'" %> >
+<%= render :partial => '/catalogs/shadowBox' %>
   <a name="top"></a>
   <div class="container">
     <div id="header" class="header">
@@ -41,14 +47,17 @@
     </div>
 
     <%= render 'layouts/notice' %>
+	<div id="left_stretching"></div>
 	<div id="left_col">
 	<%= render 'layouts/left_col_menu' %>
 	</div>
     <div class="content">
+	 <%= render 'layouts/karusel' %>
       <%= yield %>
     </div>
-    <%= render 'layouts/footer' %>
-  </div>
+	
+  
+  </div>  <%= render 'layouts/footer' %>
   <%= render :partial => 'layouts/admin_menu' %>
   <%= render :partial => 'layouts/main_menu' %>
 </body>

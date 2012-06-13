@@ -12,3 +12,5 @@ config/deploy.rb
 
 config/database.yml
 
+*.swo
+*.swp
