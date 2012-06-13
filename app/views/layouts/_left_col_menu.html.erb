@@ -1,0 +1,166 @@
+	<div id="select_menu">
+	<a href="" id="but_katalog" class="active_menu">Каталоги </a>
+	<!--<a href="" id="but_discont"> Дисконт </a>-->
+	<a href="" id="but_my_catalog"> Мои каталоги</a>
+	</div>	
+	<script language="javascript">
+		$(document).ready(function() {
+					$('#but_katalog').click(function(){
+							$('#menu_discont').hide('slow'); $('#but_discont').removeAttr("class");
+							$('#menu_my_catalog').hide('slow'); $('#but_my_catalog').removeAttr("class");
+							$('#menu_katalog').show('slow'); $('#but_katalog').attr("class","active_menu");
+							return false;
+							});
+					$('#but_discont').click(function(){
+							$('#menu_my_catalog').hide('slow'); $('#but_my_catalog').removeAttr("class");
+							$('#menu_katalog').hide('slow'); $('#but_katalog').removeAttr("class");
+							$('#menu_discont').show('slow'); $('#but_discont').attr("class","active_menu");
+							return false;
+							});
+					$('#but_my_catalog').click(function(){
+							$('#menu_katalog').hide('slow'); $('#but_katalog').removeAttr("class");
+							$('#menu_discont').hide('slow'); $('#but_discont').removeAttr("class");
+							$('#menu_my_catalog').show('slow'); $('#but_my_catalog').attr("class","active_menu");
+							return false;
+							});
+					$('#login_block').hover(function(){
+							$('#grey_no_active').attr("id","color_active")
+					}, function() {$('#color_active').attr("id","grey_no_active")}
+					
+					);
+		}
+		);
+	</script>
+	<div id="menu_katalog">
+	<div class="left_col_menu" id="menu_tovarov">
+	<h3>Товары</h3>
+		<ul>
+			<li><a href="#">Строительство и ремонт</a></li>
+			<li><a href="#">Одежда, обувь, аксесуары</a></li>
+			<li><a href="#">Мебель и интерьер</a></li>
+			<li><a href="#">Бытовая техника и электроника</a></li>
+			<li><a href="#">Спорт активный отдых</a></li>
+			<li><a href="#">Красота и здоровье</a></li>
+			<li><a href="#">Книги, канцтовары</a></li>
+			<li><a href="#">Подарки, ювелирные изделия</a></li>
+
+		</ul>
+		</div>
+
+		<div id="menu_uslugi">
+		
+		<h3>Услуги</h3>
+		<ul>
+			<li><a href="#">Юридические</a></li>
+			<li><a href="#">Строительство и ремонт</a></li>
+			<li><a href="#">Рекламные</a></li>
+			<li><a href="#">Посреднеческие</a></li>
+			<li><a href="#">Нотариальные</a></li>
+
+		</ul>
+		</div>
+	</div> <!-- Конец блока меню Каталога-->
+	<div id="menu_discont">
+	<div  class="left_col_menu">
+	
+		<h3>Скидки здесь</h3>
+		<ul>
+			<li><a href="#">Магазины <span>150</span></a></li>
+			<li><a href="#">Клубы <span>17</span></a></li>
+			<li><a href="#">Фитнес Центры <span>8</span></a></li>
+			<li><a href="#">Кафе, бары <span>17</span></a></li>
+			<li><a href="#">Офисы <span>15</span></a></li>
+			<li><a href="#">Цеха, Мастерские <span>14</span></a></li>
+			<li><a href="#">Иммидж студии <span>15</span></a></li>
+			<li><a href="#">Солярии <span>12</span></a></li>
+		</ul>
+		<hr>
+		<div id="info_discont">
+		<h4>Инфо дисконта № 0123456:</h4>
+		<ul>	
+			<li><a href="#">Купил/сэкономил  <span>37980/2870</span></a></li>
+			<li><a href="#">Подарки держателям <span>15</span></a></li>
+			<li><a href="#">Мои подарки <span>1</span></a></li>
+			<li><a href="#">Социальный дисконт это?</a></li>
+			<li><a href="#">Акции и новости партнёров <span>12</span></a></li>
+			<li><a href="#">Осталось дисконтов <span>985</span></a></li>
+			<li><a href="#">Техподдержка</a></li>
+		</ul>
+		</div>
+	</div>
+	</div>
+	<div id="menu_my_catalog">
+	<div  class="left_col_menu">
+	<div id="login_block">
+	<h3 class="login_form_header">Авторизация</h3>
+		<form method="post" action="login">
+		<label for="b-domik-username">Номер тел:</label>
+		<input type="text" tabindex="2" name="login" id="potreb_username">
+		<label for="b-domik-password">Пароль</label>
+		<input type="password" tabindex="3" name="passwd" id="potreb_pass">
+		<input type="submit" tabindex="4" class="b-form-button__input" value="Войти">
+		<div style="text-align: center;"><a id="reg_link" href="#">Регистрация</a>
+		</div>
+		<div style="color: #999; text-align: center;">или вход через:</div>
+		<div id="social_logon"><script src="http://ulogin.ru/js/ulogin.js"></script>
+<div id="uLogin" x-ulogin-params="display=small;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=http%3A%2F%2F"></div></div>
+		</form>
+		
+	</div>
+	<div id="user_data_col">
+	<div id="user_name">
+	<h3>Ник_name</h3>
+	</div>
+	<div id="user_avatar">
+	<a href="/userpg/user1"><img src="/images/default_user_avatar.jpg"></a>
+	</div>
+	<div id="user_rang">
+		<p>Звание: «<b>Новичёк</b>»</p>
+		<div id="user_bant"><b>7</b></div>
+	</div>
+	<div id="user_finance_count">
+	<p>На счёте: «<b>350</b>» ед.</p>
+	<a href="/userpg/user1">Мой профиль</a>
+	
+	</div>
+	
+<!-- 	<div id="user_contact">
+		<h3>Мои контакты</h3>
+		<ul>
+			<li><a href="#"><img src="/images/default_user_avatar.jpg">Петя</a></li>
+			<li><a href="#"><img src="/images/default_user_avatar.jpg">Вася</a></li>
+			<li><a href="#"><img src="/images/default_user_avatar.jpg">Альберт</a></li>
+			<li><a href="#"><img src="/images/default_user_avatar.jpg">Виолетта</a></li>
+			<li><a href="#"><img src="/images/default_user_avatar.jpg">Евгений</a></li>
+			<li><a href="#"><img src="/images/default_user_avatar.jpg">Евлампий</a></li>
+			
+		</ul>
+	</div> -->
+
+	
+</div>
+	<div id="grey_no_active">
+	<h3>Любимые</h3>
+	<ul>
+		<li><a href="#">Магазины <span>150</span></a></li>
+		<li><a href="#">Клубы <span>17</span></a></li>
+		<li><a href="#">Фитнес Центры <span>8</span></a></li>
+		<li><a href="#">Кафе, бары <span>17</span></a></li>
+		<li><a href="#">Офисы <span>15</span></a></li>
+		<li><a href="#">Цеха, Мастерские 14<span></span></a></li>
+		<li><a href="#">Иммидж студии <span>15</span></a></li>
+		<li><a href="#">Солярии <span>12</span></a></li>
+
+	</ul>
+	<hr>
+		<ul>
+			<!-- <li><a href="#">Посоветоваться с друзьями</a></li>
+			<li><a href="#">Благодарности и нетолько <span>5</span></a></li>
+			<li><a href="#">Моё резюме</a></li> -->
+			<li><a href="#">Дать объявление</a></li>
+			<li><a href="#">Пригласить друга</a></li>
+			<li><a href="#">Чёрный список <span>8</span></a></li>
+		</ul>
+	</div>	
+	</div>
+	</div>

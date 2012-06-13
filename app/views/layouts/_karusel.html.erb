@@ -1,0 +1,138 @@
+	<style type="text/css" media="all">
+			.list_carousel {
+				margin: 0;
+				width: 100%;
+				
+			}
+			.list_carousel ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+				display: block;
+			}
+			.list_carousel li {
+				font-size: 10px;
+				color: #333;
+				text-align: left;
+				background-color: #eee;
+				border-radius: 5px;
+				box-shadow: 1px 1px 3px #999;
+				width: 50px;
+				height: 100px;
+				padding: 0 !important;
+				margin: 6px;
+				display: block;
+				float: left;
+				overflow: auto;
+			}
+			.list_carousel li h4{
+				margin: 0;
+				padding: 0;
+				color: #09F;
+				font-size:12px;
+			}
+			.list_carousel li p {
+				margin: 0;
+				font-size:10px;
+			}
+			.list_carousel li img {
+				float: left;
+				padding-right: 3px;
+			}
+			.list_carousel#foo4.responsive {
+				width: auto;
+				margin-left: 0;
+			}
+			.clearfix {
+				float: none;
+				clear: both;
+			}
+			.prev {
+				float: left;
+				margin-left: 10px;
+			}
+			.next {
+				float: right;
+				margin-right: 10px;
+			}
+			.pager {
+				float: left;
+				width: 300px;
+				text-align: center;
+			}
+			.pager a {
+				margin: 0 5px;
+				text-decoration: none;
+			}
+			.pager a.selected {
+				text-decoration: underline;
+			}
+			.timer {
+				background-color: #999;
+				height: 6px;
+				width: 0px;
+			}
+		</style>
+
+	<div class="list_carousel responsive">
+			<ul id="foo4">
+				<li>
+				<img src="/images/shoth.jpg">
+				<h4>Весенние скидки на обувь</h4>
+				<p>Только в мае, очень привлекательные цены на весенне-летнюю колеекуию обуви от российских производителей. Приходите у нам иубедитесь сами ))). </p>
+				</li>
+				<li><img src="/images/oil.jpg">
+				<h4>Замена масла бесплатно</h4>
+				<p>Каждому покупателю 4-х и более литров масла Shell Helix Ultra - замена масла бесплатно в нашем сервисном центре.</p></li>
+				<li><img src="/images/pritcha.jpg">
+				<h4>Укладка в пол цены!!!</h4>
+				<p>Всю весну в парикмахерской «Кудряшка» укладку волос наши проффесиональные визажисты выполнят по цене на 50% меньше обычной, спешите быть красивой! </p>
+				</li>
+				
+				<li><img src="/images/kino_i_deti.jpg">
+				<h4>Детям до 14-ти посвящается!</h4>
+				<p>Весной приглашаем всех маленьких любителей синиматографа. Билеты на дневные сеансы на 50% дешевле! </p>
+				</li>
+				
+				<li><img src="/images/condi.jpg">
+				<h4>Успей до аццкой жары ))))</h4>
+				<p>Тем кто ещё не успел обзавестись сплит системой посвящается, только в апреле, установка БЕСПЛАТНО!!! </p>
+				</li>
+				
+				<li><img src="/images/moda2012.jpg">
+				<h4>Весенняя коллекция.</h4>
+				<p>Самых красивых и стильных ждём в нашем бутике, весенняя коллекция одежды 2012 уже ждёт вас.</p>
+				</li>
+				
+				<li>
+				<h4>Кирпич по 6,5 руб.</h4>
+				<p>Распродажа партии кирпича, в наличии 7 тыс. штук. Кирпич производства Бжедуховки, упакован в целофановые кубы, самовывоз, погрузка за наш счёт.</p>
+				</li>
+			
+			
+			</ul>
+			
+		</div>
+		<script type="text/javascript" language="javascript">
+		$(document).ready(function(){
+		$('#foo4').carouFredSel({
+					responsive: true,
+					width: '100%',
+					pauseOnHover: 'immediate',
+					scroll: {
+						items: 1,
+						pauseOnHover: true,
+						duration: 1000
+						},
+					
+					items: {
+						width: 400,
+					//	height: '30%',	//	optionally resize item-height
+						visible: {
+							min: 2,
+							max: 6
+						}
+					}
+				});
+				})
+		</script>
