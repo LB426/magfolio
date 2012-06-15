@@ -2347,6 +2347,9 @@ box-shadow: 1px 1px 3px #333;
  margin-right: 5px;
  font-size: 10px;
 }
+.description_lenta p img {
+	max-width: 150px;
+}
 .avatar_in_lenta img {
 	width: 48px;
 }
@@ -2386,11 +2389,11 @@ box-shadow: 1px 1px 3px #333;
 /* /Страница пользователя*/
 #top_lenta h3 {
 	padding: 3px;
-	color: fff;
+	color: #fff;
 	margin: 0 0 5px 0;
 }
 #top_lenta h3 a {
-	color: fff;
+	color: #fff;
 }
 #top_lenta h3#top_city {
 	background: #09f;
@@ -2422,7 +2425,7 @@ clear: both;
 
 }
 #top_users h3 {
-	background:#09f;
+	background:#f93;
 }
 .object_users {
 	background: #fff;
@@ -2442,7 +2445,7 @@ clear: both;
 	background: #eee;
 }
 #top_reviews h3{
-	background: #09f;
+	background: #6c0;
 }
 .users_reviews {
 	clear: both;
@@ -2471,7 +2474,7 @@ clear: both;
 	overflow: hidden;
 }
 #top_presentation h3 {
-	background: #09f;
+	background: #33f;
 }
 .catalog_presentation {
 	clear: both;
@@ -2543,9 +2546,26 @@ clear: both;
 	height: 100%;
 	display: block;
 }
+#vip_icon_top {
+	width: 38px;
+	height: 38px;
+	background: url('/images/vip_icon.gif') 0 0 no-repeat;
+	float: left;
+}
+#vip_icon_top a {
+	line-height: 44px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 18px;
+	width: 100%;
+	height: 100%;
+	display: block;
+	color: #fff;
+}
+
 /* /описание иконок в heder*/
 #top_experts h3 {
-	background: #09f;
+	background: #f30;
 }
 #top_experts {
 	overflow: hidden;
@@ -2559,6 +2579,9 @@ clear: both;
 
 .object_experts:hover {
 	background: #eee;
+}
+.object_experts_info {
+	margin: 0;
 }
 .object_experts_img_nik {
 	width: 60px;
@@ -2638,57 +2661,33 @@ li.name_catalog  a{
 	font-size: 14px;
 	line-height: 18px;
 }
+.text_info_cataloga h4 {
+	margin: 5px 0;
+}
+.text_info_cataloga h4 span {
+	background: #09f;
+	padding: 3px 5px;
+	color: #fff;
+	margin-right: 10px;
+}
 .spatistika_cataloga {
-	float: right;
-	
 	padding: 5px;
 	background: #eee;
-}
-.spatistika_cataloga h4 {
-	margin: 2px -7px;
-	background:#555;
-	color: #fff;
-	text-align: center;
-	position: relative;
-}
-.spatistika_cataloga dl {
-	text-align: center;
-	margin: 3px 0;
-}
-.spatistika_cataloga dl dt {
-	margin-top: 3px;
-	color: #999
-}
-.spatistika_cataloga dl dd {
-	margin: 0;
-	background: #fff;
-}
-
-.spatistika_cataloga dl dd.raiting {
-	background: #09f;
-	color: #fff;
-}
-.object_list_catalog  dd {
-	font-weight: bold;
-}
-.contact_info {
 	clear: both;
 }
-.contact_info dl dt, .contact_info dl dd {
+div.spatistika_cataloga ul {
+	display: block;
+	text-align: center;
+}
+.spatistika_cataloga ul li{
 	display: inline;
+	
 }
-
-.contact_info dl {
-	padding: 2px;
-	background: #eee;
-	padding-left: 160px;
-	margin: 0;
-}
-.contact_info dl dd {
+li.data {
 	background: #fff;
-	padding: 0 10px;
+	padding: 2px 5px;
+	margin-right: 15px;
 }
-
 /* /Стили страницы ТОР каталога*/
 /*Стили ТОР USER*/
 #content_top_user_page {
@@ -2766,8 +2765,11 @@ margin: 0 auto;
 .user_nik a {
 	font-size: 16px;
 	display: block;
-	background: #09f;
+	background: #f93;
 	color: #fff;
+}
+.right_col li.user_nik,.right_col li.user_nik a {
+	background: #09f;
 }
 .inner_div li {
 	font-size: 12px;
@@ -2783,7 +2785,7 @@ div#content_mneniy {
 }
 #content_mneniy h2 {
 	color: #fff;
-	background: #09f;
+	background: #6c0;
 	margin: 5px 0;
 	padding: 5px 0;
 	padding: 5px 0;
@@ -2857,40 +2859,69 @@ div#content_mneniy {
 }
 #content_top_presentation h2 {
 	color: #fff;
-	background: #09f;
+	background: #33f;
 	padding: 3px 0;
 }
-.left_col_in_top_presentation {
-	width: 100px;
-	padding: 0 3px 0 0;
-	float: left;
-}
-.telo_presentation {
-	text-align: left;
-}
-.description_lenta p img {
-	width: 150px;
-}
-.botton_table_top_presentation {
-	width: 100%;
+.object_top_presentation {
+	overflow: hidden;
 	background: #eee;
-	font-size: 12px;
+	border: 10px solid #fff;
+	
 }
-.label_name {
-	font-size: 14px;
-	color: #999;
-	margin-top: 20px;
-}
-.label_data {
-	font-size: 20px;
-	font-weight: bold;
-	color: #09f;
-}
-.left_col_in_top_presentation img {
-	width: 48px;
+.right_col_in_top_presentation {
+	width: 140px;
+	background: #eee;
+	float: right;
+	padding: 5px
 }
 .telo_presentation h4 {
-	margin: 3px 0;
+	margin: 0;
+	text-align: left;
+	overflow: hidden;
+	border-bottom: 1px dashed #eee;
+	font-size: 16px;
+}
+.telo_presentation h4 span {
+	background: #09f;
+	display: block;
+	float: left;
+	color: #fff;
+	padding: 5px 10px;
+	margin-right: 5px;
+	font-size: 14px;
+}
+.short_info_presentation {
+	background: #fff;
+	overflow: hidden;
+}
+.short_info_presentation p {
+	text-align: left;
+	font-size: 14px;
+}
+.short_info_presentation p img {
+	width: 150px;
+}
+.right_col_in_top_presentation a img {
+	width: 140px;
+}
+.right_col_in_top_presentation a span {
+	display: block;
+	color: #fff;
+	background: #09f;
+	margin-top: 5px;
+}
+.botton_table_top_presentation td {
+	padding: 2px 10px;
+	font-size: 12px;
+}
+.botton_table_top_presentation {
+	margin-left: 30%;
+}
+.botton_table_top_presentation span {
+	background: #fff;
+	padding: 2px 3px;
+	font-weight: bold;
+	
 }
 /* /ТОР Презентаций*/
 

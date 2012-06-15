@@ -2,6 +2,14 @@ Magfolio::Application.routes.draw do
 
   
 
+  get "presentation/index"
+
+  get "presentation/reserv_page1"
+
+  get "presentation/reserv_page2"
+
+  get "presentation/reserv_page3"
+
   get "top/top_mneniy"
 
   get "top/top_presentation"
