@@ -1747,12 +1747,13 @@ body.cities div.cardcontent-perma h3 {
 	font-size: 14px;
 	color: fff;
 	background: #09f;
-	
-	
-
-
 }
-
+#right_col_opisaniya_obekta_kataloga h3 a {
+	color: #fff;
+}
+#right_col_opisaniya_obekta_kataloga h3 span a {
+	color: #09f;
+}
 body.cities div.cardcontent-perma h3 span {
   font-size: 12px;
   text-transform: none;
@@ -2991,3 +2992,65 @@ div.object_klient img {
 #social_logon {
 	text-align: center;
 }
+/*Описание страницы с презентациями магазина*/
+#page_with_presentations {
+	background: #fff;
+	overflow: hidden;
+}
+#page_with_presentations h2 {
+	background: #09f;
+	color: #fff;
+	padding: 5px 0;
+}
+#main_table_presentations {
+	width: 100%;
+	vertical-align: top;
+}
+#main_table_presentations td {
+	vertical-align: top;
+}
+#left_col_presentations {
+	width: 70%;
+}
+#right_col_presentations {
+	width: 30%;
+	background: #fff;
+}
+#right_col_presentations h3 {
+	background: #09f;
+	color: #fff;
+	padding: 3px 0 3px 5px;;
+	margin-bottom: 3px;
+	font-size: 14px;
+}
+.element_right_col_presentation {
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 2px;
+	margin-bottom: 3px;
+	overflow: hidden;	
+}
+.element_right_col_presentation:hover {
+	background: #eee;
+}
+.element_right_col_presentation a img {
+	width: 100px;
+	float: left;
+	margin-right: 5px;
+}
+.element_right_col_presentation a p {
+	margin: 2px 0;
+	font-size: 12px;
+}
+.object_left_col_presentation {
+	border: 1px solid #ddd;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.object_left_col_presentation h4 {
+	margin: 0 0 10px 0;
+	background: #aaa;
+	color: #fff;
+	padding: 2px;
+}
+/* /Описание страницы с презентациями магазина*/
