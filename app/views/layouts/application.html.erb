@@ -37,6 +37,57 @@
    	</script> -->
 </head>
 <body class="<%= body_style %>" <%= "onload='#{@onload}'" %> >
+<div id="logon_box">
+	<script type="text/javascript">
+		function OpenRegArea(){
+			$('#RegArea').toggle("slow");
+			return false
+		}
+	</script>
+		<div id="login_form_box"><h3>Форма авторизации на сайте<a id="close_shadow_logon" href="/">X</a></h3>
+		<form method="post" action="login">
+			<table id="login_form_box_table">
+			<tr><td><label for="phone_number">Номер тел:</label></td><td><input type="text" tabindex="2" name="phone_number" id="potreb_username"><br /></td></tr>
+			<tr><td><label for="password">Пароль:</label></td><td><input type="password" tabindex="3" name="passwd" id="potreb_pass"><br /></td></tr>
+			</table>
+			</form>
+			
+			
+			<input type="submit" tabindex="4" class="b-form-button__input" value="Войти">
+			<div style="text-align: center;"><a id="reg_link" onclick="OpenRegArea()" href="#">Регистрация</a>
+			<div id="RegArea">
+			<form method="post" action="registration">
+				<table id="login_form_box_table">
+				<tr><td><label for="phone_number">Номер тел:</label></td><td><input type="text" tabindex="2" name="phone_number" </td></tr>
+				<tr><td><label for="password">Пароль:</label></td><td><input type="password" tabindex="3" name="passwd"></td></tr>
+				<tr><td><label for="password">Подтверждение пароля:</label></td><td><input type="password" tabindex="3" name="passwd"</td></tr>
+				<tr><td><label for="password">Ник:</label></td><td><input type="text" tabindex="3" name="nik"</td></tr><tr><td><label for="password">E-mail:</label></td><td><input type="text" tabindex="3" name="nik"</td></tr>
+				</table>
+				<input type="submit" tabindex="4" class="b-form-button__input" value="Зарегистрироваться">
+			</form>
+			
+			</div>
+			</div>
+			<div style="color: #999; text-align: center;">или вход через:</div>
+			<div id="social_logon"><script src="http://ulogin.ru/js/ulogin.js"></script>
+			<div id="uLogin" x-ulogin-params="display=small;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=http%3A%2F%2F"></div></div>
+		
+		</div>
+	</div>
+<div id="logon_shadow_box">
+	
+</div>
+<script>
+		$(document).ready( function () {
+		
+		$('#close_shadow_logon').click( function(){
+			$('#logon_shadow_box').css('display','none');
+			$('#logon_box').css('display','none');
+			return false;
+			})
+		});
+</script>
+
 <%= render :partial => '/catalogs/shadowBox' %>
   <a name="top"></a>
   <div class="container">

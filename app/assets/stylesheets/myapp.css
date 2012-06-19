@@ -55,7 +55,11 @@ p.alert {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
-
+.go_back_button,.go_back_button:hover{
+	color: #fff;
+	float: right;
+	margin-right: 10px;
+}
 p.notice {
   font-size: 18px;
   background-color: #abf6c5;
@@ -446,6 +450,7 @@ div.content {
   margin: 0 0 0 240px;
   position: relative;
   padding-top: 55px;
+  overflow: hidden;
 }
 
 div.scroller_content {
@@ -3054,3 +3059,88 @@ div.object_klient img {
 	padding: 2px;
 }
 /* /Описание страницы с презентациями магазина*/
+/*Описание страницы Топ специалистов*/
+#content_specialist {
+	background: #fff;
+}
+#content_specialist h2 {
+	background: #f00;
+	color: #fff;
+	margin: 0 0 10px 0;
+	padding: 3px 0;
+}
+.left_col_object_specialist_list {
+	width: 150px;
+	float: left;
+}
+.pos_specialist {
+	display: block;
+	float: left;
+	background: #f00;
+	font-weight: bold;
+	color: #fff;
+	padding: 3px 10px;
+	margin: 0 10px 0 0;
+}
+/* /Описание страницы Топ специалистов*/
+/*Описание страницы Добавить Акцию*/
+#add_akciya {
+	background: #fff;
+	overflow: hidden;
+}
+#add_akciya h3 {
+	background: #09f;
+	color: #fff;
+	margin: 0 0 10px 0;
+	padding: 3px 0;
+}
+#add_akciya form {
+	width: 100%;
+}
+.mceEditor {
+	margin: 0 auto;
+}
+/* /Описание страницы Добавить Акцию*/
+#logon_shadow_box {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	z-index: 10000;
+	background: #000;
+	opacity: 0.5;
+}
+#logon_box {
+	position: fixed;
+	width: 100%;
+	top: 100px;
+	left: auto;
+	right: auto;
+	z-index: 10001;
+	background: none;
+}
+#login_form_box {
+	width: 500px;
+	background: #fff;
+	margin: 0 auto;
+	padding: 10px;
+	text-align: center;
+}
+#login_form_box h3 {
+	background: #09f;
+	color: #fff;
+	margin: -10px -10px 10px -10px;
+	padding: 5px;
+}
+#close_shadow_logon {
+	color: #fff;
+	float: right;
+}
+#login_form_box_table {
+ margin: 0 auto;
+}
+#RegArea {
+	border: 1px dashed #ccc;
+	display: none;
+}
