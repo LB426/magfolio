@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20110829093348) do
     t.text     "order_options"
   end
 
+  add_index "carts", ["id"], :name => "index_carts_on_id"
   add_index "carts", ["unique_identifier"], :name => "index_carts_on_unique_identifier"
 
   create_table "catalogs", :force => true do |t|
