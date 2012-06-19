@@ -15,4 +15,3 @@ config/database.yml
 *.swo
 *.swp
 .rvmrc
-

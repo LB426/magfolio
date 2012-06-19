@@ -1,0 +1,2 @@
+module AddPostHelper
+end

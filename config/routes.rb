@@ -2,6 +2,14 @@ Magfolio::Application.routes.draw do
 
   
 
+  get "add_post/add_mnenie"
+
+  get "add_post/add_akciya"
+
+  get "add_post/add_presentation"
+
+  get "top/top_specialist"
+
   get "presentation/index"
 
   get "presentation/reserv_page1"
